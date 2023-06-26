@@ -30,7 +30,7 @@
               </time>
               {% if blog.comments_enabled? %}
               <span class="article__footer-item-sep">|</span> 
-              <a class="article__footer-item" href="{{ shop.url }}{{ article.url }}#disqus_thread" data-disqus-identifier="{{ article.id }}">No Comments</a>
+              <a class="article__footer-item" href="{{ shop.url }}{{ article.url }}#disqus_thread" data-disqus-identifier="{{ article.id }}">No Comments <span class="visually-hidden">on {{ article.title | escape }}</span></a>
               {% endif %}
             </footer><!-- article__footer -->
           </article><!-- article -->

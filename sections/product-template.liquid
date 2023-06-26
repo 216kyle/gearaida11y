@@ -80,7 +80,7 @@
         {% endfor %}
         {% if product.metafields.gear_aid.youtube_id %}
         <a  href="#" class="image-gallery__thumbnail-wrapper image-gallery__thumbnail-wrapper--video" data-image-id="video">
-          <img class="image-gallery__thumbnail" alt="" src="//img.youtube.com/vi/{{ product.metafields.gear_aid.youtube_id }}/default.jpg" />
+          <img class="image-gallery__thumbnail" alt="Embedded Video Player" src="//img.youtube.com/vi/{{ product.metafields.gear_aid.youtube_id }}/default.jpg" />
         </a><!-- image-gallery__thumbnail -->
         {% endif %}
       </div><!-- image-gallery__thumbnails -->
@@ -196,10 +196,11 @@
         {% if rec_collection_section_type == 'normal' %}
             <div class="custom-recommendations">
               <div class="custom-recommendations__heading-box heading-align-{{ rec_collection_heading_align }}">
-                  <h2 
-                  class="custom-recommendations__heading{% unless rec_collection_heading_style == 'normal' %} heading-style-{{ rec_collection_heading_style }}{% endunless %}">
+                  {% if rec_collection_heading_text != blank %}
+                <h2 class="custom-recommendations__heading{% unless rec_collection_heading_style == 'normal' %} heading-style-{{ rec_collection_heading_style }}{% endunless %}">
                       {{ rec_collection_heading_text }}
                   </h2>
+                  {% endif %}
               </div>
           
               <div class="custom-recommendations__row">
@@ -415,12 +416,12 @@
       {% endif %}
       {% if section.settings.sharing_facebook %}
       <span id="facebook-sharing" class="sharing-meta-section">
-        <a target="_blank" href='http://www.facebook.com/share.php?u={{ shop.url }}{{product.url}}' onclick="window.open('http://www.facebook.com/share.php?u={{ shop.url }}{{product.url}}&t={{ product.title }}', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no'); return false;"><i class="fa fa-facebook"></i> <span class="sharing-meta-service">Facebook</span></a>
+        <a target="_blank" href="http://www.facebook.com/share.php?u={{ shop.url }}{{product.url}}"><i class="fa fa-facebook"></i> <span class="sharing-meta-service">Facebook</span></a>
       </span><!-- sharing-meta-section -->
       {% endif %}
       {% if section.settings.sharing_twitter %}
       <span id="twitter-sharing" class="sharing-meta-section">
-        <a target="_blank" href='https://twitter.com/intent/tweet?text={{ product.title }}&nbsp;-&nbsp;&url={{ shop.url }}{{product.url}}&via=@{{ settings.social_twitter }}'><i class="fa fa-twitter"></i> <span class="sharing-meta-service">Twitter</span></a>
+        <a target="_blank" href="https://twitter.com/intent/tweet?text={{ product.title | escape }}&nbsp;"><i class="fa fa-twitter"></i> <span class="sharing-meta-service">Twitter</span></a>
       </span><!-- sharing-meta-section -->
       {% endif %}
       {% if section.settings.sharing_pinterest %}

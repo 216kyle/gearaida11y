@@ -53,9 +53,13 @@
                 {% if related_articles != blank %}
                   {% for related_article in related_articles %}
                     {% assign loop_article = articles[related_article] %}
+                    {% if loop_article.url != blank %}
                     <a href="{{ loop_article.url }}" class="related-article column50">
+                      {% if loop_article.title != blank %}
                       <h4>{{ loop_article.title }}</h4>
+                      {% endif %}
                     </a>
+                    {% endif %}
                   {% endfor %}
                 {% else %}
                   {% assign loop_counter = 0 %}
@@ -64,9 +68,13 @@
                       {% if loop_counter < 4 %}
                         {% unless article.handle == loop_article.handle %}
                           {% assign loop_counter = loop_counter | plus: 1 %}
+                          {% if loop_article.url != blank %}
                           <a href="{{ loop_article.url }}" class="related-article column50">
+                            {% if loop_article.title != blank %}
                             <h4>{{ loop_article.title }}</h4>
+                            {% endif %}
                           </a>
+                          {% endif %}
                         {% endunless %}
                       {% else %}
                         {% break %}

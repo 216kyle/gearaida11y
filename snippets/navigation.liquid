@@ -4,14 +4,14 @@
     {% if link.title == "Shop" %}
     <li id="{{ link.title | handleize }}-link" class="site-navigation_item{% if link.active %} active{% endif %} has-sub-navigation">
       <a href="{{ link.url }}">{{ link.title }}</a>
-      <div role="menu" id="sub-navigation-{{ child_list_handle }}-wrapper" class="sub-navigation-wrapper">
+      <div id="sub-navigation-{{ child_list_handle }}-wrapper" class="sub-navigation-wrapper">
         <ul class="sub-navigation sub-navigation--super">
           {% for l in link.links %}
           {% if l.title == 'Images' %}
           <li id="images-list">
             <ul>
               {% for image in l.links %}
-              <li role="menuitem" class="image-link">
+              <li class="image-link">
                 <a href="{{ image.url }}">
                   {% capture dd_img %}{{ image.title | split:'|' | last }}{% endcapture %}
                   <img srcset="{{ dd_img | file_img_url:'240x' }} 2x, {{ dd_img | file_img_url:'120x' }} 1x" src="{{ dd_img | file_img_url:'120x' }}" alt=""/>

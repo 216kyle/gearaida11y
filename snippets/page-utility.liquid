@@ -30,7 +30,7 @@
 
       {% if show_filters and filters_count > 1 %}
       <div class="form__field--select utility-filters__filter">
-        <select class="coll-filter">
+        <select title="Select Collection Filter" class="coll-filter">
           <option value="">All {{ block.settings.filter_title }}</option>
           {% for f in filters %}
           {% assign filter = f | strip %}

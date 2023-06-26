@@ -4107,6 +4107,41 @@ $pf-spacing-large: 2.75rem;
     }
   }
 }
+
+.visually-hidden {
+  position: absolute !important;
+  left: -10000px !important;
+}
+
+*:focus-visible {
+  border: 2px solid black;
+}
+
+.skip-link {
+                position: absolute;
+                left: -10000px;
+                top: 0px;
+                padding: 12px;
+                background-color: white;
+                color: black;
+                border: 2px solid black;
+                border-radius: 5px;
+                z-index: 9999;
+            }
+            .skip-link:focus-visible {
+                left: 0px;
+            }
+
+.collection-section__content .collButton {
+  font-size: 1.2em;
+  font-weight: 700;
+  padding: 20px 80px 50px; 
+}
+
+.has-sub-navigation:focus-within .sub-navigation-wrapper, a.sub-navigation-wrapper:focus-visible + div.sub-navigation-wrapper {
+  visibility: visible;
+  display: block;
+}
 /* =============== END LANDING PAGE ========================= */
 /* ======== NEEDED OPTIMIZATIONS FOR WORKING WITH ACCESSIBEE ======== */
 /*DESKTOP*/

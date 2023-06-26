@@ -1,6 +1,6 @@
 <div class="pagination">
   {% if paginate.previous %}
-  <a class="pagination__part pagination__part--prev fa fa-angle-left" href="{{ paginate.previous.url }}"></a>
+  <a title="Previous Page" class="pagination__part pagination__part--prev fa fa-angle-left" href="{{ paginate.previous.url }}"></a>
   {% endif %}
   {% for part in paginate.parts %}
   {% if part.is_link %}
@@ -14,6 +14,6 @@
   {% endif %}        
   {% endfor %}
   {% if paginate.next %}
-  <a class="pagination__part pagination__part--next fa fa-angle-right" href="{{ paginate.next.url }}"></a>
+  <a title="Next Page" class="pagination__part pagination__part--next fa fa-angle-right" href="{{ paginate.next.url }}"></a>
   {% endif %}
 </div><!-- pagination -->

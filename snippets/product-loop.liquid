@@ -1,6 +1,7 @@
+{% if prod.url != blank %}
 <article data-aos="fade" data-aos-once="true" data-aos-offset="50" data-aos-easing="ease-in-sine" data-aos-delay="0" data-aos-duration="400" class="{% if classes %}{{ classes }}{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}" data-prod-id="{{ prod.id }}" itemscope itemtype="http://schema.org/Product">
   <div class="product__contents">
-    <a class="product__image-wrapper" href="{{ prod.url }}">
+    <a title="{{ prod.title | escape }}" class="product__image-wrapper" href="{{ prod.url }}">
       {% if prod.tags contains 'Online-Only Right' %}
       <div class="online-only online-only--right"><span>Online<br/>Only</span></div>
       {% endif %}
@@ -10,9 +11,9 @@
       {% if prod.tags contains 'Discontinued' %}
       <div class="discontinued-badge"><span>Discontinued</span></div>
       {% endif %}
-      {% if quickview %}
-      <button role="button" aria-label="Product Quickview" class="product__quickview btn" data-qv="{{ prod.url }}">Quickview</button>
-      {% endif %}
+       <!-- {% if quickview %}
+       <button aria-label="Product Quickview" class="product__quickview btn" data-qv="{{ prod.url }}">Quickview</button>
+      {% endif %} -->
       {% assign featured_image = prod.selected_or_first_available_variant.featured_image | default: prod.featured_image %}
       {% if prod.images.size < 1 %}
       {{ 'image' | placeholder_svg_tag: 'product__image' }}
@@ -36,9 +37,11 @@
       <span aria-label="Coming Soon Product" class="product-label product-label--coming-soon">Coming Soon</span>
       {% endif %}
       {% endfor %}
+      {% if prod.title != blank %}
       <h2 class="product__title">
-        <a role="heading" aria-label="{{ prod.title }}" href="{{ prod.url }}" itemprop="name">{{ prod.title }}</a>
+        <a href="{{ prod.url }}" itemprop="name">{{ prod.title | escape }}</a>
       </h2>
+      {% endif %}
       <span class="product__meta product__meta--type">{{ prod.type }}</span><!-- product__type -->
       {% if section.settings.show_vendor %}
       <span class="product__meta product__meta--vendor">{{ prod.vendor }}</span><!-- product__vendor -->
@@ -90,7 +93,7 @@
         {% assign downcase_variant_to_match = variant_to_match | downcase %}
         {% if downcase_option == downcase_variant_to_match %}
           {% unless prod.variants.size < 2 %}
-            <div aria-label="Product Swatches" class="product__swatches" data-count="{{ prod.variants.size }}">
+            <div class="product__swatches" data-count="{{ prod.variants.size }}">
               {% assign index = forloop.index0 %}
               {% assign colorlist = '' %}
               {% assign color = '' %}
@@ -99,7 +102,7 @@
               {% unless colorlist contains color %}
               {% assign img_name = color | handleize | append:'.png' %}
               {{ color_name }}
-              <span aria-label="Product Swatches" class="product-swatch product-swatch--{{ option_index }}-{{ variant.id | handleize }}" data-prod-id="{{ prod.id }}" data-variant-id="{{ variant.id }}" data-variant-url="{{ variant.url }}" data-variant-image="{{ variant | img_url: '1024x1024' }}" data-variant-image-srcset="{{ variant.featured_image | img_url: '600x' }} 2x, {{ variant.featured_image | img_url: '250x' }} 1x" style="background: #fff url({{ img_name | file_img_url:"80x80" }}) no-repeat 50% 50%;background-size:cover;"></span>
+              <span aria-label="Shop {{ prod.title | escape }} in {{ color | escape }}" class="product-swatch product-swatch--{{ option_index }}-{{ variant.id | handleize }}" data-prod-id="{{ prod.id }}" data-variant-id="{{ variant.id }}" data-variant-url="{{ variant.url }}" data-variant-image="{{ variant | img_url: '1024x1024' }}" data-variant-image-srcset="{{ variant.featured_image | img_url: '600x' }} 2x, {{ variant.featured_image | img_url: '250x' }} 1x" style="background: #fff url({{ img_name | file_img_url:"80x80" }}) no-repeat 50% 50%;background-size:cover;"></span>
               {% capture tempList %}
               {{ colorlist | append: color | append: " " }}
               {% endcapture %}
@@ -127,3 +130,4 @@
     {% endif %}
   </div>
 </article><!-- product -->
+{% endif %}

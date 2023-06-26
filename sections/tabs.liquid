@@ -16,20 +16,20 @@
     </div>
     <div class="tabs-items">
       {% for block in section.blocks %}
-        <div role="tab" class="tabs-item tabs-item--{{ block.id }}{% if forloop.first %} tabs-item--selected{% endif %}" data-index="{{ forloop.index }}">
+        <div class="tabs-item tabs-item--{{ block.id }}{% if forloop.first %} tabs-item--selected{% endif %}" data-index="{{ forloop.index }}">
           <div class="tabs-item__image">
             <img class="lazy" data-src="{{ block.settings.image | img_url: '1000x' }}" alt="{{ block.settings.title }}" />
           </div>
           <div class="tabs-item__content">
             <h3>{{ block.settings.heading }}</h3>
             {{ block.settings.text }}
-            <a role="button" href="{{ block.settings.btn_url }}" class="btn btn-large btn-alt-white">{{ block.settings.btn_label }}</a>
+            <a role="button" href="{{ block.settings.btn_url }}" class="btn btn-large btn-alt-white">{{ block.settings.btn_label }} <span class="visually-hidden">About {{ block.settings.title | escape }}</span></a>
           </div>
         </div>
       {% endfor%}
     </div>
     <div class="tabs__actions">
-      <a role="button" class="btn btn-large btn-alt-solid" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
+      <a role="button" class="btn btn-large btn-alt-solid" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }} <span class="visually-hidden">{{ section.settings.title | escape }}</span></a>
     </div>
   </div>
   <style>

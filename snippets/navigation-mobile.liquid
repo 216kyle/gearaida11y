@@ -11,8 +11,8 @@
     {% else %}
     {% assign children = false %}
     {% endif %}
-    <li role="menu" id="{{ link.title | handleize }}-link" class="mobile-link {% if link.active %}active{% endif %}{% if children %} clearfix children{% endif %}">
-      <a role="menuitem" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }} 
+    <li id="{{ link.title | handleize }}-link" class="mobile-link {% if link.active %}active{% endif %}{% if children %} clearfix children{% endif %}">
+      <a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }} 
         {% unless children %}
         <span class="fa fa-angle-right"></span>
         {% endunless %}
@@ -22,14 +22,14 @@
       <ul role="presentation" class="mobile-dropdown">
         {% for l in link.links %}
         {% if l.title == 'Images' %}
-        <li role="menuitems" id="mobile-images-list">
+        <li id="mobile-images-list">
           <ul>
             {% for image in l.links %}
             <li class="image-link">
-              <a role="menuitem" href="{{ image.url }}">
+              <a href="{{ image.url }}">
                 {% capture dd_img %}{{ image.title | split:'|' | last }}{% endcapture %}
                 <img srcset="{{ dd_img | file_img_url:'240x' }} 2x, {{ dd_img | file_img_url:'120x' }} 1x" src="{{ dd_img | file_img_url:'120x' }}" alt=""/>
-                <h3 role="menuitem" >{{ image.title | split:'|' | first }}</h3>
+                <h3>{{ image.title | split:'|' | first }}</h3>
               </a>
             </li>
             {% endfor %}
@@ -41,19 +41,19 @@
         {% else %}
         {% assign children = false %}
         {% endif %}
-        <li role="menuitem" class="mobile-link {% if l.active %}active{% endif %}{% if children %} clearfix children{% endif %}">
+        <li class="mobile-link {% if l.active %}active{% endif %}{% if children %} clearfix children{% endif %}">
           {% if children %}
-          <h4 role="menuitem" >{{ l.title }}</h4>
+          <h4>{{ l.title }}</h4>
           <span class="mobile-dropdown-toggle fa fa-plus"></span>
           <ul class="mobile-dropdown">
             {% for sl in l.links %}
-            <li role="menuitem" class="mobile-link {% if sl.active %}active{% endif %}">
+            <li class="mobile-link {% if sl.active %}active{% endif %}">
               <a href="{{ sl.url }}">{{ sl.title }} <span class="fa fa-angle-right"></span></a>
             </li>
             {% endfor %}
           </ul>
           {% else %}
-          <a role="menuitem" href="{{ l.url }}">{{ l.title }}
+          <a href="{{ l.url }}">{{ l.title }}
             {% unless children %}
             <span class="fa fa-angle-right"></span>
             {% endunless %}

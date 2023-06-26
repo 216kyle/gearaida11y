@@ -2,11 +2,11 @@
   {% for link in linklists[block.settings.linklist].links %}
   {% assign collection = link.object %}
   <article class="collection-section collection-section--{{ collection.id }}">
-    <a class="collection-section__content" href="{{ link.url }}" title="{{ collection.title | escape }}">
+    <div class="collection-section__content">
       <h2>{{ link.title }}</h2>
       <p>{{- collection.description | strip_html -}}</p>
-      <button class="btn btn-alt">Learn More</button>
-    </a>
+      <a href="{{ link.url }}" class="btn btn-alt collButton">Learn More <span class="visually-hidden">{{ collection.title | escape }}</span></a>
+    </div>
   </article>
   {% endfor %}
 </div>

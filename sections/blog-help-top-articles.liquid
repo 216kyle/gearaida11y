@@ -31,14 +31,14 @@
               </style>
             {% endif %}
             <article class="column50">
-              <a aria-label="Blog Box" href="{{ article.url }}">
+              <a href="{{ article.url }}">
                 <div class="white-wrapper">
                   <figure class="article-bkgd article-bkgd--{{ block.id }} lazy"></figure>
                 </div>
                 <figcaption>
-                  <h3 aria-label="Blog Title" >{{ article.title }}</h3>
+                  <h3>{{ article.title }}</h3>
                   {% if article.excerpt %}
-                    <p aria-label="Blog Excerpt" >{{ article.excerpt }}</p>
+                    <p>{{ article.excerpt }}</p>
                   {% endif %}
                 </figcaption>
               </a>
@@ -46,7 +46,7 @@
           {% endif %}
         {% endfor %}
       </div>
-      <a role="Button" Aria-label="Read More Articles Button" href="/blogs/help?view=all" class="more-articles btn btn-alt btn-large">More</a>
+      <a role="Button" href="/blogs/help?view=all" class="more-articles btn btn-alt btn-large">Read More<span class="visually-hidden"> Blog Articles</span></a>
     </div>
   </section>
 </div>

@@ -59,13 +59,16 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2BJ23L"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <a onkeydown="keyToClick(event)" onclick="scrollSkip()" class="skip-link" href="#mainContent">Skip to Content</a>
   <div class="site-wrapper">
     {% section 'header' %}
+    <div id="mainContent">
     {{ content_for_layout }}
+    </div>
     {% section 'footer' %}
     <div id="privacy-pop-up">
       <div class="site-flexbox">
-        <p>This website uses cookies to ensure you get the best experience on our website. Please read our <a href="/pages/privacy" title="Go to Privacy Page">Privacy Policy</a>.</p>
+        <p>This website uses cookies to ensure you get the best experience on our website. Please read our <a href="/pages/privacy">Privacy Policy</a>.</p>
         <div id="privacy-close" class="btn">Got it</div>
       </div>
     </div>
@@ -84,5 +87,24 @@ var _learnq = _learnq || [];
 {% comment %} <!-- START accessiBe script -->
 <script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init({ statementLink : '', footerHtml : '', hideMobile : false, hideTrigger : false, disableBgProcess : false, language : 'en', position : 'left', leadColor : '#e02500', triggerColor : '#e02500', triggerRadius : '50%', triggerPositionX : 'left', triggerPositionY : 'bottom', triggerIcon : 'people', triggerSize : 'medium', triggerOffsetX : 26, triggerOffsetY : 40, mobile : { triggerSize : 'small', triggerPositionX : 'left', triggerPositionY : 'bottom', triggerOffsetX : 20, triggerOffsetY : 20, triggerRadius : '50%' } }); }; h.appendChild(s); })(); </script>  
   <!-- END accessiBe script --> {% endcomment %}
+
+ <!-- 216 a11y -->
+<script>
+function scrollSkip() {
+  window.scrollTo(0, 55);
+
+  let focusable = "a, button, select, input, textarea, [tabindex='0'], [role='button']";
+  let main = document.querySelector('#mainContent');
+  main.querySelector(focusable).focus();
+}
+
+function keyToClick(event) {
+                if (event.key == "Enter") {
+                    event.preventDefault();
+                    event.target.click();
+                }
+}
+</script>  
+  
 </body>
 </html>

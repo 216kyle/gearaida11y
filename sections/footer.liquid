@@ -21,12 +21,12 @@
         {% for link in linklists[section.settings.menu].links %}
           {% if link.links.size > 0 %}
             <li class="site-footer-navigation__item site-footer-navigation__main-item">
-              <a role="Menu" href="{{ link.url }}" Aria-Title="{{ link.title }}">{{ link.title }}</a>
+              <a href="{{ link.url }}">{{ link.title }}</a>
               {% if link.links.size > 0 %}
                 <ul>
                   {% for sublink in link.links %}
                     <li>
-                      <a role="MenuItem" href="{{ sublink.url }}" Aria-Title="{{ sublink.title }}">{{ sublink.title }}</a>
+                      <a href="{{ sublink.url }}">{{ sublink.title }}</a>
                     </li>
                   {% endfor %}
                 </ul>
@@ -47,7 +47,7 @@
         {% for link in linklists[section.settings.menu].links %}
           {% unless link.links.size > 0 %}
             <li class="site-footer-navigation__item site-footer-navigation__main-item">
-              <a href="{{ link.url }}" Aria-title="{{ link.title }}">{{ link.title }}</a>
+              <a href="{{ link.url }}">{{ link.title }}</a>
             </li>
           {% endunless %}
         {% endfor %}

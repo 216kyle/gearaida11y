@@ -1,4 +1,4 @@
-<main class="site-content" role="main">
+<div class="site-content" role="main">
   {% if section.settings.header_image != blank %}
     <style>
       .sales-doc__header {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
@@ -52,7 +52,7 @@
                     <img class="material-image" src="{{ block.settings.image | img_url:'200x400' }}" alt="{{ block.settings.title }}" />
                     <div class="material-header">
                       <h2>{{ block.settings.title }}</h2>
-                      <a href="{{ block.settings.doc_url }}"target="_blank" download title="Sales Material">Download</a>
+                      <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Material">Download</a>
                     </div>
                   </div>
                 {% endif %}
@@ -132,7 +132,7 @@
       </div>
     </div>
   </div>
-</main>
+</div>
 {% schema %}
 {
   "name": "Sales Documentation",

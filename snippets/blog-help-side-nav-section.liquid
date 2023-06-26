@@ -1,11 +1,11 @@
 {% comment %}sec_title, sec_handle, tag{% endcomment %}
 <div class="page-sidebar__section {% if this_page == '' or this_page == sec_handle %}active{% endif %}">
-  <h3 Aria-label="{{ sec_title }}" >{{sec_title}}  <span class="toggle">{% if this_page == '' or this_page == sec_handle %}-{% else %}+{% endif %}</span></h3>
-  <ul role="menu" class="page-sidebar__navigation">
+  <h3 Aria-label="{{ sec_title | escape }}" >{{ sec_title | escape }}  <span class="toggle">{% if this_page == '' or this_page == sec_handle %}-{% else %}+{% endif %}</span></h3>
+  <ul class="page-sidebar__navigation">
     {% assign article_counter = 0 %}
     {% for article in blogs.help.articles %}
     {% if article.tags contains tag %}
-    <li><a role="menuitem" Aria-Label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+    <li><a Aria-Label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
     {% assign article_counter = article_counter | plus: 1 %}
     {% if article_counter >= 5 %}{% break %}{% endif %}
     {% endif %}
