@@ -1,0 +1,19 @@
+<ul class="site-footer-navigation">
+  {% for link in linklists.footer.links limit:4 %}
+  {% assign sub_links = false %}
+  {% capture child_list_handle %}{{ link.title | handleize }}{% endcapture %}
+  {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+  {% assign sub_links = true %}
+  {% endif %}
+  <li class="site-footer-navigation__item">
+    <a role="Heading" href="{{ link.url }}" Aria-label="{{ link.title }}">{{ link.title }}</a>
+    {% if sub_links %}
+    <ul class="site-footer-navigation__sub">
+      {% for l in linklists[child_list_handle].links %}
+      <li class="site-footer-navigation__sub-item"><a href="{{ l.url }}">{{ l.title }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul><!-- site-footer-navigation -->

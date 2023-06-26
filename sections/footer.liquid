@@ -1,0 +1,72 @@
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu"
+      }
+    ]
+  }
+{% endschema %}
+
+<footer role="contentinfo" class="site-footer" aria-label="Footer">
+  <div class="site-footer__section site-footer__section--upper site-container">
+    <div class="site-footer__block site-footer__block--left">
+
+      {% include 'gear-aid-svg' %}
+
+      <ul aria-label="Footer navigation" class="site-footer-navigation">
+        {% for link in linklists[section.settings.menu].links %}
+          {% if link.links.size > 0 %}
+            <li class="site-footer-navigation__item site-footer-navigation__main-item">
+              <a role="Menu" href="{{ link.url }}" Aria-Title="{{ link.title }}">{{ link.title }}</a>
+              {% if link.links.size > 0 %}
+                <ul>
+                  {% for sublink in link.links %}
+                    <li>
+                      <a role="MenuItem" href="{{ sublink.url }}" Aria-Title="{{ sublink.title }}">{{ sublink.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    <div aria-label="Social Media Icons" class="site-footer__block site-footer__block--right">
+      <h3>Follow Gear Aid</h3>
+      <a class="footer-social-link" href="https://www.facebook.com/GEARAID/" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+      {% comment %} <a class="footer-social-link" href="https://twitter.com/gearaid"><i class="fa fa-twitter" aria-hidden="true"></i></a> {% endcomment %}
+      <a class="footer-social-link" href="https://www.instagram.com/gearaid/" aria-label="Instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+      <a class="footer-social-link" href="https://www.youtube.com/user/GearAidProducts" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+
+      <ul aria-label="Footer navigation" class="site-footer-navigation site-footer-navigation--singles">
+        {% for link in linklists[section.settings.menu].links %}
+          {% unless link.links.size > 0 %}
+            <li class="site-footer-navigation__item site-footer-navigation__main-item">
+              <a href="{{ link.url }}" Aria-title="{{ link.title }}">{{ link.title }}</a>
+            </li>
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__section site-footer__section--lower site-container">
+    <div class="site-footer__block site-footer__block--left">
+      <span id="site-copyright">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} Inc. All Rights Reserved.</span>
+      <meta itemprop="name" value="{{ shop.name }}" />
+      <meta itemprop="telephone" value="{{ shop.phone }}" />
+      <meta itemprop="email" value="{{ shop.email }}" />
+    </div>
+    <div aria-label="Legal navigation" class="site-footer__block site-footer__block--right">
+      <a href="/pages/terms-and-conditions">Terms of Use</a>
+      <span class="sep"> </span>
+      <a href="/pages/privacy">Gear Aid Privacy Policy</a>
+      <span class="sep"> </span>
+      <a href="/pages/cookie-policy">Cookie Policy</a>
+    </div>
+  </div>
+</footer>

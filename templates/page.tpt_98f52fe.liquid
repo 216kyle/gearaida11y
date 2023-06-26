@@ -1,0 +1,167 @@
+<script>window.__tpt_full_page = 1</script><script class='tpt_dynamic'>function dynamicAttach(itemId, containerId, override){
+    console.log(itemId, containerId);
+    var slt= '.spb-item.type_actual_statement.spb-item-id_'+itemId;
+    var targetElement = document.querySelector(slt);
+    var containerElement = document.querySelector('.'+containerId);
+    console.log(targetElement, containerElement);
+    if(targetElement && containerElement && (!targetElement.innerHTML.length || override)){
+        console.log('Found container element');
+        var tpt_rerun = containerElement.querySelectorAll('script.tpt_rerun, script.tpt_inject_script');
+        targetElement.innerHTML = containerElement.innerHTML;
+        tpt_rerun.forEach(function(t){Function(t.innerText)()});
+    }else if (targetElement && containerElement && targetElement.innerHTML.length){
+        console.log('Already attached', slt);
+    }
+    if(!window._tapita_ssr_ijt_obj){
+        window._tapita_ssr_ijt_obj = {};
+    }
+    window._tapita_ssr_ijt_obj[slt] = function(){return dynamicAttach(itemId, containerId, override)};
+}</script>
+<script>window._issolate_tapita_hamburger = true;</script>
+
+        <style>
+                .type_actual_statement{width: 100%}
+        </style>
+        {% assign content = page.metafields.tapita["pgt-98f52fe"] %}
+        
+        <div id="tapita-page-main-content" style="min-height: 100vh; display: block">
+          <h1 class="tapita-placeholder" style="display:none;">
+            {{ page.title | escape }}
+            "", 1
+          </h1>
+        </div>
+
+        
+        <div class="rte">
+            <script>
+                try {
+                    var _tpt_insigna = "d03e2d804744a80e416045e0be8191f7";
+                    if(!globalThis._tpt_pbds){
+                        globalThis._tpt_pbds = [];
+                    }
+                    document.querySelectorAll("meta[name='description']").forEach(function(t){t.setAttribute("data-react-helmet",true)});
+                }catch(e){
+                    console.warn(e);
+                }
+                var tapitacss = `#shopify-section-tapita-main-page, #shopify-section-tapita-main-home { min-height: 100vh; } .main.content { max-width: unset; } .spb-item-root {width: 100%;} h1.main-page-title.page-title {display: none;} .spb-item.type_text {overflow-y: hidden;} `;
+                var tapitahead = document.head || document.getElementsByTagName("head")[0];
+                var tapitastyle = document.createElement("style");
+
+                tapitastyle.type = "text/css";
+                if (tapitastyle.styleSheet){
+                    tapitastyle.styleSheet.cssText = tapitacss;
+                } else {
+                    tapitastyle.appendChild(document.createTextNode(tapitacss));
+                }
+                tapitastyle.class="tapita-custom-css";
+                 
+                var tapitajs = ``;
+                var tapitascript = document.createElement("script");
+                tapitascript.appendChild(document.createTextNode(tapitajs));
+                tapitascript.defer = true;
+                tapitascript.class="tapita-custom-css";
+
+                tapitahead.appendChild(tapitastyle);
+                tapitahead.appendChild(tapitascript);
+                
+            </script>
+            
+            {{ 'tapita-cdn-assets-1.6.18.js' | asset_url | script_tag }}
+             
+            <script defer>
+                var tapita_counter = 0;
+                var possibleMainTargetQuery = [
+                    
+                    "#tapita-page-main-content",
+                    ".normal_main_content",
+                    "#MainContent",
+                    "shopify-section-tapita-main-page",
+                    "shopify-section-tapita-main-home",
+                    "main",
+                ];
+              
+                var currentMain = null;
+                for (const selector of possibleMainTargetQuery) {
+                    currentMain = document.querySelector(selector);
+                    if(currentMain){
+                        break;
+                    }
+                }
+                var injector = setInterval(function () {
+                    var idToRender = false;
+                    var mainTarget = null;
+                    for (const selector of possibleMainTargetQuery) {
+                        mainTarget = document.querySelector(selector);
+                        if(mainTarget){
+                            break;
+                        }
+                    }
+                    if(currentMain && currentMain.id !=="MainContent"){
+                        currentMain.id = "MainContentTapita";
+                        idToRender = "MainContentTapita";
+                    }
+                    
+                    if (!idToRender)
+                        return;
+
+                    tapita_counter += 1;
+                    if (globalThis.PageBuilderComponent) {
+                        var tapitaSections = document.querySelectorAll(".tapitaSection, .spb-customerhtml-serverrender");
+                        currentMain = null;
+                        function tptPBD(){
+                            PageBuilderComponent.renderForIdWithProps(idToRender, {
+                            endPoint: "https://tapita.io/pb/graphql/",
+                            mode: "shopify",
+                            lazyloadPlaceHolder: "",
+                            formatMessage: globalThis._rms_translate,
+                            _translateParagraph: true,
+                            _translateSEO: true,
+                            _translatePlaceholder: true,
+                            pageData: {"url_path":"\/your-page","original_url_path":"\/your-page","type_id":0,"priority":10,"entity_id":24340,"name":"Your Page","status":1,"masked_id":"2386wZzcQwz9LEZ8qsGqNDrt1686346471","custom_css":"#MainContentTapita {min-height:inherit!important;}","custom_js":null,"keywords":null,"title":"Get 20% OFF Summer Sale | GEAR AID","desc":"","is_rtl":0,"storeview_visibility":"","publish_items":"[{\"entity_id\":70,\"page_id\":\"24340\",\"status\":1,\"styles\":\"{\\\"flexDirection\\\":\\\"column\\\",\\\"widthPercent\\\":100,\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":0,\\\"marginRight\\\":0,\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0,\\\"borderRadius\\\":\\\"0px\\\",\\\"paddingLeft\\\":0,\\\"paddingRight\\\":0}\",\"data\":\"{\\\"image\\\":\\\"https:\\\\\\\/\\\\\\\/cdn.shopify.com\\\\\\\/s\\\\\\\/files\\\\\\\/1\\\\\\\/1487\\\\\\\/5048\\\\\\\/t\\\\\\\/54\\\\\\\/assets\\\\\\\/1686346647CouponLandingPage-test.png?v=1686346649\\\",\\\"hideOnTablet\\\":false,\\\"hideOnMobile\\\":false,\\\"t_image\\\":\\\"https:\\\\\\\/\\\\\\\/cdn.shopify.com\\\\\\\/s\\\\\\\/files\\\\\\\/1\\\\\\\/1487\\\\\\\/5048\\\\\\\/t\\\\\\\/54\\\\\\\/assets\\\\\\\/1686348088Untitled-design-14_jpg.jpeg?v=1686348089\\\",\\\"m_image\\\":\\\"https:\\\\\\\/\\\\\\\/cdn.shopify.com\\\\\\\/s\\\\\\\/files\\\\\\\/1\\\\\\\/1487\\\\\\\/5048\\\\\\\/t\\\\\\\/54\\\\\\\/assets\\\\\\\/1686348052Untitled-design-14_jpg.jpeg?v=1686348053\\\",\\\"openUrl\\\":\\\"https:\\\\\\\/\\\\\\\/www.gearaid.com\\\\\\\/discount\\\\\\\/SUMMER2023\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_ZnY1aXQxNjg2MzQ3OTM4MzA0_38304\",\"class_name\":\"\",\"type\":\"image\",\"visibility\":\"\",\"sort_order\":20,\"parent_id\":69,\"storeview_visibility\":0},{\"entity_id\":69,\"page_id\":\"24340\",\"status\":1,\"styles\":\"{\\\"display\\\":\\\"flex\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"widthPercent\\\":100,\\\"flexShrink\\\":1,\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0,\\\"paddingLeft\\\":0,\\\"paddingRight\\\":0,\\\"justifyContent\\\":\\\"center\\\",\\\"maxWidth\\\":\\\"1440px\\\",\\\"alignItems\\\":\\\"center\\\",\\\"flexWrap\\\":\\\"wrap\\\"}\",\"data\":\"{}\",\"name\":\"\",\"tag_id\":\"pbi_QUZEbkExNjg2MzQ3OTA4MDg1_08085\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":40,\"parent_id\":0,\"storeview_visibility\":0}]","updated_at":"2023-06-09 22:06:52","image":null}
+                            });
+                        }
+                        globalThis._tpt_pbds.push(tptPBD);
+                        tptPBD();
+                        
+        function _tapita_ssr_cti(){window._tapita_ssr_ijt_obj && Object.values(window._tapita_ssr_ijt_obj||{}).forEach(function (t){t&&t()})};
+        _tapita_ssr_cti();
+        if(!globalThis._tpt_pbds){globalThis._tpt_pbds=[]};
+        globalThis._tpt_pbds.push(_tapita_ssr_cti);
+        window.addEventListener("resize", ()=>{_tapita_ssr_cti()});
+        ;
+                        var documentFragment = document.createDocumentFragment();
+                        tapitaSections.forEach(function(el){documentFragment.appendChild(el)});
+                        document.querySelector("#" + idToRender).appendChild(documentFragment);
+                        tapitaSections = null;
+                        clearInterval(injector);
+                    } else if (tapita_counter > 60) {
+                        clearInterval(injector);
+                    }
+                }, 100);
+            </script>
+        </div>
+
+        <div class="tel">
+        {% for field in content.value %}
+          {% if field.type == "product_grid" %}
+          {% render 'tapita-product-grid',
+                    product_target_ident: field.settings.product_target_ident,
+                    product_handle: field.settings.product-handle,
+                    product_handles: field.settings.product-handles,
+                    product_ident: field.settings.product_ident,
+                    product_title: field.settings.product-title,
+                    product_limit: field.settings.product-limit,
+          %}
+          {% elsif field.type == "product_scroll" %}
+          {% render 'tapita-product-list',
+                    product_target_ident: field.settings.product_target_ident,
+                    product_handle: field.settings.product-handle,
+                    product_handles: field.settings.product-handles,
+                    product_ident: field.settings.product_ident,
+                    product_title: field.settings.product-title,
+                    product_limit: field.settings.product-limit,
+          %}
+          {% endif %}
+          {% endfor %}
+        </div>
+        

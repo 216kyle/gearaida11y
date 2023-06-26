@@ -1,0 +1,311 @@
+<section class="tab-content tab-content--{{ block.id }} partner-with-us" {{ block.shopify_attributes }}>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      (function($){
+        $(function(){
+          $('.tab-content--{{ block.id }} .tabs h3').on('click', function() {
+            var matchClass = $(this).data('match');
+
+            $('.tab-content--{{ block.id }} .tabs h3').removeClass('active');
+            $(this).addClass('active');
+            $('.tab-matching-content').removeClass('active');
+            $('.tab-matching-content.' + matchClass + '').addClass('active');
+          })
+          
+        });
+      })(jQuery)
+    });
+  </script>
+  
+  <div class="tab-content__container">
+    {% if block.settings.title != blank %}
+      <h2>{{ block.settings.title}}</h2>
+    {% endif %}
+    {% if block.settings.content != blank %}
+      {{ block.settings.content}}
+    {% endif %}
+    
+    <div class="tabs">
+      <h3 class="aquaseal active" data-match="aquaseal">Aquaseal</h3>
+      <h3 class="seam-grip" data-match="seam-grip">Seam Grip</h3>
+      <h3 class="revivex" data-match="revivex">Revivex</h3>
+      <h3 class="tenacious-tape" data-match="tenacious-tape">Tenacious Tape</h3>
+    </div>
+
+    <div class="tab-matching-content aquaseal active">
+      <div class="tab-top-wrapper">
+        <h3>{{ block.settings.aquaseal_title }}</h3>
+        <p>{{ block.settings.aquaseal_content }}</p>
+        <h4 class="fix-title">Use Aquaseal to Fix:</h4>
+        <div class="fix-items">
+          <div class="fix-item">
+            <img src="{{ block.settings.aquaseal_fix_img_1 | img_url: '100x' }}" alt="{{ block.settings.aquaseal_fix_text_1 }}">
+            <p>{{ block.settings.aquaseal_fix_text_1 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.aquaseal_fix_img_2 | img_url: '100x' }}" alt="{{ block.settings.aquaseal_fix_text_2 }}">
+            <p>{{ block.settings.aquaseal_fix_text_2 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.aquaseal_fix_img_3 | img_url: '100x' }}" alt="{{ block.settings.aquaseal_fix_text_3 }}">
+            <p>{{ block.settings.aquaseal_fix_text_3 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.aquaseal_fix_img_4 | img_url: '100x' }}" alt="{{ block.settings.aquaseal_fix_text_4 }}">
+            <p>{{ block.settings.aquaseal_fix_text_4 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.aquaseal_fix_img_5 | img_url: '100x' }}" alt="{{ block.settings.aquaseal_fix_text_5 }}">
+            <p>{{ block.settings.aquaseal_fix_text_5 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-products">
+        <a class="tab-product" href="{{ block.settings.aquaseal_prod_url_1 }}" title="{{ block.settings.aquaseal_prod_title_1 }}">
+          <h4>{{ block.settings.aquaseal_prod_title_1 }}</h4>
+          <p class="subheader">{{ block.settings.aquaseal_prod_subheader_1 }}</p>
+          <img src="{{ block.settings.aquaseal_prod_img_1 | img_url: '300x' }}" alt="{{ block.settings.aquaseal_prod_title_1 }}">
+          <div class="copy">{{ block.settings.aquaseal_prod_copy_1 }}</div>
+          {% if block.settings.aquaseal_prod_size_1_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_1_1}}</p>{% endif %}
+          {% if block.settings.aquaseal_prod_size_2_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_2_1}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.aquaseal_prod_url_2 }}" title="{{ block.settings.aquaseal_prod_title_2 }}">
+          <h4>{{ block.settings.aquaseal_prod_title_2 }}</h4>
+          <p class="subheader">{{ block.settings.aquaseal_prod_subheader_2 }}</p>
+          <img src="{{ block.settings.aquaseal_prod_img_2 | img_url: '300x' }}" alt="{{ block.settings.aquaseal_prod_title_2 }}">
+          <div class="copy">{{ block.settings.aquaseal_prod_copy_2 }}</div>
+          {% if block.settings.aquaseal_prod_size_1_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_1_2}}</p>{% endif %}
+          {% if block.settings.aquaseal_prod_size_2_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_2_2}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.aquaseal_prod_url_3 }}" title="{{ block.settings.aquaseal_prod_title_3 }}">
+          <h4>{{ block.settings.aquaseal_prod_title_3 }}</h4>
+          <p class="subheader">{{ block.settings.aquaseal_prod_subheader_3 }}</p>
+          <img src="{{ block.settings.aquaseal_prod_img_3 | img_url: '300x' }}" alt="{{ block.settings.aquaseal_prod_title_3 }}">
+          <div class="copy">{{ block.settings.aquaseal_prod_copy_3 }}</div>
+          {% if block.settings.aquaseal_prod_size_1_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_1_3}}</p>{% endif %}
+          {% if block.settings.aquaseal_prod_size_2_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_2_3}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.aquaseal_prod_url_4 }}" title="{{ block.settings.aquaseal_prod_title_4 }}">
+          <h4>{{ block.settings.aquaseal_prod_title_4 }}</h4>
+          <p class="subheader">{{ block.settings.aquaseal_prod_subheader_4 }}</p>
+          <img src="{{ block.settings.aquaseal_prod_img_4 | img_url: '300x' }}" alt="{{ block.settings.aquaseal_prod_title_4 }}">
+          <div class="copy">{{ block.settings.aquaseal_prod_copy_4 }}</div>
+          {% if block.settings.aquaseal_prod_size_1_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_1_4}}</p>{% endif %}
+          {% if block.settings.aquaseal_prod_size_2_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.aquaseal_prod_size_2_4}}</p>{% endif %}
+        </a>
+      </div>
+      <div class="learn-more">
+        <a class="btn btn-alt-white" href="{{ block.settings.learn_more_url}}" title="Learn More">Learn More</a>
+      </div>
+    </div>
+
+    <div class="tab-matching-content seam-grip">
+      <div class="tab-top-wrapper">
+        <h3>{{ block.settings.seam_grip_title }}</h3>
+        <p>{{ block.settings.seam_grip_content }}</p>
+        <h4 class="fix-title">Use Seam Grip to Fix:</h4>
+        <div class="fix-items">
+          <div class="fix-item">
+            <img src="{{ block.settings.seam_grip_fix_img_1 | img_url: '100x' }}" alt="{{ block.settings.seam_grip_fix_text_1 }}">
+            <p>{{ block.settings.seam_grip_fix_text_1 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.seam_grip_fix_img_2 | img_url: '100x' }}" alt="{{ block.settings.seam_grip_fix_text_2 }}">
+            <p>{{ block.settings.seam_grip_fix_text_2 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.seam_grip_fix_img_3 | img_url: '100x' }}" alt="{{ block.settings.seam_grip_fix_text_3 }}">
+            <p>{{ block.settings.seam_grip_fix_text_3 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.seam_grip_fix_img_4 | img_url: '100x' }}" alt="{{ block.settings.seam_grip_fix_text_4 }}">
+            <p>{{ block.settings.seam_grip_fix_text_4 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.seam_grip_fix_img_5 | img_url: '100x' }}" alt="{{ block.settings.seam_grip_fix_text_5 }}">
+            <p>{{ block.settings.seam_grip_fix_text_5 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-products">
+        <a class="tab-product" href="{{ block.settings.seam_grip_prod_url_1 }}" title="{{ block.settings.seam_grip_prod_title_1 }}">
+          <h4>{{ block.settings.seam_grip_prod_title_1 }}</h4>
+          <p class="subheader">{{ block.settings.seam_grip_prod_subheader_1 }}</p>
+          <img src="{{ block.settings.seam_grip_prod_img_1 | img_url: '300x' }}" alt="{{ block.settings.seam_grip_prod_title_1 }}">
+          <div class="copy">{{ block.settings.seam_grip_prod_copy_1 }}</div>
+          {% if block.settings.seam_grip_prod_size_1_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_1_1}}</p>{% endif %}
+          {% if block.settings.seam_grip_prod_size_2_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_2_1}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.seam_grip_prod_url_2 }}" title="{{ block.settings.seam_grip_prod_title_2 }}">
+          <h4>{{ block.settings.seam_grip_prod_title_2 }}</h4>
+          <p class="subheader">{{ block.settings.seam_grip_prod_subheader_2 }}</p>
+          <img src="{{ block.settings.seam_grip_prod_img_2 | img_url: '300x' }}" alt="{{ block.settings.seam_grip_prod_title_2 }}">
+          <div class="copy">{{ block.settings.seam_grip_prod_copy_2 }}</div>
+          {% if block.settings.seam_grip_prod_size_1_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_1_2}}</p>{% endif %}
+          {% if block.settings.seam_grip_prod_size_2_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_2_2}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.seam_grip_prod_url_3 }}" title="{{ block.settings.seam_grip_prod_title_3 }}">
+          <h4>{{ block.settings.seam_grip_prod_title_3 }}</h4>
+          <p class="subheader">{{ block.settings.seam_grip_prod_subheader_3 }}</p>
+          <img src="{{ block.settings.seam_grip_prod_img_3 | img_url: '300x' }}" alt="{{ block.settings.seam_grip_prod_title_3 }}">
+          <div class="copy">{{ block.settings.seam_grip_prod_copy_3 }}</div>
+          {% if block.settings.seam_grip_prod_size_1_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_1_3}}</p>{% endif %}
+          {% if block.settings.seam_grip_prod_size_2_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_2_3}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.seam_grip_prod_url_4 }}" title="{{ block.settings.seam_grip_prod_title_4 }}">
+          <h4>{{ block.settings.seam_grip_prod_title_4 }}</h4>
+          <p class="subheader">{{ block.settings.seam_grip_prod_subheader_4 }}</p>
+          <img src="{{ block.settings.seam_grip_prod_img_4 | img_url: '300x' }}" alt="{{ block.settings.seam_grip_prod_title_4 }}">
+          <div class="copy">{{ block.settings.seam_grip_prod_copy_4 }}</div>
+          {% if block.settings.seam_grip_prod_size_1_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_1_4}}</p>{% endif %}
+          {% if block.settings.seam_grip_prod_size_2_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.seam_grip_prod_size_2_4}}</p>{% endif %}
+        </a>
+      </div>
+      <div class="learn-more">
+        <a class="btn btn-alt-white" href="{{ block.settings.learn_more_url}}" title="Learn More">Learn More</a>
+      </div>
+    </div>
+
+    <div class="tab-matching-content revivex">
+      <div class="tab-top-wrapper">
+        <h3>{{ block.settings.revivex_title }}</h3>
+        <p>{{ block.settings.revivex_content }}</p>
+        <h4 class="fix-title">Use Revivex to Fix:</h4>
+        <div class="fix-items">
+          <div class="fix-item">
+            <img src="{{ block.settings.revivex_fix_img_1 | img_url: '100x' }}" alt="{{ block.settings.revivex_fix_text_1 }}">
+            <p>{{ block.settings.revivex_fix_text_1 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.revivex_fix_img_2 | img_url: '100x' }}" alt="{{ block.settings.revivex_fix_text_2 }}">
+            <p>{{ block.settings.revivex_fix_text_2 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.revivex_fix_img_3 | img_url: '100x' }}" alt="{{ block.settings.revivex_fix_text_3 }}">
+            <p>{{ block.settings.revivex_fix_text_3 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.revivex_fix_img_4 | img_url: '100x' }}" alt="{{ block.settings.revivex_fix_text_4 }}">
+            <p>{{ block.settings.revivex_fix_text_4 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.revivex_fix_img_5 | img_url: '100x' }}" alt="{{ block.settings.revivex_fix_text_5 }}">
+            <p>{{ block.settings.revivex_fix_text_5 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-products">
+        <a class="tab-product" href="{{ block.settings.revivex_prod_url_1 }}" title="{{ block.settings.revivex_prod_title_1 }}">
+          <h4>{{ block.settings.revivex_prod_title_1 }}</h4>
+          <p class="subheader">{{ block.settings.revivex_prod_subheader_1 }}</p>
+          <img src="{{ block.settings.revivex_prod_img_1 | img_url: '300x' }}" alt="{{ block.settings.revivex_prod_title_1 }}">
+          <div class="copy">{{ block.settings.revivex_prod_copy_1 }}</div>
+          {% if block.settings.revivex_prod_size_1_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_1_1}}</p>{% endif %}
+          {% if block.settings.revivex_prod_size_2_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_2_1}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.revivex_prod_url_2 }}" title="{{ block.settings.revivex_prod_title_2 }}">
+          <h4>{{ block.settings.revivex_prod_title_2 }}</h4>
+          <p class="subheader">{{ block.settings.revivex_prod_subheader_2 }}</p>
+          <img src="{{ block.settings.revivex_prod_img_2 | img_url: '300x' }}" alt="{{ block.settings.revivex_prod_title_2 }}">
+          <div class="copy">{{ block.settings.revivex_prod_copy_2 }}</div>
+          {% if block.settings.revivex_prod_size_1_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_1_2}}</p>{% endif %}
+          {% if block.settings.revivex_prod_size_2_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_2_2}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.revivex_prod_url_3 }}" title="{{ block.settings.revivex_prod_title_3 }}">
+          <h4>{{ block.settings.revivex_prod_title_3 }}</h4>
+          <p class="subheader">{{ block.settings.revivex_prod_subheader_3 }}</p>
+          <img src="{{ block.settings.revivex_prod_img_3 | img_url: '300x' }}" alt="{{ block.settings.revivex_prod_title_3 }}">
+          <div class="copy">{{ block.settings.revivex_prod_copy_3 }}</div>
+          {% if block.settings.revivex_prod_size_1_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_1_3}}</p>{% endif %}
+          {% if block.settings.revivex_prod_size_2_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_2_3}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.revivex_prod_url_4 }}" title="{{ block.settings.revivex_prod_title_4 }}">
+          <h4>{{ block.settings.revivex_prod_title_4 }}</h4>
+          <p class="subheader">{{ block.settings.revivex_prod_subheader_4 }}</p>
+          <img src="{{ block.settings.revivex_prod_img_4 | img_url: '300x' }}" alt="{{ block.settings.revivex_prod_title_4 }}">
+          <div class="copy">{{ block.settings.revivex_prod_copy_4 }}</div>
+          {% if block.settings.revivex_prod_size_1_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_1_4}}</p>{% endif %}
+          {% if block.settings.revivex_prod_size_2_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.revivex_prod_size_2_4}}</p>{% endif %}
+        </a>
+      </div>
+      <div class="learn-more">
+        <a class="btn btn-alt-white" href="{{ block.settings.learn_more_url}}" title="Learn More">Learn More</a>
+      </div>
+    </div>
+
+    <div class="tab-matching-content tenacious-tape">
+      <div class="tab-top-wrapper">
+        <h3>{{ block.settings.tenacious_tape_title }}</h3>
+        <p>{{ block.settings.tenacious_tape_content }}</p>
+        <h4 class="fix-title">Use Tenacious Tape to Fix:</h4>
+        <div class="fix-items">
+          <div class="fix-item">
+            <img src="{{ block.settings.tenacious_tape_fix_img_1 | img_url: '100x' }}" alt="{{ block.settings.tenacious_tape_fix_text_1 }}">
+            <p>{{ block.settings.tenacious_tape_fix_text_1 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.tenacious_tape_fix_img_2 | img_url: '100x' }}" alt="{{ block.settings.tenacious_tape_fix_text_2 }}">
+            <p>{{ block.settings.tenacious_tape_fix_text_2 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.tenacious_tape_fix_img_3 | img_url: '100x' }}" alt="{{ block.settings.tenacious_tape_fix_text_3 }}">
+            <p>{{ block.settings.tenacious_tape_fix_text_3 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.tenacious_tape_fix_img_4 | img_url: '100x' }}" alt="{{ block.settings.tenacious_tape_fix_text_4 }}">
+            <p>{{ block.settings.tenacious_tape_fix_text_4 }}</p>
+          </div>
+          <div class="fix-item">
+            <img src="{{ block.settings.tenacious_tape_fix_img_5 | img_url: '100x' }}" alt="{{ block.settings.tenacious_tape_fix_text_5 }}">
+            <p>{{ block.settings.tenacious_tape_fix_text_5 }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-products">
+        <a class="tab-product" href="{{ block.settings.tenacious_tape_prod_url_1 }}" title="{{ block.settings.tenacious_tape_prod_title_1 }}">
+          <h4>{{ block.settings.tenacious_tape_prod_title_1 }}</h4>
+          <p class="subheader">{{ block.settings.tenacious_tape_prod_subheader_1 }}</p>
+          <img src="{{ block.settings.tenacious_tape_prod_img_1 | img_url: '300x' }}" alt="{{ block.settings.tenacious_tape_prod_title_1 }}">
+          <div class="copy">{{ block.settings.tenacious_tape_prod_copy_1 }}</div>
+          {% if block.settings.tenacious_tape_prod_size_1_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_1_1}}</p>{% endif %}
+          {% if block.settings.tenacious_tape_prod_size_2_1 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_2_1}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.tenacious_tape_prod_url_2 }}" title="{{ block.settings.tenacious_tape_prod_title_2 }}">
+          <h4>{{ block.settings.tenacious_tape_prod_title_2 }}</h4>
+          <p class="subheader">{{ block.settings.tenacious_tape_prod_subheader_2 }}</p>
+          <img src="{{ block.settings.tenacious_tape_prod_img_2 | img_url: '300x' }}" alt="{{ block.settings.tenacious_tape_prod_title_2 }}">
+          <div class="copy">{{ block.settings.tenacious_tape_prod_copy_2 }}</div>
+          {% if block.settings.tenacious_tape_prod_size_1_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_1_2}}</p>{% endif %}
+          {% if block.settings.tenacious_tape_prod_size_2_2 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_2_2}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.tenacious_tape_prod_url_3 }}" title="{{ block.settings.tenacious_tape_prod_title_3 }}">
+          <h4>{{ block.settings.tenacious_tape_prod_title_3 }}</h4>
+          <p class="subheader">{{ block.settings.tenacious_tape_prod_subheader_3 }}</p>
+          <img src="{{ block.settings.tenacious_tape_prod_img_3 | img_url: '300x' }}" alt="{{ block.settings.tenacious_tape_prod_title_3 }}">
+          <div class="copy">{{ block.settings.tenacious_tape_prod_copy_3 }}</div>
+          {% if block.settings.tenacious_tape_prod_size_1_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_1_3}}</p>{% endif %}
+          {% if block.settings.tenacious_tape_prod_size_2_3 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_2_3}}</p>{% endif %}
+        </a>
+        <a class="tab-product" href="{{ block.settings.tenacious_tape_prod_url_4 }}" title="{{ block.settings.tenacious_tape_prod_title_4 }}">
+          <h4>{{ block.settings.tenacious_tape_prod_title_4 }}</h4>
+          <p class="subheader">{{ block.settings.tenacious_tape_prod_subheader_4 }}</p>
+          <img src="{{ block.settings.tenacious_tape_prod_img_4 | img_url: '300x' }}" alt="{{ block.settings.tenacious_tape_prod_title_4 }}">
+          <div class="copy">{{ block.settings.tenacious_tape_prod_copy_4 }}</div>
+          {% if block.settings.tenacious_tape_prod_size_1_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_1_4}}</p>{% endif %}
+          {% if block.settings.tenacious_tape_prod_size_2_4 != blank %}<p class="size"><span class="circle">&#9711;</span> {{ block.settings.tenacious_tape_prod_size_2_4}}</p>{% endif %}
+        </div>
+      </a>
+      <div class="learn-more">
+        <a class="btn btn-alt-white" href="{{ block.settings.learn_more_url}}" title="Learn More">Learn More</a>
+      </div>
+    </div>
+
+    <div class="catalog">
+      <a href="{{ block.settings.catalog_url }}" title="Download Catalog">
+        <img src="{{ block.settings.catalog_img | img_url: '300x' }}" alt="Catalog">
+        <p>Download Catalog</p>
+      </a>
+    </div>
+
+  </div>
+</section>

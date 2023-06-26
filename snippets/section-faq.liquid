@@ -1,0 +1,22 @@
+<section class="faq faq--{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="faq__container">
+    {% if block.settings.title != blank %}
+      <h2>{{ block.settings.title}}</h2>
+    {% endif %}
+    {% if block.settings.content != blank %}
+      {{ block.settings.content}}
+    {% endif %}
+    <div class="faqs">
+      {% for i in (1..30) %}
+      {% capture faq_title %}faq_title_{{ i }}{% endcapture %}
+      {% capture faq_content %}faq_content_{{ i }}{% endcapture %}
+      {% if block.settings[faq_title] != blank %}
+      <div>
+        <h3>{{ block.settings[faq_title] }}</h3>
+        {{ block.settings[faq_content] }}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+ </div>
+</section>

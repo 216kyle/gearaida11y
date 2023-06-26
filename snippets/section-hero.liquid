@@ -1,0 +1,29 @@
+<section class="hero" {{ block.shopify_attributes }}>
+  <figure class="hero__image lazy" data-src="{{ block.settings.bkgd_image | img_url: '3000x' }}"></figure>
+  <div class="hero__heading">
+    <div class="hero__heading-icon">
+      {% include 'icon-r-logo.svg' %}
+    </div>
+    <div class="hero__heading-text">
+      <span>/ Learn</span>
+      <h1>Repair. Renew.<br>Reuse.</h1>
+      <a href="{{ block.settings.url }}" class="btn btn-alt-white" title="Go to Learn More">Learn More</a>
+    </div>
+  </div>
+  <div class="hero__content" id="hero_content">
+    <div class="hero__content-item hero__content-item--left">
+      <h3>{{ block.settings.description }}</h3>
+    </div>
+    <div class="hero__content-item hero__content-item--right">
+      {% include 'icon-heart.svg' %}
+    </div>
+    <div class="hero__content-item">
+      {{ block.settings.content }}
+    </div>
+  </div>
+  {% if block.settings.footer_img != blank %}
+    <div class="hero__footer">
+      <img src="{{ block.settings.footer_img | img_url: '1200x' }}" alt="{{ block.settings.footer_img.alt }}" />
+    </div>
+  {% endif %}
+</section>

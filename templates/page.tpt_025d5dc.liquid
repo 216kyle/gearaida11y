@@ -1,0 +1,202 @@
+<script>window.__tpt_full_page = 1</script><script class='tpt_dynamic'>function dynamicAttach(itemId, containerId, override){
+    console.log(itemId, containerId);
+    var slt= '.spb-item.type_actual_statement.spb-item-id_'+itemId;
+    var targetElement = document.querySelector(slt);
+    var containerElement = document.querySelector('.'+containerId);
+    console.log(targetElement, containerElement);
+    if(targetElement && containerElement && (!targetElement.innerHTML.length || override)){
+        console.log('Found container element');
+        var tpt_rerun = containerElement.querySelectorAll('script.tpt_rerun, script.tpt_inject_script');
+        targetElement.innerHTML = containerElement.innerHTML;
+        tpt_rerun.forEach(function(t){Function(t.innerText)()});
+    }else if (targetElement && containerElement && targetElement.innerHTML.length){
+        console.log('Already attached', slt);
+    }
+    if(!window._tapita_ssr_ijt_obj){
+        window._tapita_ssr_ijt_obj = {};
+    }
+    window._tapita_ssr_ijt_obj[slt] = function(){return dynamicAttach(itemId, containerId, override)};
+}</script>
+<script>window._issolate_tapita_hamburger = true;</script>
+
+        <style>
+                .type_actual_statement{width: 100%}
+        </style>
+        {% assign content = page.metafields.tapita["pgt-025d5dc"] %}
+        
+        <div id="tapita-page-main-content" style="min-height: 100vh; display: block">
+          <h1 class="tapita-placeholder" style="display:none;">
+            {{ page.title | escape }}
+            "", 1
+          </h1>
+        </div>
+
+        
+                                <div class='spb-customerhtml-serverrender spb-customerhtml-serverrender-58' style='opacity: 0'></div>
+                                <script>
+                                var timmerTime = (window && window.screen && window.screen.width && window.screen.width < 1024) ? 1000: 300;
+                                    var timer_58_counter = 0;
+                                    var timer_58 = setInterval(function () {
+                                    try{
+                                        timer_58_counter++;
+                                        let target_c = document.querySelector('.spb-item.spb-item-id_58');
+                                        let self_c = document.getElementsByClassName('spb-customerhtml-serverrender-58');
+                                        if (target_c && !target_c.innerHTML) {
+                                            if(self_c.length > 0 ){
+                                                target_c.style.setProperty('display', 'block');
+                                                target_c.style.setProperty('overflow', 'clip');
+                                                self_c[0].style.setProperty('display', 'unset');
+                                                self_c[0].style.setProperty('opacity', '1');
+                                                window.tpb_srsappended_{{ident}}58 = self_c[0];
+                                                target_c.appendChild(self_c[0]);
+                                            } else if (window.tpb_srsappended_{{ident}}58) {
+                                                target_c.style.setProperty('display', 'block');
+                                                target_c.style.setProperty('overflow', 'clip');
+                                                window.tpb_srsappended_{{ident}}58.style.setProperty('display', 'unset');
+                                                target_c.appendChild(window.tpb_srsappended_{{ident}}58);
+                                            }
+                                        } else if (!target_c) {
+                                            if((self_c.length > 0) && (timer_58_counter > 5)){
+                                                self_c[0].style.setProperty('display', 'none');
+                                            }
+                                        }
+                                    } catch(e) {
+                                        console.warn(e);
+                                        clearInterval(timer_58);
+                                    }
+                                }, timmerTime);
+                                </script>
+                            
+        <div class="rte">
+            <script>
+                try {
+                    var _tpt_insigna = "6b9a3db28a7ef2ddf4534f6e6bcbfb8c";
+                    if(!globalThis._tpt_pbds){
+                        globalThis._tpt_pbds = [];
+                    }
+                    document.querySelectorAll("meta[name='description']").forEach(function(t){t.setAttribute("data-react-helmet",true)});
+                }catch(e){
+                    console.warn(e);
+                }
+                var tapitacss = `#shopify-section-tapita-main-page, #shopify-section-tapita-main-home { min-height: 100vh; } .main.content { max-width: unset; } .spb-item-root {width: 100%;} h1.main-page-title.page-title {display: none;} .spb-item.type_text {overflow-y: hidden;} `;
+                var tapitahead = document.head || document.getElementsByTagName("head")[0];
+                var tapitastyle = document.createElement("style");
+
+                tapitastyle.type = "text/css";
+                if (tapitastyle.styleSheet){
+                    tapitastyle.styleSheet.cssText = tapitacss;
+                } else {
+                    tapitastyle.appendChild(document.createTextNode(tapitacss));
+                }
+                tapitastyle.class="tapita-custom-css";
+                 
+                var tapitajs = ``;
+                var tapitascript = document.createElement("script");
+                tapitascript.appendChild(document.createTextNode(tapitajs));
+                tapitascript.defer = true;
+                tapitascript.class="tapita-custom-css";
+
+                tapitahead.appendChild(tapitastyle);
+                tapitahead.appendChild(tapitascript);
+                
+            </script>
+            
+            {{ 'tapita-cdn-assets-1.6.18.js' | asset_url | script_tag }}
+             
+            <script defer>
+                var tapita_counter = 0;
+                var possibleMainTargetQuery = [
+                    
+                    "#tapita-page-main-content",
+                    ".normal_main_content",
+                    "#MainContent",
+                    "shopify-section-tapita-main-page",
+                    "shopify-section-tapita-main-home",
+                    "main",
+                ];
+              
+                var currentMain = null;
+                for (const selector of possibleMainTargetQuery) {
+                    currentMain = document.querySelector(selector);
+                    if(currentMain){
+                        break;
+                    }
+                }
+                var injector = setInterval(function () {
+                    var idToRender = false;
+                    var mainTarget = null;
+                    for (const selector of possibleMainTargetQuery) {
+                        mainTarget = document.querySelector(selector);
+                        if(mainTarget){
+                            break;
+                        }
+                    }
+                    if(currentMain && currentMain.id !=="MainContent"){
+                        currentMain.id = "MainContentTapita";
+                        idToRender = "MainContentTapita";
+                    }
+                    
+                    if (!idToRender)
+                        return;
+
+                    tapita_counter += 1;
+                    if (globalThis.PageBuilderComponent) {
+                        var tapitaSections = document.querySelectorAll(".tapitaSection, .spb-customerhtml-serverrender");
+                        currentMain = null;
+                        function tptPBD(){
+                            PageBuilderComponent.renderForIdWithProps(idToRender, {
+                            endPoint: "https://tapita.io/pb/graphql/",
+                            mode: "shopify",
+                            lazyloadPlaceHolder: "",
+                            formatMessage: globalThis._rms_translate,
+                            _translateParagraph: true,
+                            _translateSEO: true,
+                            _translatePlaceholder: true,
+                            pageData: {"url_path":"\/summer2023","original_url_path":"\/summer2023","type_id":0,"priority":10,"entity_id":23332,"name":"Gear Ad Shows 2023","status":1,"masked_id":"238630KFHSPZrErOTW1xiJYo1684433211","custom_css":"#pbitm-id-24 {font-family:'FFDINWebBlack';font-weight:400;transform:uppercase;}\n#pbitm-id-26 {font-family:'FFDINWebBlack';font-weight:400;transform:uppercase\n#pbitm-id-34 {font-family:'FFDINWebBlack';}\n#pbitm-id-25 {font-family:'Bitter';}\n#pbitm-id-30 {font-family:'Bitter';}\n#pbitm-id-32 {font-family:'Bitter';}\n#pbitm-id-37 {padding-left:25px 15px 25px 15px!important;}\n#pditm-id-3 {background: linear-gradient(119deg, rgba(54,99,133,1) 30%, rgba(255,255,255,0) 61%)!important;}\n#MainContentTapita {min-height: inherit;}\n#pbitm-id-46 #pbitm-id-44 {position:relative;float:left;width:30%;display:inline-block;}","custom_js":null,"keywords":null,"title":"GA SHOW 2023","desc":"","is_rtl":0,"storeview_visibility":"","publish_items":"[{\"entity_id\":46,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"fontWeight\\\":700,\\\"fontSize\\\":\\\"50px\\\",\\\"color\\\":\\\"#fff\\\",\\\"backgroundColor\\\":\\\"#7fa0be00\\\",\\\"paddingLeft\\\":5,\\\"paddingRight\\\":5,\\\"paddingTop\\\":5,\\\"paddingBottom\\\":5,\\\"textAlign\\\":\\\"left\\\",\\\"m_fontSize\\\":\\\"30px\\\",\\\"t_textAlign\\\":\\\"center\\\",\\\"marginLeft\\\":\\\"auto\\\"}\",\"data\":\"{\\\"textTag\\\":\\\"h1\\\"}\",\"name\":\"OFF\",\"tag_id\":\"pbi_WjI4OUMxNjg2MTM5NTI3NzQ1_27745\",\"class_name\":\"\",\"type\":\"text\",\"visibility\":\"\",\"sort_order\":30,\"parent_id\":63,\"storeview_visibility\":0},{\"entity_id\":44,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"fontWeight\\\":900,\\\"fontSize\\\":\\\"130px\\\",\\\"color\\\":\\\"#fff\\\",\\\"textAlign\\\":\\\"right\\\",\\\"l_fontSize\\\":\\\"110px\\\",\\\"m_fontSize\\\":\\\"50px\\\",\\\"lineHeight\\\":\\\"130px\\\",\\\"m_textAlign\\\":\\\"center\\\",\\\"boxShadow\\\":\\\"0px 0px 0px 0px \\\",\\\"boxShadowHorizontal\\\":0,\\\"m_paddingLeft\\\":0,\\\"m_paddingRight\\\":0,\\\"m_paddingTop\\\":0,\\\"m_paddingBottom\\\":0}\",\"data\":\"{\\\"textTag\\\":\\\"h2\\\"}\",\"name\":\"20% \",\"tag_id\":\"pbi_dWN5UXMxNjg2MTM5Mzc3NDE4_77418\",\"class_name\":\"\",\"type\":\"text\",\"visibility\":\"\",\"sort_order\":40,\"parent_id\":62,\"storeview_visibility\":0},{\"entity_id\":61,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"display\\\":\\\"grid\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"widthPercent\\\":100,\\\"flexShrink\\\":1,\\\"paddingTop\\\":\\\"20px\\\",\\\"paddingBottom\\\":\\\"20px\\\",\\\"paddingLeft\\\":\\\"15px\\\",\\\"paddingRight\\\":\\\"15px\\\",\\\"minHeight\\\":100,\\\"justifyContent\\\":\\\"center\\\",\\\"columnGap\\\":\\\"15px\\\",\\\"rowGap\\\":\\\"15px\\\",\\\"gridTemplateColumns\\\":\\\"1fr 1fr\\\",\\\"m_gridTemplateColumns\\\":\\\"2fr 1fr\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"t_maxWidth\\\":\\\"1024px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"m_paddingLeft\\\":0,\\\"m_paddingRight\\\":0,\\\"m_rowGap\\\":\\\"0px\\\",\\\"m_columnGap\\\":\\\"0px\\\"}\",\"data\":\"{}\",\"name\":\"\",\"tag_id\":\"pbi_NVZCajQxNjg2MzQyMjExNTU3_11557\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":50,\"parent_id\":43,\"storeview_visibility\":0},{\"entity_id\":47,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"fontWeight\\\":600,\\\"fontSize\\\":\\\"80px\\\",\\\"textAlign\\\":\\\"left\\\",\\\"color\\\":\\\"#fff\\\",\\\"paddingTop\\\":5,\\\"paddingBottom\\\":0,\\\"marginTop\\\":-20,\\\"lineHeight\\\":\\\"80px\\\",\\\"t_fontSize\\\":\\\"60px\\\",\\\"m_fontSize\\\":\\\"30px\\\",\\\"m_lineHeight\\\":\\\"50px\\\",\\\"m_textAlign\\\":\\\"center\\\"}\",\"data\":\"{\\\"textTag\\\":\\\"h2\\\"}\",\"name\":\"Your Gear\",\"tag_id\":\"pbi_a2o3U1MxNjg2MTM5NDg2MDI5_86029\",\"class_name\":\"\",\"type\":\"text\",\"visibility\":\"\",\"sort_order\":60,\"parent_id\":43,\"storeview_visibility\":0},{\"entity_id\":48,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"fontWeight\\\":600,\\\"fontSize\\\":\\\"85px\\\",\\\"textAlign\\\":\\\"left\\\",\\\"color\\\":\\\"#fff\\\",\\\"paddingTop\\\":0,\\\"lineHeight\\\":\\\"90px\\\",\\\"t_fontSize\\\":\\\"60px\\\",\\\"t_marginTop\\\":-30,\\\"m_fontSize\\\":\\\"30px\\\",\\\"m_lineHeight\\\":\\\"40px\\\",\\\"l_fontSize\\\":\\\"70px\\\",\\\"m_textAlign\\\":\\\"center\\\"}\",\"data\":\"{\\\"textTag\\\":\\\"h2\\\"}\",\"name\":\"Care & Repair\",\"tag_id\":\"pbi_NkwwM2kxNjg2MTQwMzE2MDkx_16091\",\"class_name\":\"\",\"type\":\"text\",\"visibility\":\"\",\"sort_order\":70,\"parent_id\":43,\"storeview_visibility\":0},{\"entity_id\":42,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"display\\\":\\\"grid\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"widthPercent\\\":100,\\\"flexShrink\\\":1,\\\"paddingTop\\\":5,\\\"paddingBottom\\\":0,\\\"paddingLeft\\\":15,\\\"paddingRight\\\":\\\"15px\\\",\\\"minHeight\\\":100,\\\"justifyContent\\\":\\\"center\\\",\\\"columnGap\\\":\\\"0px\\\",\\\"rowGap\\\":\\\"0px\\\",\\\"gridTemplateColumns\\\":\\\"1fr\\\",\\\"m_gridTemplateColumns\\\":\\\"1fr\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"t_maxWidth\\\":\\\"1024px\\\",\\\"marginLeft\\\":50,\\\"marginRight\\\":\\\"auto\\\",\\\"t_textAlign\\\":\\\"center\\\",\\\"t_gridTemplateColumns\\\":\\\"1fr\\\",\\\"backgroundColor\\\":\\\"#00000099\\\",\\\"t_marginLeft\\\":\\\"auto\\\",\\\"m_marginLeft\\\":0,\\\"m_paddingBottom\\\":5,\\\"m_paddingLeft\\\":0,\\\"m_paddingRight\\\":0}\",\"data\":\"{}\",\"name\":\"\",\"tag_id\":\"pbi_Sk1ocTUxNjg2MTM5NTQwMDA2_40006\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":80,\"parent_id\":41,\"storeview_visibility\":0},{\"entity_id\":40,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"display\\\":\\\"grid\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"widthPercent\\\":100,\\\"flexShrink\\\":1,\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0,\\\"paddingLeft\\\":0,\\\"paddingRight\\\":0,\\\"minHeight\\\":\\\"700px\\\",\\\"justifyContent\\\":\\\"center\\\",\\\"columnGap\\\":\\\"0px\\\",\\\"rowGap\\\":\\\"0px\\\",\\\"gridTemplateColumns\\\":\\\"2fr 2fr\\\",\\\"m_gridTemplateColumns\\\":\\\"1fr\\\",\\\"t_maxWidth\\\":\\\"1024px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"backgroundPositionY\\\":\\\"center\\\",\\\"backgroundPositionX\\\":\\\"center\\\",\\\"t_gridTemplateColumns\\\":\\\"1fr 1fr\\\",\\\"m_widthPercent\\\":100,\\\"m_maxWidth\\\":\\\"300px\\\"}\",\"data\":\"{}\",\"name\":\"\",\"tag_id\":\"pbi_Q2JucWkxNjg2MTI5NzA4MDYx_08061\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":90,\"parent_id\":39,\"storeview_visibility\":0},{\"entity_id\":39,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"display\\\":\\\"flex\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"widthPercent\\\":100,\\\"flexShrink\\\":1,\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0,\\\"paddingLeft\\\":0,\\\"paddingRight\\\":0,\\\"justifyContent\\\":\\\"left\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"alignItems\\\":\\\"center\\\",\\\"flexWrap\\\":\\\"wrap\\\",\\\"backgroundPositionX\\\":\\\"center\\\",\\\"backgroundPositionY\\\":\\\"center\\\",\\\"boxShadow\\\":\\\"0px 0px 0px 0px #8b4343\\\",\\\"boxShadowColor\\\":\\\"#8b4343\\\",\\\"boxShadowHorizontal\\\":0,\\\"boxShadowSpread\\\":0,\\\"boxShadowBlur\\\":0,\\\"minWidth\\\":\\\"1100px\\\",\\\"backgroundImage\\\":\\\"url(https:\\\\\\\/\\\\\\\/cdn.shopify.com\\\\\\\/s\\\\\\\/files\\\\\\\/1\\\\\\\/1487\\\\\\\/5048\\\\\\\/t\\\\\\\/54\\\\\\\/assets\\\\\\\/1686341584TwinLakes-takenfromWinchesterMnt-crop-dark_jpg.jpeg?v=1686341586)\\\",\\\"m_minWidth\\\":\\\"300px\\\"}\",\"data\":\"{\\\"custom_title_name\\\":\\\"Full Width\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_a3ZEWVIxNjg2MzQxODk3NzA2_97706\",\"class_name\":\"page-header\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":100,\"parent_id\":0,\"storeview_visibility\":0},{\"entity_id\":41,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"padding\\\":\\\"15px\\\",\\\"width\\\":\\\"100%\\\",\\\"minHeight\\\":100,\\\"display\\\":\\\"flex\\\",\\\"alignContent\\\":\\\"center\\\",\\\"flexWrap\\\":\\\"wrap\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"maxWidth\\\":\\\"1440px\\\",\\\"l_maxWidth\\\":\\\"1280px\\\",\\\"marginTop\\\":null,\\\"m_widthPercent\\\":100}\",\"data\":null,\"name\":\"\",\"tag_id\":\"pbi_V3VodUkxNjg2MTM5Mjg5Njcy_89672\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":110,\"parent_id\":40,\"storeview_visibility\":0},{\"entity_id\":53,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"padding\\\":\\\"15px\\\",\\\"width\\\":\\\"100%\\\",\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0,\\\"marginRight\\\":\\\"auto\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"backgroundColor\\\":\\\"#ffffff00\\\",\\\"alignContent\\\":\\\"center\\\",\\\"flexWrap\\\":\\\"wrap\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"display\\\":\\\"flex\\\"}\",\"data\":null,\"name\":\"\",\"tag_id\":\"\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":120,\"parent_id\":40,\"storeview_visibility\":0},{\"entity_id\":54,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\"}\",\"data\":\"{\\\"name\\\":\\\"form_type\\\",\\\"default_value\\\":\\\"customer\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_NE16bWYxNjcwODY0NTkxMjY4_91268\",\"class_name\":\"\",\"type\":\"hidden_input\",\"visibility\":\"\",\"sort_order\":130,\"parent_id\":53,\"storeview_visibility\":0},{\"entity_id\":55,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\"}\",\"data\":\"{\\\"name\\\":\\\"form_type\\\",\\\"default_value\\\":\\\"customer\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_cWpWQ1QxNjcwODY0NTk0NzIw_94720\",\"class_name\":\"\",\"type\":\"hidden_input\",\"visibility\":\"\",\"sort_order\":140,\"parent_id\":53,\"storeview_visibility\":0},{\"entity_id\":56,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\"}\",\"data\":\"{\\\"name\\\":\\\"form_type\\\",\\\"default_value\\\":\\\"customer\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_MU5ud2gxNjcwODY0NjA0OTYz_04963\",\"class_name\":\"\",\"type\":\"hidden_input\",\"visibility\":\"\",\"sort_order\":150,\"parent_id\":53,\"storeview_visibility\":0},{\"entity_id\":57,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\"}\",\"data\":\"{\\\"name\\\":\\\"form_type\\\",\\\"default_value\\\":\\\"customer\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_c1MzeHAxNjcwODY0NjAyMTE2_02116\",\"class_name\":\"\",\"type\":\"hidden_input\",\"visibility\":\"\",\"sort_order\":160,\"parent_id\":53,\"storeview_visibility\":0},{\"entity_id\":58,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0}\",\"data\":\"{\\\"htmlContent\\\":\\\"\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_UHBzSXgxNjcwODY0NjM3NzI3_37727\",\"class_name\":\"\",\"type\":\"custom_html\",\"visibility\":\"\",\"sort_order\":170,\"parent_id\":53,\"storeview_visibility\":0},{\"entity_id\":59,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\"}\",\"data\":\"{\\\"name\\\":\\\"form_type\\\",\\\"default_value\\\":\\\"customer\\\"}\",\"name\":\"\",\"tag_id\":\"pbi_R29FYlgxNjcwODY0NTk5MTQ0_99144\",\"class_name\":\"\",\"type\":\"hidden_input\",\"visibility\":\"\",\"sort_order\":180,\"parent_id\":53,\"storeview_visibility\":0},{\"entity_id\":43,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"padding\\\":\\\"15px\\\",\\\"width\\\":\\\"100%\\\",\\\"minHeight\\\":100,\\\"display\\\":\\\"flex\\\",\\\"flexWrap\\\":\\\"wrap\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"paddingLeft\\\":0,\\\"paddingRight\\\":0,\\\"alignContent\\\":\\\"center\\\"}\",\"data\":null,\"name\":\"\",\"tag_id\":\"\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":190,\"parent_id\":42,\"storeview_visibility\":0},{\"entity_id\":50,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"fontSize\\\":\\\"40px\\\",\\\"color\\\":\\\"#fff\\\",\\\"fontWeight\\\":600,\\\"lineHeight\\\":\\\"41px\\\",\\\"m_fontSize\\\":\\\"40px\\\",\\\"t_textAlign\\\":\\\"left\\\"}\",\"data\":\"{\\\"textTag\\\":\\\"h3\\\"}\",\"name\":\"Use Code\",\"tag_id\":\"pbi_c21RUE0xNjg2MTQyNjQ0MTU1_44155\",\"class_name\":\"\",\"type\":\"text\",\"visibility\":\"\",\"sort_order\":200,\"parent_id\":43,\"storeview_visibility\":0},{\"entity_id\":51,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"widthPercent\\\":100,\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"marginLeft\\\":\\\"auto\\\",\\\"marginRight\\\":\\\"auto\\\",\\\"fontSize\\\":\\\"40px\\\",\\\"color\\\":\\\"#fff\\\",\\\"fontWeight\\\":900,\\\"paddingTop\\\":0,\\\"paddingBottom\\\":0,\\\"marginTop\\\":-20,\\\"lineHeight\\\":\\\"41px\\\",\\\"m_fontSize\\\":\\\"35px\\\",\\\"t_textAlign\\\":\\\"left\\\"}\",\"data\":\"{\\\"textTag\\\":\\\"h3\\\"}\",\"name\":\"SUMMER23\",\"tag_id\":\"pbi_U0tRZTExNjg2MTQyODg2NTQ1_86545\",\"class_name\":\"\",\"type\":\"text\",\"visibility\":\"\",\"sort_order\":210,\"parent_id\":43,\"storeview_visibility\":0},{\"entity_id\":52,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"flexDirection\\\":\\\"row\\\",\\\"backgroundColor\\\":\\\"#ef4623\\\",\\\"color\\\":\\\"#fff\\\",\\\"paddingTop\\\":20,\\\"paddingBottom\\\":20,\\\"paddingLeft\\\":0,\\\"paddingRight\\\":0,\\\"textAlign\\\":\\\"justify\\\",\\\"marginTop\\\":25,\\\"cursor\\\":\\\"pointer\\\",\\\"display\\\":\\\"flex\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"center\\\",\\\"fontFamily\\\":\\\"inherit\\\",\\\"maxWidth\\\":\\\"1280px\\\",\\\"padding\\\":\\\"6px 16px\\\",\\\"fontSize\\\":\\\"25px\\\",\\\"fontWeight\\\":600,\\\"marginBottom\\\":0,\\\"widthPercent\\\":40,\\\"m_widthPercent\\\":90,\\\"heightPixel\\\":50,\\\"m_paddingLeft\\\":5,\\\"m_paddingRight\\\":5,\\\"m_marginLeft\\\":\\\"auto\\\",\\\"m_marginRight\\\":\\\"auto\\\"}\",\"data\":\"{\\\"icon_position\\\":\\\"left\\\",\\\"openUrl\\\":\\\"https:\\\\\\\/\\\\\\\/www.gearaid.com\\\\\\\/collections\\\\\\\/all?utm_source=button&utm_medium=summer2023&utm_campaign=sale\\\",\\\"customProps\\\":\\\"{\\\\\\\"title\\\\\\\":\\\\\\\"Shop GEARAID's product collection. \\\\\\\"}\\\"}\",\"name\":\"Shop Now\",\"tag_id\":\"pbi_RGg2aFAxNjg2MTQzODI5MTU0_29154\",\"class_name\":\"\",\"type\":\"button\",\"visibility\":\"\",\"sort_order\":220,\"parent_id\":43,\"storeview_visibility\":0},{\"entity_id\":62,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"padding\\\":\\\"15px\\\",\\\"width\\\":\\\"100%\\\",\\\"minHeight\\\":100,\\\"display\\\":\\\"flex\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"right\\\",\\\"flexWrap\\\":\\\"wrap\\\",\\\"flexDirection\\\":\\\"row\\\",\\\"paddingRight\\\":0,\\\"m_paddingLeft\\\":0}\",\"data\":null,\"name\":\"\",\"tag_id\":\"\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":230,\"parent_id\":61,\"storeview_visibility\":0},{\"entity_id\":63,\"page_id\":\"23332\",\"status\":1,\"styles\":\"{\\\"padding\\\":\\\"15px\\\",\\\"width\\\":\\\"100%\\\",\\\"minHeight\\\":100,\\\"paddingLeft\\\":0,\\\"paddingTop\\\":0,\\\"display\\\":\\\"flex\\\",\\\"alignItems\\\":\\\"center\\\",\\\"justifyContent\\\":\\\"left\\\",\\\"flexWrap\\\":\\\"wrap\\\",\\\"flexDirection\\\":\\\"row\\\"}\",\"data\":null,\"name\":\"\",\"tag_id\":\"\",\"class_name\":\"\",\"type\":\"container\",\"visibility\":\"\",\"sort_order\":240,\"parent_id\":61,\"storeview_visibility\":0}]","updated_at":"2023-06-09 21:34:16","image":null}
+                            });
+                        }
+                        globalThis._tpt_pbds.push(tptPBD);
+                        tptPBD();
+                        
+        function _tapita_ssr_cti(){window._tapita_ssr_ijt_obj && Object.values(window._tapita_ssr_ijt_obj||{}).forEach(function (t){t&&t()})};
+        _tapita_ssr_cti();
+        if(!globalThis._tpt_pbds){globalThis._tpt_pbds=[]};
+        globalThis._tpt_pbds.push(_tapita_ssr_cti);
+        window.addEventListener("resize", ()=>{_tapita_ssr_cti()});
+        ;
+                        var documentFragment = document.createDocumentFragment();
+                        tapitaSections.forEach(function(el){documentFragment.appendChild(el)});
+                        document.querySelector("#" + idToRender).appendChild(documentFragment);
+                        tapitaSections = null;
+                        clearInterval(injector);
+                    } else if (tapita_counter > 60) {
+                        clearInterval(injector);
+                    }
+                }, 100);
+            </script>
+        </div>
+
+        <div class="tel">
+        {% for field in content.value %}
+          {% if field.type == "product_grid" %}
+          {% render 'tapita-product-grid',
+                    product_target_ident: field.settings.product_target_ident,
+                    product_handle: field.settings.product-handle,
+                    product_handles: field.settings.product-handles,
+                    product_ident: field.settings.product_ident,
+                    product_title: field.settings.product-title,
+                    product_limit: field.settings.product-limit,
+          %}
+          {% elsif field.type == "product_scroll" %}
+          {% render 'tapita-product-list',
+                    product_target_ident: field.settings.product_target_ident,
+                    product_handle: field.settings.product-handle,
+                    product_handles: field.settings.product-handles,
+                    product_ident: field.settings.product_ident,
+                    product_title: field.settings.product-title,
+                    product_limit: field.settings.product-limit,
+          %}
+          {% endif %}
+          {% endfor %}
+        </div>
+        

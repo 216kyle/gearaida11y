@@ -1,0 +1,151 @@
+<div class="section section--tabs section--tabs-{{ section.id }}">
+  <div class="site-container--wide">
+    <h4 class="section-label">{{ section.settings.title }}</h4>
+  </div>
+  <div class="site-container">
+    <div class="tabs__text-content">
+      <h2 role="heading" class="tabs__heading">{{ section.settings.heading }}</h2>
+      <div role="paragraph" class="tabs__content">{{ section.settings.text }}</div>
+    </div>
+  </div>
+  <div class="site-container--wide">
+    <div class="tabs-controls">
+      {% for block in section.blocks %}
+        <div class="tabs-control tabs-control--{{ block.id }}{% if forloop.first %} tabs-control--selected{% endif %}" data-index="{{ forloop.index }}">{{ block.settings.title }}</div>
+      {% endfor %}
+    </div>
+    <div class="tabs-items">
+      {% for block in section.blocks %}
+        <div role="tab" class="tabs-item tabs-item--{{ block.id }}{% if forloop.first %} tabs-item--selected{% endif %}" data-index="{{ forloop.index }}">
+          <div class="tabs-item__image">
+            <img class="lazy" data-src="{{ block.settings.image | img_url: '1000x' }}" alt="{{ block.settings.title }}" />
+          </div>
+          <div class="tabs-item__content">
+            <h3>{{ block.settings.heading }}</h3>
+            {{ block.settings.text }}
+            <a role="button" href="{{ block.settings.btn_url }}" class="btn btn-large btn-alt-white">{{ block.settings.btn_label }}</a>
+          </div>
+        </div>
+      {% endfor%}
+    </div>
+    <div class="tabs__actions">
+      <a role="button" class="btn btn-large btn-alt-solid" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
+    </div>
+  </div>
+  <style>
+    .section--tabs-{{ section.id }} {background-image: url('{{ section.settings.image | img_url: "3000x" }}');}
+    .section--tabs-{{ section.id }} .tabs-controls {grid-template-columns: repeat({{ section.blocks.size }}, 1fr)}
+    @media screen and (max-width: 60em) {
+      .section--tabs .tabs-controls {column-gap: 10px;overflow-x:auto;grid-template-columns: repeat({{ section.blocks.size }}, minmax(40%, 1fr))}
+    }
+    {%- for block in section.blocks -%}
+    .tabs-control--{{ block.id }}:hover,
+    .tabs-control--{{ block.id }}.tabs-control--selected {background: {{ block.settings.color }};}
+    .tabs-item--{{ block.id }}{border-top: 8px solid {{ block.settings.color }};}
+    {%- endfor -%}
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      $(document).on('click', '.section--tabs-{{ section.id }} .tabs-control', function(e){
+        var _this = $(this),
+          container = _this.parents('.section--tabs'),
+          index = _this.data('index');
+        e.preventDefault();
+
+        container.find('.tabs-control').removeClass('tabs-control--selected');
+        container.find('.tabs-item').removeClass('tabs-item--selected');
+        _this.addClass('tabs-control--selected');
+        container.find('.tabs-item[data-index="'+index+'"]').addClass('tabs-item--selected');
+      });
+    });
+  </script>
+</div>
+
+
+{% schema %}
+{
+  "name": "Tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    },
+    {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Background Image"
+    }
+  ],
+  "max_blocks":6,
+  "blocks":[
+    {
+      "type":"tab",
+      "name":"Tab",
+      "settings":[
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Highlight Color"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "text",
+          "id": "btn_label",
+          "label": "Button Label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tabs",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,160 @@
+<style>
+  .section--content-block-{{ section.id }} {background-color:{{ section.settings.background_color }};background-position: {{ section.settings.alignment }};}
+  .section--content-block-{{ section.id }} h2,
+  .section--content-block-{{ section.id }} {color:{{ section.settings.color }};}
+  {% if section.settings.image != blank %}
+  .section--content-block-{{ section.id }} {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+  .section--content-block-{{ section.id }}.lazyloaded,
+  .section--content-block-{{ section.id }}[data-was-processed="true"] {opacity:1;}
+  @media screen and (max-width: 300px) {
+    .section--content-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '600x' }});}
+  }
+  @media screen and (min-width: 301px) and (max-width: 600px) {
+    .section--content-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '900x' }});}
+  }
+  @media screen and (min-width: 601px) and (max-width: 800px) {
+    .section--content-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '1200x' }});}
+  }
+  @media screen and (min-width: 801px) and (max-width: 1000px) {
+    .section--content-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '2000x' }});}
+  }
+  @media screen and (min-width: 1001px) {
+    .section--content-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '2048x' }});}
+  }
+  {% endif %}
+</style>
+<div class="section section--content-block section--content-block-{{ section.id }} lazy section--content-block-{{ section.settings.content-block_size }} section--content-block-overlay-{{ section.settings.overlay }}">
+  <div data-aos="fade" data-aos-once="true" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-delay="0" data-aos-duration="400" class="section--content-block__inner">
+    <div class="site-container--slim">
+      <div class="section-heading">
+        {% if section.settings.title != blank %}
+        <h2 class="section--content-block__title">{{ section.settings.title }}</h2>
+        {% endif %}
+      </div>
+      {% if section.settings.text != blank %}
+      <div class="section--content-block__subtitle">{{ section.settings.text }}</div>
+      {% endif %}
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+      <a href="{{ section.settings.button_link }}" class="btn btn--content-block">
+        {{ section.settings.button_label }}
+      </a>
+      {% endif %}
+    </div><!-- site-container--slim -->
+  </div><!-- section--content-block__inner -->
+</div><!-- section--content-block-{{ section.id }} -->
+{% schema %}
+{
+  "name": "Content Block",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Leave blank to not use."
+    },
+    {
+      "type": "select",
+      "id": "overlay",
+      "default": "none",
+      "label": "Image Overlay",
+      "info": "Leave blank to not use.",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Image alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#dddddd",
+      "label": "Content Background Color"
+    },
+    {
+      "type": "select",
+      "id": "content-block_size",
+      "label": "Section height",
+      "default": "normal",
+      "options": [
+        {
+          "label": "Auto",
+          "value": "auto"
+        },
+        {
+          "label": "Short",
+          "value": "short"
+        },
+        {
+          "label": "Normal",
+          "value": "normal"
+        },
+        {
+          "label": "Full Height",
+          "value": "full"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "default": "#fff",
+      "label": "Heading and text color"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content Block",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

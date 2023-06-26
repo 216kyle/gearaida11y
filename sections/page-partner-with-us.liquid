@@ -1,0 +1,1786 @@
+<main class="site-content site-content--no-sidebar" role="main">
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'hero' %}
+        {% include 'section-hero-partner' %}
+      {% when 'heading' %}
+        {% include 'section-heading' %}
+      {% when 'content-slider' %}
+        {% include 'section-content-slider' %}
+      {% when 'list' %}
+        {% include 'section-list' %}
+      {% when 'image' %}
+        {% include 'section-image' %}
+      {% when 'brands' %}
+        {% include 'section-brands' %}
+      {% when 'infographic' %}
+        {% include 'section-infographic-partner' %}
+      {% when 'video' %}
+        {% include 'section-video' %}
+      {% when 'collections-listing' %}
+        {% include 'section-collections-listing' %}
+      {% when 'text-content' %}
+        {% include 'section-text-content-partner' %}
+      {% when 'tab-content' %}
+        {% include 'section-tab-content' %}
+      {% when 'press' %}
+        {% include 'section-press' %}
+      {% when 'text-content-simple' %}
+        {% include 'section-text-content-simple' %}
+      {% when 'faq' %}
+        {% include 'section-faq' %}
+      
+      {% else %}
+    {% endcase %}
+  {% endfor %}
+
+
+</main>
+{% schema %}
+{
+  "name": "Partner With Us",
+  "blocks":[
+    {
+      "type":"hero",
+      "name":"Hero",
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"bkgd_image",
+          "label":"Background Image"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"Learn More Link"
+        },
+        {
+          "type":"textarea",
+          "id":"description",
+          "label":"Description"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"image_picker",
+          "id":"footer_img",
+          "label":"Footer Image"
+        }
+      ]
+    },
+    {
+      "type":"heading",
+      "name":"Section Heading",
+      "settings": [
+        {
+          "type":"image_picker",
+          "id":"bkgd_image",
+          "label":"Background Image"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"text",
+          "id":"content_heading",
+          "label":"Content Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content_body",
+          "label":"Content Body"
+        }
+      ]
+    },
+    {
+      "type":"content-slider",
+      "name":"Content Slider",
+      "settings":[
+        {
+          "type":"header",
+          "content":"Slide #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_1",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_1",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_1",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_1",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_1",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Slide #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_2",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_2",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_2",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_2",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Slide #3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_3",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_3",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_3",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_3",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_3",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Slide #4"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_4",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_4",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_4",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_4",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_4",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type":"list",
+      "name":"List",
+      "settings": [
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"html",
+          "id":"list_1",
+          "label":"List 1"
+        },
+        {
+          "type":"html",
+          "id":"list_2",
+          "label":"List 2"
+        },
+        {
+          "type":"text",
+          "id":"bottom_heading",
+          "label":"Bottom Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"bottom_content",
+          "label":"Bottom Content"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type":"image",
+      "name":"Image",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bkgd_color",
+          "label":"Background Color",
+          "default":"#fff"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"richtext",
+          "id":"text_content",
+          "label":"Text Content"
+        }
+      ]
+    },
+    {
+      "type":"brands",
+      "name":"Brands",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Text Content"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Brand #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_1",
+          "label":"Image #1"
+        },
+        {
+          "type":"text",
+          "id":"text_1",
+          "label":"Text #1"
+        },
+        {
+          "type":"url",
+          "id":"link_1",
+          "label":"Link #1"
+        },
+        {
+          "type":"header",
+          "content":"Brand #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image #2"
+        },
+        {
+          "type":"text",
+          "id":"text_2",
+          "label":"Text #2"
+        },
+        {
+          "type":"url",
+          "id":"link_2",
+          "label":"Link #2"
+        },
+        {
+          "type":"header",
+          "content":"Brand #3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_3",
+          "label":"Image #3"
+        },
+        {
+          "type":"text",
+          "id":"text_3",
+          "label":"Text #3"
+        },
+        {
+          "type":"url",
+          "id":"link_3",
+          "label":"Link #3"
+        },
+        {
+          "type":"header",
+          "content":"Brand #4"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_4",
+          "label":"Image #4"
+        },
+        {
+          "type":"text",
+          "id":"text_4",
+          "label":"Text #4"
+        },
+        {
+          "type":"url",
+          "id":"link_4",
+          "label":"Link #4"
+        }
+      ]
+    },
+    {
+      "type":"infographic",
+      "name":"Infographic",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading 1"
+        },
+        {
+          "type":"richtext",
+          "id":"content_1",
+          "label":"Content 1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_1",
+          "label":"Image #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_3",
+          "label":"Image #3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_4",
+          "label":"Image #4"
+        },
+        {
+          "type":"text",
+          "id":"title_2",
+          "label":"Heading 2"
+        },
+        {
+          "type":"richtext",
+          "id":"content_2",
+          "label":"Content 2"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "video_image",
+          "label": "Video Background Image",
+          "info": "Should be a horizontal JPG"
+        },
+        {
+          "type": "text",
+          "id": "video_heading",
+          "label": "Video Spotlight Title"
+        },
+        {
+          "type": "video_url",
+          "id": "video",
+          "label": "Video URL",
+          "accept": ["youtube"],
+          "default": "https://www.youtube.com/watch?v=LWg4nUOBFX4"
+        }
+      ]
+    },
+    {
+      "type": "collections-listing",
+      "name": "Collections Listing",
+      "settings":[
+        {
+          "type":"link_list",
+          "id":"linklist",
+          "label":"Linklist"
+        }
+      ]
+    },
+    {
+      "type": "text-content",
+      "name": "Text Content",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bkgd_color",
+          "label":"Background Color"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image",
+          "info":"Leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        },
+        {
+          "type":"text",
+          "id":"box_1_title",
+          "label":"Box 1 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_1_text",
+          "label":"Box 1 Text"
+        },
+        {
+          "type":"text",
+          "id":"box_2_title",
+          "label":"Box 2 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_2_text",
+          "label":"Box 2 Text"
+        },
+        {
+          "type":"text",
+          "id":"box_3_title",
+          "label":"Box 3 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_3_text",
+          "label":"Box 3 Text"
+        }
+      ]
+    },
+    {
+      "type": "tab-content",
+      "name": "Tab Content",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"aquaseal_title",
+          "label":"Aquaseal Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"aquaseal_content",
+          "label":"Aquaseal Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_fix_img_1",
+          "label": "Aquaseal Fix Icon 1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_fix_text_1",
+          "label": "Aquaseal Fix Text 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_fix_img_2",
+          "label": "Aquaseal Fix Icon 2"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_fix_text_2",
+          "label": "Aquaseal Fix Text 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_fix_img_3",
+          "label": "Aquaseal Fix Icon 3"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_fix_text_3",
+          "label": "Aquaseal Fix Text 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_fix_img_4",
+          "label": "Aquaseal Fix Icon 4"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_fix_text_4",
+          "label": "Aquaseal Fix Text 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_fix_img_5",
+          "label": "Aquaseal Fix Icon 5"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_fix_text_5",
+          "label": "Aquaseal Fix Text 5"
+        },
+        {
+          "type": "url",
+          "id": "aquaseal_prod_url_1",
+          "label": "Aquaseal Product URL 1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_title_1",
+          "label": "Aquaseal Product Heading 1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_subheader_1",
+          "label": "Aquaseal Product Sub Heading 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_prod_img_1",
+          "label": "Aquaseal Product Image 1"
+        },
+        {
+          "type":"richtext",
+          "id":"aquaseal_prod_copy_1",
+          "label":"Aquaseal Product Copy 1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_1_1",
+          "label": "Aquaseal Product Size 1-1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_2_1",
+          "label": "Aquaseal Product Size 1-2"
+        },
+        {
+          "type": "url",
+          "id": "aquaseal_prod_url_2",
+          "label": "Aquaseal Product URL 2"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_title_2",
+          "label": "Aquaseal Product Heading 2"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_subheader_2",
+          "label": "Aquaseal Product Sub Heading 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_prod_img_2",
+          "label": "Aquaseal Product Image 2"
+        },
+        {
+          "type":"richtext",
+          "id":"aquaseal_prod_copy_2",
+          "label":"Aquaseal Product Copy 2"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_1_2",
+          "label": "Aquaseal Product Size 2-1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_2_2",
+          "label": "Aquaseal Product Size 2-2"
+        },
+        {
+          "type": "url",
+          "id": "aquaseal_prod_url_3",
+          "label": "Aquaseal Product URL 3"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_title_3",
+          "label": "Aquaseal Product Heading 3"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_subheader_3",
+          "label": "Aquaseal Product Sub Heading 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_prod_img_3",
+          "label": "Aquaseal Product Image 3"
+        },
+        {
+          "type":"richtext",
+          "id":"aquaseal_prod_copy_3",
+          "label":"Aquaseal Product Copy 3"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_1_3",
+          "label": "Aquaseal Product Size 3-1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_2_3",
+          "label": "Aquaseal Product Size 3-2"
+        },
+        {
+          "type": "url",
+          "id": "aquaseal_prod_url_4",
+          "label": "Aquaseal Product URL 4"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_title_4",
+          "label": "Aquaseal Product Heading 4"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_subheader_4",
+          "label": "Aquaseal Product Sub Heading 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "aquaseal_prod_img_4",
+          "label": "Aquaseal Product Image 4"
+        },
+        {
+          "type":"richtext",
+          "id":"aquaseal_prod_copy_4",
+          "label":"Aquaseal Product Copy 4"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_1_4",
+          "label": "Aquaseal Product Size 4-1"
+        },
+        {
+          "type": "text",
+          "id": "aquaseal_prod_size_2_4",
+          "label": "Aquaseal Product Size 4-2"
+        },
+        {
+          "type":"text",
+          "id":"seam_grip_title",
+          "label":"Seam Grip Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"seam_grip_content",
+          "label":"Seam Grip Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_fix_img_1",
+          "label": "Seam Grip Fix Icon 1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_fix_text_1",
+          "label": "Seam Grip Fix Text 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_fix_img_2",
+          "label": "Seam Grip Fix Icon 2"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_fix_text_2",
+          "label": "Seam Grip Fix Text 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_fix_img_3",
+          "label": "Seam Grip Fix Icon 3"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_fix_text_3",
+          "label": "Seam Grip Fix Text 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_fix_img_4",
+          "label": "Seam Grip Fix Icon 4"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_fix_text_4",
+          "label": "Seam Grip Fix Text 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_fix_img_5",
+          "label": "Seam Grip Fix Icon 5"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_fix_text_5",
+          "label": "Seam Grip Fix Text 5"
+        },
+        {
+          "type": "url",
+          "id": "seam_grip_prod_url_1",
+          "label": "Seam Grip Product URL 1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_title_1",
+          "label": "Seam Grip Product Heading 1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_subheader_1",
+          "label": "Seam Grip Product Sub Heading 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_prod_img_1",
+          "label": "Seam Grip Product Image 1"
+        },
+        {
+          "type":"richtext",
+          "id":"seam_grip_prod_copy_1",
+          "label":"Seam Grip Product Copy 1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_1_1",
+          "label": "Seam Grip Product Size 1-1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_2_1",
+          "label": "Seam Grip Product Size 1-2"
+        },
+        {
+          "type": "url",
+          "id": "seam_grip_prod_url_2",
+          "label": "Seam Grip Product URL 2"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_title_2",
+          "label": "Seam Grip Product Heading 2"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_subheader_2",
+          "label": "Seam Grip Product Sub Heading 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_prod_img_2",
+          "label": "Seam Grip Product Image 2"
+        },
+        {
+          "type":"richtext",
+          "id":"seam_grip_prod_copy_2",
+          "label":"Seam Grip Product Copy 2"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_1_2",
+          "label": "Seam Grip Product Size 2-1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_2_2",
+          "label": "Seam Grip Product Size 2-2"
+        },
+        {
+          "type": "url",
+          "id": "seam_grip_prod_url_3",
+          "label": "Seam Grip Product URL 3"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_title_3",
+          "label": "Seam Grip Product Heading 3"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_subheader_3",
+          "label": "Seam Grip Product Sub Heading 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_prod_img_3",
+          "label": "Seam Grip Product Image 3"
+        },
+        {
+          "type":"richtext",
+          "id":"seam_grip_prod_copy_3",
+          "label":"Seam Grip Product Copy 3"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_1_3",
+          "label": "Seam Grip Product Size 3-1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_2_3",
+          "label": "Seam Grip Product Size 3-2"
+        },
+        {
+          "type": "url",
+          "id": "seam_grip_prod_url_4",
+          "label": "Seam Grip Product URL 4"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_title_4",
+          "label": "Seam Grip Product Heading 4"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_subheader_4",
+          "label": "Seam Grip Product Sub Heading 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "seam_grip_prod_img_4",
+          "label": "Seam Grip Product Image 4"
+        },
+        {
+          "type":"richtext",
+          "id":"seam_grip_prod_copy_4",
+          "label":"Seam Grip Product Copy 4"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_1_4",
+          "label": "Seam Grip Product Size 4-1"
+        },
+        {
+          "type": "text",
+          "id": "seam_grip_prod_size_2_4",
+          "label": "Seam Grip Product Size 4-2"
+        },
+        {
+          "type":"text",
+          "id":"revivex_title",
+          "label":"Revivex Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"revivex_content",
+          "label":"Revivex Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_fix_img_1",
+          "label": "Revivex Fix Icon 1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_fix_text_1",
+          "label": "Revivex Fix Text 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_fix_img_2",
+          "label": "Revivex Fix Icon 2"
+        },
+        {
+          "type": "text",
+          "id": "revivex_fix_text_2",
+          "label": "Revivex Fix Text 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_fix_img_3",
+          "label": "Revivex Fix Icon 3"
+        },
+        {
+          "type": "text",
+          "id": "revivex_fix_text_3",
+          "label": "Revivex Fix Text 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_fix_img_4",
+          "label": "Revivex Fix Icon 4"
+        },
+        {
+          "type": "text",
+          "id": "revivex_fix_text_4",
+          "label": "Revivex Fix Text 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_fix_img_5",
+          "label": "Revivex Fix Icon 5"
+        },
+        {
+          "type": "text",
+          "id": "revivex_fix_text_5",
+          "label": "Revivex Fix Text 5"
+        },
+        {
+          "type": "url",
+          "id": "revivex_prod_url_1",
+          "label": "Revivex Product URL 1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_title_1",
+          "label": "Revivex Product Heading 1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_subheader_1",
+          "label": "Revivex Product Sub Heading 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_prod_img_1",
+          "label": "Revivex Product Image 1"
+        },
+        {
+          "type":"richtext",
+          "id":"revivex_prod_copy_1",
+          "label":"Revivex Product Copy 1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_1_1",
+          "label": "Revivex Product Size 1-1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_2_1",
+          "label": "Revivex Product Size 1-2"
+        },
+        {
+          "type": "url",
+          "id": "revivex_prod_url_2",
+          "label": "Revivex Product URL 2"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_title_2",
+          "label": "Revivex Product Heading 2"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_subheader_2",
+          "label": "Revivex Product Sub Heading 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_prod_img_2",
+          "label": "Revivex Product Image 2"
+        },
+        {
+          "type":"richtext",
+          "id":"revivex_prod_copy_2",
+          "label":"Revivex Product Copy 2"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_1_2",
+          "label": "Revivex Product Size 2-1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_2_2",
+          "label": "Revivex Product Size 2-2"
+        },
+        {
+          "type": "url",
+          "id": "revivex_prod_url_3",
+          "label": "Revivex Product URL 3"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_title_3",
+          "label": "Revivex Product Heading 3"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_subheader_3",
+          "label": "Revivex Product Sub Heading 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_prod_img_3",
+          "label": "Revivex Product Image 3"
+        },
+        {
+          "type":"richtext",
+          "id":"revivex_prod_copy_3",
+          "label":"Revivex Product Copy 3"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_1_3",
+          "label": "Revivex Product Size 3-1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_2_3",
+          "label": "Revivex Product Size 3-2"
+        },
+        {
+          "type": "url",
+          "id": "revivex_prod_url_4",
+          "label": "Revivex Product URL 4"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_title_4",
+          "label": "Revivex Product Heading 4"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_subheader_4",
+          "label": "Revivex Product Sub Heading 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "revivex_prod_img_4",
+          "label": "Revivex Product Image 4"
+        },
+        {
+          "type":"richtext",
+          "id":"revivex_prod_copy_4",
+          "label":"Revivex Product Copy 4"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_1_4",
+          "label": "Revivex Product Size 4-1"
+        },
+        {
+          "type": "text",
+          "id": "revivex_prod_size_2_4",
+          "label": "Revivex Product Size 4-2"
+        },
+        {
+          "type":"text",
+          "id":"tenacious_tape_title",
+          "label":"Tenacious Tape Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"tenacious_tape_content",
+          "label":"Tenacious Tape Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_fix_img_1",
+          "label": "Tenacious Tape Fix Icon 1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_fix_text_1",
+          "label": "Tenacious Tape Fix Text 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_fix_img_2",
+          "label": "Tenacious Tape Fix Icon 2"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_fix_text_2",
+          "label": "Tenacious Tape Fix Text 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_fix_img_3",
+          "label": "Tenacious Tape Fix Icon 3"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_fix_text_3",
+          "label": "Tenacious Tape Fix Text 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_fix_img_4",
+          "label": "Tenacious Tape Fix Icon 4"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_fix_text_4",
+          "label": "Tenacious Tape Fix Text 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_fix_img_5",
+          "label": "Tenacious Tape Fix Icon 5"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_fix_text_5",
+          "label": "Tenacious Tape Fix Text 5"
+        },
+        {
+          "type": "url",
+          "id": "tenacious_tape_prod_url_1",
+          "label": "Tenacious Tape Product URL 1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_title_1",
+          "label": "Tenacious Tape Product Heading 1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_subheader_1",
+          "label": "Tenacious Tape Product Sub Heading 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_prod_img_1",
+          "label": "Tenacious Tape Product Image 1"
+        },
+        {
+          "type":"richtext",
+          "id":"tenacious_tape_prod_copy_1",
+          "label":"Tenacious Tape Product Copy 1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_1_1",
+          "label": "Tenacious Tape Product Size 1-1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_2_1",
+          "label": "Tenacious Tape Product Size 1-2"
+        },
+        {
+          "type": "url",
+          "id": "tenacious_tape_prod_url_2",
+          "label": "Tenacious Tape Product URL 2"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_title_2",
+          "label": "Tenacious Tape Product Heading 2"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_subheader_2",
+          "label": "Tenacious Tape Product Sub Heading 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_prod_img_2",
+          "label": "Tenacious Tape Product Image 2"
+        },
+        {
+          "type":"richtext",
+          "id":"tenacious_tape_prod_copy_2",
+          "label":"Tenacious Tape Product Copy 2"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_1_2",
+          "label": "Tenacious Tape Product Size 2-1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_2_2",
+          "label": "Tenacious Tape Product Size 2-2"
+        },
+        {
+          "type": "url",
+          "id": "tenacious_tape_prod_url_3",
+          "label": "Tenacious Tape Product URL 3"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_title_3",
+          "label": "Tenacious Tape Product Heading 3"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_subheader_3",
+          "label": "Tenacious Tape Product Sub Heading 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_prod_img_3",
+          "label": "Tenacious Tape Product Image 3"
+        },
+        {
+          "type":"richtext",
+          "id":"tenacious_tape_prod_copy_3",
+          "label":"Tenacious Tape Product Copy 3"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_1_3",
+          "label": "Tenacious Tape Product Size 3-1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_2_3",
+          "label": "Tenacious Tape Product Size 3-2"
+        },
+        {
+          "type": "url",
+          "id": "tenacious_tape_prod_url_4",
+          "label": "Tenacious Tape Product URL 4"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_title_4",
+          "label": "Tenacious Tape Product Heading 4"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_subheader_4",
+          "label": "Tenacious Tape Product Sub Heading 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "tenacious_tape_prod_img_4",
+          "label": "Tenacious Tape Product Image 4"
+        },
+        {
+          "type":"richtext",
+          "id":"tenacious_tape_prod_copy_4",
+          "label":"Tenacious Tape Product Copy 4"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_1_4",
+          "label": "Tenacious Tape Product Size 4-1"
+        },
+        {
+          "type": "text",
+          "id": "tenacious_tape_prod_size_2_4",
+          "label": "Tenacious Tape Product Size 4-2"
+        },
+        {
+          "type": "url",
+          "id": "learn_more_url",
+          "label": "Learn More Link"
+        },
+        {
+          "type": "url",
+          "id": "catalog_url",
+          "label": "Catalog Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "catalog_img",
+          "label": "Catalog Image"
+        }
+      ]
+    },
+    {
+      "type": "press",
+      "name": "Press",
+      "settings": [
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_1",
+          "label": "Press Icon 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_2",
+          "label": "Press Icon 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_3",
+          "label": "Press Icon 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_4",
+          "label": "Press Icon 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_5",
+          "label": "Press Icon 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_6",
+          "label": "Press Icon 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_7",
+          "label": "Press Icon 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_8",
+          "label": "Press Icon 8"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_9",
+          "label": "Press Icon 9"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_10",
+          "label": "Press Icon 10"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_11",
+          "label": "Press Icon 11"
+        },
+        {
+          "type": "image_picker",
+          "id": "press_icon_12",
+          "label": "Press Icon 12"
+        }
+      ]
+    },
+    {
+      "type": "text-content-simple",
+      "name": "Text Content Simple",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_1",
+          "label":"FAQ Heading 1"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_1",
+          "label":"FAQ Content 1"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_2",
+          "label":"FAQ Heading 2"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_2",
+          "label":"FAQ Content 2"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_3",
+          "label":"FAQ Heading 3"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_3",
+          "label":"FAQ Content 3"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_4",
+          "label":"FAQ Heading 4"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_4",
+          "label":"FAQ Content 4"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_5",
+          "label":"FAQ Heading 5"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_5",
+          "label":"FAQ Content 5"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_6",
+          "label":"FAQ Heading 6"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_6",
+          "label":"FAQ Content 6"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_7",
+          "label":"FAQ Heading 7"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_7",
+          "label":"FAQ Content 7"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_8",
+          "label":"FAQ Heading 8"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_8",
+          "label":"FAQ Content 8"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_9",
+          "label":"FAQ Heading 9"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_9",
+          "label":"FAQ Content 9"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_10",
+          "label":"FAQ Heading 10"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_10",
+          "label":"FAQ Content 10"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_11",
+          "label":"FAQ Heading 11"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_11",
+          "label":"FAQ Content 11"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_12",
+          "label":"FAQ Heading 12"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_12",
+          "label":"FAQ Content 12"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_13",
+          "label":"FAQ Heading 13"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_13",
+          "label":"FAQ Content 13"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_14",
+          "label":"FAQ Heading 14"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_14",
+          "label":"FAQ Content 14"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_15",
+          "label":"FAQ Heading 15"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_15",
+          "label":"FAQ Content 15"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_16",
+          "label":"FAQ Heading 16"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_16",
+          "label":"FAQ Content 16"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_17",
+          "label":"FAQ Heading 17"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_17",
+          "label":"FAQ Content 17"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_18",
+          "label":"FAQ Heading 18"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_18",
+          "label":"FAQ Content 18"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_19",
+          "label":"FAQ Heading 19"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_19",
+          "label":"FAQ Content 19"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_20",
+          "label":"FAQ Heading 20"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_20",
+          "label":"FAQ Content 20"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_21",
+          "label":"FAQ Heading 21"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_21",
+          "label":"FAQ Content 21"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_22",
+          "label":"FAQ Heading 22"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_22",
+          "label":"FAQ Content 22"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_23",
+          "label":"FAQ Heading 23"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_23",
+          "label":"FAQ Content 23"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_24",
+          "label":"FAQ Heading 24"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_24",
+          "label":"FAQ Content 24"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_25",
+          "label":"FAQ Heading 25"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_25",
+          "label":"FAQ Content 25"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_26",
+          "label":"FAQ Heading 26"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_26",
+          "label":"FAQ Content 26"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_27",
+          "label":"FAQ Heading 27"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_27",
+          "label":"FAQ Content 27"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_28",
+          "label":"FAQ Heading 28"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_28",
+          "label":"FAQ Content 28"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_29",
+          "label":"FAQ Heading 29"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_29",
+          "label":"FAQ Content 29"
+        },
+        {
+          "type":"text",
+          "id":"faq_title_30",
+          "label":"FAQ Heading 30"
+        },
+        {
+          "type":"richtext",
+          "id":"faq_content_30",
+          "label":"FAQ Content 30"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

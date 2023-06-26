@@ -1,0 +1,76 @@
+<div class="section section--press section--press-{{ section.id }}">
+  <div class="product-resources__intro center">
+    {% if section.settings.title != blank %}
+      <h1 class="center primary-font product-resources__title">{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <h3 class="w-66pc center secondary-font product-resources__text">{{ section.settings.text }}</h3>
+    {% endif %}
+  </div>
+  <div class="product-resources__blocks">
+    {%- for block in section.blocks -%}
+      <div class="product-resources__block center">
+        {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}">{%- endif -%}
+        {%- if block.settings.icon != blank -%}
+          {{ block.settings.icon | img_url: '150x' | img_tag }}
+        {%- endif -%}
+        {%- if block.settings.title != blank -%}
+          <h4 class="primary-font product-resources-block__title">{{ block.settings.title }}</h4>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+          <p class="product-resources-block__text">{{ block.settings.text }}</p>
+        {%- endif -%}
+        {%- if block.settings.url != blank -%}</a>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Resources",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "PRODUCT RESOURCES"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Whether you’re a brand interested in partnering with us or a customer with a question, we’re here to help. Our range of product resources can help you learn how to use our products and understand more technical details."
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Resource",
+      "type": "resource",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

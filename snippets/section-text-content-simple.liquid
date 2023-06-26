@@ -1,0 +1,25 @@
+<section class="text-content-simple text-content-simple--{{ block.id }}" {{ block.shopify_attributes }}>
+  <style>
+    .text-content-simple--{{ block.id }}:before { 
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: -1;  
+    }
+  </style>
+  <div class="text-content-simple__container">
+    {% if block.settings.title != blank %}
+      <h2>{{ block.settings.title}}</h2>
+    {% endif %}
+    {% if block.settings.content != blank %}
+      {{ block.settings.content}}
+    {% endif %}
+    {% if block.settings.link_text != blank %}
+      <a class="btn btn-alt-white" href="{{ block.settings.link_url }}" title="{{ block.settings.link_text }}">{{ block.settings.link_text}}</a>
+    {% endif %}
+  </div>
+</section>

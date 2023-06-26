@@ -1,0 +1,54 @@
+{% include 'page-utility' %}
+<div class="site-container site-flexbox site-flexbox--reversed">
+  <section class="page-main">
+    <header class="page-header">
+      <h1>Orders</h1>
+    </header><!-- page-header -->
+    <div class="page-content" id="customer_orders">
+      {% if customer.orders.size != 0 %}
+      <table>
+        <thead>
+          <tr>
+            <th class="order_number">Order</th>
+            <th class="date">Date</th>
+            <th class="payment_status">Payment</th>
+            <th class="fulfillment_status">Fulfillment</th>
+            <th class="total">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in customer.orders %}
+          <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
+            <td>{{ order.name | link_to: order.customer_url }}</td>
+            <td><span class="note">{{ order.created_at | date: "%m/%d/%y" }}</span></td>
+            <td><span class="status_{{ order.financial_status }}">{{ order.financial_status }}</span></td>
+            <td><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></td>
+            <td><span class="total money">{{ order.total_price | money | replace: '$ ','$' }}</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>You haven't placed any orders yet. <a href="/collections/all">Starting Shopping</a>.</p>
+      {% endif %}
+    </div><!-- page-content -->
+  </section><!-- page-main -->
+  <div class="page-sidebar">
+    <nav class="widget widget--navigation">
+      <ul>
+        <li class="{% if template == 'customers/account' or template == 'customers/order' %}active {% endif %}">
+          <a role="button" aria-label="All Account Orders" href="/account">Orders <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/addresses' %}active {% endif %}">
+          <a role="button" aria-label="All Account Addresses" href="/account/addresses">Addresses <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/account.wishlist' %}active {% endif %}">
+          <a role="button" aria-label="Account Wishlist" href="/account?view=wishlist">Wishlist <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/account.notification' %}active {% endif %}">
+          <a role="button" aria-label="Account Notifications" href="/account?view=notifications">Notifications <i class="fa fa-angle-right"></i></a>
+        </li>
+      </ul>
+    </nav><!-- widget--navigation -->
+  </div><!-- page-sidebar -->
+</div><!-- site-container -->

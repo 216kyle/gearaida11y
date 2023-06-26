@@ -1,0 +1,42 @@
+<section class="text-content text-content--{{ block.id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.bkgd_color != blank %}
+    <style>
+      .text-content--{{ block.id }} { background: {{ block.settings.bkgd_color }};}
+    </style>
+  {% endif %}
+  <div class="text-content__container">
+    {% if block.settings.image != blank %}
+      <img src="{{ block.settings.image | img_url: '1600x'}}" alt="{{ block.settings.image.alt }}" />
+    {% endif %}
+    {% if block.settings.title != blank %}
+      <h2>{{ block.settings.title}}</h2>
+    {% endif %}
+    {% if block.settings.content != blank %}
+      {{ block.settings.content}}
+    {% endif %}
+    {% if block.settings.link_text != blank %}
+      <a class="btn btn-alt" href="{{ block.settings.link_url }}" title="{{ block.settings.link_text }}">{{ block.settings.link_text}}</a>
+    {% endif %}
+
+    <div class="text-content__boxes">
+      {% if block.settings.box_1_title != blank %}
+        <div class="text-content__box">
+          <h3>{{ block.settings.box_1_title}}</h3>
+          <p>{{ block.settings.box_1_text }}</p>
+        </div>
+      {% endif %}
+      {% if block.settings.box_2_title != blank %}
+        <div class="text-content__box">
+          <h3>{{ block.settings.box_2_title}}</h3>
+          <p>{{ block.settings.box_2_text }}</p>
+        </div>
+      {% endif %}
+      {% if block.settings.box_3_title != blank %}
+        <div class="text-content__box">
+          <h3>{{ block.settings.box_3_title}}</h3>
+          <p>{{ block.settings.box_3_text }}</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

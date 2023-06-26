@@ -1,0 +1,164 @@
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+    (function($){
+      $(function(){
+        var swiper{{ section.id | remove: '--' | remove: '-' }} = new Swiper('.slider--{{ section.id }}', {
+          // pagination: '.swiper-pagination--{{ section.id }}',
+          // paginationClickable: true,
+          prevButton: '.slider-button-prev--{{ section.id }}',
+          nextButton: '.slider-button-next--{{ section.id }}',
+          loop: true
+        });
+      });
+    })(jQuery)
+  });
+</script>
+{% if section.blocks.size > 0 %}
+<article data-aos="fade" data-aos-once="true" data-aos-offset="0" data-aos-easing="ease-in-sine" data-aos-delay="100" data-aos-duration="400" class="slider slider--index slider--{{ section.id }} swiper-container swiper-container--slider" data-section-id="{{ section.id }}">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+    {% if block.settings.image != blank %}
+    <style>
+      .slide--{{ block.id }} h1 {color:{{ block.settings.color }};margin-bottom:0;}
+      .slide--{{ block.id }} p {font-family:'Bitter';color:{{ block.settings.sub_title_color }};font-size:2.4rem;font-weight:bold;line-height:1.2;-moz-box-shadow:0 0 10px rgba(0,0,0,0.2);text-shadow:0 0 10px rgba(0,0,0,0.2);}
+      .slide--{{ block.id }} .btn-alt {color:{{ block.settings.color }} !important;border:1px solid {{ block.settings.color }} !important;}
+      .slide__image--{{ block.id }} {background-position: 50% 50%;background-size:cover;opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+      .slide__image--{{ block.id }}.lazyloaded,
+      .slide__image--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+      @media screen and (max-width: 150px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '300x' }}');}
+      }
+      @media screen and (min-width: 151px) and (max-width: 300px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '600x' }}');}
+      }
+      @media screen and (min-width: 301px) and (max-width: 600px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '900x' }}');}
+      }
+      @media screen and (min-width: 601px) and (max-width: 800px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '1200x' }}');}
+      }
+      @media screen and (min-width: 801px) and (max-width: 1000px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '1400x' }}');}
+      }
+      @media screen and (min-width: 1001px) and (max-width: 1500px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '2000x' }}');}
+      }
+      @media screen and (min-width: 1501px) {
+        .slide__image--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '3000x' }}');}
+      }
+    </style>
+    {% endif %}
+    <section class="slide slide--{{ block.id }} swiper-slide" {{ block.shopify_attributes }}>
+      <figure class="slide__image slide__image--{{ block.id }} lazy"></figure><!-- hero-slide-image -->
+      <header class="slide__header slide__header--{{ block.settings.heading_position }}">
+        {% unless block.settings.title == blank %}
+        <h1>{{ block.settings.title | escape }}</h1>
+        {% endunless %}
+        {% unless block.settings.sub_title == blank %}
+        <p>{{ block.settings.sub_title | escape }}</p>
+        {% endunless %}
+        {% unless block.settings.primary_btn_text == blank %}
+        <a class="btn" href="{{ block.settings.primary_btn_link }}{% if block.settings.primary_btn_utm != blank %}{{ block.settings.primary_btn_utm }}{% endif %}">{{ block.settings.primary_btn_text }}</a>
+        {% endunless %}
+        {% unless block.settings.secondary_btn_text == blank %}
+        <a class="btn btn-alt" href="{{ block.settings.secondary_btn_link }}{% if block.settings.secondary_btn_utm != blank %}{{ block.settings.secondary_btn_utm }}{% endif %}">{{ block.settings.secondary_btn_text }}</a>
+        {% endunless %}
+      </header><!-- slide__header -->
+    </section><!-- slide -->
+    {% endfor %}
+  </div><!-- swiper-wrapper -->
+  {% comment %} <div class="swiper-pagination swiper-pagination--{{ section.id }} swiper-pagination-white"></div> {% endcomment %}
+  <div class="slider-button-prev swiper-button-white slider-button-prev--{{ section.id }}">{% include 'icon', handle: 'arrow-left' %}</div>
+  <div class="slider-button-next swiper-button-white slider-button-next--{{ section.id }}">{% include 'icon', handle: 'arrow-right' %}</div>
+</article><!-- slider -->
+{% endif %}
+{% schema %}
+{
+  "name": "Slider",
+  "class": "section--index section--slider",
+  "max_blocks": 6,
+  "blocks": [
+     {
+      "type": "image",
+      "name": "Image slide",
+      "settings": [
+      {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Image should be a JPEG image 3,000px wide by 2,000px tall."
+      },
+      {
+      "type":"select",
+      "id":"heading_position",
+      "label":"Heading Style",
+      "default": "right",
+      "options": [
+        {"label":"None", "value":"none"},
+        {"label":"Bottom Right Corner", "value":"right"},
+        {"label":"Bottom Left Corner", "value":"left"},
+        {"label":"Bottom Centered", "value":"center"}
+      ]
+      },
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Slide Heading"
+      },
+      {
+      "type": "color",
+      "id": "color",
+      "label": "Heading Color",
+      "default": "#292929"
+      },
+      {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub-heading"
+      },
+      {
+      "type": "color",
+      "id": "sub_title_color",
+      "label": "Sub-heading Color",
+      "default": "#292929"
+      },
+      {
+      "type": "text",
+      "id": "primary_btn_text",
+      "label": "Primary Button Text"
+      },
+      {
+      "type": "url",
+      "id": "primary_btn_link",
+      "label": "Primary Button Link"
+      },
+      {
+      "type": "text",
+      "id": "primary_btn_utm",
+      "label": "Primary Button UTM"
+      },
+      {
+      "type": "text",
+      "id": "secondary_btn_text",
+      "label": "Secondary Button Text"
+      },
+      {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Button Link"
+      },
+      {
+      "type": "text",
+      "id": "secondary_btn_utm",
+      "label": "Secondary Button UTM"
+      }
+      ]
+    }
+  ],
+  "presets": [{
+  "name": "Slider",
+  "category": "Media"
+  }]
+}
+{% endschema %}

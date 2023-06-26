@@ -1,0 +1,37 @@
+{% include 'page-utility' %}
+<div class="site-container">
+  <div class="page-main">
+    <div class="page-header">
+      <h1>Register</h1>
+    </div><!-- page-header -->
+    <div class="page-content">
+      {% form 'create_customer' %}
+      {{ form.errors | default_errors }}
+      <div class="form__fieldrow" id="first_name">
+        <label for="first_name">First Name</label><br>
+        <input type="text" value="" name="customer[first_name]" id="first_name" class="large" size="30" />
+      </div><!-- form__fieldrow -->
+      <div class="form__fieldrow" id="last_name">
+        <label for="last_name">Last Name</label><br>
+        <input type="text" value="" name="customer[last_name]" id="last_name" class="large" size="30" />
+      </div><!-- form__fieldrow -->
+      <div class="form__fieldrow" id="email">
+        <label for="email">Email Address</label><br>
+        <input type="email" value="" name="customer[email]" id="email" class="large" size="30" />
+      </div><!-- form__fieldrow -->
+      <div class="form__fieldrow" id="password">
+        <label for="password">Password</label><br>
+        <input type="password" value="" name="customer[password]" id="password" class="large password" size="30" />
+      </div><!-- form__fieldrow -->
+      <div class="form__fieldrow" id="marketing-optional">
+        <input type="checkbox" name="customer[accepts_marketing]" id="marketing" />
+        <label for="marketing"><span>Receive emails about new produts, sales and brand events.</span> <br/>GEAR AID does not share or sell personal information. See our <a href="/pages/privacy">Privacy Policy</a>.</label>
+      </div>
+      <div class="form__actions">
+        <input class="btn" type="submit" value="Register" />
+        <span class="note">or <a href="{{ shop.url }}">return to store</a></span>
+      </div><!-- form__actions -->
+      {% endform %}
+    </div><!-- page-content -->
+  </div><!-- page-main -->
+</div><!-- site-container -->

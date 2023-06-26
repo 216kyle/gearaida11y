@@ -1,0 +1,235 @@
+{% paginate collection.products by 100 %}
+<div class="site-content{% if section.settings.use_sidebar %} site-content--has-sidebar site-content--sidebar-left{% endif %}" role="main">
+  <header class="page-header-banner page-header-banner--{{ collection.id }}">
+    <div class="page-header_banner__contents">
+      <h1 role="heading" aria-label="{{ collection.title }}" >{{ collection.title }}</h1>
+      <div role="paragraph" class="page-header-banner__slogan">{{ collection.description | strip_html }}</div>
+    </div><!-- page-header_hero__contents -->
+  </header><!-- page-header-bkgd -->
+  {% include 'page-utility' %}
+  <div class="site-container {% if section.settings.use_sidebar %}site-container--fluid site-flexbox{% endif %} site-container--collection">
+    {% if section.settings.use_sidebar %}
+    <div role="presentation" class="page-sidebar">
+      <div id="collection-filtering-close"><span><i class="fa fa-close"></i> Close</span></div>
+      {% include 'collection-filtering' %}
+    </div><!-- page-sidebar -->
+    {% endif %}
+    <div class="page-main">
+      <div class="page-content">
+        <div class="products site-flexbox grid grid--gutters">
+          {% if collection.products.size < 1 %}
+          <p role="paragraph" class="no-products">Sorry, nothing is available at the moment.</p>
+          {% else %}
+          {% assign grid_sizing = section.settings.products_per_row  %}
+          {% for prod in collection.products %}
+          {% unless prod.tags contains 'Discontinued' %}
+          {% include 'product-loop', classes:grid_sizing, quickview:true %}
+          {% endunless %}
+          {% endfor %}
+          {% if paginate.items < 48 %}
+          {% comment %}Adding spacer to help with flexbox issues{% endcomment %}
+          <div class="{{ grid_sizing }} product-spacer"></div>
+          <div class="{{ grid_sizing }} product-spacer"></div>
+          {% endif %}
+          {% endif %}
+        </div><!-- products -->
+      </div><!-- page-content -->
+      {% if paginate.pages > 1 %}
+      <footer id="page-footer">
+        {% include 'pagination' %}
+      </footer><!-- page-footer -->
+      {% endif %}
+    </div><!-- page-main -->
+  </div><!-- site-container -->
+</div><!-- site-content -->
+{% endpaginate %}
+{% include 'quickview-modal' %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  (function($){
+    $(function(){
+
+      $('#filtering-toggle').on('click', function(){
+        $('body').toggleClass('modal-shown');
+        $('.page-sidebar').toggleClass('shown');
+      });
+
+      $('#filtering-close').on('click', function(){
+        $('body').toggleClass('modal-shown');
+        $('.page-').toggleClass('shown');
+      });
+
+      $('.filtering-group h3').on('click', function(){
+        $('i', this).toggleClass('fa-minus fa-plus');
+        $(this).parent().toggleClass('collapsed');
+      });
+
+      Shopify.queryParams = {};
+      if (location.search.length) {
+        for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+          aKeyValue = aCouples[i].split('=');
+          if (aKeyValue.length > 1) {
+            Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+          }
+        }
+      }
+      $('.coll-picker').change(function() {
+        if ($(this).val()) {
+          location.href = '/collections/' + jQuery(this).val();
+        }
+        else {
+          location.href = '/collections/all';
+        }
+      });
+      var collFilters = $('.coll-filter');
+      collFilters.change(function() {
+        delete Shopify.queryParams.page;
+        var newTags = [];
+        collFilters.each(function() {
+          if ($(this).val()) {
+            newTags.push(jQuery(this).val());
+          }
+        });
+        {% if collection.handle %}
+        var newURL = '/collections/{{ collection.handle }}';
+        if (newTags.length) {
+          newURL += '/' + newTags.join('+');
+        }
+        var search = $.param(Shopify.queryParams);
+        if (search.length) {
+          newURL += '?' + search;
+        }
+        location.href = newURL;
+        {% else %}
+        if (newTags.length) {
+          Shopify.queryParams.constraint = newTags.join('+');
+        }
+        else {
+          delete Shopify.queryParams.constraint;
+        }
+        location.search = $.param(Shopify.queryParams);
+        {% endif %}
+      });
+      
+//       $('#sort-by-select').val('{{ collection.sort_by | default: collection.default_sort_by | escape }}').bind('change', function(){
+//         Shopify.queryParams.sort_by = $(this).val();
+//         location.search = $.param(Shopify.queryParams).replace(/\+/g, '%20');
+//       });
+
+    });
+  })(jQuery)
+});
+</script>
+{% schema %}
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner Image"
+      },
+      {
+        "label": "Text Location",
+        "type": "select",
+		"id": "banner_title_location",
+        "options": [
+          {"label":"Bottom", "value":"bottom"},
+          {"label":"Center", "value":"center"}
+        ],
+        "default": "center"
+      },
+      {
+        "type": "header",
+        "content": "Utility Bar"
+      },
+      {
+        "type": "checkbox",
+		"id": "use_utility_bar",
+		"default": true,
+		"label": "Use Utility Bar?"
+      },
+      {
+        "type": "checkbox",
+		"id": "utility_filters",
+		"label": "Show filters in utility bar?",
+		"info": "You should not activate this and sidebar filtering at the same time."
+      },
+      {
+        "type": "header",
+        "content": "Sidebar"
+      },
+      {
+        "type": "checkbox",
+		"id": "use_sidebar",
+		"label": "Use Sidebar?"
+      },
+      {
+        "type": "header",
+        "content": "Filtering Options"
+      },
+      {
+        "type": "header",
+        "content": "Product Grid"
+      },
+      {
+        "label": "Products Per Row",
+        "type": "select",
+		"id": "products_per_row",
+        "options": [
+          {"label":"2", "value":"column50"},
+          {"label":"3", "value":"column33"},
+          {"label":"4", "value":"column25"}
+        ],
+        "default": "column33"
+      },
+      {
+        "type": "checkbox",
+		"id": "show_vendor",
+		"label": "Show Vendor?"
+      },
+      {
+        "type": "checkbox",
+		"id": "show_type",
+		"label": "Show Type?"
+      },
+      {
+        "type": "checkbox",
+		"id": "show_swatches",
+		"label": "Show Color Swatches?"
+      }
+    ],
+	"blocks": [
+      {
+      "type": "filter",
+      "name": "Filter",
+      "settings": [
+          {
+          "type": "text",
+          "id": "filter_title",
+          "label": "Filter Title",
+          "info": "Ex: Color"
+          },
+          {
+          "type": "select",
+          "id": "filter_type",
+          "label": "Filter Type",
+          "options": [
+            {"label":"Product Types", "value":"type"},
+            {"label":"Product Vendors", "value":"vendor"},
+            {"label":"Product Tags", "value":"tag"},
+            {"label":"Link List", "value":"list"}
+          ],
+          "default": "tag"
+          },
+          {
+          "type": "textarea",
+          "id": "filter_list",
+          "label": "Tags List",
+          "info": "If using product tags, type in a comma separated list of all possible choices for this filter. Ex: Red, Blue, Black"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

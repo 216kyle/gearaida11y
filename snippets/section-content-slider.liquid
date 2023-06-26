@@ -1,0 +1,90 @@
+<section class="content-slider content-slider--{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="content-slider__slides swiper-container">
+    <div class="swiper-wrapper">
+      {% if block.settings.image_1 != blank %}
+        <div class="content-slider__slide swiper-slide">
+          <figure class="content-slider__slide-image lazy" data-src="{{ block.settings.image_1 | img_url: '1200x'}}"></figure>
+          <div class="content-slider__text">
+            {% if block.settings.title_1 != blank %}
+              <h4>{{ block.settings.title_1}}</h4>
+            {% endif %}
+            {% if block.settings.content_1 != blank %}
+              {{ block.settings.content_1}}
+            {% endif %}
+            {% if block.settings.link_text_1 != blank %}
+              <a href="{{ block.settings.link_url_1}}" class="btn btn-alt" title="Go to {{ block.settings.link_text_1 }}">{{ block.settings.link_text_1 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.image_2 != blank %}
+        <div class="content-slider__slide swiper-slide">
+          <figure class="content-slider__slide-image lazy" data-src="{{ block.settings.image_2 | img_url: '1200x'}}"></figure>
+          <div class="content-slider__text">
+            {% if block.settings.title_2 != blank %}
+              <h4>{{ block.settings.title_2}}</h4>
+            {% endif %}
+            {% if block.settings.content_2 != blank %}
+              {{ block.settings.content_2}}
+            {% endif %}
+            {% if block.settings.link_text_2 != blank %}
+              <a href="{{ block.settings.link_url_2}}" class="btn btn-alt" title="Go to {{ block.settings.link_text_2 }}">{{ block.settings.link_text_2 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.image_3 != blank %}
+        <div class="content-slider__slide swiper-slide">
+          <figure class="content-slider__slide-image lazy" data-src="{{ block.settings.image_3 | img_url: '1200x'}}"></figure>
+          <div class="content-slider__text">
+            {% if block.settings.title_3 != blank %}
+              <h4>{{ block.settings.title_3}}</h4>
+            {% endif %}
+            {% if block.settings.content_3 != blank %}
+              {{ block.settings.content_3}}
+            {% endif %}
+            {% if block.settings.link_text_3 != blank %}
+              <a href="{{ block.settings.link_url_3}}" class="btn btn-alt" title="Go to {{ block.settings.link_text_3 }}">{{ block.settings.link_text_3 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.image_4 != blank %}
+        <div class="content-slider__slide swiper-slide">
+          <figure class="content-slider__slide-image lazy" data-src="{{ block.settings.image_4 | img_url: '1200x'}}"></figure>
+          <div class="content-slider__text">
+            {% if block.settings.title_4 != blank %}
+              <h4>{{ block.settings.title_4}}</h4>
+            {% endif %}
+            {% if block.settings.content_4 != blank %}
+              {{ block.settings.content_4}}
+            {% endif %}
+            {% if block.settings.link_text_4 != blank %}
+              <a href="{{ block.settings.link_url_4}}" class="btn btn-alt" title="Go to {{ block.settings.link_text_4 }}">{{ block.settings.link_text_4 }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    <div class="swiper-button-prev swiper-button-white swiper-button-prev--{{ block.id }}"></div>
+    <div class="swiper-button-next swiper-button-white swiper-button-next--{{ block.id }}"></div>
+  </div>
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      (function($){
+        $(function(){
+          var swiper_{{ block.id }} = new Swiper('.content-slider--{{ block.id }} .content-slider__slides', {
+            prevButton: '.swiper-button-prev--{{ block.id }}',
+            nextButton: '.swiper-button-next--{{ block.id }}',
+            //loop: true,
+            effect: 'fade'
+          });
+        });
+      })(jQuery)
+    });
+  </script>
+</section>

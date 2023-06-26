@@ -1,0 +1,83 @@
+<section class="section section--heading-block section--heading-block--{{ section.id }} {% if section.settings.border_top %} heading-block--border-top{% endif %}{% if section.settings.border_bottom %} heading-block--border-bottom{% endif %}{% if section.settings.padding_top %} heading-block--padding-top{% endif %}{% if section.settings.padding_bottom %} heading-block--padding-bottom{% endif %}" {{ section.shopify_attributes }}>
+  {% if section.settings.image or section.settings.min_height %}
+  <style>
+    .section--heading-block--{{ section.id }} {
+      {% if section.settings.image %} 
+      background: url('{{ section.settings.image | img_url: 'master' }}') no-repeat center center;
+      {% endif %}
+
+      {% if section.settings.min_height %}
+      min-height: {{section.settings.min_height}}px;
+      {% endif %}
+    }
+
+    @media screen and (max-width: 60em) {
+       .section--heading-block--{{ section.id }} {
+        background: none;
+        min-height: 0;
+      }
+    }
+
+  </style>
+  {% endif %}
+  <div class="site-container">
+    <div class="heading-block-container">
+      {% if section.settings.title != blank %}
+        <h2 class="block-title">{{ section.settings.title}}</h2>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Heading Block",
+  "settings":[
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+    "type": "image_picker",
+    "id": "image",
+    "label": "Background Image"
+  },
+  {
+      "type":"text",
+      "id":"min_height",
+      "label":"Minumum Height (in px)",
+      "info": "Leave blank to have no min height"
+    },
+    {
+    "type":"checkbox",
+    "id":"padding_top",
+    "label":"Padding Top?",
+    "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"padding_bottom",
+      "label":"Padding Bottom?",
+      "default":true
+    },
+      {
+      "type":"checkbox",
+      "id":"border_top",
+      "label":"Border Top?",
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"border_bottom",
+      "label":"Border Bottom?",
+      "default":false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Heading block"
+    }
+  ]
+}
+{% endschema %}

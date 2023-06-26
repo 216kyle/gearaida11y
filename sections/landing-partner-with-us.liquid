@@ -1,0 +1,97 @@
+{% stylesheet %}
+.dark { background-color: #282828; color: white; }
+.mg-r-20px { margin-right: 21px; }
+.pad-t-70pc { padding-top: 70px; }
+.pad-b-70pc { padding-bottom: 70px; }
+.w-66pc { width: 66.66666%; }
+.w-100pc { width: 100% }
+.txt-white { color: white; }
+{% endstylesheet %}
+
+<div class="section section--press section--press-{{ section.id }}">
+
+  <div class="w-100pc dark pad-t-70pc pad-b-70pc"> 
+    <div class="partner-with-us__intro center">
+      {% if section.settings.title != blank %}
+        <h1 class="center txt-white primary-font partner-with-us__title">{{ section.settings.title }}</h1>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <h3 class="w-66pc center txt-white secondary-font partner-with-us__text">{{ section.settings.text }}</h3>
+      {% endif %}
+    </div>
+  
+    <div class="partner-with-us__buttons center">
+      {% for block in section.blocks %}
+        {% if section.settings.text2 != blank %}
+          <a href="{{ block.settings.button_url }}" class="btn {{ block.settings.button_class }} mg-r-20px">{{ block.settings.button_text }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  
+    <div class="partner-with-us__footer center">
+      {% if section.settings.text2 != blank %}
+      <h3 class="w-66pc center txt-white secondary-font partner-with-us__text">{{ section.settings.text2 }}</h3>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+
+
+{% schema %}
+{
+  "name": "Partner With Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Text 2"
+    }
+  ],
+  "max_blocks": 2,
+  "blocks":[
+    {
+    "type":"press_item",
+    "name":"Button Item",
+    "settings":[
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "select",
+        "id": "button_class",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "orange",
+            "label": "Orange"
+          },
+          {
+            "value": "dark",
+            "label": "Dark"
+          }
+        ],
+        "default": "orange"
+      },
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      }
+    ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+<section class="section section--logos-grid section--logos-grid--{{ section.id }} {% if section.settings.border_top %} logos-grid--border-top{% endif %}{% if section.settings.border_bottom %} logos-grid--border-bottom{% endif %}{% if section.settings.padding_top %} logos-grid--padding-top{% endif %}{% if section.settings.padding_bottom %} logos-grid--padding-bottom{% endif %}" {{ section.shopify_attributes }}>
+  <div class="site-container">
+    <div class="logos-grid-container">
+      {% if section.settings.image != blank %}<img class="grid-logo grid-logo-1 lazy" data-srcset="{{ section.settings.image | img_url: '1000x' }} 2x, {{ section.settings.image | img_url: '500x' }} 1x" data-src="{{ section.settings.image | img_url: '250x' }}" alt="{{ section.settings.image.alt | escape }}" itemprop="image">{% endif %}
+      {% if section.settings.image2 != blank %}<img class="grid-logo grid-logo-2 lazy" data-srcset="{{ section.settings.image2 | img_url: '1000x' }} 2x, {{ section.settings.image2 | img_url: '500x' }} 1x" data-src="{{ section.settings.image2 | img_url: '250x' }}" alt="{{ section.settings.image2.alt | escape }}" itemprop="image">{% endif %}
+      {% if section.settings.image3 != blank %}<img class="grid-logo grid-logo-3 lazy" data-srcset="{{ section.settings.image3 | img_url: '1000x' }} 2x, {{ section.settings.image3 | img_url: '500x' }} 1x" data-src="{{ section.settings.image3 | img_url: '250x' }}" alt="{{ section.settings.image3.alt | escape }}" itemprop="image">{% endif %}
+      {% if section.settings.image4 != blank %}<img class="grid-logo grid-logo-4 lazy" data-srcset="{{ section.settings.image4 | img_url: '1000x' }} 2x, {{ section.settings.image4 | img_url: '500x' }} 1x" data-src="{{ section.settings.image4 | img_url: '250x' }}" alt="{{ section.settings.image4.alt | escape }}" itemprop="image">{% endif %}
+      {% if section.settings.image5 != blank %}<img class="grid-logo grid-logo-5 lazy" data-srcset="{{ section.settings.image5 | img_url: '1000x' }} 2x, {{ section.settings.image5 | img_url: '500x' }} 1x" data-src="{{ section.settings.image5 | img_url: '250x' }}" alt="{{ section.settings.image5.alt | escape }}" itemprop="image">{% endif %}
+      {% if section.settings.image6 != blank %}<img class="grid-logo grid-logo-6 lazy" data-srcset="{{ section.settings.image6 | img_url: '1000x' }} 2x, {{ section.settings.image6 | img_url: '500x' }} 1x" data-src="{{ section.settings.image6 | img_url: '250x' }}" alt="{{ section.settings.image6.alt | escape }}" itemprop="image">{% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Logos grid",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Logo 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Logo 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image3",
+      "label": "Logo 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "image4",
+      "label": "Logo 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "image5",
+      "label": "Logo 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "image6",
+      "label": "Logo 6"
+    },
+      {
+      "type":"checkbox",
+      "id":"padding_top",
+      "label":"Padding Top?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"padding_bottom",
+      "label":"Padding Bottom?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"border_top",
+      "label":"Border Top?",
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"border_bottom",
+      "label":"Border Bottom?",
+      "default":false
+    }
+  ],
+ "presets": [
+   {
+     "name": "Logos grid"
+   }
+ ]
+}
+{% endschema %}

@@ -1,0 +1,209 @@
+{% assign selected_collection = section.settings.collection %}
+{% assign num_of_products = section.settings.num_of_products %}
+{% assign num_of_columns = section.settings.num_of_columns %}
+
+{% assign heading_text = section.settings.heading_text %}
+{% assign heading_align = section.settings.heading_align %}
+{% assign heading_style = section.settings.heading_style %}
+
+{% assign col_button_bg_color = section.settings.col_button_bg_color %}
+{% assign col_button_text = section.settings.col_button_text %}
+{% assign col_button_style = section.settings.col_button_style %}
+
+{{ 'custom-recommendations.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .custom-recommendations {
+    --link-normal-color: {{ settings.body_text_color }};
+    --link-hover-color: {{ settings.navigation_link_hover_color }};
+  }
+  .custom-recommendations__row {
+    --custom-recommendations-cols: {{ num_of_columns }};
+  }
+
+  .custom-recommendations__col-button {
+    text-transform: {{ col_button_style }};
+    background-color: {{ col_button_bg_color }};
+  }
+</style>
+
+{% if product.tags contains 'visible_test' %}
+  <div class="custom-recommendations">
+    <div class="custom-recommendations__heading-box heading-align-{{ heading_align }}">
+        <h2 
+        class="custom-recommendations__heading{% unless heading_style == 'normal' %} heading-style-{{ heading_style }}{% endunless %}">
+            {{ heading_text }}
+        </h2>
+    </div>
+
+    <div class="custom-recommendations__row">
+        {% for cur_product in selected_collection.products %}
+            {% render 'custom-recommendation-product', product: cur_product, button_text: col_button_text %}
+        {% endfor %}
+    </div>
+  </div> 
+{% endif %}
+
+{% schema %}
+{
+     "name": "Custom recommendations",
+     "tag": "section",
+     "settings": [
+        {
+            "type": "header",
+            "content": "General options"
+        },
+
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection",
+            "info": "This section will be shown only on the product pages of the products that are in this collection."
+        },
+
+        {
+            "type": "select",
+            "id": "num_of_products",
+            "label": "Number of products",
+            "default": "4",
+            "options": [
+                {
+                    "value": "2",
+                    "label": "2"
+                },
+
+                {
+                    "value": "3",
+                    "label": "3"
+                },
+
+                {
+                    "value": "4",
+                    "label": "4"
+                }
+            ]
+        },
+
+        {
+            "type": "select",
+            "id": "num_of_columns",
+            "label": "Number of columns",
+            "default": "4",
+            "options": [
+                {
+                    "value": "2",
+                    "label": "2"
+                },
+
+                {
+                    "value": "3",
+                    "label": "3"
+                },
+
+                {
+                    "value": "4",
+                    "label": "4"
+                }
+            ]
+        },
+
+        {
+            "type": "header",
+            "content": "Heading"
+        },
+
+        {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Text"
+        },
+
+        {
+            "type": "radio",
+            "id": "heading_align",
+            "label": "Heading alignment",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+
+        {
+            "type": "radio",
+            "id": "heading_style",
+            "label": "Heading style",
+            "default": "uppercase",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+
+                {
+                    "value": "uppercase",
+                    "label": "Uppercase"
+                },
+
+                {
+                    "value": "capitalize",
+                    "label": "Capitalized"
+                }
+            ]
+        },
+
+        {
+            "type": "header",
+            "content": "Column button"
+        },
+        
+        {
+            "type": "text",
+            "id": "col_button_text",
+            "label": "Text"
+        },
+
+        {
+            "type": "color",
+            "id": "col_button_bg_color",
+            "label": "Background color",
+            "default": "#f05231"
+        },
+
+        {
+            "type": "radio",
+            "id": "col_button_style",
+            "label": "Style",
+            "default": "uppercase",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+
+                {
+                    "value": "uppercase",
+                    "label": "Uppercase"
+                },
+
+                {
+                    "value": "capitalize",
+                    "label": "Capitalized"
+                }
+            ]
+        }
+      ]
+    }
+{% endschema %}

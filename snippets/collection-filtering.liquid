@@ -1,0 +1,80 @@
+<div class="widget widget--filtering">
+  {% capture colors_list %}{{ settings.filtering_colors }}{% endcapture %}
+  {% assign colors = colors_list | replace: ' ,', ',' | replace: ', ', ',' | split: ',' %}
+  {% assign all_filter_tags = '' %}
+  {% assign show_colors = false %}
+  {% for color in colors %}
+  {% if collection.all_tags contains color %}
+  {% assign show_colors = true %}
+  {% capture all_filter_tags %}{{ all_filter_tags }},{{ color }},{% endcapture %}
+  {% endif %}
+  {% endfor %}
+  {% if show_colors %}
+  <div class="filtering-group">
+    <h3>Colors <i class="fa fa-minus"></i></h3>
+    <ul class="filtering-list filtering-list--colors">
+      {% assign new_tags = '' %}
+      {% for tag in current_tags %}
+      {% unless all_filter_tags contains tag %}
+      {% capture new_tags %}{{ new_tags }}+{{ tag | handle }}{% endcapture %}
+      {% endunless %}
+      {% endfor %}
+      {% capture new_tags %}{{ new_tags | remove_first: '+' }}{% endcapture %}
+      {% for color in colors %}
+      {% if collection.all_tags contains color %}
+      {% if current_tags contains color %}
+      {% capture color_style %}<span class="filtering-color-swatch"></span>{% endcapture %}
+      <li class="{{ color | handle }} active-filter">{{ color_style | link_to_remove_tag: color }}</li>
+      {% else %}
+      {% capture color_style %}<span class="filtering-color-swatch"></span>{% endcapture %}
+      <li class="{{ color | handle }}">{{ color_style | link_to_add_tag: color }}</li>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </ul><!-- filtering-list-colors -->
+  </div><!-- filtering-group -->
+  {% endif %}
+  
+  {% capture designers_list %}{{ settings.filtering_designers }}{% endcapture %}
+  {% assign designers = designers_list | replace: ' ,', ',' | replace: ', ', ',' | split: ',' %}
+  {% assign all_filter_tags = '' %}
+  {% assign show_designers = false %}
+  {% assign designers_count = 0 %}
+  {% for designer in designers %}
+  {% if collection.all_tags contains designer %}
+  {% assign show_designers = true %}
+  {% assign designers_count = designers_count | plus:1 %}
+  {% capture all_filter_tags %}{{ all_filter_tags }},{{ designer }},{% endcapture %}
+  {% endif %}
+  {% endfor %}
+  {% if show_designers and designers_count > 1 %}
+  <div class="filtering-group">
+    <h3>Vendors <i class="fa fa-minus"></i></h3>
+    <ul class="filtering-list">
+      {% assign new_tags = '' %}
+      {% for tag in current_tags %}
+      {% unless all_filter_tags contains tag %}
+      {% capture new_tags %}{{ new_tags }}+{{ tag | handle }}{% endcapture %}
+      {% endunless %}
+      {% endfor %}
+      {% capture new_tags %}{{ new_tags | remove_first: '+' }}{% endcapture %}
+      {% for designer in designers %}
+      {% if collection.all_tags contains designer %}
+      {% if current_tags contains designer %}
+      {% capture designer_style %}<span class="fa fa-fw fa-check-square"></span> {{ designer }}{% endcapture %}
+      <li class="{{ designer | handle }} active-filter">{{ designer_style | link_to_remove_tag: designer }}</li>
+      {% else %}
+      {% if collection.url != '' %}
+      {% capture url %}{{ collection.url }}/{% if new_tags != '' %}{{ new_tags }}+{% endif %}{{ designer | handle }}{% endcapture %}
+      {% else %}
+      {% capture url %}/collections/all/{% if new_tags != '' %}{{ new_tags }}+{% endif %}{{ designer | handle }}{% endcapture %}
+      {% endif %}
+      {% capture designer_style %}<span class="fa fa-fw fa-square-o"></span> {{ designer }}{% endcapture %}
+      <li class="{{ designer | handle }}">{{ designer_style | link_to: url }}</li>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </ul><!-- filtering-list -->
+  </div><!-- filtering-group -->
+  {% endif %}
+</div><!-- filtering -->

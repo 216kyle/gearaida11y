@@ -1,0 +1,47 @@
+{% stylesheet %}
+.section--promos-lights {padding: 0;}
+.section--promos-lights .promo {text-align:center;margin:0;}
+.section--promos-lights .promo figure {display:block;width:100%;position:relative;z-index:102;margin:0;text-align:center;}
+.section--promos-lights .promo figure img {width:100%;max-width:600px;display:block;margin:0 auto;}
+{% endstylesheet %}
+
+{% if section.blocks.size > 0 %}
+  <section class="section section--promos section--promos-lights">
+    <div class="section-content"> 
+      <div class="site-container site-flexbox grid grid--gutters">
+        {% for block in section.blocks %}
+        <div class="promo promo--{{ block.id }} column100" {{ block.shopify_attributes }}>
+          <figure>
+            <img src="{{ block.settings.image | img_url: '1200x' }}" alt="{% unless block.settings.heading == blank %}{{ block.settings.heading | escape }}{% endunless %}" />
+          </figure>
+        </div><!-- promo --> 
+        {% endfor %}
+      </div><!-- site-container--fluid -->
+    </div><!-- section-content -->
+  </section><!-- section -->
+{% endif %}
+{% schema %}
+{
+  "name": "Image",
+  "max_blocks": 1,
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Promo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

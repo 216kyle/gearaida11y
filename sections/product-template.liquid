@@ -1,0 +1,717 @@
+{% include 'page-utility' %}
+
+{% assign pro_customer = false %}
+{% if customer and customer.tags contains 'PRO' %}
+{% assign pro_customer = true %}
+{% endif %}
+
+{% assign show_gallery_controls = false %}
+{% if product.images.size > 1 %}
+{% assign show_gallery_controls = true %}
+{% endif %}
+{% if product.images.size >= 1 %}
+{% if product.metafields.gear_aid.youtube_id != blank %}
+{% assign show_gallery_controls = true %}
+{% endif %}
+{% endif %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+<main class="site-content site-content--no-sidebar" itemscope itemtype="http://schema.org/Product" role="main">
+  <article id="product-content" class="site-container site-flexbox grid">
+    <div id="product-images">
+      <div aria-label="product image swiper" class="image-gallery swiper-container photoswipe-gallery">
+        <div class="swiper-wrapper">
+          {% for image in product.images %}
+          {% capture img_url %}{{ image | product_img_url: 'master' }}{% endcapture %}
+          <figure data-swiper-slide-index="{{ forloop.index0 }}" data-main-image-id="{{ image.id }}" id="n-{{ forloop.index }}" class="swiper-slide" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+            {% if img_url contains 'lifestyle' %}
+            <a href="{{ image | product_img_url:'2048x', scale: 2 }}" data-size="3000x2000">
+              {% if product.tags contains 'Online-Only Right' %}
+              <div aria-label="Online Deal Only" class="online-only online-only--right"><span>Online<br/>Only</span></div>
+              {% endif %}
+              {% if product.tags contains 'Online-Only Left' %}
+              <div aria-label="Online Deal Only" class="online-only online-only--left"><span>Online<br/>Only</span></div>
+              {% endif %}
+              {% if product.tags contains 'Discontinued' %}
+              <div aria-label="Discontinued Product" class="discontinued-badge"><span>Discontinued</span></div>
+              {% endif %}
+              <img itemprop="image" alt="{{ image.alt | escape  }}" {% if forloop.first %}src="{{ image | product_img_url: '500x' }}" srcset="{{ image | product_img_url: '500x' }} 1x, {{ image | product_img_url: '1200x' }} 2x"{% else %}data-src="{{ image | product_img_url: '500x' }}" data-srcset="{{ image | product_img_url: '1200x' }} 2x"{% endif %}{% unless forloop.first %} class="swiper-lazy"{% endunless %}>
+              {% unless forloop.first %}
+              <div class="swiper-lazy-preloader"></div>
+              {% endunless %}
+            </a>
+            {% else %}
+            <a href="{{ image | product_img_url:'2048x', scale: 2 }}" data-size="3000x3000">
+              {% if product.tags contains 'Online-Only Right' %}
+              <div aria-label="Online Only Deal" class="online-only online-only--right"><span>Online<br/>Only</span></div>
+              {% endif %}
+              {% if product.tags contains 'Online-Only Left' %}
+              <div aria-label="Online Only Deal" class="online-only online-only--left"><span>Online<br/>Only</span></div>
+              {% endif %}
+              {% if product.tags contains 'Discontinued' %}
+              <div aria-label="Discontinued Product" class="discontinued-badge"><span>Discontinued</span></div>
+              {% endif %}
+              <img itemprop="image" alt="{{ image.alt | escape  }}" {% if forloop.first %}src="{{ image | product_img_url: '500x' }}" srcset="{{ image | product_img_url: '500x' }} 1x, {{ image | product_img_url: '1200x' }} 2x"{% else %}data-src="{{ image | product_img_url: '500x' }}" data-srcset="{{ image | product_img_url: '1200x' }} 2x"{% endif %}{% unless forloop.first %} class="swiper-lazy"{% endunless %}>
+              {% unless forloop.first %}
+              <div class="swiper-lazy-preloader"></div>
+              {% endunless %}
+            </a>
+            {% endif %}
+          </figure>
+          {% endfor %}
+          {% if product.metafields.gear_aid.youtube_id %}
+          <figure data-swiper-slide-index="{{ forloop.index0 | plus:1 }}" data-main-image-id="video" class="swiper-slide swiper-slide--video">
+            <div aria-label="Video Player" id="product-video-player"></div>
+          </figure>
+          {% endif %}
+        </div><!-- swiper-wrapper -->
+        {% if show_gallery_controls %}
+        <div class="swiper-pagination swiper-pagination-black"></div>
+        <div class="swiper-button-prev swiper-button-white"></div>
+        <div class="swiper-button-next swiper-button-white"></div>
+        {% endif %}
+      </div><!-- image-gallery  -->
+      {% if show_gallery_controls %}
+      <div role="presentation" class="image-gallery__thumbnails">
+        {% for image in product.images %}
+        <a href="#" class="image-gallery__thumbnail-wrapper{% if forloop.first %} image-gallery__thumbnail-wrapper--active{% endif %}" data-image-id="{{ image.id }}">
+          <img class="image-gallery__thumbnail" alt="{{ image.alt | escape }}" src="{{ image | img_url: '300x300' }}" />
+        </a><!-- image-gallery__thumbnail -->
+        {% endfor %}
+        {% if product.metafields.gear_aid.youtube_id %}
+        <a  href="#" class="image-gallery__thumbnail-wrapper image-gallery__thumbnail-wrapper--video" data-image-id="video">
+          <img class="image-gallery__thumbnail" alt="" src="//img.youtube.com/vi/{{ product.metafields.gear_aid.youtube_id }}/default.jpg" />
+        </a><!-- image-gallery__thumbnail -->
+        {% endif %}
+      </div><!-- image-gallery__thumbnails -->
+      {% endif %}
+    </div><!-- product-images -->
+    <div id="product-options">
+      <header{% unless template contains 'quickview' %} data-aos="fade" data-aos-once="true" data-aos-offset="0" data-aos-easing="ease-in-sine" data-aos-delay="200" data-aos-duration="400"{% endunless %} id="product-header" class="clearfix">
+        {% for tag in product.tags %}
+        {% if tag == 'New Name' %}
+        <span aria-label="New Product Name" class="product-label product-label--new-name">New Name</span>
+        {% endif %}
+        {% if tag == 'New' %}
+        <span aria-label="New Product" class="product-label product-label--new">New</span>
+        {% endif %}
+        {% if tag == 'Coming Soon' %}
+        <span aria-label="Product Coming Soon" class="product-label product-label--coming-soon">Coming Soon</span>
+        {% endif %}
+        {% endfor %}
+        <h1 aria-label="Product Title" itemprop="name">{{ product.title }}</h1>
+        {% if product.metafields.gear_aid.slogan %}
+        <div aria-label="Product Short Description" id="product-slogan">
+          {{ product.metafields.gear_aid.slogan }}
+        </div>
+        {% endif %}
+        <div class="clearfix">
+          <span id="product-pricing-wrapper" class="product-pricing" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            {% if product.available %}
+            <meta itemprop="price" content="{{ product.price | money_without_currency }}" />
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+            <meta itemprop="availability" itemtype="http://schema.org/ItemAvailability" content="InStock" />
+            {% else %}
+            <meta itemprop="price" content="{{ product.price | money_without_currency }}" />
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+            <meta itemprop="availability" itemtype="http://schema.org/ItemAvailability" content="OutOfStock" />
+            {% endif %}
+            {% assign variant = product.selected_or_first_available_variant %}
+            <span class="product-price"{% if pro_customer %} data-discount-type="PRO" {% if product.type == 'Lights & Mounts' %}data-discount-percentage="0.6"{% else %}data-discount-percentage="0.5"{% endif %}{% endif %}>{{ variant.price | money_without_trailing_zeros }}</span>
+            {% if product.compare_at_price_max > product.price or pro_customer %}
+            <span class="product-old-price"><span class="old-price-was">{% if pro_customer %}Retail: {% else %}Compared to{% endif %}</span> <span class="old-price">{% if current_variant.compare_at_price > current_variant.price %}{{ current_variant.compare_at_price | money_without_trailing_zeros }}{% endif %}</span></span>
+            {% endif %}
+          </span><!-- product-pricing-wrapper -->
+          <div id="product-meta">
+            {% if section.settings.show_vendor and product.vendor != blank %}
+            <span id="product-vendor" class="product-meta-item">
+              <span class="product-meta-item-title">Vendor: </span>
+              <span class="product-meta-item-content">{{ product.vendor }}</span>
+            </span><!-- product-vendor -->
+            {% endif %}
+            {% if section.settings.show_type and product.type != blank %}
+            <span id="product-type" class="product-meta-item">
+              <span aria-title="Product Type" class="product-meta-item-title">Type: </span>
+              <span aria-title="{{ product.type }}" class="product-meta-item-content">{{ product.type }}</span>
+            </span><!-- product-sku -->
+            {% endif %}
+            {% if section.settings.show_sku and variant.sku != blank %}
+            <span id="product-sku" class="product-meta-item">
+              <span aria-label="Product SKU" class="product-meta-item-title">SKU: </span>
+              <span aria-label="Number {{ variant.sku }}" class="product-meta-item-content">{{ variant.sku }}</span>
+            </span><!-- product-sku -->
+            {% endif %}
+          </div><!-- product-meta -->
+        </div>
+        {% if section.settings.show_reviews %}
+        <div aria-label="Product Reviews" id="product-rating" class="product-meta-item">
+          <span class="product-meta-item-content"><span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span></span>
+        </div><!-- product-rating -->
+        {% endif %}
+      </header><!-- product-header -->
+    {% if product.tags contains 'Discontinued' %}
+      <p id="discontinued-item">This item has been discontinued and is no longer available.</p>
+      {% else %}
+      {% if product.available %}
+      {% include 'add-to-cart-form' %}
+      {% else %}
+
+      {% assign coming_soon = false %}
+      {% for tag in product.tags %}
+      {% if tag == 'Coming Soon' %}
+      {% assign coming_soon = true %}
+      {% endif %}
+      {% endfor %}
+      {% if coming_soon %}
+
+      {% else %}
+      <div class="sold-out">
+        <p Aria-Label="Out of Stock Product" class="lead">Sorry, this product is currently out of stock.</p>
+      </div>
+      {% endif %}
+
+      {% endif %}
+
+      {% endif %}
+
+    </div><!-- product-options -->
+    
+    {% assign enable_custom_rec_prods_section = section.settings.enable_custom_rec_prods_section %}
+    
+    {% unless enable_custom_rec_prods_section == false %}
+        {{ 'custom-recommendations.css' | asset_url |stylesheet_tag }}
+        <!-- Custom recommended products section -->
+        {% assign heading_align = section.settings.custom_rec_products_heading_align %}
+        {% assign rec_collection_num_of_products = section.settings.custom_rec_prods_num_of_products %}
+        {% assign rec_collection_heading_text = section.settings.custom_rec_prods_heading_text %}
+        {% assign rec_collection_heading_align = section.settings.custom_rec_prods_heading_align %}
+        {% assign rec_collection_heading_style = section.settings.custom_rec_prods_heading_style %}
+        {% assign rec_collection_button_text = section.settings.custom_rec_prods_button_text %}
+        {% assign rec_collection_button_bg_color = section.settings.custom_rec_prods_button_bg_color %}
+        {% assign rec_collection_button_style = section.settings.custom_rec_prods__button_style %}
+        {% assign rec_collection_section_type = section.settings.custom_rec_prods_section_type %}
+        {% assign custom_rec_prods_recs_type = section.settings.custom_rec_prods_recs_type %}
+        {% assign recommended_collection = section.settings.custom_rec_prods_collection %}
+        
+        {% if rec_collection_section_type == 'normal' %}
+            <div class="custom-recommendations">
+              <div class="custom-recommendations__heading-box heading-align-{{ rec_collection_heading_align }}">
+                  <h2 
+                  class="custom-recommendations__heading{% unless rec_collection_heading_style == 'normal' %} heading-style-{{ rec_collection_heading_style }}{% endunless %}">
+                      {{ rec_collection_heading_text }}
+                  </h2>
+              </div>
+          
+              <div class="custom-recommendations__row">
+                {% unless custom_rec_prods_recs_type == 'dynamic' %}
+                    {% for collection_product in recommended_collection.products %}
+                      {% render 'custom-recommendation-product', product: collection_product, button_text: rec_collection_button_text %}
+                    {% endfor %}
+                {% endunless %}
+              </div>
+            </div> 
+  
+          {% unless custom_rec_prods_recs_type == 'collection_based' %}
+            {{ 'generate-custom-recommended-products.js' | asset_url | script_tag }}
+
+            <script>
+              generateCustomRecommenedProducts({
+                productId: {{ product.id }},
+                btnText: "{{ rec_collection_button_text }}",
+                productsLimit: {{ rec_collection_num_of_products }},
+                recommendationType: 'collection_based'
+              });
+            </script>
+          {% endunless %}
+        {% endif %}
+  
+        {% if rec_collection_section_type == 'carousel' %}
+          <div class="custom-recommendations-swiper">
+            <div class="custom-recommendations__heading-box heading-align-{{ rec_collection_heading_align }}">
+                <h2 
+                class="custom-recommendations__heading{% unless rec_collection_heading_style == 'normal' %} heading-style-{{ rec_collection_heading_style }}{% endunless %}">
+                  {{ rec_collection_heading_text }}
+                </h2>
+            </div>
+  
+         <div class="swiper custom-recs">
+            <div class="swiper-wrapper">
+                {% unless custom_rec_prods_recs_type == 'dynamic' %}
+                  {% for collection_product in recommended_collection.products %}
+                    <div class="swiper-slide">
+                      {% render 'custom-recommendation-product', product: collection_product, button_text: rec_collection_button_text %}
+                    </div>
+                  {% endfor %}
+                {% endunless %}
+            </div>
+          </div>
+  
+            <span role="button" class="btn-swiper btn-prev">&#60;</span>
+            <span role="button" class="btn-swiper btn-next">&#62;</span>
+        </div>
+          {% if custom_rec_prods_recs_type == 'dynamic' %}
+            {{ 'generate-custom-recommended-products.js' | asset_url | script_tag }}
+  
+            <script>
+              generateCustomRecommenedProducts({
+                productId: {{ product.id }},
+                btnText: "{{ rec_collection_button_text }}",
+                productsLimit: {{ rec_collection_num_of_products }},
+                recommendationType: 'dynamic'
+              });
+            </script>
+          {% endif %}
+  
+          <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+        
+          <script>
+           var swiper = new Swiper(".custom-recs", {
+          slidesPerView: 4,
+          spaceBetween: 30,
+          loop: false,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".btn-next",
+            prevEl: ".btn-prev",
+          },
+           breakpoints: {
+            200: {
+              slidesPerView: 1,
+              slidesPerView: 1,
+            },
+            500: {
+              slidesPerView: 2,
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+            900: {
+              slidesPerView: 4,
+              slidesPerView: 4,
+              spaceBetween: 30,
+            },
+          },
+        });
+          </script>
+  
+          <style>
+        .custom-recommendations-swiper .swiper {
+          width: 100%;
+          height: 100%;
+        }
+  
+       .custom-recommendations-swiper .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
+  
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+  
+       .custom-recommendations-swiper .swiper-slide img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+          </style>
+        {% endif %}
+    {% endunless %}
+
+    <!-- END CUSTOM RECOMMEDNED PRODUCTS -->
+    <div id="product-content-sections">
+
+      {% unless product.type == 'Gift Card' %}
+      <div id="product-content-sections-nav">
+        <span class="product-content-sections-tab product-content-sections-tab--details product-content-sections-tab--active" data-tab-id="#product-details">Details</span>
+        {% for block in section.blocks %}
+        {% if block.settings.type == 'metafield' %}
+        {% assign key = block.settings.metafield_content %}
+        {% if product.metafields.gear_aid[key] %}
+        <span class="sep"></span>
+        <span class="product-content-sections-tab product-content-sections-tab--{{ block.settings.title | handle }}" data-tab-id="#product-{{ block.settings.title | handle }}">{{ block.settings.title }}</span>
+        {% endif %}
+        {% else %}
+        <span class="sep"></span>
+        <span class="product-content-sections-tab product-content-sections-tab--{{ block.settings.title | handle }}" data-tab-id="#product-{{ block.settings.title | handle }}">{{ block.settings.title }}</span>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <h3 class="product-content-section-title product-content-section-title--product-details" data-tab-id="#product-details">Details <i class="fa fa-minus"></i></h3>
+      {% endunless %}
+
+      <div id="product-details" class="product-content-section product-content-section--active" itemprop="description">
+        {{ product.content }}
+        {% if product.tags contains 'warning:cutting' %}
+        <div role="presentation" class="warning-message">
+          <p><i class="fa fa-warning"></i> Cut hazard / sharp blade. Use blade edge for splitting and chopping wood only. Flying debris can result in eye injury. Always wear protective safety glasses or goggles. Safety sheath must be installed when using the stake driving feature. Never use if blade is dull, chipped, or damaged. Improper use can result in serious injury. Always store in safety sheath. Keep out of reach of children. </p>
+        </div>
+        {% endif %}
+        {% if product.tags contains 'Warning:toluene' %}
+        <div role="presentation" class="warning-message">
+          <p><i class="fa fa-warning"></i> California WARNING: Using this product will expose you to toluene, a chemical known to the State of California to cause birth defects or other reproductive harm <a target="_blank" href="https://www.P65Warnings.ca.gov">www.P65Warnings.ca.gov</a>.</p>
+        </div>
+      {% endif %}
+      </div><!-- product-details -->
+      {% unless product.type == 'Gift Card' %}
+      {% for block in section.blocks %}
+      {% if block.settings.type == 'metafield' %}
+      {% assign key = block.settings.metafield_content %}
+      {% if product.metafields.gear_aid[key] %}
+      <h3 class="product-content-section-title product-content-section-title--{{ block.settings.title | handle }}" data-tab-id="#product-{{ block.settings.title | handle }}">{{ block.settings.title }} <i class="fa fa-plus"></i></h3>
+      <div id="product-{{ block.settings.title | handle }}" class="product-content-section">
+        {% if key == 'specs' %}
+        {% assign specs = product.metafields.gear_aid[key] | split: '|' %}
+        <ul>
+          {% for spec in specs %}
+            <li>{{ spec }}</li>
+          {% endfor %}
+
+          {% if product.tags contains 'Ingredients' %}
+            <li>See <a href="/pages/ingredients">Ingredients</a></li>
+          {% endif %}
+        </ul>
+        {% else %}
+        {{ product.metafields.gear_aid[key] }}
+        {% endif %}
+      </div><!-- product-{{ block.settings.title | handle }} -->
+      {% endif %}
+      {% else %}
+      <h3 class="product-content-section-title product-content-section-title--{{ block.settings.title | handle }}" data-tab-id="#product-{{ block.settings.title | handle }}">{{ block.settings.title }} <i class="fa fa-plus"></i></h3>
+      <div id="product-{{ block.settings.title | handle }}" class="product-content-section">
+        {% if block.settings.type == 'global_text' %}
+        {{ block.settings.global_text_content }}
+        {% elsif block.settings.type == 'reviews' %}
+        <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+        {% endif %}
+      </div><!-- product-{{ block.settings.title | handle }} -->
+      {% endif %}
+      {% endfor %}
+      {% endunless %}
+    </div><!-- product-content-sections -->
+    {% unless section.settings.social_sharing == 'none' %}
+    <div id="product-sharing" class="sharing-meta sharing-meta--{{ section.settings.social_sharing }}">
+      {% if section.settings.sharing_heading != '' %}
+      <span id="sharing-title" class="sharing-meta-section">{{ section.settings.sharing_heading }}</span>
+      {% endif %}
+      {% if section.settings.sharing_facebook %}
+      <span id="facebook-sharing" class="sharing-meta-section">
+        <a target="_blank" href='http://www.facebook.com/share.php?u={{ shop.url }}{{product.url}}' onclick="window.open('http://www.facebook.com/share.php?u={{ shop.url }}{{product.url}}&t={{ product.title }}', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no'); return false;"><i class="fa fa-facebook"></i> <span class="sharing-meta-service">Facebook</span></a>
+      </span><!-- sharing-meta-section -->
+      {% endif %}
+      {% if section.settings.sharing_twitter %}
+      <span id="twitter-sharing" class="sharing-meta-section">
+        <a target="_blank" href='https://twitter.com/intent/tweet?text={{ product.title }}&nbsp;-&nbsp;&url={{ shop.url }}{{product.url}}&via=@{{ settings.social_twitter }}'><i class="fa fa-twitter"></i> <span class="sharing-meta-service">Twitter</span></a>
+      </span><!-- sharing-meta-section -->
+      {% endif %}
+      {% if section.settings.sharing_pinterest %}
+      <span id="pinterest-sharing" class="sharing-meta-section">
+        <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ shop.name }}{{ product.url }}&media={{ product.featured_image | product_img_url: '1024x1024' }}&description={{ product.description | strip_html | escape }}"><i class="fa fa-pinterest"></i> <span class="sharing-meta-service">Pinterest</span></a>
+      </span><!-- sharing-meta-section -->
+      {% endif %}
+    </div><!-- product-sharing -->
+    {% endunless %}
+
+    {% unless product == empty %}
+    <script type="application/json" id="product__json">{{ product | json }}</script>
+    {% endunless %}
+
+  </article><!-- product-content -->
+
+  {% include 'photoswipe' %}
+
+  {% if product.metafields.gear_aid.youtube_id %}
+    {% include 'scripts-youtube' %}
+  {% endif %}
+</main>
+{% schema %}
+{
+"name": "Product Template",
+"settings": [
+{
+"type": "header",
+"content": "Product Header"
+},
+{
+"type": "checkbox",
+"id": "show_sku",
+"label": "Show Product SKU?"
+},
+{
+"type": "checkbox",
+"id": "show_vendor",
+"label": "Show Product Vendor?"
+},
+{
+"type": "checkbox",
+"id": "show_type",
+"label": "Show Product Type?"
+},
+{
+"type": "checkbox",
+"id": "show_reviews",
+"label": "Show Product Reviews?",
+"info":"Must activate reviews below."
+},
+{
+"type": "header",
+"content": "Social Sharing"
+},
+{
+"type": "select",
+"id": "social_sharing",
+"label": "Social Sharing",
+"default": "none",
+"options": [
+{
+"label": "None",
+"value": "none"
+},
+{
+"label": "Icons Only",
+"value": "icons-only"
+},
+{
+"label": "Icons and Text",
+"value": "icons-text"
+}
+]
+},
+{
+"type": "text",
+"id": "sharing_heading",
+"label": "Heading",
+"default": "Share",
+"info": "Leave blank to hide"
+},
+{
+"type": "checkbox",
+"id": "sharing_facebook",
+"label": "Facebook"
+},
+{
+"type": "checkbox",
+"id": "sharing_twitter",
+"label": "Twitter"
+},
+{
+"type": "checkbox",
+"id": "sharing_pinterest",
+"label": "Pinterest"
+},
+  {
+"type": "header",
+"content": "Custom recommended products"
+},
+  {
+    "type": "checkbox",
+    "id": "enable_custom_rec_prods_section",
+    "label": "Enable section",
+    "default": true
+  },
+  {
+    "type": "radio",
+    "id": "custom_rec_prods_section_type",
+    "label": "Section type",
+    "default": "normal",
+    "options": [
+        {
+            "value": "normal",
+            "label": "Normal"
+        },
+
+        {
+             "value": "carousel",
+            "label": "Carousel"
+        }
+    ]
+},
+  {
+    "type": "radio",
+    "id": "custom_rec_prods_recs_type",
+    "label": "Recommendations type",
+    "default": "dynamic",
+    "options": [
+        {
+            "value": "dynamic",
+            "label": "Dynamic"
+        },
+
+        {
+            "value": "collection_based",
+             "label": "Specific collection-based"
+        }
+    ]
+},
+{
+ "type": "collection",
+ "id": "custom_rec_prods_collection",
+ "label": "Collection",
+ "info": "You need to choose a collection here if you have selected 'Specific collection-based' as a recommendation type above."
+},
+{
+    "type": "range",
+    "id": "custom_rec_prods_num_of_products",
+    "label": "Number of products",
+    "default": 6,
+    "min": 4,
+    "max": 10,
+    "step": 1
+},
+
+{
+            "type": "text",
+            "id": "custom_rec_prods_heading_text",
+            "label": "Heading Text"
+        },
+
+        {
+            "type": "radio",
+            "id": "custom_rec_prods_heading_align",
+            "label": "Heading alignment",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+
+                {
+                    "value": "center",
+                    "label": "Center"
+                },
+
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+
+        {
+            "type": "radio",
+            "id": "custom_rec_prods_heading_style",
+            "label": "Heading style",
+            "default": "uppercase",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+
+                {
+                    "value": "uppercase",
+                    "label": "Uppercase"
+                },
+
+                {
+                    "value": "capitalize",
+                    "label": "Capitalized"
+                }
+            ]
+        },
+        
+        {
+            "type": "text",
+            "id": "custom_rec_prods_button_text",
+            "label": "Button Text"
+        },
+
+        {
+            "type": "color",
+            "id": "custom_rec_prods_button_bg_color",
+            "label": "Button background color",
+            "default": "#f05231"
+        },
+
+        {
+            "type": "radio",
+            "id": "custom_rec_prods__button_style",
+            "label": "Button text style",
+            "default": "uppercase",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "Normal"
+                },
+
+                {
+                    "value": "uppercase",
+                    "label": "Uppercase"
+                },
+
+                {
+                    "value": "capitalize",
+                    "label": "Capitalized"
+                }
+            ]
+        },
+{
+"type": "header",
+"content": "Other"
+},
+{
+"type": "checkbox",
+"id": "use_reviews",
+"label": "Use Shopify's Product Reviews?",
+"info": "Must install the application here."
+}
+],
+"blocks": [
+{
+"type": "tab_content",
+"name": "Tab Content",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Tab Title",
+"info": "Ex: Specs"
+},
+{
+"type": "select",
+"id": "type",
+"label": "Tab Content Type",
+"options": [
+{"label":"Product Metafield", "value":"metafield"},
+{"label":"Global Text", "value":"global_text"},
+{"label":"Product Reviews", "value":"reviews"}
+],
+"default": "global_text"
+},
+{
+"type": "text",
+"id": "metafield_content",
+"label": "Metafield",
+"info": "If you chose \"Product Metafield\" above, enter the metafield's key. Leave blank if you chose a different option."
+},
+{
+"type": "textarea",
+"id": "global_text_content",
+"label": "Global Text Content",
+"info": "If you chose \"Global Text\" above, enter the text content here. Leave blank if you chose a different option."
+}
+]
+}
+]
+}
+{% endschema %}

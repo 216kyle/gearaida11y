@@ -1,0 +1,53 @@
+<div id="faq-section" class="section section--press section--press-{{ section.id }}">
+  <div class="product-faq__intro center">
+    {% if section.settings.title != blank %}
+      <h1 class="center primary-font product-faq__title">{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <h3 class="w-66pc center secondary-font product-faq__text">{{ section.settings.text }}</h3>
+    {% endif %}
+  </div>
+  {%- for block in section.blocks -%}
+    <details class="faq-block">
+      <summary>{% if block.settings.question != blank %}{{ block.settings.question }}{% endif %}</summary>
+      {%- if block.settings.answer != blank -%}{{ block.settings.answer }}{%- endif -%}
+    </details>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "FAQ"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Question + answer",
+      "type": "question-answer",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

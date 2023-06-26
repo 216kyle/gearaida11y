@@ -1,0 +1,70 @@
+{% include 'page-utility' %}
+<div class="site-container">
+  <div class="page-main">
+    <div class="page-header">
+      <h1>Search</h1>
+    </div><!-- page-header -->
+    <div class="page-content" id="search-results">
+      {% if search.performed %}
+      <form id="search-page-form" action="/search" class="form form--compact clearfix" method="get">
+        <div class="form__fieldrow form__fieldrow--inline-fields">
+          <input class="form__field" type="text" name="q" value="{{search.terms | escape}}" size="25" />
+          <div class="form__field form__field--select">
+            <select name="type">
+              <option value="all" selected>Filter By</option>
+              <option value="article">Articles</option>
+              <option value="product">Products</option>
+              <option value="page">Pages</option>
+            </select>
+          </div>
+          <input type="submit" class="form__field btn" value="Search Again" />
+        </div><!-- form__fieldrow -->
+      </form>
+      <p>Search results for "{{search.terms}}":</p>
+      {% paginate search.results by 10 %}
+      {% if search.results == empty %}
+      <p>Sorry, your search for "{{search.terms | escape}}" did not return any results.</p>
+      {% else %}
+      <div class="item-list item-list--with-thumbnail item-list--search-results">
+        {% for item in search.results %}
+          {% assign is_page_hidden_from_search = item.metafields.custom.hide_page_from_search_results %}
+        {% unless item.tags contains 'Discontinued' or is_page_hidden_from_search %}
+        <article class="item {% cycle 'item--odd', 'item--even' %} clearfix">
+          {% if item.featured_image %}
+          <a class="pull-left item__image-wrapper" href="{{item.url}}" title="">
+            {{ item.featured_image.src | product_img_url: 'large' | img_tag: item.featured_image.alt }}
+          </a><!-- item__image-wrapper -->
+          {% endif %}
+          <header class="item__header">
+            <script>console.log({{ item | json }});</script>
+            <h3 class="item__title">{{ item.title | link_to: item.url }} {% if item.price %} <span class="sep">/</span> <span class="search-item-price">{{ item.variants.first.price | money_without_trailing_zeros }}</span>{% endif %}</h4>
+            <p class="secondary">{{ item.content | strip_html | truncatewords: 80 | highlight: search.terms }}</p>
+          </header><!-- item__header -->
+        </article><!-- item__item -->
+        {% endunless %}
+        {% endfor %}
+      </div><!-- item-list -->
+      {% endif %}
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+      {% endpaginate %}
+      {% else %}
+      <form id="search-page-form" action="/search" class="form form--compact clearfix" method="get">
+        <div class="form__fieldrow form__fieldrow--inline-fields">
+          <input class="form__field" type="text" name="q" value="" size="25" />
+          <div class="form__field form__field--select">
+            <select name="type">
+              <option value="all" selected>Filter By</option>
+              <option value="article">Articles</option>
+              <option value="product">Products</option>
+              <option value="page">Pages</option>
+            </select>
+          </div>
+          <input type="submit" class="form__field btn" value="Search" />
+        </div><!-- form__fieldrow -->
+      </form>
+      {% endif %}
+    </div><!-- search-results -->
+  </div><!-- page-main -->
+</div><!-- site-container -->

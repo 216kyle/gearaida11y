@@ -1,0 +1,72 @@
+<style>
+  .section--50-50-{{ section.id }} {color:{{ section.settings.color }};background-color:{{ section.settings.background_color }};}
+  .section--50-50-{{ section.id }} h2,
+  .section--50-50-{{ section.id }} p {color:{{ section.settings.color }};}
+</style>
+<div class="section section--50-50 section--50-50-{{ section.id }}">
+  <div class="site-container--slim">
+    <div class="site-flexbox grid grid--gutters">
+      <div class="column50">
+        {% if section.settings.title != blank %}
+        <h3>{{ section.settings.title }}</h3>
+        {% endif %}
+        {% if section.settings.text != blank %}
+        {{ section.settings.text }}
+        {% endif %}
+      </div><!-- column50 -->
+      <div class="column50">
+        {% if section.settings.title_two != blank %}
+        <h3>{{ section.settings.title_two }}</h3>
+        {% endif %}
+        {% if section.settings.text_two != blank %}
+        {{ section.settings.text_two }}
+        {% endif %}
+      </div><!-- column50 -->
+    </div><!-- site-flexbox -->
+  </div><!-- site-container -->
+</div><!-- section--50-50-{{ section.id }} -->
+{% schema %}
+{
+  "name": "50/50 Text Columns",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#ffffff",
+      "label": "Content Background Color"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "default": "#343434",
+      "label": "Heading and text color"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "title_two",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text_two",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "50/50 Text Columns",
+      "category": "Columns"
+    }
+  ]
+}
+{% endschema %}

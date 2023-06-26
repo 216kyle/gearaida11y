@@ -1,0 +1,68 @@
+<div id="family-video" style="background: url({{ block.settings.video_image | img_url:'2000x' }}) no-repeat 50% 50%;background-size:cover;" {{ block.shopify_attributes }}>
+  <div id="family-video-container">
+    <div id="family-video-content-wrapper">
+      <div id="family-video-content">
+        <a id="toggle-video" href="{{ block.settings.video }}"><i class="fa fa-fw fa-play"></i></a>
+        <h3>{{ block.settings.video_heading }}</h3>
+      </div>
+      <div id="family-video-player"></div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      (function($){
+        $(function(){
+          var tag = document.createElement('script'),
+          firstScriptTag = document.getElementsByTagName('script')[0];
+
+          tag.src = "https://www.youtube.com/iframe_api";
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+          window.done = false;
+
+          window.onYouTubeIframeAPIReady = function() {
+          window.player = new YT.Player('family-video-player', {
+            height: '405',
+            width: '720',
+            videoId: '{{ block.settings.video.id }}',
+            playerVars: {
+              color: 'white',
+              rel: 0,
+              showinfo: 0,
+              playsinline: 1
+            },
+            events: {
+              'onStateChange': onPlayerStateChange
+            }
+          });
+          }
+          window.onPlayerReady = function(event) {
+            event.target.playVideo();
+          }
+
+          window.onPlayerStateChange = function(event) {
+          if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 3000);
+            done = true;
+          }
+          }
+          window.stopVideo = function() {
+            player.stopVideo();
+          }
+          window.pauseVideo = function() {
+            player.pauseVideo();
+          }
+
+
+          $('#toggle-video').on('click', function(event){
+            event.preventDefault();
+            player.playVideo();
+            setTimeout(function() {
+              $('#family-video').addClass('video-shown');
+            }, 500);
+          });
+        });
+      })(jQuery)
+    });
+    </script>
+</div>

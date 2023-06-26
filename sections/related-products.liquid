@@ -1,0 +1,69 @@
+{% schema %}
+  {
+    "name": "Related Products",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Related Products"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_related_products",
+        "label": "Use Related Products?"
+      },
+      {
+        "type": "text",
+        "id": "related_products_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "limit",
+        "label": "Amount of products to show"
+      },
+      {
+        "type": "select",
+        "label": "Products Per Row",
+        "id": "products_per_row",
+        "options": [
+          {"label":"2", "value":"column50"},
+          {"label":"3", "value":"column33"},
+          {"label":"4", "value":"column25"}
+        ],
+        "default": "column33"
+      }
+    ]
+  }
+{% endschema %}
+{% if section.settings.use_related_products %}
+{% if product.metafields.gear_aid.related_products != blank %}
+{% comment %}
+Metafield was assigned so we grab products based on that
+{% endcomment %}
+
+{% assign grid_sizing = section.settings.products_per_row %}
+{% assign limit = section.settings.limit %}
+<section class="section section--related-products">
+  <div class="section-content site-container">
+    <h2 class="section--related-products-title">{{ section.settings.related_products_heading }}</h2>
+    <div class="site-flexbox grid grid--gutters products">
+      {%- assign related_products = product.metafields.gear_aid.related_products | split: '|' | uniq -%}
+      {% assign total = 0 %}
+      {% for prod_handle in related_products limit:limit %}
+      {%- assign prod = all_products[prod_handle] -%}
+      {% if prod.title != blank %}
+      {% assign total = total | plus:1 %}
+      {% include 'product-loop', classes:grid_sizing, quickview:false %}
+      {% endif %}
+      {% endfor %}
+      {% if total == 2 or total == 4 or total == 6 or total == 8 %}
+      <div class="{{ grid_sizing }} product-break"></div>
+      <div class="{{ grid_sizing }} product-break"></div>
+      {% elsif total == 3 or total == 5 or total == 7 %}
+      <div class="{{ grid_sizing }} product-break"></div>
+      {% endif %}
+    </div><!-- products-listing -->
+  </div><!-- section-content -->
+</section><!-- section--related-products -->
+{% endif %}
+{% endif %}

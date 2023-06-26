@@ -1,0 +1,74 @@
+<style>
+  .section--icons-{{ section.id }} {color:{{ section.settings.color }};background-color:{{ section.settings.background_color }};}
+  .section--icons-{{ section.id }} h2 {color:{{ section.settings.color }};}
+</style>
+<div class="section section--icons section--icons-{{ section.id }}">
+  <div class="site-container--slim">
+    {% if section.settings.title != blank %}
+    <div class="section-heading center">
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+    <div class="icon-bar">
+      {% for block in section.blocks %}
+      <div class="icon-bar__item" {{ block.shopify_attributes }}>
+        {{ block.settings.image | img_url: '160x' | img_tag: section.settings.image.alt, 'icon-bar__image' }}
+        <h4 role="heading" >{{ block.settings.title }}</h4>
+      </div>
+      {% endfor %}
+    </div><!-- icon-bar -->
+    {% endif %}
+  </div><!-- site-container -->
+</div><!-- section--icons-{{ section.id }} -->
+
+{% schema %}
+{
+  "name": "Icons list",
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Features"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#ffffff",
+      "label": "Content Background Color"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "default": "#343434",
+      "label": "Heading and text color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "icon_image",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons list",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

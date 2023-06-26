@@ -1,0 +1,9 @@
+<section class="image image--{{ block.id }}" {{block.shopify_attributes }}>
+  {% if block.settings.bkgd_color != blank %}
+    <style>
+      .image--{{ block.id }} { background: {{ block.settings.bkgd_color }};}
+    </style>
+  {% endif %}
+  <img src="{{ block.settings.image | img_url: '1600x' }}" alt="{{ block.settings.image.alt }}" />
+  {{ block.settings.text_content }}
+</section>

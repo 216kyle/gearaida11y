@@ -1,0 +1,164 @@
+{% if section.settings.youtube_id != blank %}
+<script>
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var player__{{ section.id }};
+  function onYouTubeIframeAPIReady() {
+    player__{{ section.id }} = new YT.Player('section-video-player--{{ section.id }}', {
+      height: '600',
+      width: '1200',
+      videoId: '{{ section.settings.youtube_id }}',
+      playerVars: {
+        color: 'white',
+        rel: 0,
+        showinfo: 0,
+        playsinline: 1
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    var container = document.querySelector('.section--video-block-{{ section.id }}'),
+      button = container.querySelector('#toggle-video');
+
+    function handleToggleVideo(e) {
+      var container = $('.section--video-block-{{ section.id }}');
+      e.preventDefault();
+      $(container).find('.section--video-block__inner').hide();
+      $(container).find('.section-video-player').show();
+      player__{{ section.id }}.playVideo();
+    };
+
+    button.addEventListener('click', handleToggleVideo)
+  });
+</script>
+{% endif %}
+<style>
+  .section--video-block-{{ section.id }} {background-color:{{ section.settings.background_color }};background-position: {{ section.settings.alignment }};}
+  .section--video-block-{{ section.id }},
+  .section--video-block-{{ section.id }} h2,
+  .section--video-block-{{ section.id }} p {color:{{ section.settings.color }};}
+  .section--video-block-{{ section.id }} .btn {color:{{ section.settings.color }} !important;border-color:{{ section.settings.color }} !important;}
+  {% if section.settings.image != blank %}
+  .section--video-block-{{ section.id }} {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+  .section--video-block-{{ section.id }}.lazyloaded,
+  .section--video-block-{{ section.id }}[data-was-processed="true"] {opacity:1;}
+  @media screen and (max-width: 300px) {
+    .section--video-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '600x' }});}
+  }
+  @media screen and (min-width: 301px) and (max-width: 600px) {
+    .section--video-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '900x' }});}
+  }
+  @media screen and (min-width: 601px) and (max-width: 800px) {
+    .section--video-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '1200x' }});}
+  }
+  @media screen and (min-width: 801px) and (max-width: 1000px) {
+    .section--video-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '2000x' }});}
+  }
+  @media screen and (min-width: 1001px) {
+    .section--video-block-{{ section.id }} {background-image: url({{ section.settings.image | img_url: '2048x' }});}
+  }
+  {% endif %}
+</style>
+<div class="section section--video-block section--video-block-{{ section.id }} lazy section--video-block-{{ section.settings.content-block_size }} section--content-block-overlay-{{ section.settings.overlay }}">
+  <div class="section-video-player-wrapper"><div id="section-video-player--{{ section.id }}" class="section-video-player"></div></div>
+  <div class="section--video-block__inner">
+    <div class="site-container--slim">
+      <a id="toggle-video" href="{{ block.settings.video }}"><i class="fa fa-fw fa-play"></i></a>
+      {% if section.settings.title != blank %}
+        <h2 class="section--video-block__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="section--video-block__subtitle">{{ section.settings.text }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Content Block",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "overlay",
+      "default": "none",
+      "label": "Image Overlay",
+      "info": "Leave blank to not use.",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "dark",
+          "label": "Dark"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Image alignment",
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#292929",
+      "label": "Content Background Color"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "default": "#fff",
+      "label": "Heading and text color"
+    },
+    {
+      "type": "text",
+      "id": "youtube_id",
+      "label": "YouTube Video ID",
+      "info": "Ex: zXy88aUc"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Block",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

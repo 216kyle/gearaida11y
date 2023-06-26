@@ -1,0 +1,106 @@
+{% form 'product', product, id: "add-item-form", class: "{{ product.type | handleize }}" %}
+{% comment %} <form action="/cart/add" method="post" id="add-item-form" name="add-item-form" class="{{ product.type | handleize }}"> {% endcomment %}
+
+  {% if product.options.size == 1 and product.variants.size == 1 %}
+  <!-- TODO: What is this stuff below for? Not sure we need so hiding for now. -->
+  {% for option in product.options_with_values %}
+  <div style="display: none;">
+    {% if option.name != 'default' and option.name != 'Title' and option.name != 'Default Title' %} {{ option.name }}: {% endif %}
+    {{ option.values[0] }}
+  </div>
+  {% endfor %}
+
+  {% else %}
+
+  {% if section.settings.show_swatches %}
+
+  {% comment %} Swatches {% endcomment %}
+  {% for option in product.options_with_values %}
+  {% assign option_index = forloop.index %}
+  {% assign assign is_color = false %}
+  {% assign downcased_option = option.name | downcase %}
+
+  {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+  {% assign is_color = true %}
+  {% endif %}
+
+  <div class="product-option-row product-option-row--swatches">
+    {% if option.name != 'default' %}
+    <h4 class="swatch-header">{{ option.name }}</h4>
+    {% endif %}
+    <div class="swatch">
+      {% for value in option.values %}
+      <div class="swatch-element {% if option.selected_value == value %}selected-swatch{%endif%}">
+        <input type="radio" name="single-option-select-{{ option_index }}" id="swatch-{{ option_index }}-{{ value | handle }}" value="{{ value | escape }}" data-index="option{{ option_index }}" class="single-option-select" {% if option.selected_value == value %}checked{% endif %}>
+        {% if is_color %}
+        <label for="swatch-{{ option_index }}-{{ value | handle }}" style="background: #fff url({{ value | handle | append: '.png' | file_url }});background-size:100% auto;"></label>
+        {% else %}
+        <label for="swatch-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+
+  {% else %}
+
+  {% comment %} Single option drop downs {% endcomment %}
+  {% for option in product.options_with_values %}
+  {% assign option_index = forloop.index %}
+  <div class="form__fieldrow product-option-row">
+    {% if option.name != 'default' %}
+    <label for="single-option-select-{{ option_index }}">{{ option.name }}</label>
+    {% endif %}
+    <div class="form__field form__field--select">
+      <select id="single-option-select-{{ option_index }}" data-index="option{{ option_index }}" class="single-option-select">
+        {% for value in option.values %}
+        <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% endif %}
+  {% endif %}
+
+  {% comment %} Main variant drop down (hidden) {% endcomment %}
+  {% if product.variants.size <= 1 %}
+  <input name="id" id="product-select" type="hidden" value="{{ product.variants.first.id }}" />
+  {% else %}
+  <select name="id" id="product-select" style="display: none;">
+    {% for variant in product.variants %}
+    {% if variant.available %}
+    <option {% if variant == current_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+    {% else %}
+    <option disabled="disabled">{{ variant.title }} - Sold Out</option>
+    {% endif %}
+    {% endfor %}
+  </select>
+  {% endif %}
+
+  <div id="product-qty-row" class="form__fieldrow product-option-row">
+    <label id="product-qty-label" for="quantity">Quantity</label>
+    <div id="product-qty-input">
+      <input type="button" value="–" class="qtyminus" field="quantity" />
+      <input id="quantity" type="text" size="4" name="quantity" value="1" min="1"/>
+      <input type="button" value="+" class="qtyplus" field="quantity" />
+    </div><!-- cart-qty-input -->
+  </div><!-- product-qty-row -->
+
+  <div id="product-purchase-row" class="product-option-row">
+    <button name="add" id="add-to-cart" type="submit" class="btn btn-block btn-large{% if current_variant.available %}" {% else %} disabled" disabled="disabled"{% endif %}>
+      <span id="add-to-cart-text">
+        {% if current_variant.available %}
+        Add To Cart
+        {% else %}
+        Sold Out
+        {% endif %}
+      </span>
+    </button>
+    {% comment %} {% include 'rebase-product-wishlist-button' %}
+    {% include 'rebase-product-notify-button' %} {% endcomment %}
+  </div><!-- product-purchase-row -->
+{% comment %} </form> {% endcomment %}
+{% endform %}

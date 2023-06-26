@@ -1,0 +1,8 @@
+{% case blog.handle %}
+  {% when 'learn' %}
+    {% include 'article-template' %}
+  {% when 'help' %}
+    {% include 'article-help-template' %}
+  {% else %}
+    {% include 'article-old-template' %}
+{% endcase %}

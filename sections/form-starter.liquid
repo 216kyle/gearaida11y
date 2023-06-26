@@ -1,0 +1,660 @@
+
+{% comment %} - OLD FORM (before rebase apps)
+
+{{ '/services/javascripts/countries.js' | script_tag }}
+{{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+
+<div class="section section--form section--{{ section.id }}{% if section.settings.use_container %} site-container--slim{% endif %}">
+  {% if section.settings.title != '' %}
+  <h2>{{ section.settings.title }}</h2>
+  {% endif %}
+  {% if section.settings.intro != '' %}
+  {{ section.settings.intro }}
+  {% endif %}
+  <form id="form-{{ section.id }}" action="//admin.getrebase.com/api/forms/{{ section.settings.action }}" method="post" class="form form--{{ section.settings.style }}" accept-charset="UTF-8">
+    <input type="hidden" name="utf8" value="✓">
+    <input type="hidden" name="api_key" value="4076418f4d1f125b30047d1a6a63685d">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'name' %}
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <input type="text" name="fields[{{ block.settings.title | handleize }}]" value="" {% if block.settings.required %}required {% endif %}/>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div><!-- form__fieldrow -->
+    {% when 'email' %}
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <input type="email" name="fields[{{ block.settings.title | handleize }}]" value="" {% if block.settings.required %}required {% endif %}/>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div><!-- form__fieldrow -->
+    {% when 'phone' %}
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <input type="tel" name="fields[{{ block.settings.title | handleize }}]" value="" {% if block.settings.required %}required {% endif %}/>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div><!-- form__fieldrow -->
+    {% when 'address' %}
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}_1]">{{ block.settings.title }}</label>
+      <input type="text" name="fields[{{ block.settings.title | handleize }}_1]" value="" {% if block.settings.required %}required {% endif %}/>
+    </div><!-- form__fieldrow -->
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}_2]">{{ block.settings.title }} 2</label>
+      <input type="text" name="fields[{{ block.settings.title | handleize }}_2]" value=""/>
+    </div><!-- form__fieldrow -->
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}_city]">City</label>
+      <input type="text" name="fields[{{ block.settings.title | handleize }}_city]" value="" {% if block.settings.required %}required {% endif %}/>
+    </div><!-- form__fieldrow -->
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <div class="form__fieldrow--set">
+        <div class="form__fieldset">
+          <label for="{{ block.settings.title | handleize }}_country">Country</label>
+          <div class="form__field--select">
+            <select id="{{ block.settings.title | handleize }}_country" name="fields[{{ block.settings.title | handleize }}_country]" data-default="{{ shop.address.country }}">{{ country_option_tags }}</select>
+          </div>
+        </div>
+        <div class="form__fieldset" id="{{ block.settings.title | handleize }}_province-container" style="display:none;">
+          <label for="{{ block.settings.title | handleize }}_province" id="address_province_label">State/Province</label>
+          <div class="form__field--select">
+            <select id="{{ block.settings.title | handleize }}_province" name="fields[{{ block.settings.title | handleize }}_province]" data-default="{{ shop.address.province }}"></select>
+          </div>
+        </div>
+      </div>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div><!-- form__fieldrow -->
+    <script> 
+      new Shopify.CountryProvinceSelector('{{ block.settings.title | handleize }}_country', '{{ block.settings.title | handleize }}_province', {hideElement: '{{ block.settings.title | handleize }}_province-container'});       
+    </script>
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}_postal_code]">Postal Code</label>
+      <input type="text" name="fields[{{ block.settings.title | handleize }}_postal_code]" value="" {% if block.settings.required %}required {% endif %}/>
+    </div><!-- form__fieldrow -->      
+    {% when 'text' %}
+    <div class="form__fieldrow form__fieldrow--{{ block.id }}" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <input class="form__field" type="text" name="fields[{{ block.settings.title | handleize }}]" id="{{ block.settings.title | handleize }}" value="" {% if block.settings.required %}required {% endif %}/>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div>
+    {%  when 'select' %}
+    <div class="form__fieldrow form__fieldrow--{{ block.id }}" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <div class="form__field form__field--select">
+        {% assign options = block.settings.options | split:',' %}
+        <select name="fields[{{ block.settings.title | handleize }}]" {% if block.settings.required %}required {% endif %}>
+          <option value="" selected="selected">Choose...</option>
+          {% for option in options %}
+          <option value="{{ option }}">{{ option }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div>
+    {%  when 'checkbox' %}
+    <div class="form__fieldrow form__fieldrow--{{ block.id }}" {{ block.shopify_attributes }}>
+      {% if block.settings.title != blank %}<h4 class="label">{{ block.settings.title }}</h4>{% endif %}
+      <div class="form__field form__field--checkbox">
+        {% assign options = block.settings.options | split:',' %}
+        {% for option in options %}
+        <label for="{{ option | strip_html | escape | handleize }}"><input id="{{ option | strip_html | escape | handleize }}" type="checkbox" name="fields[{{ block.settings.title | handleize }}][]" value="{{ option |  strip_html | escape }}"> {{ option }}</label>
+        {% endfor %}
+      </div>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div>
+    {%  when 'radio' %}
+    <div class="form__fieldrow form__fieldrow--{{ block.id }}" {{ block.shopify_attributes }}>
+      {% if block.settings.title != blank %}<h4 class="label">{{ block.settings.title }}</h4>{% endif %}
+      <div class="form__field form__field--radio">
+        {% assign options = block.settings.options | split:',' %}
+        {% for option in options %}
+        <label for="{{ option | strip_html | escape | handleize }}"><input id="{{ option | strip_html | escape | handleize }}" type="radio" name="fields[{{ block.settings.title | handleize }}][]" value="{{ option |  strip_html | escape }}"> {{ option }}</label>
+        {% endfor %}
+      </div>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div>
+    {%  when 'datepicker' %}
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <input data-toggle="datepicker" type="date" name="fields[{{ block.settings.title | handleize }}]" value="" {% if block.settings.required %}required {% endif %}/>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div><!-- form__fieldrow -->
+    {% when 'textarea' %}
+    <div class="form__fieldrow form__fieldrow--{{ block.id }}" {{ block.shopify_attributes }}>
+      <label for="{{ block.settings.title | handleize }}">{{ block.settings.title }}</label>
+      <textarea name="fields[{{ block.settings.title | handleize }}]" id="{{ block.settings.title | handleize }}" rows="7" {% if block.settings.required %}required {% endif %}></textarea>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div>
+    {% when 'file' %}
+    <div class="form__fieldrow" {{ block.shopify_attributes }}>
+      <label for="fields[{{ block.settings.title | handleize }}]">{{ block.settings.title }}</label>
+      <div id="form-files"></div>
+      <div id="file_upload_wrapper">
+        <input id="file_upload" type="file" name="files[]" multiple {% if block.settings.required %}required {% endif %}>
+      </div>
+      {% if block.settings.note != '' %}
+      <div class="form__note">{{ block.settings.note }}</div>
+      {% endif %}
+    </div><!-- form__fieldrow -->
+    {%  when 'break' %}
+    <div class="form__break" {{ block.shopify_attributes }}></div>
+    {%  when 'heading' %}
+    <div class="form__heading" {{ block.shopify_attributes }}>
+      <h3>{{ block.settings.title }}</h3>
+      {% if block.settings.intro %}{{ block.settings.intro }}{% endif %}
+    </div>
+    {% endcase %}
+    {% endfor %}
+    {% if section.blocks.size > 0 %}
+    <div class="form__actions">
+      <input type="submit" value="{{ section.settings.button_label }}" class="btn" />
+    </div>
+    {% endif %}
+  </form>
+</div>
+
+{% if section.blocks.size > 0 %}
+{% assign has_datepicker = false %}
+{% assign has_file_input = false %}
+{% for block in section.blocks %}
+{% if block.type == 'datepicker' %}
+{% assign has_datepicker = true %}
+{% endif %}
+{% if block.type == 'file' %}
+{% assign has_file_input = true %}
+{% endif %}
+{% endfor %}
+{% if has_datepicker or has_file_input %}
+<script src="{{ 'jquery.ui.widget.js' | asset_url }}" defer></script>
+{% endif %}
+{% if has_datepicker %}
+<script src="{{ 'datepickers.js' | asset_url }}" defer></script>
+{% endif %}
+{% if has_file_input %}
+<script src="{{ 'jquery.iframe-transport.js' | asset_url }}" defer></script>
+<script src="{{ 'jquery.fileupload.js' | asset_url }}" defer></script>
+{% endif %}
+<script src="{{ 'jquery.validate.min.js' | asset_url }}" defer></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  $(function() {
+
+    {% if has_datepicker %}
+    $('[data-toggle="datepicker"]').datepicker({
+      autohide: 1
+    });
+    {% endif %}
+
+    {% if has_file_input %}
+    $.get("https://admin.getrebase.com/api/forms/file_upload?api_key=4076418f4d1f125b30047d1a6a63685d", function(result){
+      var s3_file_upload = result;
+      var fileInput = $("#file_upload");
+      var form         = $("#form-{{ section.id }}");
+      var submitButton = form.find('input[type="submit"]');
+      var progressBar  = $("<div class='bar'></div>");
+      var barContainer = $("<div class='progress'></div>").append(progressBar);
+      fileInput.after(barContainer);
+
+      fileInput.fileupload({
+        //forceIframeTransport: true,
+        autoUpload: true,
+        url: s3_file_upload.action, 
+        type: 'POST',
+        paramName: 'file',
+        dataType: 'xml',
+        formData: s3_file_upload.fields,
+        replaceFileInput: false,
+        progressall: function (e, data) {
+          var progress = parseInt(data.loaded / data.total * 100, 10);
+          progressBar.css('width', progress + '%')
+        },
+        start: function (e) {
+          submitButton.prop('disabled', true);
+
+          progressBar.
+          css('background', 'green').
+          css('display', 'block').
+          css('width', '0%').
+          text("Loading...");
+        },
+        fail: function(e,data) {
+          //console.log(data.messages);
+        },
+        done: function(e, data) {
+          $("#file_upload_wrapper").fadeOut();
+          //console.log(data);
+          $(data.jqXHR.responseXML).find('Location').text();
+          submitButton.prop('disabled', false);
+          progressBar.text("Uploading done");
+
+          // extract key and generate URL from response
+          var key   = $(data.jqXHR.responseXML).find("Key").text();
+          var url   = s3_file_upload.action + '/' + key;
+
+          // create hidden field
+          $("#form-files").append("<span>"+data.files[0].name+"</span>");
+          var input = $("<input />", { type:'hidden', name: 'fields[file_url]', value: url })
+          form.append(input);
+        } 
+      });
+    });
+    {% endif %}
+
+    $form = $("#form-{{ section.id }}");
+      var submitFormAction = function(form) {
+      var formEl = $(form);
+      var submitButton = $('input[type=submit]', formEl);
+      submitButton.prop('disabled', 'disabled');
+      $.ajax({
+        type: 'POST',
+        url: formEl.prop('action'),
+        accept: {javascript: 'application/javascript'},
+        data: formEl.serialize()
+      }).done(function(data){
+        formEl.fadeOut(500, function() {
+          var div = $("<div/>", {id: 'form-success'}).hide();
+          div.html("<div class=\"success\">{{ section.settings.success }}");
+                   $(this).replaceWith(div);
+          div.fadeIn(1000);
+        })
+      }).fail(function(){
+        var div = $("<div/>", {id: 'form-error'}).hide();
+        div.html("<div class=\"error\">{{ section.settings.error }}</div>");
+                 formEl.prepend(div);
+        div.fadeIn(500);
+      });
+    }
+
+    // Validation
+    $form.validate({submitHandler: function(form) {
+      submitFormAction(form);
+      return false;
+    }});
+    // Submit
+    $form.submit(function(event) {
+      event.preventDefault();
+    });
+
+  });
+});
+</script>
+{% endif %}
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "Form - Starter",
+  "settings": [
+	{
+	"type":"header",
+    "content": "Please read the following:"
+    },
+    {
+	"type":"paragraph",
+    "content": "You must include one \"Email\" input per form if you are sending a confirmation message to the customer. If you need to capture more than one email per form, use a generic text input for each additional one needed."
+    },
+    {
+	"type":"paragraph",
+    "content": "—————————————————"
+    },
+    {
+    "type": "text",
+    "id": "action",
+    "label": "Rebase Form Handle",
+    "info": "Ex: contact-us"
+    },
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "info": "Leave blank to hide"
+    },
+    {
+    "type": "richtext",
+    "id": "intro",
+    "label": "Intro",
+    "info": "Leave blank to hide"
+    },
+    {
+    "type": "richtext",
+    "id": "success",
+    "label": "Confirmation Message",
+    "default": "<p>Thank you! We'll be in touch as soon as possible.</p>"
+    },
+    {
+    "type": "richtext",
+    "id": "error",
+    "label": "Error Message",
+    "default": "<p>Sorry, looks like something went wrong. Please try submitting your form again.</p>"
+    },
+    {
+    "type": "checkbox",
+    "id": "use_container",
+    "label": "Use container around form?",
+    "default": true
+    },
+    {
+    "type": "select",
+    "id": "style",
+    "label": "Label Style",
+    "options": [
+      {
+        "label": "Default",
+        "value": "standard"
+      },
+      {
+        "label": "Inline",
+        "value": "inline"
+      }
+    ],
+	"default":"standard"
+    },
+    {
+    "type": "text",
+    "id": "button_label",
+    "label": "Button Label",
+    "default": "Submit"
+    }
+  ],
+  "blocks": [
+  {
+    "type": "name",
+    "name": "Name",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label",
+      "default": "Name"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "email",
+    "name": "Email",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label",
+      "default": "Email"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "phone",
+    "name": "Phone",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label",
+      "default": "Phone"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "address",
+    "name": "Address",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "text",
+    "name": "Text Input",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "textarea",
+    "name": "Textarea",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "checkbox",
+    "name": "Checkbox",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "textarea",
+      "id": "options",
+      "label": "Options",
+      "info":"Comma separate list of options. Ex: \"Small, Medium, Large\"."
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "file",
+    "name": "File Upload",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "datepicker",
+    "name": "Datepicker",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "select",
+    "name": "Select Box",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "textarea",
+      "id": "options",
+      "label": "Options",
+      "info":"Comma separate list of options. Ex: \"Small, Medium, Large\"."
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "radio",
+    "name": "Radio Buttons",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+      },
+      {
+      "type": "checkbox",
+      "id": "required",
+      "label": "Required?"
+      },
+      {
+      "type": "textarea",
+      "id": "options",
+      "label": "Options",
+      "info":"Comma separate list of options. Ex: \"Small, Medium, Large\"."
+      },
+      {
+      "type": "text",
+      "id": "note",
+      "label": "Note"
+      }
+    ]
+  },
+  {
+    "type": "break",
+    "name": "Section Break",
+    "settings": [
+      {
+      "type": "header",
+      "content": "--------------- BREAK ---------------"
+      }
+    ]
+  },
+  {
+    "type": "heading",
+    "name": "Section Heading",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+      },
+      {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Intro"
+      }
+    ]
+  }]
+}
+{% endschema %}

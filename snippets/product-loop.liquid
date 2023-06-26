@@ -1,0 +1,129 @@
+<article data-aos="fade" data-aos-once="true" data-aos-offset="50" data-aos-easing="ease-in-sine" data-aos-delay="0" data-aos-duration="400" class="{% if classes %}{{ classes }}{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}" data-prod-id="{{ prod.id }}" itemscope itemtype="http://schema.org/Product">
+  <div class="product__contents">
+    <a class="product__image-wrapper" href="{{ prod.url }}">
+      {% if prod.tags contains 'Online-Only Right' %}
+      <div class="online-only online-only--right"><span>Online<br/>Only</span></div>
+      {% endif %}
+      {% if prod.tags contains 'Online-Only Left' %}
+      <div class="online-only online-only--left"><span>Online<br/>Only</span></div>
+      {% endif %}
+      {% if prod.tags contains 'Discontinued' %}
+      <div class="discontinued-badge"><span>Discontinued</span></div>
+      {% endif %}
+      {% if quickview %}
+      <button role="button" aria-label="Product Quickview" class="product__quickview btn" data-qv="{{ prod.url }}">Quickview</button>
+      {% endif %}
+      {% assign featured_image = prod.selected_or_first_available_variant.featured_image | default: prod.featured_image %}
+      {% if prod.images.size < 1 %}
+      {{ 'image' | placeholder_svg_tag: 'product__image' }}
+      {% else %}
+      {%- comment -%}<img id="product__image--{{ prod.id }}" class="product__image lazy" src="{{ prod.featured_image | img_url: '600x' }}" data-default-image="{{ prod.featured_image | img_url: '600x' }}" alt="{{ prod.featured_image.alt | escape }}" itemprop="image">{%- endcomment -%}
+      <noscript>
+        <img id="product__image--{{ prod.id }}" class="product__image" srcset="{{ prod.featured_image | img_url: '600x' }} 2x, {{ prod.featured_image | img_url: '250x' }} 1x" src="{{ prod.featured_image | img_url: '250x' }}" data-default-image="{{ prod.featured_image | img_url: '600x' }}" alt="{{ prod.featured_image.alt | escape }}" itemprop="image">  
+      </noscript>
+      <img id="product__image--{{ prod.id }}" class="product__image lazy" data-srcset="{{ prod.featured_image | img_url: '600x' }} 2x, {{ prod.featured_image | img_url: '250x' }} 1x" data-src="{{ prod.featured_image | img_url: '250x' }}" data-default-image="{{ prod.featured_image | img_url: '600x' }}" alt="{{ prod.featured_image.alt | escape }}" itemprop="image">
+      {% endif %}
+    </a><!-- product__image-wrapper -->
+    <header class="product__header clearfix{% if settings.product_header_centered %} center{% endif %}">
+      {% for tag in prod.tags %}
+      {% if tag == 'New Name' %}
+      <span class="product-label product-label--new-name">New Name</span>
+      {% endif %}
+      {% if tag == 'New' %}
+      <span aria-label="New Product" class="product-label product-label--new">New</span>
+      {% endif %}
+      {% if tag == 'Coming Soon' %}
+      <span aria-label="Coming Soon Product" class="product-label product-label--coming-soon">Coming Soon</span>
+      {% endif %}
+      {% endfor %}
+      <h2 class="product__title">
+        <a role="heading" aria-label="{{ prod.title }}" href="{{ prod.url }}" itemprop="name">{{ prod.title }}</a>
+      </h2>
+      <span class="product__meta product__meta--type">{{ prod.type }}</span><!-- product__type -->
+      {% if section.settings.show_vendor %}
+      <span class="product__meta product__meta--vendor">{{ prod.vendor }}</span><!-- product__vendor -->
+      {% endif %}
+      <span class="product__meta product__meta--pricing" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+        <meta itemprop="price" content="{{ variant.price | money_without_currency }}">
+        {% if prod.available %}
+        <link itemprop="availability" href="http://schema.org/InStock" />
+        {% else %}
+        <link itemprop="availability" href="http://schema.org/OutOfStock" />
+        {% endif %}
+        {% assign variant = prod.variants.first %}
+        {% if prod.compare_at_price_max > prod.price %}
+        <span class="product__old-price">{% if variant.compare_at_price > 0 %}{{ variant.compare_at_price | money_without_trailing_zeros }}{% endif %}</span>
+        {% endif %}
+        <span class="product__price">{{ variant.price | money_without_trailing_zeros }}</span>
+      </span><!-- product__meta--pricing -->
+    </header><!-- product_header -->
+    {% if section.settings.show_swatches %}
+    {% assign found_color = false %}
+    {% assign found_pattern = false %}
+    {% assign show_swatches = false %}
+    {% for option in prod.options %}
+      {% assign downcase_option = option | downcase %}
+      {% if downcase_option == 'color' %}
+      {% assign found_color = true %}
+      {% endif %}
+      {% if downcase_option == 'pattern' %}
+      {% assign found_pattern = true %}
+      {% endif %}
+    {% endfor %}
+    {% for option in prod.options %}
+      {% if found_color and found_pattern %}
+      {% assign variant_to_match = 'Color' %}
+      {% assign show_swatches = true %}
+      {% else %}
+      {% if found_color %}
+      {% assign variant_to_match = 'Color' %}
+      {% assign show_swatches = true %}
+      {% endif %}
+      {% if found_pattern %}
+      {% assign variant_to_match = 'Pattern' %}
+      {% assign show_swatches = true %}
+      {% endif %}
+      {% endif %}
+      {% if show_swatches %}
+        {% assign downcase_option = option | downcase %}
+        {% assign downcase_variant_to_match = variant_to_match | downcase %}
+        {% if downcase_option == downcase_variant_to_match %}
+          {% unless prod.variants.size < 2 %}
+            <div aria-label="Product Swatches" class="product__swatches" data-count="{{ prod.variants.size }}">
+              {% assign index = forloop.index0 %}
+              {% assign colorlist = '' %}
+              {% assign color = '' %}
+              {% for variant in prod.variants %}
+              {% capture color %}{{ variant.options[index] }}{% endcapture %}
+              {% unless colorlist contains color %}
+              {% assign img_name = color | handleize | append:'.png' %}
+              {{ color_name }}
+              <span aria-label="Product Swatches" class="product-swatch product-swatch--{{ option_index }}-{{ variant.id | handleize }}" data-prod-id="{{ prod.id }}" data-variant-id="{{ variant.id }}" data-variant-url="{{ variant.url }}" data-variant-image="{{ variant | img_url: '1024x1024' }}" data-variant-image-srcset="{{ variant.featured_image | img_url: '600x' }} 2x, {{ variant.featured_image | img_url: '250x' }} 1x" style="background: #fff url({{ img_name | file_img_url:"80x80" }}) no-repeat 50% 50%;background-size:cover;"></span>
+              {% capture tempList %}
+              {{ colorlist | append: color | append: " " }}
+              {% endcapture %}
+              {% assign colorlist = tempList %}
+              {% endunless %}
+            {% endfor %}
+            </div><!-- product-swatches -->
+          {% endunless %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% if shop.customer_accounts_enabled %}
+      {% include 'rebase-product-collection-wishlist-button' %}
+      {% assign variant = prod.variants.first %}
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // REBASE.lists.updateActiveProductVariant({
+        //   product_id: '{{prod.id}}', 
+        //   variant_id: '{{variant.id}}'
+        // });
+      });
+      </script>
+    {% endif %}
+  </div>
+</article><!-- product -->

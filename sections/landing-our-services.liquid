@@ -1,0 +1,155 @@
+<div class="section section--press section--press-{{ section.id }}">
+  <div class="center w-90pc landing-our-services">
+    {% if section.settings.title != blank %}
+      <h1 class="center txt-white primary-font landing-our-services__title">{{ section.settings.title }}</h1>
+    {% endif %}
+    {% if section.settings.title2 != blank %}
+      <h1 class="center txt-white primary-font landing-our-services__title">{{ section.settings.title2 }}</h1>
+    {% endif %}
+    {% if section.settings.text != blank %}
+      <h4 class="center txt-white secondary-font landing-our-services__text">{{ section.settings.text }}</h4>
+    {% endif %}
+  </div>
+
+  {% comment %}Desktop layout{% endcomment %}
+  <ul class="center w-90pc landing-our-services-icons">
+    {% for block in section.blocks %}
+      <li class="landing-our-services-icons__column">
+        {% if block.settings.svg_desktop != blank %}
+          {{ block.settings.svg_desktop }}
+        {% endif %}
+        <span class="txt-white primary-font">{{ block.settings.heading | newline_to_br }}</span>
+        <div class="secondary-font hidden_desktop">{{ block.settings.content }}</div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% comment %}General layout{% endcomment %}
+  <div class="center landing-our-services-slider hidden_mobile swiper-container">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+        <div class="swiper-slide swiper-slide-gear-aid-plus">
+          <div class="txt-white secondary-font">{{ block.settings.content }}</div>
+        </div>
+      {% endfor %}
+    </div>
+    {% if section.blocks.size > 1 %}
+      <div class="swiper-button-prev swiper-button-black"></div>
+      <div class="swiper-button-next swiper-button-black"></div>
+    {% endif %}
+  </div>
+
+  {% if section.settings.button_text_slider != blank %}
+    <div class="center">
+      <a href="{{ section.settings.button_url_slider }}" class="btn--gear-aid-plus bg-dark-grey primary-font">{{ section.settings.button_text_slider }}</a>
+    </div>
+  {% endif %}
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() { 
+      let icons = document.querySelector(".landing-our-services-icons").getElementsByTagName("li");
+      const lightIconColor = "#fff";
+      const markedIconColor = "#231F20";
+      const textClassToToggle = "txt-white";
+      const swiper = new Swiper('.landing-our-services-slider', {
+        loop: false,
+        effect: 'slide',
+        speed: 600,
+        nextButton: '.landing-our-services-slider .swiper-button-next',
+        prevButton: '.landing-our-services-slider .swiper-button-prev',
+        onSlideChangeStart: function (e) {
+          resetColor(icons);
+          markActive(icons[e.activeIndex]);
+        }
+      });
+
+      resetColor(icons);
+      markActive(icons[0]);
+      registerEvents(icons);
+
+      function registerEvents(icons){
+        for(let i=0; i < icons.length; i++){
+          icons[i].addEventListener("click", function () {
+            resetColor(icons);
+            markActive(this);
+            swiper.slideTo(i);
+          });
+        };
+      }
+
+      function markActive(icon){
+        icon.classList.add('icon-slide-active');
+        icon.querySelector('svg').style.fill = markedIconColor;
+        icon.querySelector('span').classList.toggle(textClassToToggle);
+      }
+
+      function resetColor(icons){
+        for(let j=0; j < icons.length; j++){
+          icons[j].classList.remove('icon-slide-active');
+          icons[j].querySelector('svg').style.fill = lightIconColor;
+          icons[j].querySelector('span').classList.add(textClassToToggle);
+        };
+      }
+    });
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Our Services",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Label"
+    },
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Label 2"
+    },
+    {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_text_slider",
+      "label": "Slider Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_url_slider",
+      "label": "Slider Button URL"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"icons_svg",
+      "name":"SVG Icons",
+      "settings":[
+        {
+          "type":"header",
+          "content":"Icons and content"
+        },
+        {
+          "type": "textarea",
+          "id": "svg_desktop",
+          "label": "Add your svg desktop code"
+        },
+        {
+          "type":"textarea",
+          "id":"heading",
+          "label":"Add the icon heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Add content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

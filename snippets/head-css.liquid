@@ -1,0 +1,44 @@
+{% assign type_base_parts = settings.type_base_family | split: '_' %}
+{% capture baseGoogleUrl %}{{ type_base_parts[1] }}:{{ type_base_parts[2] }}{% endcapture %}
+{{ '//fonts.googleapis.com/css?family=' | append: baseGoogleUrl | stylesheet_tag }}
+
+{% comment %}
+Below we check for collection image and use
+media queries to pull in proper size. baller.
+
+{% if template contains 'collection' %}
+{% if collection.image %}
+<style>
+  .page-header-hero--{{ collection.id }} {background-color: #343434;background-repeat:no-repeat;background-position: 50% 50%;background-size:cover;}
+  @media screen and (max-width: 300px) {
+    .page-header-hero--{{ collection.id }} {background-image: url({{ collection.image | img_url:"500x" }});}
+  }
+  @media screen and (min-width: 301px) and (max-width: 600px) {
+    .page-header-hero--{{ collection.id }} {background-image: url({{ collection.image | img_url:"900x" }});}
+  }
+  @media screen and (min-width: 601px) and (max-width: 1200px) {
+    .page-header-hero--{{ collection.id }} {background-image: url('{{ collection.image | img_url: '1200x' }}');}
+  }
+  @media screen and (min-width: 1201px) and (max-width: 1600px) {
+    .page-header-hero--{{ collection.id }} {background-image: url('{{ collection.image | img_url: '1800x' }}');}
+  }
+  @media screen and (min-width: 1601px) {
+    .page-header-hero--{{ collection.id }} {background-image: url('{{ collection.image | img_url: '2000x' }}');}
+  }
+</style>
+{% endif %}
+{% endif %}
+{% endcomment %}
+
+
+{{ 'style.scss.css' | asset_url | stylesheet_tag }}
+{{ 'rebase.scss.css' | asset_url | stylesheet_tag }}
+
+<!--[if lte IE 9]>
+{{ 'ie.css' | asset_url | stylesheet_tag }}
+<![endif]-->
+
+{% if template contains 'gift_card' %}
+{{ 'gift-card.css' | shopify_asset_url | stylesheet_tag }}
+<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+{% endif %}

@@ -1,0 +1,194 @@
+<div id="collections-intro" style="background: url({{ section.settings.collections_bkgd_image | img_url:'master' }}) no-repeat 50% 50%;background-size:auto 100%;">
+	<div id="collections-intro__content">
+		<h1>{{ section.settings.collections_intro_title }}</h1>
+		{{ section.settings.collections_intro_text }}
+	</div><!-- collections-intro__content -->
+</div><!-- collections-intro -->
+<div id="collections-listing">
+	{% for link in linklists.collections-list.links %}
+	{% assign collection = link.object %}
+	<article class="collection-section collection-section--{{ collection.id }}">
+		<a class="collection-section__content" href="{{ link.url }}" title="{{ collection.title | escape }}">
+			<h2>{{ link.title }}</h2>
+			<p>{{- collection.description | strip_html -}}</p>
+			<button class="btn btn-alt">Learn More</button>
+		</a>
+	</article>
+	{% endfor %}
+</div>
+{% if section.settings.collections_video_active %}
+	<div id="family-video" style="background: url({{ section.settings.collections_video_image | img_url:'2000x' }}) no-repeat 50% 50%;background-size:cover;">
+		<div id="family-video-container">
+			<div id="family-video-content-wrapper">
+				<div id="family-video-content">
+					<a id="toggle-video" href="{{ section.settings.collections_video }}"><i class="fa fa-fw fa-play"></i></a>
+					<h3>{{ section.settings.collections_video_heading }}</h3>
+				</div><!-- family-video-content -->
+				<div id="family-video-player"></div>
+			</div><!-- family-video-content -->
+		</div>
+	</div><!-- family-video -->
+{% endif %}
+{% if section.settings.collections_tip_active %}
+	<div id="family-tip-alt">
+		<img class="icon" src="{{ 'gear-tip.png' | asset_url }}" alt="Gear Tip"/>
+		<div id="family-tip-content-alt">
+			{% if section.settings.collections_tip_title != blank %}<h2>{{ section.settings.collections_tip_title }}</h2>{% endif %}
+			{{ section.settings.collections_tip_text }}
+			{% if section.settings.collections_tip_btn_text != blank %}
+			<a href="{{ section.settings.collections_tip_btn_url }}" class="btn btn-alt">{{ section.settings.collections_tip_btn_text }}</a>
+			{% endif %}
+		</div>
+	</div><!-- family-intro -->
+{% endif %}
+{% include 'scripts-youtube' %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	(function($){
+		$(function(){
+
+			{% if section.settings.collections_video_active %}
+			var tag = document.createElement('script'),
+			firstScriptTag = document.getElementsByTagName('script')[0];
+
+			tag.src = "https://www.youtube.com/iframe_api"; 
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+			window.done = false;
+
+			window.onYouTubeIframeAPIReady = function() {
+			window.player = new YT.Player('family-video-player', {
+				height: '405',
+				width: '720',
+				videoId: '{{ section.settings.collections_video.id }}',
+				playerVars: {
+					color: 'white',
+					rel: 0,
+					showinfo: 0,
+					playsinline: 1
+				},
+				events: {
+					'onStateChange': onPlayerStateChange
+				}
+			});
+			}
+			window.onPlayerReady = function(event) {
+				event.target.playVideo();
+			}
+
+			window.onPlayerStateChange = function(event) {
+			if (event.data == YT.PlayerState.PLAYING && !done) {
+				setTimeout(stopVideo, 3000);
+				done = true;
+			}
+			}
+			window.stopVideo = function() {
+				player.stopVideo();
+			}
+			window.pauseVideo = function() {
+				player.pauseVideo();
+			}
+
+
+			$('#toggle-video').on('click', function(event){
+				$('#family-video-content').hide();
+				
+				event.preventDefault();
+				player.playVideo();
+				setTimeout(function() {
+					$('#family-video').addClass('video-shown');
+				}, 500);
+			});
+			{% endif %}
+
+		});
+	})(jQuery)
+});
+</script>
+{% schema %}
+	{
+		"name": "Collections List",
+		"settings": [
+			{
+				"type": "header",
+				"content": "Collections Intro"
+			},
+			{
+				"type": "text",
+				"id": "collections_intro_title",
+				"label": "Intro Title"
+			},
+			{
+				"type": "richtext",
+				"id": "collections_intro_text",
+				"label": "Intro Text"
+			},
+			{
+				"type": "image_picker",
+				"id": "collections_bkgd_image",
+				"label": "Intro Background Image",
+				"info": "Should be a vertical, transparent PNG"
+			},
+			{
+				"type": "header",
+				"content": "Gear Tip"
+			},
+			{
+				"type": "checkbox",
+				"id": "collections_tip_active",
+				"label": "Use a gear tip?",
+				"default": true
+			},
+			{
+				"type": "text",
+				"id": "collections_tip_title",
+				"label": "Tip Title"
+			},
+			{
+				"type": "richtext",
+				"id": "collections_tip_text",
+				"label": "Tip Text"
+			},
+			{
+				"type": "text",
+				"id": "collections_tip_btn_text",
+				"label": "Button Text",
+				"info": "Leave blank to hide"
+			},
+			{
+				"type": "url",
+				"id": "collections_tip_btn_url",
+				"label": "Button Link"
+			},
+			{
+				"type": "header",
+				"content": "Collections Video"
+			},
+			{
+				"type": "checkbox",
+				"id": "collections_video_active",
+				"label": "Use a video spotlight?",
+				"default": true
+			},
+			{
+				"type": "image_picker",
+				"id": "collections_video_image",
+				"label": "Video Background Image",
+				"info": "Should be a horizontal JPG"
+			},
+			{
+				"type": "text",
+				"id": "collections_video_heading",
+				"label": "Video Spotlight Title"
+			},
+			{
+				"type": "video_url",
+				"id": "collections_video",
+				"label": "Video URL",
+				"accept": ["youtube"],
+				"default": "https://www.youtube.com/watch?v=LWg4nUOBFX4"
+			}
+		]
+	}
+{% endschema %}

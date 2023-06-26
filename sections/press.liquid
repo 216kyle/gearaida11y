@@ -1,0 +1,128 @@
+<div class="section section--press section--press-{{ section.id }}">
+  <div class="site-container--wide">
+    <h4 class="section-label">{{ section.settings.title }}</h4>
+  </div>
+  <div class="site-container">
+    <div class="press-controls">
+      {% for block in section.blocks %}
+        <div class="press-control{% if forloop.first %} press-control--selected{% endif %}" data-index="{{ forloop.index }}">
+          <img class="lazy" data-src="{{ block.settings.logo | img_url: '640x' }}" {% if block.settings.logo.alt != blank %} alt="{{ block.settings.logo.alt }}" {% endif %}  />
+        </div>
+      {% endfor %}
+    </div>
+    <div class="press-items">
+      {% for block in section.blocks %}
+        <div class="press-item{% if forloop.first %} press-item--selected{% endif %}" data-index="{{ forloop.index }}">
+          <div class="press-item__image">
+            <img class="lazy" data-src="{{ block.settings.image | img_url: '1200x' }}" alt="{% if block.settings.image.alt != blank %}{{ block.settings.image.alt }}{% else %}{{ block.settings.title }}{% endif %}" />
+          </div>
+          <div class="press-item__content">
+            {% if block.settings.title != blank %}
+              <h2 class="press-item__title">{{ block.settings.title }}</h2>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <p class="press-item__text">{{ block.settings.text }}</p>
+            {% endif %}
+            {% if block.settings.attribution != blank %}
+              <p class="press-item__attribution">{{ block.settings.attribution }}</p>
+            {% endif %}
+
+            <div class="press-item__actions">
+              {% if block.settings.btn_1_label != blank %}<a href="{{ block.settings.btn_1_url }}" class="btn btn-block btn-large btn-alt-solid">{{ block.settings.btn_1_label }}</a>{% endif %}
+              {% if block.settings.btn_2_label != blank %}<a href="{{ block.settings.btn_2_url }}" class="btn btn-block btn-large btn-alt">{{ block.settings.btn_2_label }}</a>{% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor%}
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      $(document).on('click', '.section--press-{{ section.id }} .press-control', function(e){
+        var _this = $(this),
+          container = _this.parents('.section--press'),
+          index = _this.data('index');
+        e.preventDefault();
+
+        container.find('.press-control').removeClass('press-control--selected');
+        container.find('.press-item').removeClass('press-item--selected');
+        _this.addClass('press-control--selected');
+        container.find('.press-item[data-index="'+index+'"]').addClass('press-item--selected');
+      });
+    });
+  </script>
+</div>
+
+
+{% schema %}
+{
+  "name": "Press",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label"
+    }
+  ],
+  "max_blocks":3,
+  "blocks":[
+    {
+      "type":"press_item",
+      "name":"Press Item",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "attribution",
+          "label": "Attribution"
+        },
+        {
+          "type": "url",
+          "id": "btn_1_url",
+          "label": "Button #1 URL"
+        },
+        {
+          "type": "text",
+          "id": "btn_1_label",
+          "label": "Button #1 Label"
+        },
+        {
+          "type": "url",
+          "id": "btn_2_url",
+          "label": "Button #2 URL"
+        },
+        {
+          "type": "text",
+          "id": "btn_2_label",
+          "label": "Button #2 Label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

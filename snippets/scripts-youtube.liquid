@@ -1,0 +1,44 @@
+<script>
+  var tag = document.createElement('script'),
+	  firstScriptTag = document.getElementsByTagName('script')[0];
+
+  tag.src = "https://www.youtube.com/iframe_api"; 
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+  window.done = false;
+
+  window.onYouTubeIframeAPIReady = function() {
+    window.player = new YT.Player('product-video-player', {
+      height: '405',
+      width: '720',
+      videoId: '{{ product.metafields.gear_aid.youtube_id }}',
+      playerVars: {
+        color: 'white',
+        rel: 0,
+        showinfo: 0,
+        playsinline: 1
+      },
+      events: {
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+  window.onPlayerReady = function(event) {
+    // TODO - what was this for?
+//     event.target.playVideo();
+  }
+
+  window.onPlayerStateChange = function(event) {
+    // TODO - why was this here? caused swiper embed to stop after 3 secs on initial play
+//     if (event.data == YT.PlayerState.PLAYING && !done) {
+//       setTimeout(stopVideo, 3000);
+//       done = true;
+//     }
+  }
+  window.stopVideo = function() {
+    player.stopVideo();
+  }
+  window.pauseVideo = function() {
+    player.pauseVideo();
+  }
+</script>

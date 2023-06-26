@@ -1,0 +1,105 @@
+<main class="site-content site-content--has-sidebar site-content--sidebar-right" role="main">
+  <div class="site-container site-container--article site-flexbox">
+
+    <div class="page-main">
+      <div class="page-content">
+        <div class="site-flexbox grid">
+          <article itemscope itemtype="http://schema.org/Article">
+            {% assign article_category = '' %}
+            {% for tag in article.tags %}
+              {% case tag %}
+                {% when 'Camping' %}
+                  <h3 class="article-tag-header">Camping</h3>
+                  {% assign article_category = 'Camping' %}
+                  {% break %}
+                {% when 'Hike Run' %}
+                  <h3 class="article-tag-header">Hiking &amp; Running</h3>
+                  {% assign article_category = 'Hike Run' %}
+                  {% break %}
+                {% when 'hunt fish' %}
+                  <h3 class="article-tag-header">Hunting &amp; Fishing</h3>
+                  {% assign article_category = 'hunt fish' %}
+                  {% break %}
+                {% when 'paddle dive' %}
+                  <h3 class="article-tag-header">Paddlesports &amp; Diving</h3>
+                  {% assign article_category = 'paddle dive' %}
+                  {% break %}
+                {% when 'snow' %}
+                  <h3 class="article-tag-header">Snowsports</h3>
+                  {% assign article_category = 'snow' %}
+                  {% break %}
+                {% when 'gear care' %}
+                  <h3 class="article-tag-header">Gear Care &amp; Repair</h3>
+                  {% assign article_category = 'gear care' %}
+                  {% break %}
+              {% endcase %}
+            {% endfor %}
+
+            <header class="page-header">
+              <h1 class="article-title" itemprop="name">{{ article.title }}</h1>
+              {% comment %} <p class="article-meta">
+                <time class="article-meta__item article-meta__item--published" pubdate date="{{ article.published_at | date: "%m/%d/%y" }}"><span itemprop="datePublished">{{ article.published_at | date: "%B %d, %Y" }}</span></time>
+                <span class="article-meta__item article-meta__item--sep">|</span>
+                <a data-disqus-identifier="{{ article.id }}" href="#disqus_thread" class="article-meta__item article-meta__item--comments">No Comments</a>
+              </p><!-- article-meta --> {% endcomment %}
+            </header><!-- page-header -->
+            <div class="article-content" itemprop="content">
+              {{ article.content }}
+            </div><!-- article-content -->
+            <div id="article__related-articles">
+              <h3>Related Articles</h3>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign related_articles = article.metafields.gear_aid.related_articles | split: '|' %}
+                {% if related_articles != blank %}
+                  {% for related_article in related_articles %}
+                    {% assign loop_article = articles[related_article] %}
+                    <a href="{{ loop_article.url }}" class="related-article column50">
+                      <h4>{{ loop_article.title }}</h4>
+                    </a>
+                  {% endfor %}
+                {% else %}
+                  {% assign loop_counter = 0 %}
+                  {% for loop_article in blog.articles %}
+                    {% if loop_article.tags contains article_category %}
+                      {% if loop_counter < 4 %}
+                        {% unless article.handle == loop_article.handle %}
+                          {% assign loop_counter = loop_counter | plus: 1 %}
+                          <a href="{{ loop_article.url }}" class="related-article column50">
+                            <h4>{{ loop_article.title }}</h4>
+                          </a>
+                        {% endunless %}
+                      {% else %}
+                        {% break %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            {% if article.metafields.gear_aid.related_products %}
+              <div id="article__related-products">
+                <h3>Recommended Products</h3>
+                <div class="products site-flexbox grid grid--gutters textile">
+                  {% assign related_products = article.metafields.gear_aid.related_products | split: '|' %}
+                  {% assign total = related_products.size %}
+                  {% for product in related_products limit:6 %}
+                  {% assign prod = all_products[product] %}
+                  {% include 'product-loop', classes:'column33', quickview:false %}
+                  {% endfor %}
+                  {% if total == 4 %}
+                  <div class="column33 product-break"></div>
+                  <div class="column33 product-break"></div>
+                  {% elsif total == 2 or total == 5 %}
+                  <div class="column33 product-break"></div>
+                  {% endif %}
+                </div>
+              </div><!--  // related-products  -->
+            {% endif %}
+          </article><!-- page-main -->
+        </div>
+      </div>
+    </div>
+    {% include 'blog-side-nav' %}
+  </div><!-- site-container -->
+</main><!-- site-content -->
+{% include 'email-signup' %}

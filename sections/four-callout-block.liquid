@@ -1,0 +1,234 @@
+<section class="section section--four-callout-block section--four-callout-block--{{ section.id }} {% if section.settings.border_top %} four-callout-block--border-top{% endif %}{% if section.settings.border_bottom %} four-callout-block--border-bottom{% endif %}{% if section.settings.padding_top %} four-callout-block--padding-top{% endif %}{% if section.settings.padding_bottom %} four-callout-block--padding-bottom{% endif %}" {{ section.shopify_attributes }}>
+  {% if section.settings.image or section.settings.content_text_color %}
+  <style>
+    .section--four-callout-block--{{ section.id }} {
+      {% if section.settings.image %} 
+      background: url('{{ section.settings.image | img_url: 'master' }}') no-repeat center top;
+      background-size: cover;
+      {% endif %}
+    }
+
+    .section--four-callout-block--{{ section.id }} .four-callout-block-content {
+      {% if section.settings.content_text_color %}color: {{section.settings.content_text_color}};{% endif %}
+    }
+  </style>
+  {% endif %}
+  <div class="site-container">
+    <div class="four-callout-block-container">
+      {% if section.settings.block_title != blank %}
+        <h2 class="block-title">{{ section.settings.block_title}}</h2>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h3 class="block-heading">{{ section.settings.title}}</h3>
+      {% endif %}
+      {% if section.settings.content != blank %}
+        <div class="four-callout-block-content"><div class="four-callout-block-content-inner-wrap">{{ section.settings.content}}</div></div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="four-callouts">
+    <div class="callout callout-1">
+      <a href="{{section.settings.url_callout1}}">
+        <div class="callout-icon">{% if section.settings.icon_callout1 != blank %}<img class="lazy" data-srcset="{{ section.settings.icon_callout1 | img_url: '240x' }} 2x, {{ section.settings.icon_callout1 | img_url: '120x' }} 1x" data-src="{{ section.settings.icon_callout1 | img_url: '40x' }}" alt="{{ section.settings.icon_callout1.alt | escape }}" itemprop="image">{% endif %}</div>
+        {% if section.settings.heading_callout1 != blank %}
+          <h4 class="callout-heading">{{section.settings.heading_callout1}}</h4>
+        {% endif %}
+        {% if section.settings.content_callout1 != blank %}
+          <div class="callout-content">{{section.settings.content_callout1}}</div>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="callout callout-2">
+      <a href="{{section.settings.url_callout2}}">
+        <div class="callout-icon">{% if section.settings.icon_callout2 != blank %}<img class="lazy" data-srcset="{{ section.settings.icon_callout2 | img_url: '240x' }} 2x, {{ section.settings.icon_callout2 | img_url: '120x' }} 1x" data-src="{{ section.settings.icon_callout2 | img_url: '40x' }}" alt="{{ section.settings.icon_callout2.alt | escape }}" itemprop="image">{% endif %}</div>
+        {% if section.settings.heading_callout2 != blank %}
+          <h4 class="callout-heading">{{section.settings.heading_callout2}}</h4>
+        {% endif %}
+        {% if section.settings.content_callout2 != blank %}
+          <div class="callout-content">{{section.settings.content_callout2}}</div>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="callout callout-3">
+      <a href="{{section.settings.url_callout3}}">
+        <div class="callout-icon">{% if section.settings.icon_callout3 != blank %}<img class="lazy" data-srcset="{{ section.settings.icon_callout3 | img_url: '240x' }} 2x, {{ section.settings.icon_callout3 | img_url: '120x' }} 1x" data-src="{{ section.settings.icon_callout3 | img_url: '40x' }}" alt="{{ section.settings.icon_callout3.alt | escape }}" itemprop="image">{% endif %}</div>
+        {% if section.settings.heading_callout3 != blank %}
+          <h4 class="callout-heading">{{section.settings.heading_callout3}}</h4>
+        {% endif %}
+        {% if section.settings.content_callout3 != blank %}
+          <div class="callout-content">{{section.settings.content_callout3}}</div>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="callout callout-4">
+      <a href="{{section.settings.url_callout4}}">
+        <div class="callout-icon">{% if section.settings.icon_callout4 != blank %}<img class="lazy" data-srcset="{{ section.settings.icon_callout4 | img_url: '240x' }} 2x, {{ section.settings.icon_callout4 | img_url: '120x' }} 1x" data-src="{{ section.settings.icon_callout4 | img_url: '40x' }}" alt="{{ section.settings.icon_callout4.alt | escape }}" itemprop="image">{% endif %}</div>
+        {% if section.settings.heading_callout4 != blank %}
+          <h4 class="callout-heading">{{section.settings.heading_callout4}}</h4>
+        {% endif %}
+        {% if section.settings.content_callout4 != blank %}
+          <div class="callout-content">{{section.settings.content_callout4}}</div>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Four callout Block",
+  "settings":[
+    {
+      "type":"text",
+      "id":"block_title",
+      "label":"Block title"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"Content"
+    },
+    {
+      "type": "color",
+       "id": "content_text_color",
+       "label": "Content Text Color"
+     },
+    {
+      "type":"checkbox",
+      "id":"padding_top",
+      "label":"Padding Top?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"padding_bottom",
+      "label":"Padding Bottom?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"border_top",
+      "label":"Border Top?",
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"border_bottom",
+      "label":"Border Bottom?",
+      "default":false
+    },
+
+    {
+      "type":"header",
+      "content": "Callout 1"
+    },
+    {
+      "type": "url",
+      "id": "url_callout1",
+      "label": "Callout 1  URL"
+    },
+    {
+      "type":"text",
+      "id":"heading_callout1",
+      "label":"Callout 1 Heading"
+    },
+    {
+      "type":"richtext",
+      "id":"content_callout1",
+      "label":"Callout 1 Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_callout1",
+      "label": "Icon"
+    },
+    {
+      "type":"header",
+      "content": "Callout 2"
+    },
+    {
+      "type": "url",
+      "id": "url_callout2",
+      "label": "Callout 2  URL"
+    },
+    {
+      "type":"text",
+      "id":"heading_callout2",
+      "label":"Callout 2 Heading"
+    },
+    {
+      "type":"richtext",
+      "id":"content_callout2",
+      "label":"Callout 2 Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_callout2",
+      "label": "Icon"
+    },
+
+    {
+      "type":"header",
+      "content": "Callout 3"
+    },
+    {
+      "type": "url",
+      "id": "url_callout3",
+      "label": "Callout 3  URL"
+    },
+    {
+      "type":"text",
+      "id":"heading_callout3",
+      "label":"Callout 3 Heading"
+    },
+    {
+      "type":"richtext",
+      "id":"content_callout3",
+      "label":"Callout 3 Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_callout3",
+      "label": "Icon"
+    },
+
+    {
+      "type":"header",
+      "content": "Callout 4"
+    },
+    {
+      "type": "url",
+      "id": "url_callout4",
+      "label": "Callout 4  URL"
+    },
+    {
+      "type":"text",
+      "id":"heading_callout4",
+      "label":"Callout 4 Heading"
+    },
+    {
+      "type":"richtext",
+      "id":"content_callout4",
+      "label":"Callout 4 Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_callout4",
+      "label": "Icon"
+    }
+  ]
+}
+{% endschema %}

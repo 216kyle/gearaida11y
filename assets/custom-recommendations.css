@@ -1,0 +1,103 @@
+.custom-recommendations,
+.custom-recommendations-swiper {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 4.8rem 0;
+}
+.custom-recommendations-swiper {
+  position: relative;
+}
+.custom-recs {
+  overflow: hidden;
+}
+
+.custom-recommendations-swiper .btn-prev,
+.custom-recommendations-swiper .btn-next {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  --arrow-distance: -40px;
+  font-size: 35px;
+  z-index: 10;
+  color: #333;
+  cursor: pointer;
+}
+.custom-recommendations-swiper .btn-swiper:hover {
+  color: #ef4623;
+}
+
+.custom-recommendations-swiper .btn-prev {
+  left: var(--arrow-distance);
+}
+
+.custom-recommendations-swiper .btn-next {
+  right: var(--arrow-distance);
+}
+.custom-recommendations__row {
+  display: grid;
+  -moz-column-gap: 3.2rem;
+       column-gap: 3.2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8rem 3.2rem;
+}
+.custom-recommendations__product-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.custom-recommendations__heading {
+  margin-bottom: 65px;
+}
+.custom-recommendations__heading-box.heading-align-left {
+  text-align: left;
+}
+.custom-recommendations__heading-box.heading-align-center {
+  text-align: center;
+}
+.custom-recommendations__heading-box.heading-align-right {
+  text-align: right;
+}
+.custom-recommendations__product-image {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.custom-recommendations__product-title {
+  font-size: 2.2rem;
+  margin-bottom: 1.6rem;
+}
+.custom-recommendations__product-title a {
+  color: var(--link-normal-color);
+}
+.custom-recommendations__product-title a:hover {
+  color: var(--link-hover-color);
+}
+
+@media only screen and (max-width: 900px) {
+  .custom-recommendations__row {
+    grid-template-columns: repeat(3, 1fr);  
+  }
+
+  .custom-recommendations, 
+  .custom-recommendations-swiper {
+      max-width: 95%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .custom-recommendations-swiper .btn-prev, 
+  .custom-recommendations-swiper .btn-next {
+    --arrow-distance: 0;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .custom-recommendations__row {
+    grid-template-columns: repeat(2, 1fr);  
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .custom-recommendations__row {
+    grid-template-columns: 1fr;  
+  }
+}

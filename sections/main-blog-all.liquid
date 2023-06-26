@@ -1,0 +1,103 @@
+{% paginate blog.articles by 20 %}
+<main class="site-content site-content--has-sidebar {% if blog.handle == 'learn' %}site-content--sidebar-right{% else %}site-content--sidebar-left{% endif %}" role="main">
+  {% include 'page-utility' %}
+  <div class="site-container site-container--blog site-flexbox">
+    {% if blog.handle =='help' %}
+      {% include 'blog-help-side-nav' %}
+    {% endif %}
+    <div class="page-main">
+      <div class="page-header">
+        <a role="button" href="{{ blog.url }}" class="view-all-back-to" title="{{ blog.title }}">
+          Back to 
+          {% if blog.title == 'Learn' %}
+              Blog
+          {% else %}
+            {{ blog.title }}
+          {% endif %}
+        </a>
+        <h1 role="heading">
+          All
+            {% for tag in current_tags %}
+              {% case tag %}
+                {% when 'Camping' %}
+                  Camping
+                {% when 'Hike Run' %}
+                  Hiking and Running
+                {% when 'hunt fish' %}
+                  Hunting and Fishing
+                {% when 'paddle dive' %}
+                  Paddlesports and Diving
+                {% when 'snow' %}
+                  Snowsports
+                {% when 'gear care' %}
+                  Gear Care and Repair
+                {% when 'aquaseal' %}
+                  Aquaseal
+                {% when 'Seam Grip' %}
+                  Seam Grip
+                {% when 'Tenacious Tape' %}
+                  Tenacious Tape
+                {% when 'ReviveX' %}
+                  Revivex
+                {% when 'Heroclip' %}
+                  Heroclip
+                {% when 'adventure tools' %}
+                  Adventure Tools
+                {% when 'Other' %}
+                  Other
+              {% endcase %}
+            {% endfor %}
+          Articles
+        </h1>
+        {% if current_tags == blank %}
+          <form class="form blog__search-form clearfix" action="/search" method="get">
+            <input type="hidden" name="type" value="article">
+            <input role="searchbox" aria-label="Search" type="text" name="q" value="" placeholder="SEARCH" />
+            <button role="button" aria-label="Submit" type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+          </form>
+        {% endif %}
+      </div>
+      <div class="page-content">
+        <div class="articles site-flexbox grid grid--gutters">
+          {% for article in blog.articles %}
+          <article class="article column100" itemscope itemtype="http://schema.org/Article">
+            {% if article.image %}
+            <a class="article__image-wrapper" href="{{ article.url }}">
+              <img itemprop="thumbnail" class="article__image" src="{{ article.image | img_url:'1024x1024' }}" alt="{{ article.title }}" />
+            </a><!-- article__image-wrapper -->
+            {% endif %}
+            <header class="article__header">
+              <h2 itemprop="name">
+                <a role="button" href="{{ article.url }}" title="{{ article.title | escape }}" itemprop="url">{{ article.title }}</a>
+              </h2>
+            </header><!-- article__header -->
+            <div role="excerpt" class="article__excerpt" itemprop="description">
+              {% if article.excerpt.size > 0 %}
+              {{ article.excerpt }}
+              {% else %}
+              <p>{{ article.content | strip_html | truncate: 170 }}</p>
+              {% endif %}
+            </div><!-- article__excerpt -->
+            <footer class="article__footer">
+              <time class="article__footer-item" pubdate date="{{ article.published_at | date: "%m/%d/%y" }}">
+                <span itemprop="datePublished">{{ article.published_at | date: "%B %d, %Y" }}</span>
+              </time>
+              {% if blog.comments_enabled? %}
+              <span class="article__footer-item-sep">|</span> 
+              <a class="article__footer-item" href="{{ shop.url }}{{ article.url }}#disqus_thread" data-disqus-identifier="{{ article.id }}">No Comments</a>
+              {% endif %}
+            </footer><!-- article__footer -->
+          </article><!-- article -->
+          {% endfor %}
+        </div><!-- articles -->
+      </div><!-- page-content -->
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+    </div><!-- page-main -->
+    {% if blog.handle == 'learn' %}
+      {% include 'blog-side-nav' %}
+    {% endif %}
+  </div><!-- site-container -->
+</main><!-- site-content -->
+{% endpaginate %}

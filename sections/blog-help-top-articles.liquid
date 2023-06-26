@@ -1,0 +1,73 @@
+<div class="site-container--blog-help">
+  <section class="blog-help__top-articles">
+    <div class="site-container">
+      <div class="section-heading">
+        <h2>Top Gear Aid Articles</h2>
+      </div>
+      <div class="articles site-flexbox">
+        {% for block in section.blocks %}
+          {% if block.type == "featured_article" %}
+            {% assign article = articles[block.settings.article] %}
+            {% if article.image %}
+              <style>
+                .article-bkgd--{{ block.id }} {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+                .article-bkgd--{{ block.id }}.lazyloaded,
+                .article-bkgd--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+                @media screen and (min-width: 151px) and (max-width: 300px) {
+                  .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '600x' }}');}
+                }
+                @media screen and (min-width: 301px) and (max-width: 600px) {
+                  .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '800x' }}');}
+                }
+                @media screen and (min-width: 601px) and (max-width: 800px) {
+                  .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '900x' }}');}
+                }
+                @media screen and (min-width: 801px) and (max-width: 1000px) {
+                  .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '1200x' }}');}
+                }
+                @media screen and (min-width: 1001px) {
+                  .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '1200x' }}');}
+                }
+              </style>
+            {% endif %}
+            <article class="column50">
+              <a aria-label="Blog Box" href="{{ article.url }}">
+                <div class="white-wrapper">
+                  <figure class="article-bkgd article-bkgd--{{ block.id }} lazy"></figure>
+                </div>
+                <figcaption>
+                  <h3 aria-label="Blog Title" >{{ article.title }}</h3>
+                  {% if article.excerpt %}
+                    <p aria-label="Blog Excerpt" >{{ article.excerpt }}</p>
+                  {% endif %}
+                </figcaption>
+              </a>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <a role="Button" Aria-label="Read More Articles Button" href="/blogs/help?view=all" class="more-articles btn btn-alt btn-large">More</a>
+    </div>
+  </section>
+</div>
+
+{%- include 'blog-help-icon-nav' -%}
+{% schema %}
+{
+  "name": "Blog Help Top Articles",
+  "max_blocks": 2,
+  "blocks": [
+    {
+      "type": "featured_article",
+      "name": "Featured Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

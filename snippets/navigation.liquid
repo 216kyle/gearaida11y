@@ -1,0 +1,82 @@
+<nav class="site-navigation-wrapper" role="navigation" aria-label="Main Navigation" >
+  <ul class="site-navigation">
+    {% for link in linklists.main-menu.links %}
+    {% if link.title == "Shop" %}
+    <li id="{{ link.title | handleize }}-link" class="site-navigation_item{% if link.active %} active{% endif %} has-sub-navigation">
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      <div role="menu" id="sub-navigation-{{ child_list_handle }}-wrapper" class="sub-navigation-wrapper">
+        <ul class="sub-navigation sub-navigation--super">
+          {% for l in link.links %}
+          {% if l.title == 'Images' %}
+          <li id="images-list">
+            <ul>
+              {% for image in l.links %}
+              <li role="menuitem" class="image-link">
+                <a href="{{ image.url }}">
+                  {% capture dd_img %}{{ image.title | split:'|' | last }}{% endcapture %}
+                  <img srcset="{{ dd_img | file_img_url:'240x' }} 2x, {{ dd_img | file_img_url:'120x' }} 1x" src="{{ dd_img | file_img_url:'120x' }}" alt=""/>
+                  <h3>{{ image.title | split:'|' | first }}</h3>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% elsif l.title == 'Shop New' %}
+          <li id="btn-row">
+            <a href="{{ l.url }}" class="btn btn-alt btn-large" title="{{ l.title }}">{{ l.title }}</a>
+          </li>
+          {% else %}
+          <li id="product-column" class="products-links-column">
+            <h4>{{ l.title }}</h4>
+            <ul id="items-in-list" >
+              {% for sl in l.links %}
+              <li class="{% if sl.active %} active{% endif %}">
+                <a href="{{ sl.url }}">{{ sl.title }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          {% endif %}
+          {% endfor %}
+          <li id="video-spotlight">
+           {% comment %} <a href="https://www.gearaid.com/blogs/news/upcycled-bags-from-old-signage">
+              <img src="{{ 'video-spotlight.jpg' | file_img_url:'300x' }}" alt="Repair. Renew. Reuse." />
+              <h3>Repair / Reuse:</h3>
+              <h4>It makes a difference</h4>
+            </a> {% endcomment %}
+          </li>
+        </ul><!-- sub-navigation -->
+      {% comment %}  <div id="dd-footer">
+          <h3>Browse:</h3>
+          <a href="/collections/" title="View all collections">Collections</a> 
+          <span class="sep">|</span> 
+          <a href="/collections/all" title="View all products">Products</a>
+          <span class="sep">|</span> 
+          <a href="/collections/sale" title="View all products on sale">Sale Items</a>
+        </div><!-- dd-footer -->
+      </div><!-- sub-navigation-wrapper --> {% endcomment %}
+    </li>
+    {% else %}
+    {% assign dropdown = false %}
+    {% capture child_list_handle %}{{ link.title | handleize }}{% endcapture %}
+    {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+    {% assign dropdown = true %}
+    {% endif %}
+    <li id="{{ link.title | handleize }}-link" class="site-navigation_item{% if link.active %} active{% endif %}{% if dropdown %} has-sub-navigation{% endif %}">
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      {% if dropdown %}
+      <div id="sub-navigation-{{ child_list_handle }}-wrapper" class="sub-navigation-wrapper">
+        <ul class="sub-navigation">
+          {% for l in linklists[child_list_handle].links %}
+          <li {% if l.active %} class="active"{% endif %}>
+            <a href="{{ l.url }}">{{ l.title }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div><!-- sub-navigation-wrapper -->
+      {% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul><!-- main-navigation -->
+</nav><!-- navigation-wrapper -->

@@ -1,0 +1,29 @@
+{% include 'page-utility' %}
+<div class="site-container site-container--collection site-flexbox site-flexbox--reversed">
+  <div class="page-main">
+    <header class="page-header">
+      <h1>Wishlist</h1>
+    </header><!-- page-header -->
+    <div class="page-content">
+      <div class="rebase__lists-wishlist"></div>
+    </div><!-- page-content -->
+  </div><!-- page-main -->
+  <div class="page-sidebar">
+    <nav class="widget widget--navigation">
+      <ul>
+        <li class="{% if template == 'customers/account' or template == 'customers/order' %}active {% endif %}">
+          <a href="/account">Orders <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/addresses' %}active {% endif %}">
+          <a href="/account/addresses">Addresses <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/account.wishlist' %}active {% endif %}">
+          <a href="/account?view=wishlist">Wishlist <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/account.notification' %}active {% endif %}">
+          <a href="/account?view=notifications">Notifications <i class="fa fa-angle-right"></i></a>
+        </li>
+      </ul>
+    </nav><!-- widget--navigation -->
+  </div><!-- page-sidebar -->
+</div><!-- site-container -->

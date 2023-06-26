@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if !IE]><!--><html class="non-ie" lang="en"><!--<![endif]-->
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PG2SZDQBH5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PG2SZDQBH5');
+</script>
+  <script src="https://cdn.yottaa.com/rapid.rum.min.js"></script>
+  <script>
+    Yo.configure('https://qoe-1.yottaa.net/api/v1/configure.rapid.js?key=FnF9UNxqjkaz3w');
+  </script>
+  <meta name="google-site-verification" content="oKJX4CbBTarNMpfKq3kkG5UlZ0T2k6GBz42SDdb_zA4" />
+    
+  {% include 'head-meta' %}
+  {% include 'head-css' %}
+  {% include 'head-scripts' %}
+  {% include 'head-scripts-vendor' %}
+  {{ content_for_header }}
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-K2BJ23L');</script>
+  <!-- End Google Tag Manager -->
+  {% if handle contains 'sales-support' or page.handle == 'gear-aid-our-response-to-coronavirus' %}
+    <meta name="robots" content="noindex">
+  {% endif %}
+  {% if handle contains "product-information-and-digital-assets" %}
+    <meta name="robots" content="noindex">
+  {% endif %}
+  {% if handle contains 'dealer-price-list' %}
+    <meta name="robots" content="noindex">
+  {% endif %}
+  {% if handle contains 'summer2023' %}
+    <meta name="robots" content="noindex">
+  {% endif %}
+
+{% include 'globo.formbuilder.scripts' %}
+</head>
+<script type="text/javascript">
+    window.__lo_site_id = '436f4222';
+    (function() {
+      var wa = document.createElement('script');
+      wa.type = 'text/javascript'; wa.async = true;
+      wa.src = 'https://d20519brkbo4nz.cloudfront.net/core/lo.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wa, s);
+    })();
+</script>
+
+{% capture bodyClasses %}{{ template | split: '.' | first | remove: '/' | remove: '_' | replace:'404','error-404' }}-template {{ template | handle | replace:'.','-' | replace:'/','-' | replace:'_','-' | replace:'404','error-404' }}-template{% if collection %}{% if collection.image %} has-collection-image{% endif %}{% endif %}{% if customer %} customer-logged-in{% endif %}{% endcapture %}
+{% assign bodyClasses = bodyClasses %}
+<body id="{% if template contains 'gift_card' %}gift-card-id{% else %}{{ page_title | truncatewords: 3 | handle }}-id{% endif %}" class="{{ bodyClasses | split: ' ' | uniq | join: ' ' }}">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2BJ23L"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="site-wrapper">
+    {% section 'header' %}
+    {{ content_for_layout }}
+    {% section 'footer' %}
+    <div id="privacy-pop-up">
+      <div class="site-flexbox">
+        <p>This website uses cookies to ensure you get the best experience on our website. Please read our <a href="/pages/privacy" title="Go to Privacy Page">Privacy Policy</a>.</p>
+        <div id="privacy-close" class="btn">Got it</div>
+      </div>
+    </div>
+  </div><!-- site-wrapper -->
+  {% include 'footer-scripts' %}
+  {% include 'footer-scripts-vendor' %}
+<!-- START Klaviyo Add to Cart Trigger  --> 
+{% if product %}  
+<script type="text/javascript">
+var _learnq = _learnq || [];
+	document.getElementById("add-to-cart").addEventListener('click',function (){
+ 		_learnq.push(['track', 'Added to Cart', item]);
+	});</script> 
+{% endif %}  
+ <!-- END Klaviyo Add to Cart Trigger  -->   
+{% comment %} <!-- START accessiBe script -->
+<script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init({ statementLink : '', footerHtml : '', hideMobile : false, hideTrigger : false, disableBgProcess : false, language : 'en', position : 'left', leadColor : '#e02500', triggerColor : '#e02500', triggerRadius : '50%', triggerPositionX : 'left', triggerPositionY : 'bottom', triggerIcon : 'people', triggerSize : 'medium', triggerOffsetX : 26, triggerOffsetY : 40, mobile : { triggerSize : 'small', triggerPositionX : 'left', triggerPositionY : 'bottom', triggerOffsetX : 20, triggerOffsetY : 20, triggerRadius : '50%' } }); }; h.appendChild(s); })(); </script>  
+  <!-- END accessiBe script --> {% endcomment %}
+</body>
+</html>

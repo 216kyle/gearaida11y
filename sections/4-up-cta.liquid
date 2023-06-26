@@ -1,0 +1,122 @@
+<style>
+  .section--4-up-{{ section.id }} {background-color:{{ section.settings.background_color }};}
+  .section--4-up-{{ section.id }} h2,
+  .section--4-up-{{ section.id }} h3,
+  .section--4-up-{{ section.id }} p,
+  .section--4-up-{{ section.id }} {color:{{ section.settings.color }};}
+</style>
+<div class="section section--4-up section--4-up-{{ section.id }}">
+  <div class="site-container--slim">
+    <div class="section-heading">
+      {% if section.settings.title != blank %}
+        <h2 aria-label="{{ section-settings.title }}" class="h1">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p role="description" >{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="site-container--fluid">
+    <div class="section--4-up__ctas">
+      {% for block in section.blocks %}
+        <a role="button" href="{{ block.settings.url }}" class="section--4-up__cta">
+          {% if block.settings.image != blank %}
+            <img data-src="{{ block.settings.image | img_url: '800x' }}" class="lazy" alt="{% if block.settings.image.alt != blank %}{{ block.settings.image.alt }}{% else %}{{ block.settings.title }}{% endif %}"/>
+          {% else %}
+            {{ block.settings.svg }}
+          {% endif %}
+
+          <h3 role="heading" >{{ block.settings.title }}</h3>
+          <p role="paragraph" >{{ block.settings.text }}</p>
+        </a>
+      {% endfor %}
+    </div>
+    {% if section.settings.button_link != blank and section.settings.button_label != blank %}
+      <div class="section--4-up__action">
+        <a role="button" href="{{ section.settings.button_link }}" class="btn btn-large btn-alt-white">{{ section.settings.button_label }}</a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "4-up CTA",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "default": "#282828",
+      "label": "Content Background Color"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "default": "#fff",
+      "label": "Heading and text color"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "max_blocks":4,
+  "blocks":[
+    {
+      "type":"cta",
+      "name":"CTA",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Will override SVG setting if used."
+        },
+        {
+          "type": "textarea",
+          "id": "svg",
+          "label": "SVG Icon",
+          "info": "Leave Image blank to use SVG"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "4-up CTA",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

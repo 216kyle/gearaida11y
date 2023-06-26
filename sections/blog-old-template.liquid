@@ -1,0 +1,80 @@
+{% paginate blog.articles by 20 %}
+<div class="site-content {% if section.settings.use_sidebar %}site-content--has-sidebar site-content--sidebar-left{% else %}site-content--no-sidebar{% endif %}">
+  {% include 'page-utility' %}
+  <div class="site-container{% unless section.settings.use_sidebar %} site-container--slim{% endunless %} site-container--blog{% if section.settings.use_sidebar %} site-flexbox site-flexbox--reversed{% endif %}">
+    <div class="page-main">
+      <div class="page-content">
+        <div class="articles site-flexbox grid grid--gutters">
+          {% for article in blog.articles %}
+          <article class="article column100" itemscope itemtype="http://schema.org/Article">
+            {% if article.image %}
+            <a class="article__image-wrapper" href="{{ article.url }}">
+              <img itemprop="thumbnail" class="article__image" src="{{ article.image | img_url:'1024x1024' }}" alt="{{ article.title }}" />
+            </a><!-- article__image-wrapper -->
+            {% endif %}
+            <header class="article__header">
+              <h2 itemprop="name">
+                <a href="{{ article.url }}" title="{{ article.title | escape }}" itemprop="url">{{ article.title }}</a>
+              </h2>
+            </header><!-- article__header -->
+            <div class="article__excerpt" itemprop="description">
+              {% if article.excerpt.size > 0 %}
+              {{ article.excerpt }}
+              {% else %}
+              <p>{{ article.content | strip_html | truncate: 170 }}</p>
+              {% endif %}
+            </div><!-- article__excerpt -->
+            <footer class="article__footer">
+              <time class="article__footer-item" pubdate date="{{ article.published_at | date: "%m/%d/%y" }}">
+                <span itemprop="datePublished">{{ article.published_at | date: "%B %d, %Y" }}</span>
+              </time>
+              {% if blog.comments_enabled? %}
+              <span class="article__footer-item-sep">|</span> 
+              <a class="article__footer-item" href="{{ shop.url }}{{ article.url }}#disqus_thread" data-disqus-identifier="{{ article.id }}">No Comments</a>
+              {% endif %}
+            </footer><!-- article__footer -->
+          </article><!-- article -->
+          {% endfor %}
+        </div><!-- articles -->
+      </div><!-- page-content -->
+      {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+      {% endif %}
+    </div><!-- page-main -->
+    {% if section.settings.use_sidebar %}
+    <div class="page-sidebar">
+      {% if section.settings.use_navigation %}
+      {% assign handle = section.settings.blog_navigation %}
+      {% include 'widget-navigation' with handle %}
+      {% endif %}
+    </div>
+    {% endif %}
+  </div><!-- site-container -->
+</div><!-- site-content -->
+{% endpaginate %}
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Sidebar"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_sidebar",
+      "label": "Use Sidebar?"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_navigation",
+      "label": "Use Navigation?"
+    },
+    {
+      "type": "link_list",
+      "id": "blog_navigation",
+      "label": "Link lists to use?"
+    }
+  ]
+}
+{% endschema %}

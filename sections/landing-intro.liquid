@@ -1,0 +1,189 @@
+<div class="section section--press section--press-{{ section.id }} bg-grey">
+  {% for block in section.blocks %}
+    
+    <section class="section section--promos section--promos-lights">
+      <div class="section-content"> 
+        <div class="site-flexbox grid grid--gutters">
+          <div class="promo promo--{{ block.id }} column100" {{ block.shopify_attributes }}>
+            <figure>
+              <img src="{{ block.settings.main_image | img_url: '1200x' }}" alt="{% unless block.settings.heading == blank %}{{ block.settings.heading | escape }}{% endunless %}" />
+            </figure>
+            {%- if block.settings.logo != blank -%}
+              <div class="promo__logo">{{ block.settings.logo | img_url: '450x' | img_tag }}</div>
+            {%- endif -%}
+          </div><!-- promo --> 
+        </div><!-- site-container--fluid -->
+      </div><!-- section-content -->
+    </section><!-- section -->
+
+    <!-- INTRO - SECTION 1 -->
+    <div class="center bg-dark-grey z-idx-1000 posn-rel intro-section-1">
+      {% if block.settings.title1 != blank %}
+        <h1 class="txt-white center mb-none primary-font intro-section-1__title">{{ block.settings.title1 }}</h1>
+      {% endif %}
+      {% if block.settings.title2 != blank %}
+        <h2 class="txt-white center mb-none primary-font intro-section-1__title">{{ block.settings.title2 }}</h2>
+      {% endif %}
+      {% if block.settings.text1 != blank %}
+        <h4 class="txt-white center primary-font intro-section-1__text">{{ block.settings.text1 }}</h4>
+      {% endif %}
+    </div>
+
+    <!-- INTRO - SECTION 2 -->
+    <div class="center intro-section-2">
+      <div class="bg-white intro-section-2__separator"></div>
+      <div class="intro-section-2__wrapper">
+        <div class="bg-white intro-section-2__group">
+          {% if block.settings.sectionTitle1 != blank %}
+            <h3 class="center primary-font txt-dark-grey">{{ block.settings.sectionTitle1 }}</h3>
+          {% endif %}
+          {% if block.settings.sectiontext1 != blank %}
+            <h5 class="center secondary-font txt-dark-grey">{{ block.settings.sectiontext1 }}</h5>
+          {% endif %}
+        </div>
+        <div class="bg-white intro-section-2__group">
+          {% if block.settings.sectionTitle2 != blank %}
+            <h3 class="center primary-font txt-dark-grey">{{ block.settings.sectionTitle2 }}</h3>
+          {% endif %}
+          {% if block.settings.sectiontext2 != blank %}
+            <h5 class="center secondary-font txt-dark-grey">{{ block.settings.sectiontext2 }}</h5>
+          {% endif %}
+        </div>
+        <div class="bg-white intro-section-2__group">
+          {% if block.settings.sectionTitle3 != blank %}
+            <h3 class="center primary-font txt-dark-grey">{{ block.settings.sectionTitle3 }}</h3>
+          {% endif %}
+          {% if block.settings.sectiontext3 != blank %}
+            <h5 class="center secondary-font primary-font txt-dark-grey">{{ block.settings.sectiontext3 }}</h5>
+          {% endif %}
+        </div>
+      </div>
+      <div class="bg-white intro-section-2__separator"></div>
+
+    </div>
+
+    <!--  EXTEND THE LIFESPAN OF GEAR -->
+    <div class="center extend-lifespan">
+      {% if block.settings.bottomTitle != blank %}
+        <h2 class="center primary-font extend-lifespan__title">{{ block.settings.bottomTitle }}</h2>
+      {% endif %}
+      {% if block.settings.bottomText1 != blank %}
+        <h4 class="center secondary-font extend-lifespan__text1">{{ block.settings.bottomText1 }}</h4>
+      {% endif %}
+      {% if block.settings.bottomText2 != blank %}
+        <h3 class="center primary-font extend-lifespan__text2">{{ block.settings.bottomText2 }}</h3>
+      {% endif %}
+      {% if block.settings.image3 != blank %}
+        <div class="extend-lifespan__img">
+          <img class="hidden_mobile" src="{{ block.settings.image3 | img_url: '1200x' }}" alt="{{ block.settings.image3.alt | escape | default: shop.name }}" />
+          {% if block.settings.image_mobile != blank %}
+            <img class="hidden_desktop" src="{{ block.settings.image_mobile | img_url: '1200x' }}" alt="{{ block.settings.image_mobile.alt | escape | default: shop.name }}" />
+          {% else %}
+            <img src="{{ block.settings.image3 | img_url: '800x' }}" alt="{{ block.settings.image3.alt | escape | default: shop.name }}" />
+          {% endif %}
+        </div>
+      {% endif %}
+    </div> 
+  {% endfor%}
+</div>
+
+{% schema %}
+{
+  "name": "Intro",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"press_item",
+      "name":"Press Item",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "main_image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "title1",
+          "label": "Title 1"
+        },
+        {
+          "type": "text",
+          "id": "title2",
+          "label": "Title 2"
+        },
+        {
+          "type": "textarea",
+          "id": "text1",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "sectionTitle1",
+          "label": "Section Title 1"
+        },
+        {
+          "type": "textarea",
+          "id": "sectiontext1",
+          "label": "Section Content 1"
+        },
+        {
+          "type": "text",
+          "id": "sectionTitle2",
+          "label": "Section Title 2"
+        },
+        {
+          "type": "textarea",
+          "id": "sectiontext2",
+          "label": "Section Content 2"
+        },
+        {
+          "type": "text",
+          "id": "sectionTitle3",
+          "label": "Section Title 3"
+        },
+        {
+          "type": "textarea",
+          "id": "sectiontext3",
+          "label": "Section Content 3"
+        },
+        {
+          "type": "text",
+          "id": "bottomTitle",
+          "label": "Bottom Title 1"
+        },
+        {
+          "type": "textarea",
+          "id": "bottomText1",
+          "label": "Bottom Text 1"
+        },
+        {
+          "type": "textarea",
+          "id": "bottomText2",
+          "label": "Bottom Text 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image3",
+          "label": "Intro Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Intro Image Mobile"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

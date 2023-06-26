@@ -1,0 +1,83 @@
+<div class="section section--text-and-image section--text-and-image-{{ section.id }}{% if section.settings.border_top %} section--border-top{% endif %}{% if section.settings.border_bottom %} section--border-bottom{% endif %}">
+  <div class="site-container--wide">
+    <h4 class="section-label">{{ section.settings.title }}</h4>
+  </div>
+  <div class="site-container">
+    <div class="text-and-image-container">
+      <div class="text-and-image__content">
+        <h2 class="text-and-image__heading">{{ section.settings.heading }}</h2>
+        <div class="text-and-image__text">{{ section.settings.content }}</div>
+        {% if section.settings.btn_label != blank %}
+          <a class="btn btn-alt btn-large" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
+        {% endif %}
+      </div>
+
+      <div class="text-and-image__image">
+        <img class="lazy" data-src="{{ section.settings.image | img_url: '800x' }}" alt="{% if section.settings.image.alt %}{{ section.settings.image.alt }}{% endif %}" />
+        <img class="lazy mobile" data-src="{{ section.settings.image_mobile | img_url: '800x' }}" alt="{% if section.settings.image_mobile.alt %}{{ section.settings.image_mobile.alt }}{% endif %}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Text & Image",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id":"border_top",
+      "label":"Border Top?",
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"border_bottom",
+      "label":"Border Bottom?",
+      "default":true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Image Mobile"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text & Image",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

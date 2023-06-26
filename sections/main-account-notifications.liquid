@@ -1,0 +1,29 @@
+{% include 'page-utility' %}
+<div class="site-container site-container--collection site-flexbox site-flexbox--reversed">
+  <div class="page-main">
+    <header class="page-header">
+      <h1>Notifications</h1>
+    </header><!-- page-header -->
+    <div class="page-content">
+      <div class="rebase__lists-notify"></div>
+    </div><!-- page-content -->
+  </div><!-- page-main -->
+  <div class="page-sidebar">
+    <nav role="navigation" class="widget widget--navigation">
+      <ul>
+        <li class="{% if template == 'customers/account' or template == 'customers/order' %}active {% endif %}">
+          <a role="button" aria-label="All Account Orders" href="/account">Orders <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/addresses' %}active {% endif %}">
+          <a role="button" aria-label="All Account Addresses" href="/account/addresses">Addresses <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/account.wishlist' %}active {% endif %}">
+          <a role="button" aria-label="Account Wishlist" href="/account?view=wishlist">Wishlist <i class="fa fa-angle-right"></i></a>
+        </li>
+        <li class="{% if template == 'customers/account.notifications' %}active {% endif %}">
+          <a role="button" aria-label="All Account Notification" href="/account?view=notifications">Notifications <i class="fa fa-angle-right"></i></a>
+        </li>
+      </ul>
+    </nav><!-- widget--navigation -->
+  </div><!-- page-sidebar -->
+</div><!-- site-container -->

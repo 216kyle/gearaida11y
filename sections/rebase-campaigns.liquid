@@ -1,0 +1,41 @@
+{% schema %}
+  {
+    "name": "Campaigns",
+    "settings": [{
+        "type": "text",
+        "id": "campaign_heading",
+        "label": "Heading",
+		"info": "Leave blank to hide."
+      },
+      {
+        "type": "textarea",
+        "id": "campaign_intro",
+        "label": "Intro",
+		"info": "Leave blank to hide."
+      },
+      {
+        "type": "textarea",
+        "id": "campaign_embed",
+        "label": "Embed Code",
+        "info": "Paste your embed code here from the Rebase admin"
+      }],
+      "presets": [{
+      "name": "Campaign",
+      "category": "Media"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+<section class="section section--campaign">
+  <header class="site-container center">
+    {% if section.settings.campaign_heading != blank %}
+    <h3>{{ section.settings.campaign_heading }}</h3>
+    {% endif %}
+    {% if section.settings.campaign_intro != blank %}
+    <p>{{ section.settings.campaign_intro }}</p>
+    {% endif %}
+  </header>
+  {{ section.settings.campaign_embed }}
+</section>

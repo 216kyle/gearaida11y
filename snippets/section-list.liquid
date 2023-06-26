@@ -1,0 +1,22 @@
+<section class="list" {{ block.shopify_attributes }}>
+  <h3 class="list__heading">{{ block.settings.title }}</h3>
+  <div class="list__content">
+    <div class="list__content-item list__content-item--split">
+      <ul>
+        {{ block.settings.list_1 }}
+      </ul>
+    </div>
+    <div class="list__content-item list__content-item--split">
+      <ul>
+        {{ block.settings.list_2 }}
+      </ul>
+    </div>
+    <div class="list__content-item">
+      <div>
+        <h4>{{ block.settings.bottom_heading }}</h4>
+        {{ block.settings.bottom_content }}
+      </div>
+      <a href="{{ block.settings.link_url}}" class="btn btn-alt" title="Go to Learn more">Learn More</a>
+    </div>
+  </div>
+</section>

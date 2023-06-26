@@ -1,0 +1,155 @@
+{% stylesheet %}
+.section--promos {padding:2em 0;}
+.promo {text-align:center;margin:0 0 1em;}
+.promo figure {display:block;width:100%;position:relative;z-index:102;margin:0;}
+.promo figure a {display:block;width:100%;height:100%;}
+.promo__header--over {position:relative;z-index:103;}
+.promo__header--over .promo__header {position:relative;z-index:104;display:block;position:absolute;top:50%;left:0;width:100%;-webkit-transform: translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);padding:0 5%;text-align:center;}
+.promo__header--over .promo__header h2 {font-size:2.4rem;font-weight:bold;margin:0;}
+.promo__header--over::after {content:'';display:block;position:absolute;top:0;left:0;z-index:101;width:100%;height:100%;}
+.promo__header--below .promo__header {display:block;width:100%;text-align:center;margin:1em 0;}
+.promo__header--below .promo__header h2 {font-size:2rem;font-weight:bold;color:#000;margin:0;}
+{% endstylesheet %}
+
+{% if section.blocks.size > 0 %}
+<section class="section section--index section--promos">
+  <div class="section-content"> 
+    <div data-aos="fade" data-aos-once="true" data-aos-offset="100" data-aos-easing="ease-in-sine" data-aos-delay="0" data-aos-duration="400" class="site-container--fluid site-flexbox grid grid--gutters">
+      {% case section.blocks.size %}
+      {% when 1 %}
+      {%- assign column_size = 'column100' -%}
+      {% when 2 %}
+      {%- assign column_size = 'column50' -%}
+      {% when 3 %}
+      {%- assign column_size = 'column33' -%}
+      {% when 5 %}
+      {%- assign column_size = 'column33' -%}
+      {% when 6 %}
+      {%- assign column_size = 'column33' -%}
+      {% else %}
+      {%- assign column_size = 'column50' -%}
+      {% endcase %}
+      
+      {% for block in section.blocks %}
+      {% if block.settings.image != blank %}
+      <style>
+        .promo--{{ block.id }} .promo__header h2 {color:{{ block.settings.heading_color }};}
+        .promo--{{ block.id }} .promo__bkgd {display:block;width:100%;content:'';background-color:transparent;background-position: 50% 50%;background-size: {{ block.settings.background_size }};background-repeat: no-repeat;}
+        .promo--{{ block.id }} .promo__bkgd--square {padding-top:100%;}
+        .promo--{{ block.id }} .promo__bkgd--portrait {padding-top:140%;}
+        .promo--{{ block.id }} .promo__bkgd--landscape {padding-top:70%;}
+        .promo__bkgd--{{ block.id }} {background-size:cover;background-position:center;background-color:#fafafa;opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+        .promo__bkgd--{{ block.id }}.lazyloaded,
+        .promo__bkgd--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+        @media screen and (min-width: 151px) and (max-width: 300px) {
+          .promo__bkgd--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '600x' }}');}
+        }
+        @media screen and (min-width: 301px) and (max-width: 600px) {
+          .promo__bkgd--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '800x' }}');}
+        }
+        @media screen and (min-width: 601px) and (max-width: 800px) {
+          .promo__bkgd--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '900x' }}');}
+        }
+        @media screen and (min-width: 801px) and (max-width: 1000px) {
+          .promo__bkgd--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '1200x' }}');}
+        }
+        @media screen and (min-width: 1001px) {
+          .promo__bkgd--{{ block.id }} {background-image: url('{{ block.settings.image | img_url: '1200x' }}');}
+        }
+      </style>
+      {% endif %}
+      <div class="promo promo--{{ block.id }} {% if section.blocks.size == 5 %}{% if forloop.index == 1 or forloop.index == 2 %}column50{% else %}{{ column_size }}{% endif %}{% else %}{{ column_size }}{% endif %} promo__header--{{ section.settings.heading_style }}" {{ block.shopify_attributes }}>
+        <figure>
+          {% if block.settings.link != blank %}
+          <a href="{{ block.settings.link }}"{% unless block.settings.heading == blank %} title="{{ block.settings.heading | escape }}"{% endunless %}>
+          {% endif %}
+            <div class="promo__bkgd promo__bkgd--{{ block.id }} promo__bkgd--{{ block.settings.promo_ratio }} lazy"></div>
+            {% unless block.settings.title == blank %}
+            <figcaption class="promo__header"><h2>{{ block.settings.title }}</h2></figcaption>
+            {% endunless %}
+          {% if block.settings.link != blank %}
+          </a>
+          {% endif %}
+        </figure>
+      </div><!-- promo --> 
+      {% endfor %}
+    </div><!-- site-container--fluid -->
+  </div><!-- section-content -->
+</section><!-- section -->
+{% endif %}
+{% schema %}
+{
+  "name": "Promos",
+  "max_blocks": 6,
+  "settings": [{
+    "type": "select",
+    "id": "heading_style",
+    "label": "Heading Style",
+    "default": "below",
+    "options": [
+      {"label":"Heading over image", "value":"over"},
+      {"label":"Heading below image", "value":"below"}
+    ],
+	"info":"Leave blank to hide."
+  }],
+  "blocks": [{
+    "type": "image",
+    "name": "Promo",
+    "settings": [{
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+      },
+      {
+      "type": "select",
+      "id": "background_size",
+      "label": "Background Style",
+      "options": [
+        {"label":"Cover", "value":"cover"},
+        {"label":"Contain", "value":"contain"}
+      ],
+	  "default":"cover"
+      },
+      {
+      "type": "select",
+      "id": "promo_ratio",
+      "label": "Promo Ratio",
+      "options": [
+        {"label":"Square", "value":"square"},
+        {"label":"Portrait", "value":"portrait"},
+        {"label":"Landscape", "value":"landscape"}
+      ],
+	  "default":"square"
+      },
+      {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+      },
+      {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Text Color",
+      "default": "#ffffff"
+      },
+      {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }]
+  }],
+  "presets": [{
+    "name": "Promos",
+    "category": "Media",
+    "blocks": [{
+      "type": "image"
+      },
+      {
+      "type": "image"
+      },
+      {
+      "type": "image"
+    }]
+  }]
+}
+{% endschema %}

@@ -1,0 +1,176 @@
+
+{% if section.settings.youtube_id != blank %}
+<script>
+
+  {% comment %} NOTE: for each video on the page this function overwrites the global function (last one wins out) {% endcomment %}
+  window.onYouTubeIframeAPIReady = function () {
+    document.dispatchEvent(new CustomEvent('yt_loaded'));
+  };
+
+  (function () {
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player_;
+    document.addEventListener('yt_loaded', function() {
+      player_ = new YT.Player('section--overlap-video-player--{{ section.id }}', {
+        height: '600',
+        width: '1200',
+        videoId: '{{ section.settings.youtube_id }}',
+        playerVars: {
+          color: 'white',
+          rel: 0,
+          showinfo: 0,
+          playsinline: 1
+        }
+      });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      var container = document.querySelector('.section--overlap-video-image-block-{{ section.id }}'),
+        button = container.querySelector('#toggle-video-{{ section.id }}');
+
+      function handleToggleVideo(e) {
+        e.preventDefault();
+
+        var container = $('.section--overlap-video-image-block-{{ section.id }}');
+        
+
+        if (player_) {
+          $(container).find('.section--overlap-video-image-block__inner').hide();
+          $(container).find('.section--overlap-video-player').show();
+          player_.playVideo();
+        }
+        
+      };
+
+      button.addEventListener('click', handleToggleVideo)
+    });
+  })();
+</script>
+{% endif %}
+<style>
+  .section--overlap-video-image-block-{{ section.id }} {}
+
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-outer-wrapper {
+    background:#333;
+
+    {% if section.settings.has_overlap %}
+    margin-top: -60px;
+    {% endif %}
+    {% if section.settings.has_border %}
+    border: 10px solid #fff;
+    {% endif %}
+  }
+
+
+  {% if section.settings.video_image_placeholder != blank %}
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-size: cover; opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper.lazyloaded,
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper[data-was-processed="true"] {opacity:1;}
+  @media screen and (max-width: 300px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.video_image_placeholder | img_url: '600x' }});}
+  }
+  @media screen and (min-width: 301px) and (max-width: 600px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.video_image_placeholder | img_url: '900x' }});}
+  }
+  @media screen and (min-width: 601px) and (max-width: 800px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.video_image_placeholder | img_url: '1200x' }});}
+  }
+  @media screen and (min-width: 801px) and (max-width: 1000px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.video_image_placeholder | img_url: '2000x' }});}
+  }
+  @media screen and (min-width: 1001px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.video_image_placeholder | img_url: '2048x' }});}
+  }
+
+  {% elsif section.settings.image != blank %}
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-size: cover; opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper.lazyloaded,
+  .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper[data-was-processed="true"] {opacity:1;}
+  @media screen and (max-width: 300px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.image | img_url: '600x' }});}
+  }
+  @media screen and (min-width: 301px) and (max-width: 600px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.image | img_url: '900x' }});}
+  }
+  @media screen and (min-width: 601px) and (max-width: 800px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.image | img_url: '1200x' }});}
+  }
+  @media screen and (min-width: 801px) and (max-width: 1000px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.image | img_url: '2000x' }});}
+  }
+  @media screen and (min-width: 1001px) {
+    .section--overlap-video-image-block-{{ section.id }} .section--overlap-video-player-wrapper {background-image: url({{ section.settings.image | img_url: '2048x' }});}
+  }
+  {% endif %}
+</style>
+<div class="section section--overlap-video-image-block section--overlap-video-image-block-{{ section.id }} section--overlap-video-image-block-{{ section.settings.content-block_size }} {% if section.settings.border_bottom %} section--overlap-video-image-block--border-bottom{% endif %} {% if section.settings.padding_bottom %} section--overlap-video-image-block--padding-bottom{% endif %}">
+  <div class="section--overlap-video-player-outer-wrapper">
+      <div class="section--overlap-video-player-wrapper lazy"><div id="section--overlap-video-player--{{ section.id }}" class="section--overlap-video-player"></div></div>
+  </div>
+
+  {% if section.settings.youtube_id != blank %}
+  <div class="section--overlap-video-image-block__inner">
+    <div class="site-container--slim">
+      <a class="toggle-video" id="toggle-video-{{ section.id }}" href="{{ section.settings.video }}"><i class="fa fa-fw fa-play"></i></a>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Overlap Vid/Img Block",
+  "settings":[
+    {
+      "type": "text",
+      "id": "youtube_id",
+      "label": "YouTube Video ID",
+      "info": "Ex: zXy88aUc. Leave blank to use Image content instead"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_image_placeholder",
+      "label": "Video Image Placeholder",
+      "info": "Image placeholder overlaid on video (used with video)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image Content",
+      "info": "Image (instead of video)"
+    },
+    {
+      "type":"checkbox",
+      "id":"has_border",
+      "label":"Has Border?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"has_overlap",
+      "label":"Has Overlap?",
+      "default":true,
+      "info": "Negative top overlap (pulls content up)"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "default": "#fff",
+      "label": "Content Border Color"
+    },
+    {
+      "type":"checkbox",
+      "id":"padding_bottom",
+      "label":"Padding Bottom?",
+      "default":true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Overlap Vid/Img Block"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+<div class="site-container--blog-help">
+  <style>
+    .blog-help__header {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+    .blog-help__header.lazyloaded,
+    .blog-help__header[data-was-processed="true"] {opacity:1;}
+    @media screen and (max-width: 150px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '300x' }}');}
+      }
+      @media screen and (min-width: 151px) and (max-width: 300px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '600x' }}');}
+      }
+      @media screen and (min-width: 301px) and (max-width: 600px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '900x' }}');}
+      }
+      @media screen and (min-width: 601px) and (max-width: 800px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '1200x' }}');}
+      }
+      @media screen and (min-width: 801px) and (max-width: 1000px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '1400x' }}');}
+      }
+      @media screen and (min-width: 1001px) and (max-width: 1500px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '2000x' }}');}
+      }
+      @media screen and (min-width: 1501px) {
+        .blog-help__header {background-image: url('{{ section.settings.header_image | img_url: '3000x' }}');}
+      }
+    }
+  </style>
+  <header class="blog-help__header lazy">
+    <div role="menu" class="blog-help__nav">
+      <ul>
+        <li><a role="menuitem" aria-label="Other Articles Clickable Menu Item" class="other" href="/blogs/help/tagged/{{ 'Other' | handleize }}?view=all" title="View All Other">Other</a></li>
+        <li><a role="menuitem" aria-label="Adventure Tool Articles Clickable Menu Item" class="adventure-tools" href="/blogs/help/tagged/{{ 'adventure tools' | handleize }}?view=all" title="View All Adventure Tools">Adventure Tools</a></li>
+        <li><a role="menuitem" aria-label="Heroclip Articles Clickable Menu Item" class="heroclip" href="/blogs/help/tagged/{{ 'Heroclip' | handleize }}?view=all" title="View All Heroclip">Heroclip</a></li>
+        <li><a role="menuitem" aria-label="Tenacious Tape Articles Clickable Menu Item" class="tenacious-tape" href="/blogs/help/tagged/{{ 'Tenacious Tape' | handleize }}?view=all" title="View All Tenacious Tape">Tenacious Tape</a></li>
+        <li><a role="menuitem" aria-label="Revivex Articles Clickable Menu Item" class="revivex" href="/blogs/help/tagged/{{ 'ReviveX' | handleize }}?view=all" title="View All Revivex">Revivex</a></li>
+        <li><a role="menuitem" aria-label="SeamGrip Articles Clickable Menu Item" class="seam-grip" href="/blogs/help/tagged/{{ 'Seam Grip' | handleize }}?view=all" title="View Seam Grip">Seam Grip</a></li>
+        <li><a role="menuitem" aria-label="Aquaseal Articles Clickable Menu Item" class="aquaseal" href="/blogs/help/tagged/{{ 'aquaseal' | handleize }}?view=all" title="View All Aquaseal">Aquaseal</a></li>
+      </ul>
+    </div>
+  </header>
+  <section class="site-container blog-help__search">
+    <form class="form blog__search-form clearfix" action="/search" method="get">
+      <input type="hidden" name="type" value="article">
+      <input role="searchbox" aria-label="Searchbox" type="text" name="q" value="" placeholder="SEARCH" />
+      <button role="button" aria-label="Submit Search" type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+    </form><!-- site-header__form -->
+  </section>
+</div>
+{% schema %}
+  {
+    "name": "Blog Help Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "header_image",
+        "label": "Header Image"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

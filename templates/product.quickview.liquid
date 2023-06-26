@@ -1,0 +1,27 @@
+{% layout none %}
+
+{% comment %}
+Including Shopify's reviews JS because it doesn't get 
+injected since we're loading this file with layout none
+{% endcomment %}
+<script type="text/javascript" async="" src="//productreviews.shopifycdn.com/assets/v4/spr.js?shop=gear-aid.myshopify.com"></script>
+
+{% assign show_gallery_controls = false %}
+{% if product.images.size > 1 %}
+{% assign show_gallery_controls = true %}
+{% endif %}
+{% if product.images.size >= 1 %}
+{% if product.metafields.gear_aid.youtube_id != blank %}
+{% assign show_gallery_controls = true %}
+{% endif %}
+{% endif %}
+
+<main class="site-content site-content--no-sidebar" itemscope itemtype="http://schema.org/Product" role="main">
+  {% section 'product-template' %}
+</main><!-- site-content -->
+
+{% include 'photoswipe' %}
+
+{% if product.metafields.gear_aid.youtube_id %}
+  {% include 'scripts-youtube' %}
+{% endif %}

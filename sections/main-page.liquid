@@ -1,0 +1,40 @@
+{% include 'page-utility' %}
+{%- if section.settings.show_title or section.settings.show_content -%}
+  <div class="site-container">
+    <section class="page-main">
+      {%- if section.settings.show_title -%}
+        <header class="page-header">
+          <h1>{{ page.title }}</h1>
+        </header><!-- page-header -->
+      {%- endif -%}
+      {%- if section.settings.show_content -%}
+        <div class="page-content">
+          {{ page.content }}
+
+          {%- if page.handle == 'ingredients' -%}
+            {% include 'product-ingredients-table' %}
+          {%- endif -%}
+        </div><!-- page-content -->
+      {%- endif -%}
+    </section><!-- page-main -->
+  </div><!-- site-container -->
+{%- endif -%}
+{% schema %}
+{
+  "name": "Page settings",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_content",
+      "label": "Show content",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

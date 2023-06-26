@@ -1,0 +1,204 @@
+<main class="site-content" role="main">
+  {% if section.settings.header_image != blank %}
+    <style>
+      .sales-doc__header {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+      .sales-doc__header.lazyloaded,
+      .sales-doc__header[data-was-processed="true"] {opacity:1;}
+      @media screen and (max-width: 150px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '300x' }}');}
+        }
+        @media screen and (min-width: 151px) and (max-width: 300px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '600x' }}');}
+        }
+        @media screen and (min-width: 301px) and (max-width: 600px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '900x' }}');}
+        }
+        @media screen and (min-width: 601px) and (max-width: 800px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '1200x' }}');}
+        }
+        @media screen and (min-width: 801px) and (max-width: 1000px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '1400x' }}');}
+        }
+        @media screen and (min-width: 1001px) and (max-width: 1500px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '2000x' }}');}
+        }
+        @media screen and (min-width: 1501px) {
+          .sales-doc__header {background-image: url('{{ section.settings.header_image | img_url: '3000x' }}');}
+        }
+      }
+    </style>
+    <header class="sales-doc__header lazy">
+      <div class="hero-title">
+        <h1 class="article-title" itemprop="name">{{ page.title }}</h1>
+        <p>{{ page.content }}</p>
+      </div>
+    </header>
+  {% endif %}
+  <div class="site-container--slim site-container--sales-documentation site-flexbox">
+    <div class="page-main">
+      <div class="page-content">
+        <div class="site-flexbox grid">
+          <article itemscope itemtype="http://schema.org/Article">
+            {% if section.settings.header_image == blank %}
+              <header class="page-header">
+                <h1 class="article-title" itemprop="name">{{ page.title }}</h1>
+                <p>{{ page.content }}</p>
+              </header><!-- page-header -->
+            {% endif %}
+            <div class="document-section sales-materials">
+              {% for block in section.blocks %}
+                {% if block.type == 'sales_material' %}
+                  <div class="material">
+                    <img class="material-image" src="{{ block.settings.image | img_url:'200x400' }}" alt="{{ block.settings.title }}" />
+                    <div class="material-header">
+                      <h2>{{ block.settings.title }}</h2>
+                      <a href="{{ block.settings.doc_url }}"target="_blank" download title="Sales Material">Download</a>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% comment %}  <div class="document-section clearfix">
+              <h2>Aquaseal</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'aquaseal' %}
+                  <div class="doc-wrapper">
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section clearfix">
+              <h2>Seam Grip</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'seam_grip' %}
+                  <div class="doc-wrapper">
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section clearfix">
+              <h2>Revivex</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'revivex' %}
+                  <div class="doc-wrapper">
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                   </div> 
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section clearfix">
+              <h2>Tenacious Tape</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'tenacious_tape' %}
+                  <div class="doc-wrapper">
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section clearfix">
+              <h2>Adventure Tools</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'adventure_tools' %}
+                  <div class="doc-wrapper">  
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+               <div class="document-section clearfix">
+              <h2>Heroclip</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'heroclip' %}
+                  <div class="doc-wrapper">  
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section clearfix">
+              <h2>Other</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'other' %}
+                  <div class="doc-wrapper">
+                    <a href="{{ block.settings.doc_url }}" target="_blank" download title="Sales Doc"><span class="doc-title">{{ block.settings.title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div> {% endcomment %}
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% schema %}
+{
+  "name": "Sales Documentation",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Hero Image",
+      "info": "Image should be 3000px x 1000px, leave blank to hide"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "sales_doc",
+      "name": "Sales Doc",
+      "settings": [
+        {
+        "type": "text",
+        "id": "title",
+        "label": "Doc Title"
+        },
+        {
+          "type": "text",
+          "id": "doc_url",
+          "label": "Doc URL",
+          "info": "Copy and paste url from files section in the Shopify admin, settings -> files"
+        },
+        {
+          "type": "radio",
+          "id": "doc_section",
+          "options": [
+            {"value": "aquaseal", "label": "Aquaseal"},
+            {"value": "seam_grip", "label": "Seam Grip"},
+            {"value": "revivex", "label": "Revivex"},
+            {"value": "tenacious_tape", "label": "Tenacious Tape"},
+            {"value": "adventure_tools", "label": "Adventure Tools"},
+            {"value": "heroclip","label": "Heroclip"},
+            {"value": "other", "label": "Other"}
+          ],
+          "label": "Doc Section"
+        }
+      ]
+    },
+    {
+      "type": "sales_material",
+      "name": "Sales Material",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Sales Material Title"
+        },
+        {
+          "type": "text",
+          "id": "doc_url",
+          "label": "Sales Material URL",
+          "info": "Copy and paste url from files section in the Shopify admin, settings -> files"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Sales Material Image",
+          "info": "Image should be 200px x 400px"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

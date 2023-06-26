@@ -1,0 +1,527 @@
+<main class="site-content site-content--no-sidebar" role="main">
+
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'hero' %}
+        {% include 'section-hero' %}
+      {% when 'heading' %}
+        {% include 'section-heading' %}
+      {% when 'content-slider' %}
+        {% include 'section-content-slider' %}
+      {% when 'list' %}
+        {% include 'section-list' %}
+      {% when 'image' %}
+        {% include 'section-image' %}
+      {% when 'brands' %}
+        {% include 'section-brands' %}
+      {% when 'infographic' %}
+        {% include 'section-infographic' %}
+      {% when 'video' %}
+        {% include 'section-video' %}
+      {% when 'collections-listing' %}
+        {% include 'section-collections-listing' %}
+      {% when 'text-content' %}
+        {% include 'section-text-content' %}
+      {% else %}
+    {% endcase %}
+  {% endfor %}
+
+
+</main>
+{% schema %}
+{
+  "name": "Repair, Renew, Reuse",
+  "blocks":[
+    {
+      "type":"hero",
+      "name":"Hero",
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"bkgd_image",
+          "label":"Background Image"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"Learn More Link"
+        },
+        {
+          "type":"textarea",
+          "id":"description",
+          "label":"Description"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"image_picker",
+          "id":"footer_img",
+          "label":"Footer Image"
+        }
+      ]
+    },
+    {
+      "type":"heading",
+      "name":"Section Heading",
+      "settings": [
+        {
+          "type":"image_picker",
+          "id":"bkgd_image",
+          "label":"Background Image"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"text",
+          "id":"content_heading",
+          "label":"Content Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content_body",
+          "label":"Content Body"
+        }
+      ]
+    },
+    {
+      "type":"content-slider",
+      "name":"Content Slider",
+      "settings":[
+        {
+          "type":"header",
+          "content":"Slide #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_1",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_1",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_1",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_1",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_1",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Slide #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_2",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_2",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_2",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_2",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Slide #3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_3",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_3",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_3",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_3",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_3",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Slide #4"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_4",
+          "label":"Image"
+        },
+        {
+          "type":"text",
+          "id":"title_4",
+          "label":"Title"
+        },
+        {
+          "type":"richtext",
+          "id":"content_4",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text_4",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url_4",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type":"list",
+      "name":"List",
+      "settings": [
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"html",
+          "id":"list_1",
+          "label":"List 1"
+        },
+        {
+          "type":"html",
+          "id":"list_2",
+          "label":"List 2"
+        },
+        {
+          "type":"text",
+          "id":"bottom_heading",
+          "label":"Bottom Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"bottom_content",
+          "label":"Bottom Content"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type":"image",
+      "name":"Image",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bkgd_color",
+          "label":"Background Color",
+          "default":"#fff"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"richtext",
+          "id":"text_content",
+          "label":"Text Content"
+        }
+      ]
+    },
+    {
+      "type":"brands",
+      "name":"Brands",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Text Content"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        },
+        {
+          "type":"header",
+          "content":"Brand #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_1",
+          "label":"Image #1"
+        },
+        {
+          "type":"text",
+          "id":"text_1",
+          "label":"Text #1"
+        },
+        {
+          "type":"url",
+          "id":"link_1",
+          "label":"Link #1"
+        },
+        {
+          "type":"header",
+          "content":"Brand #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image #2"
+        },
+        {
+          "type":"text",
+          "id":"text_2",
+          "label":"Text #2"
+        },
+        {
+          "type":"url",
+          "id":"link_2",
+          "label":"Link #2"
+        },
+        {
+          "type":"header",
+          "content":"Brand #3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_3",
+          "label":"Image #3"
+        },
+        {
+          "type":"text",
+          "id":"text_3",
+          "label":"Text #3"
+        },
+        {
+          "type":"url",
+          "id":"link_3",
+          "label":"Link #3"
+        },
+        {
+          "type":"header",
+          "content":"Brand #4"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_4",
+          "label":"Image #4"
+        },
+        {
+          "type":"text",
+          "id":"text_4",
+          "label":"Text #4"
+        },
+        {
+          "type":"url",
+          "id":"link_4",
+          "label":"Link #4"
+        }
+      ]
+    },
+    {
+      "type":"infographic",
+      "name":"Infographic",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading 1"
+        },
+        {
+          "type":"richtext",
+          "id":"content_1",
+          "label":"Content 1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_1",
+          "label":"Image #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_3",
+          "label":"Image #3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_4",
+          "label":"Image #4"
+        },
+        {
+          "type":"text",
+          "id":"title_2",
+          "label":"Heading 2"
+        },
+        {
+          "type":"richtext",
+          "id":"content_2",
+          "label":"Content 2"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "video_image",
+          "label": "Video Background Image",
+          "info": "Should be a horizontal JPG"
+        },
+        {
+          "type": "text",
+          "id": "video_heading",
+          "label": "Video Spotlight Title"
+        },
+        {
+          "type": "video_url",
+          "id": "video",
+          "label": "Video URL",
+          "accept": ["youtube"],
+          "default": "https://www.youtube.com/watch?v=LWg4nUOBFX4"
+        }
+      ]
+    },
+    {
+      "type": "collections-listing",
+      "name": "Collections Listing",
+      "settings":[
+        {
+          "type":"link_list",
+          "id":"linklist",
+          "label":"Linklist"
+        }
+      ]
+    },
+    {
+      "type": "text-content",
+      "name": "Text Content",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bkgd_color",
+          "label":"Background Color"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image",
+          "info":"Leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        },
+        {
+          "type":"text",
+          "id":"box_1_title",
+          "label":"Box 1 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_1_text",
+          "label":"Box 1 Text"
+        },
+        {
+          "type":"text",
+          "id":"box_2_title",
+          "label":"Box 2 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_2_text",
+          "label":"Box 2 Text"
+        },
+        {
+          "type":"text",
+          "id":"box_3_title",
+          "label":"Box 3 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_3_text",
+          "label":"Box 3 Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

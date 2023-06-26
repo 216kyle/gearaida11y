@@ -1,0 +1,12 @@
+<script>
+(function(r,oo,t,s,ra,te,d){if(!r[ra]){(r.GlobalRootsRatedNamespace=
+    r.GlobalRootsRatedNamespace||[]).push(ra);r[ra]=function(){(r[ra].q=
+    r[ra].q||[]).push(arguments)};r[ra].q=r[ra].q||[];te=oo.createElement(t);
+    d=oo.getElementsByTagName(t)[0];te.async=1;te.src=s;d.parentNode.insertBefore(te,d)
+    }}(window,document,'script','https://static.getmatcha.com/rootsrated.min.js','rr'));
+    rr('config', 'globalChannelToken', 'D9b3mEqcFm9xtuNVsMz3rc37');
+
+          {% if customer %}
+            rr('identify', 'user', 'shopify', '{{ shop.permanent_domain }}', '{{ customer.id }}');
+          {% endif %}</script>
+        

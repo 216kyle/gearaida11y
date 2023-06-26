@@ -1,0 +1,12 @@
+<div id="collections-listing" {{ block.shopify_attributes }}>
+  {% for link in linklists[block.settings.linklist].links %}
+  {% assign collection = link.object %}
+  <article class="collection-section collection-section--{{ collection.id }}">
+    <a class="collection-section__content" href="{{ link.url }}" title="{{ collection.title | escape }}">
+      <h2>{{ link.title }}</h2>
+      <p>{{- collection.description | strip_html -}}</p>
+      <button class="btn btn-alt">Learn More</button>
+    </a>
+  </article>
+  {% endfor %}
+</div>

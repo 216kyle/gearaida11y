@@ -1,0 +1,17 @@
+{%- assign collection = collections[block.settings.collection] -%}
+<article class="{{ section.settings.collections_per_row }} collection collection--{{ collection.id }} collection--{{ forloop.index }}" {{ block.attributes }}>
+  <a class="collection__image-wrapper" href="{{ collection.url }}">
+    {% assign featured_image = collection.image %}
+    {% if featured_image %}
+    <img class="collection__image" srcset="{{ featured_image | img_url: 'grande' }} 1x, {{ featured_image | img_url: '1024x1024' }} 2x" src="{{ featured_image | img_url: 'grande' }}" alt="{{ featured_image.alt | escape }}">
+    {% else %}
+    {% assign featured_image = collection.products.first.selected_or_first_available_variant.featured_image | default: prod.featured_image %}
+    <img class="collection__image" srcset="{{ featured_image | img_url: 'grande' }} 1x, {{ featured_image | img_url: '1024x1024' }} 2x" src="{{ featured_image | img_url: 'grande' }}" alt="{{ featured_image.alt | escape }}">
+    {% endif %}
+  </a><!-- collection__image-wrapper -->
+  <header class="collection__header clearfix">
+    <h2 class="collection__title">
+      <a href="{{ collection.url }}" title="{{ collection.title | strip_html | escape }}">{{ collection.title }}</a>
+    </h2>
+  </header><!-- collection_header -->
+</article><!-- collection -->

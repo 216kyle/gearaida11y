@@ -1,0 +1,85 @@
+<div class="section section--press section--press-{{ section.id }}" {{ section.shopify_attributes }}>
+
+  <div class="center bg-white w-90pc work-with-us">
+    {% if section.settings.title != blank %}
+      <h2 class="center primary-font work-with-us__title">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.title2 != blank %}
+      <h5 class="center secondary-font work-with-us__text">{{ section.settings.title2 }}</h5>
+    {% endif %}
+    {% if section.settings.title3 != blank %}
+      <h5 class="center secondary-font work-with-us__text">{{ section.settings.title3 }}</h5>
+    {% endif %}
+  
+    {% comment %} Desktop Layout {% endcomment %}
+    <div class="center work-with-us__image hidden_mobile">
+      {% for block in section.blocks %}
+        <img src="{{ block.settings.image | img_url: '150x' }}" alt="{{ block.settings.image.alt | escape | default: shop.name }}">
+      {% endfor%}
+    </div>
+
+    {% comment %} Mobile Layout (Slider) {% endcomment %}
+    <div class="center work-with-us__image work-with-us__slider swiper-container hidden_desktop">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <img src="{{ block.settings.image | img_url: '150x' }}" alt="{{ block.settings.image.alt | escape | default: shop.name }}">
+          </div>
+        {% endfor %}
+      </div>
+      {% if section.blocks.size > 1 %}
+        <div class="swiper-button-prev swiper-button-black"></div>
+        <div class="swiper-button-next swiper-button-black"></div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(){
+      const swiper = new Swiper('.work-with-us__slider', {
+        loop: false,
+        effect: 'slide',
+        speed: 600,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
+      });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Landing Work With Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Label 1"
+    },
+    {
+        "type": "text",
+        "id": "title2",
+        "label": "Label 2"
+    },
+    {
+        "type": "text",
+        "id": "title3",
+        "label": "Label 3"
+    }
+  ],
+  "max_blocks": 12,
+  "blocks":[
+    {
+      "type":"press_item",
+      "name":"Image Item",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

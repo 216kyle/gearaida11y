@@ -1,0 +1,57 @@
+<div class="modal-wrapper modal-wrapper--video">
+  <span class="modal__close">
+    <svg stroke="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><line stroke-width="1" x1="2" x2="30" y1="2" y2="30"/><line stroke-width="1" x1="2" x2="30" y1="30" y2="2"/></svg>
+  </span><!-- modal__close -->
+  <div class="modal modal--type-video">
+    <div class="modal__content-wrapper">
+      <div class="modal__content">
+        <div class="video-responsive">
+          <iframe width="560" height="315" src frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div><!-- modal__content -->
+    </div><!-- modal__content-wrapper -->
+  </div><!-- modal -->
+</div><!-- modal-wrapper -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  (function($){
+    $(function(){
+      // variables
+      var modalWrapper 		    = $('.modal-wrapper--video'),
+          modal		   		      = $('.modal-wrapper--video .modal'),
+          modalClose   		    = $('.modal-wrapper--video .modal__close'),
+          modalContent 		    = $('.modal-wrapper--video .modal__content'),
+          modalIframe         = $('.modal-wrapper--video .modal__content iframe'),
+          modalContentWrapper = $('.modal-wrapper--video .modal__content-wrapper');
+
+      $('.video__modal-open').on('click', function(e){
+        e.preventDefault();
+        var ytId  = $(this).data( "embed" ),
+            ytSrc = "https://www.youtube.com/embed/" + ytId;
+        // open modal
+        if (ytId != '') {
+          $('body').addClass('modal-shown');
+          $(modalWrapper).addClass('shown');
+          $(modal).addClass('animate');
+          $(modalIframe).attr('src', ytSrc);
+          setTimeout(function(){
+            $(modalContentWrapper).addClass('animate');
+          });
+        }
+      });
+
+      // closes modal
+      function closeModal(e){
+        e.preventDefault();
+        $('body').removeClass('modal-shown');
+        $(modal).removeClass('animate');
+        $(modalWrapper).removeClass('shown');
+        $(modalContentWrapper).removeClass('animate');
+        modalIframe.attr('src', "");
+      }
+
+      $(modalClose).on('click', closeModal);
+    });
+  })(jQuery)
+});
+</script>

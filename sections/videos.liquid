@@ -1,0 +1,314 @@
+{% for block in section.blocks %}
+  {% if block.type == 'product_video' %}
+    <style>
+      .video__bkgd--{{ block.id }} {background-size:cover;background-position:center;background-color:#fafafa;opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+      .video__bkgd--{{ block.id }}.lazyloaded,
+      .video__bkgd--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+      @media screen and (min-width: 151px) and (max-width: 300px) {
+        .video__bkgd--{{ block.id }} {background-image: url('{{ block.settings.video_img | img_url: '600x' }}');}
+      }
+      @media screen and (min-width: 301px) and (max-width: 600px) {
+        .video__bkgd--{{ block.id }} {background-image: url('{{ block.settings.video_img | img_url: '800x' }}');}
+      }
+      @media screen and (min-width: 601px) and (max-width: 800px) {
+        .video__bkgd--{{ block.id }} {background-image: url('{{ block.settings.video_img | img_url: '900x' }}');}
+      }
+      @media screen and (min-width: 801px) and (max-width: 1000px) {
+        .video__bkgd--{{ block.id }} {background-image: url('{{ block.settings.video_img | img_url: '1200x' }}');}
+      }
+      @media screen and (min-width: 1001px) {
+        .video__bkgd--{{ block.id }} {background-image: url('{{ block.settings.video_img | img_url: '1200x' }}');}
+      }
+    </style>
+  {% endif %}
+{% endfor %}
+<main class="site-content site-content--has-sidebar site-content--sidebar-left" role="main">
+  <div class="site-container site-container--videos site-flexbox">
+    
+    {% include 'blog-help-side-nav' %}
+    
+    <div class="page-main">
+      <div class="page-content">
+        <div class="site-flexbox grid">
+          <article itemscope itemtype="http://schema.org/Article">
+            <header class="page-header">
+              <h1 class="video-section-title">Videos</h1>
+              <p>Discover all the videos you need to learn more about Gear Aid products, our company, and special campaigns / events. Great for new or seasoned DIYers who love gear and the outdoors.</p>
+            </header>
+            <div class="site-flexbox grid">
+              <figure class="featured-video column100">{{ section.settings.featured_video_embed }}</figure>
+            </div>
+            <section class="video-section">
+              <header class="page-header">
+                <h2 class="video-section-title">Aquaseal</h2>
+              </header>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'aquaseal' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if block_counter == 7 %}
+                <div class="video-view-all">
+                  <a href="#" class="video-view-all-link btn" title="View All Link">View All</a>
+                </div>
+              {% endif %}
+              <div class="site-flexbox grid grid--gutters video-view-all-section">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'aquaseal' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+            <section class="video-section">
+              <header class="page-header">
+                <h2 class="video-section-title">Seam Grip</h2>
+              </header>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'seam_grip' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if block_counter == 7 %}
+                <div class="video-view-all">
+                  <a href="#" class="video-view-all-link btn" title="View All Link">View All</a>
+                </div>
+              {% endif %}
+              <div class="site-flexbox grid grid--gutters video-view-all-section">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'seam_grip' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+            <section class="video-section">
+              <header class="page-header">
+                <h2 class="video-section-title">Revivex</h2>
+              </header>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'revivex' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if block_counter == 7 %}
+                <div class="video-view-all">
+                  <a href="#" class="video-view-all-link btn" title="View All Link">View All</a>
+                </div>
+              {% endif %}
+              <div class="site-flexbox grid grid--gutters video-view-all-section">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'revivex' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+            <section class="video-section">
+              <header class="page-header">
+                <h2 class="video-section-title">Tenacious Tape</h2>
+              </header>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'tenacious_tape' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if block_counter == 7 %}
+                <div class="video-view-all">
+                  <a href="#" class="video-view-all-link btn" title="View All Link">View All</a>
+                </div>
+              {% endif %}
+              <div class="site-flexbox grid grid--gutters video-view-all-section">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'tenacious_tape' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+            <section class="video-section">
+              <header class="page-header">
+                <h2 class="video-section-title">Adventure Tools</h2>
+              </header>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'adventure_tools' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if block_counter == 7 %}
+                <div class="video-view-all">
+                  <a href="#" class="video-view-all-link btn" title="View All Link">View All</a>
+                </div>
+              {% endif %}
+              <div class="site-flexbox grid grid--gutters video-view-all-section">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'adventure_tools' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+            <section class="video-section">
+              <header class="page-header">
+                <h2 class="video-section-title">Other</h2>
+              </header>
+              <div class="site-flexbox grid grid--gutters">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'other' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      {% break %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if block_counter == 7 %}
+                <div class="video-view-all">
+                  <a href="#" class="video-view-all-link btn" title="View All Link">View All</a>
+                </div>
+              {% endif %}
+              <div class="site-flexbox grid grid--gutters video-view-all-section">
+                {% assign block_counter = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.settings.video_section == 'other' %}
+                    {% if block_counter < 6 %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                    {% else %}
+                      {% assign block_counter = block_counter | plus: 1 %}
+                      <a href="#" class="video column50 video__modal-open video__bkgd video__bkgd--{{ block.id }} lazy" title="Product Video" data-embed="{{ block.settings.video_id }}"></a>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </section>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div><!-- site-container -->
+</main><!-- site-content -->
+{% include 'video-modal' %}
+
+{% schema %}
+{
+  "name": "Product Videos",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "featured_video_embed",
+      "label": "Featured Video Embed Code"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_video",
+      "name": "Product Video",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "video_img",
+          "label": "Video preview image."
+        },
+        {
+          "type": "text",
+          "id": "video_id",
+          "label": "Video ID",
+          "info": "11 character ID found at end of youtube video URL"
+        },
+        {
+          "type": "radio",
+          "id": "video_section",
+          "options": [
+            {"value": "aquaseal", "label": "Aquaseal"},
+            {"value": "seam_grip", "label": "Seam Grip"},
+            {"value": "revivex", "label": "Revivex"},
+            {"value": "tenacious_tape", "label": "Tenacious Tape"},
+            {"value": "adventure_tools", "label": "Adventure Tools"},
+            {"value": "other", "label": "Other"}
+          ],
+          "label": "Video Section"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

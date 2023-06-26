@@ -1,0 +1,33 @@
+<section class="brands" {{ block.shopify_attributes }}>
+  <div class="brands__left">
+    <h3>{{ block.settings.title }}</h3>
+    {{ block.settings.content }}
+    <a href="{{ block.settings.link_url }}" class="btn btn-alt" title="Go to Learn more">Learn More</a>
+  </div>
+  <div class="brands__right">
+    <div class="brand">
+      <a href="{{ block.settings.link_1 }}" title="{{ block.settings.text_1 }}">
+        <img src="{{ block.settings.image_1 | img_url: '600x' }}" alt="{{ block.settings.image_1.alt }}" />
+        <span>{{ block.settings.text_1 }}</span>
+      </a>
+    </div>
+    <div class="brand">
+      <a href="{{ block.settings.link_2 }}" title="{{ block.settings.text_2 }}">
+        <img src="{{ block.settings.image_2 | img_url: '600x' }}" alt="{{ block.settings.image_2.alt }}" />
+        <span>{{ block.settings.text_2 }}</span>
+      </a>
+    </div>
+    <div class="brand">
+      <a href="{{ block.settings.link_3 }}" title="{{ block.settings.text_3 }}">
+        <img src="{{ block.settings.image_3 | img_url: '600x' }}" alt="{{ block.settings.image_3.alt }}" />
+        <span>{{ block.settings.text_3 }}</span>
+      </a>
+    </div>
+    <div class="brand">
+      <a href="{{ block.settings.link_4 }}" title="{{ block.settings.text_4 }}">
+        <img src="{{ block.settings.image_4 | img_url: '600x' }}" alt="{{ block.settings.image_4.alt }}" />
+        <span>{{ block.settings.text_4 }}</span>
+      </a>
+    </div>
+  </div>
+</section>

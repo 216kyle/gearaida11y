@@ -1,0 +1,340 @@
+{% paginate collection.products by 100 %}
+<div class="site-content{% if section.settings.use_sidebar %} site-content--has-sidebar site-content--sidebar-left{% endif %}" role="main">
+  <header class="page-header-banner page-header-banner--{{ collection.id }}">
+    <div class="page-header_banner__contents">
+      <h1 role="heading" aria-label="{{ collection.title }} Collection" >{{ collection.title }}</h1>
+      <div role="paragraph" aria-label="{{ collection.description }}" class="page-header-banner__slogan">{{ collection.description | strip_html }}</div>
+    </div><!-- page-header_hero__contents -->
+  </header><!-- page-header-bkgd -->
+  <div id="family-intro">
+    <div class="site-container site-flexbox grid grid--gutters">
+      <div id="family-intro-image">
+        <img src="{{ section.settings.family_intro_image | img_url:'1000x' }}" alt="{{ collection.title | escape }}" />
+      </div><!-- family-intro-image -->
+      <div id="family-intro-text">
+        <h2 role="heading" >{{ section.settings.family_intro_title }}</h2>
+        {{ section.settings.family_intro_text }}
+        {% if section.settings.family_intro_btn_text != blank %}
+        <a role="button" href="{{ section.settings.family_intro_btn_url }}" class="btn">{{ section.settings.family_intro_btn_text }}</a>
+        {% endif %}
+      </div>
+    </div><!-- site-container -->
+  </div><!-- family-intro -->
+  <div class="site-container {% if section.settings.use_sidebar %}site-container--fluid site-flexbox{% endif %} site-container--collection">
+    {% if section.settings.use_sidebar %}
+    <div class="page-sidebar">
+      <div id="collection-filtering-close"><span><i class="fa fa-close"></i> Close</span></div>
+      {% include 'collection-filtering' %}
+    </div><!-- page-sidebar -->
+    {% endif %}
+    <div class="page-main">
+      <div class="page-content">
+        <div class="products site-flexbox grid grid--gutters">
+          {% if collection.products.size < 1 %}
+          <p class="no-products">Sorry, nothing is available at the moment.</p>
+          {% else %}
+          {% assign grid_sizing = section.settings.products_per_row  %}
+          {% for prod in collection.products %}
+          {% unless prod.tags contains 'Discontinued' %}
+          {% include 'product-loop', classes:grid_sizing, quickview:true %}
+          {% endunless %}
+          {% endfor %}
+          {% if paginate.items < 48 %}
+          {% comment %}Adding spacer to help with flexbox issues{% endcomment %}
+          <div class="{{ grid_sizing }} product-spacer"></div>
+          <div class="{{ grid_sizing }} product-spacer"></div>
+          {% endif %}
+          {% endif %}
+        </div><!-- products -->
+      </div><!-- page-content -->
+      {% if paginate.pages > 1 %}
+      <footer id="page-footer">
+        {% include 'pagination' %}
+      </footer><!-- page-footer -->
+      {% endif %}
+    </div><!-- page-main -->
+  </div><!-- site-container -->
+  {% if section.settings.family_tip_active %}
+  <div id="family-tip">
+    <div id="family-tip-content">
+      <img src="{{ 'gear-tip.png' | asset_url }}" alt="{{ collection.title | escape }} Gear Tip"/>
+      {% if section.settings.family_tip_title != blank %}<h2>{{ section.settings.family_tip_title }}</h2>{% endif %}
+      {{ section.settings.family_tip_text }}
+      {% if section.settings.family_tip_btn_text != blank %}
+      <a href="{{ section.settings.family_tip_btn_url }}" class="btn btn-alt">{{ section.settings.family_tip_btn_text }}</a>
+      {% endif %}
+    </div>
+  </div><!-- family-intro -->
+  {% endif %}
+  {% if section.settings.family_video_active %}
+  <div id="family-video" style="background: url({{ section.settings.family_video_image | img_url:'2000x' }}) no-repeat 50% 50%;background-size:cover;">
+    <div id="family-video-container">
+      <div id="family-video-content-wrapper">
+        <div id="family-video-content">
+          <a id="toggle-video" href="{{ section.settings.family_video }}"><i class="fa fa-fw fa-play"></i></a>
+          <h3>{{ section.settings.family_video_heading }}</h3>
+        </div><!-- family-video-content -->
+        <div id="family-video-player"></div>
+      </div><!-- family-video-content -->
+    </div>
+  </div><!-- family-video -->
+  {% endif %}
+</div><!-- site-content -->
+{% endpaginate %}
+{% include 'quickview-modal' %}
+{% include 'scripts-youtube' %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  (function($){
+    $(function(){
+
+      {% if section.settings.family_video_active %}
+      var tag = document.createElement('script'),
+      firstScriptTag = document.getElementsByTagName('script')[0];
+
+      tag.src = "https://www.youtube.com/iframe_api"; 
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      window.done = false;
+
+      window.onYouTubeIframeAPIReady = function() {
+      window.player = new YT.Player('family-video-player', {
+        height: '405',
+        width: '720',
+        videoId: '{{ section.settings.family_video.id }}',
+        playerVars: {
+          color: 'white',
+          rel: 0,
+          showinfo: 0,
+          playsinline: 1
+        },
+        events: {
+          'onStateChange': onPlayerStateChange
+        }
+      });
+      }
+      window.onPlayerReady = function(event) {
+        event.target.playVideo();
+      }
+
+      window.onPlayerStateChange = function(event) {
+      if (event.data == YT.PlayerState.PLAYING && !done) {
+        setTimeout(stopVideo, 3000);
+        done = true;
+      }
+      }
+      window.stopVideo = function() {
+        player.stopVideo();
+      }
+      window.pauseVideo = function() {
+        player.pauseVideo();
+      }
+
+
+      $('#toggle-video').on('click', function(event){
+        event.preventDefault();
+        player.playVideo();
+        setTimeout(function() {
+          $('#family-video').addClass('video-shown');
+        }, 500);
+      });
+      {% endif %}
+      // $('#filtering-toggle').on('click', function(){
+      //   $('body').toggleClass('modal-shown');
+      //   $('.page-sidebar').toggleClass('shown');
+      // });
+
+      // $('#filtering-close').on('click', function(){
+      //   $('body').toggleClass('modal-shown');
+      //   $('.page-').toggleClass('shown');
+      // });
+
+      // $('.filtering-group h3').on('click', function(){
+      //   $('i', this).toggleClass('fa-minus fa-plus');
+      //   $(this).parent().toggleClass('collapsed');
+      // });
+
+      Shopify.queryParams = {};
+      if (location.search.length) {
+        for (var aKeyValue, i = 0, aCouples = location.search.substr(1).split('&'); i < aCouples.length; i++) {
+          aKeyValue = aCouples[i].split('=');
+          if (aKeyValue.length > 1) {
+            Shopify.queryParams[decodeURIComponent(aKeyValue[0])] = decodeURIComponent(aKeyValue[1]);
+          }
+        }
+      }
+      $('.coll-picker').change(function() {
+        if ($(this).val()) {
+          location.href = '/collections/' + jQuery(this).val();
+        }
+        else {
+          location.href = '/collections/all';
+        }
+      });
+      var collFilters = $('.coll-filter');
+      collFilters.change(function() {
+        delete Shopify.queryParams.page;
+        var newTags = [];
+        collFilters.each(function() {
+          if ($(this).val()) {
+            newTags.push(jQuery(this).val());
+          }
+        });
+        {% if collection.handle %}
+        var newURL = '/collections/{{ collection.handle }}';
+        if (newTags.length) {
+          newURL += '/' + newTags.join('+');
+        }
+        var search = $.param(Shopify.queryParams);
+        if (search.length) {
+          newURL += '?' + search;
+        }
+        location.href = newURL;
+        {% else %}
+        if (newTags.length) {
+          Shopify.queryParams.constraint = newTags.join('+');
+        }
+        else {
+          delete Shopify.queryParams.constraint;
+        }
+        location.search = $.param(Shopify.queryParams);
+        {% endif %}
+      });
+      
+//       $('#sort-by-select').val('{{ collection.sort_by | default: collection.default_sort_by | escape }}').bind('change', function(){
+//         Shopify.queryParams.sort_by = $(this).val();
+//         location.search = $.param(Shopify.queryParams).replace(/\+/g, '%20');
+//       });
+
+    });
+  })(jQuery)
+});
+</script>
+{% schema %}
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Family Intro"
+      },
+      {
+        "type": "text",
+        "id": "family_intro_title",
+        "label": "Intro Title"
+      },
+      {
+        "type": "richtext",
+        "id": "family_intro_text",
+        "label": "Intro Text"
+      },
+      {
+        "type": "text",
+        "id": "family_intro_btn_text",
+        "label": "Button Text",
+        "info": "Leave blank to hide"
+      },
+      {
+        "type": "url",
+        "id": "family_intro_btn_url",
+        "label": "Button Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "family_intro_image",
+        "label": "Intro Image",
+        "info": "Should be a vertical, transparent PNG"
+      },
+      {
+        "type": "header",
+        "content": "Family Tip"
+      },
+      {
+        "type": "checkbox",
+        "id": "family_tip_active",
+        "label": "Use a gear tip?",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "family_tip_title",
+        "label": "Tip Title"
+      },
+      {
+        "type": "richtext",
+        "id": "family_tip_text",
+        "label": "Tip Text"
+      },
+      {
+        "type": "text",
+        "id": "family_tip_btn_text",
+        "label": "Button Text",
+        "info": "Leave blank to hide"
+      },
+      {
+        "type": "url",
+        "id": "family_tip_btn_url",
+        "label": "Button Link"
+      },
+      {
+        "type": "header",
+        "content": "Family Video"
+      },
+      {
+        "type": "checkbox",
+        "id": "family_video_active",
+        "label": "Use a video spotlight?",
+        "default": true
+      },
+      {
+        "type": "image_picker",
+        "id": "family_video_image",
+        "label": "Video Background Image",
+        "info": "Should be a horizontal JPG"
+      },
+      {
+        "type": "text",
+        "id": "family_video_heading",
+        "label": "Video Spotlight Title"
+      },
+      {
+        "type": "video_url",
+        "id": "family_video",
+        "label": "Video URL",
+        "accept": ["youtube"],
+        "default": "https://www.youtube.com/watch?v=LWg4nUOBFX4"
+      },
+      {
+        "type": "header",
+        "content": "Product Grid"
+      },
+      {
+        "label": "Products Per Row",
+        "type": "select",
+        "id": "products_per_row",
+        "options": [
+          {"label":"2", "value":"column50"},
+          {"label":"3", "value":"column33"},
+          {"label":"4", "value":"column25"}
+        ],
+        "default": "column33"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show Vendor?"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_type",
+        "label": "Show Type?"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_swatches",
+        "label": "Show Color Swatches?"
+      }
+    ]
+  }
+{% endschema %}

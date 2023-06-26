@@ -1,0 +1,66 @@
+{% assign this_page = '' %}
+{% if template == 'blog.all' %}
+  {% for tag in current_tags %}
+    {% case tag %}
+      {% when 'aquaseal' %}
+        {% assign this_page = 'aquaseal' %}
+      {% when 'Seam Grip' %}
+        {% assign this_page = 'seam_grip' %}
+      {% when 'ReviveX' %}
+        {% assign this_page = 'revivex' %}
+      {% when 'Tenacious Tape' %}
+        {% assign this_page = 'tenacious_tape' %}
+      {% when 'Heroclip' %}
+          {% assign this_page = 'Heroclip' %}
+      {% when 'adventure tools' %}
+        {% assign this_page = 'adventure_tools' %}
+      {% when 'Other' %}
+        {% assign this_page = 'other' %}
+    {% endcase %}
+  {% endfor %}
+{% elsif template == 'article' %}
+  {% for tag in article.tags %}
+    {% case tag %}
+      {% when 'aquaseal' %}
+        {% assign this_page = 'aquaseal' %}
+        {% break %}
+      {% when 'Seam Grip' %}
+        {% assign this_page = 'seam_grip' %}
+        {% break %}
+      {% when 'ReviveX' %}
+        {% assign this_page = 'revivex' %}
+        {% break %}
+      {% when 'Tenacious Tape' %}
+        {% assign this_page = 'tenacious_tape' %}
+        {% break %}
+      {% when 'Heroclip' %}
+        {% assign this_page = 'Heroclip' %}
+        {% break %}
+      {% when 'adventure tools' %}
+        {% assign this_page = 'adventure_tools' %}
+        {% break %}
+      {% when 'Other' %}
+        {% assign this_page = 'other' %}
+        {% break %}
+    {% endcase %}
+  {% endfor %}
+{% endif %}
+
+<div class="page-sidebar blog-page-sidebar">
+  <h1 role="Heading" Aria-Label="Find Help for the following products" class="page-sidebar__header">Help</h1>
+  <div class="page-sidebar__main">
+    {% render 'blog-help-side-nav-section', sec_title: 'Aquaseal', sec_handle: 'aquaseal', tag: 'aquaseal', this_page: this_page %}
+    {% render 'blog-help-side-nav-section', sec_title: 'Seam Grip', sec_handle: 'seam_grip', tag: 'Seam Grip', this_page: this_page %}
+    {% render 'blog-help-side-nav-section', sec_title: 'Revivex', sec_handle: 'revivex', tag: 'ReviveX', this_page: this_page %}
+    {% render 'blog-help-side-nav-section', sec_title: 'Tenacious Tape', sec_handle: 'tenacious_tape', tag: 'Tenacious Tape', this_page: this_page %}
+    {% render 'blog-help-side-nav-section', sec_title: 'Heroclip', sec_handle: 'Heroclip', tag: 'Heroclip', this_page: this_page %}
+    {% render 'blog-help-side-nav-section', sec_title: 'Adventure Tools', sec_handle: 'adventure_tools', tag: 'adventure tools', this_page: this_page %}
+    {% render 'blog-help-side-nav-section', sec_title: 'Other', sec_handle: 'other', tag: 'Other', this_page: this_page %}
+  </div>
+  <div role="menu" Aria-label="Documentation and Other information" class="page-sidebar__bottom">
+   {% comment %} <a role="menuitem" Aria-label="Product Documentation and Information" href="/pages/product-documentation" >Product Documentation</a> {% endcomment %}
+    <a role="menuitem" aria-label="Product Videos" href="/pages/videos" >Product Videos</a>
+    <a role="menuitem" aria-label="Product Frequently Asked Questions" href="/pages/faqs">FAQs</a>
+    <a role="menuitem" aria-label="Contact our team for help" href="/pages/contact-us" >Get Help</a>
+  </div>
+</div>

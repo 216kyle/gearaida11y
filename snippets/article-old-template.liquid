@@ -1,0 +1,61 @@
+<main class="site-content site-content--no-sidebar" role="main">
+  {% include 'page-utility' %}
+  <div class="site-container site-container--slim">
+    <article class="page-main page-main--{{ template | split: '.' | first | remove: '/' | remove: '_' | replace:'404','error-404' }}" itemscope itemtype="http://schema.org/Article">
+      <header class="page-header">
+        <h1 class="article-title" itemprop="name">{{ article.title }}</h1>
+        <p class="article-meta">
+          <time class="article-meta__item article-meta__item--published" pubdate date="{{ article.published_at | date: "%m/%d/%y" }}"><span itemprop="datePublished">{{ article.published_at | date: "%B %d, %Y" }}</span></time>
+          <span class="article-meta__item article-meta__item--sep">|</span> 
+          <a data-disqus-identifier="{{ article.id }}" href="#disqus_thread" class="article-meta__item article-meta__item--comments">No Comments</a>
+        </p><!-- article-meta -->
+      </header><!-- page-header -->
+      <div class="article-content" itemprop="content">
+        {{ article.content }}
+      </div><!-- article-content -->
+      {% if article.metafields.gear_aid.related_products %}
+      <div id="article__related-products">
+        <h3>Products from this article</h3>
+        <div class="products site-flexbox grid grid--gutters textile">
+          {% assign related_products = article.metafields.gear_aid.related_products | split: '|' %}
+          {% assign total = related_products.size %}
+          {% for product in related_products limit:6 %}
+          {% assign prod = all_products[product] %}
+          {% include 'product-loop', classes:'column33', quickview:false %}
+          {% endfor %}
+          {% if total == 4 %}
+          <div class="column33 product-break"></div>
+          <div class="column33 product-break"></div>
+          {% elsif total == 2 or total == 5 %}
+          <div class="column33 product-break"></div>
+          {% endif %}
+        </div>
+      </div><!--  // related-products  -->
+      {% endif %}
+      {% if article.comments_enabled? %}
+      <section id="comments" class="section section--article-comments">
+        <div class="section-content site-container site-container--slim">
+          <h2>Comments</h2>
+          <div id="disqus_thread"></div>
+        </div><!-- section-content -->
+      </section><!-- section--article-comments -->
+      {% endif %}
+      <footer class="article__footer" class="clearfix">
+        <div class="article__footer-sharing">
+          <div id="article-sharing" class="sharing-meta sharing-meta--icons-text">
+            <span id="sharing-title" class="sharing-meta-section">Share</span>
+            <span id="facebook-sharing" class="sharing-meta-section">
+              <a target="_blank" href='http://www.facebook.com/share.php?u={{ shop.url }}{{article.url}}' onclick="window.open('http://www.facebook.com/share.php?u={{ shop.url }}{{article.url}}&t={{ article.title }}', 'facebook_share', 'height=320, width=640, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no'); return false;"><i class="fa fa-facebook"></i> <span class="sharing-meta-service">Facebook</span></a>
+            </span><!-- sharing-meta-section -->
+            <span id="twitter-sharing" class="sharing-meta-section">
+              <a target="_blank" href='https://twitter.com/intent/tweet?text={{ article.title }}&nbsp;-&nbsp;&url={{ shop.url }}{{article.url}}&via=@{{ settings.social_twitter }}'><i class="fa fa-twitter"></i> <span class="sharing-meta-service">Twitter</span></a>
+            </span><!-- sharing-meta-section -->
+            <span id="pinterest-sharing" class="sharing-meta-section">
+              <a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ shop.name }}{{ article.url }}{% if article.image %}&media={{ article.image | img_url: '1024x1024' }}{% endif %}&description={{ article.excerpt | strip_html | escape }}"><i class="fa fa-pinterest"></i> <span class="sharing-meta-service">Pinterest</span></a>
+            </span><!-- sharing-meta-section -->
+          </div>
+        </div><!-- article__footer-sharing -->
+      </footer><!-- article__footer -->
+    </article><!-- page-main -->
+  </div><!-- site-container -->
+</main><!-- site-content -->

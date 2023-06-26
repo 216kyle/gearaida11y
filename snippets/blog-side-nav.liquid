@@ -1,0 +1,147 @@
+{% assign current_page = '' %}
+{% if template == 'blog.all' %}
+  {% for tag in current_tags %}
+    {% case tag %}
+      {% when 'Camping' %}
+        {% assign current_page = 'camping' %}
+      {% when 'Hike Run' %}
+        {% assign current_page = 'hike_run' %}
+      {% when 'hunt fish' %}
+        {% assign current_page = 'hunt_fish' %}
+      {% when 'paddle dive' %}
+        {% assign current_page = 'paddle_dive' %}
+      {% when 'snow' %}
+        {% assign current_page = 'snow' %}
+      {% when 'gear care' %}
+        {% assign current_page = 'gear_care' %}
+    {% endcase %}
+  {% endfor %}
+{% elsif template == 'article' %}
+  {% for tag in article.tags %}
+    {% case tag %}
+      {% when 'Camping' %}
+        {% assign current_page = 'camping' %}
+        {% break %}
+      {% when 'Hike Run' %}
+        {% assign current_page = 'hike_run' %}
+        {% break %}
+      {% when 'hunt fish' %}
+        {% assign current_page = 'hunt_fish' %}
+        {% break %}
+      {% when 'paddle dive' %}
+        {% assign current_page = 'paddle_dive' %}
+        {% break %}
+      {% when 'snow' %}
+        {% assign current_page = 'snow' %}
+        {% break %}
+      {% when 'gear care' %}
+        {% assign current_page = 'gear_care' %}
+        {% break %}
+    {% endcase %}
+  {% endfor %}
+{% endif %}
+
+<div class="page-sidebar blog-page-sidebar learn-blog-sidebar">
+  <h1 class="page-sidebar__header">Blog</h1>
+
+  
+  <div class="page-sidebar__main">
+  
+  <div class="page-sidebar__section {% if current_page == '' or current_page == 'gear_care' %}active{% endif %}">
+    <h3 role="heading" aria-label="Gear Care and Repair Articles" >Gear Care &amp; Repair <span class="toggle">{% if current_page == '' or current_page == 'gear_care' %}-{% else %}+{% endif %}</span></h3>
+    <ul class="page-sidebar__navigation">
+      {% assign article_counter = 0 %}
+      {% assign tag = 'gear care' %}
+      {% for article in blogs.learn.articles %}
+        {% if article.tags contains tag %}
+          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          {% assign article_counter = article_counter | plus: 1 %}
+          {% if article_counter >= 5 %}{% break %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      <li><a role="Button" aria-label="View All" class="view-all" href="/blogs/learn/tagged/{{ tag | handleize }}?view=all" >View All</a></li>
+    </ul>
+  </div>
+  
+  <div class="page-sidebar__section {% if current_page == 'camping' %}active{% endif %}">
+    <h3 role="heading" aria-label="Camping Articles">Camping <span class="toggle">{% if current_page == 'camping' %}-{% else %}+{% endif %}</span></h3>
+    <ul class="page-sidebar__navigation">
+      {% assign article_counter = 0 %}
+      {% assign tag = 'Camping' %}
+      {% for article in blogs.learn.articles %}
+        {% if article.tags contains tag %}
+          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          {% assign article_counter = article_counter | plus: 1 %}
+          {% if article_counter >= 5 %}{% break %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      <li><a role="button" aria-label="View All" class="view-all" href="/blogs/learn/tagged/{{ tag | handleize }}?view=all" >View All</a></li>
+    </ul>
+  </div>
+
+  <div class="page-sidebar__section {% if current_page == 'hike_run' %}active{% endif %}">
+    <h3 role="heading" aria-label="Hiking and Running Articles">Hiking &amp; Running <span class="toggle">{% if current_page == 'hike_run' %}-{% else %}+{% endif %}</span></h3>
+    <ul class="page-sidebar__navigation">
+      {% assign article_counter = 0 %}
+      {% assign tag = 'Hike Run' %}
+      {% for article in blogs.learn.articles %}
+        {% if article.tags contains tag %}
+          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          {% assign article_counter = article_counter | plus: 1 %}
+          {% if article_counter >= 5 %}{% break %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      <li><a role="button" aria-label="View All" class="view-all" href="/blogs/learn/tagged/{{ tag | handleize }}?view=all" >View All</a></li>
+    </ul>
+  </div>
+
+  <div class="page-sidebar__section {% if current_page == 'hunt_fish' %}active{% endif %}">
+    <h3 role="heading" aria-label="Hunting and Fishing Articles" >Hunting &amp; Fishing <span class="toggle">{% if current_page == 'hunt_fish' %}-{% else %}+{% endif %}</span></h3>
+    <ul class="page-sidebar__navigation">
+      {% assign article_counter = 0 %}
+      {% assign tag = 'hunt fish' %}
+      {% for article in blogs.learn.articles %}
+        {% if article.tags contains tag %}
+          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          {% assign article_counter = article_counter | plus: 1 %}
+          {% if article_counter >= 5 %}{% break %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      <li><a role="button" aria-label="View All" class="view-all" href="/blogs/learn/tagged/{{ tag | handleize }}?view=all" >View All</a></li>
+    </ul>
+  </div>
+
+  <div class="page-sidebar__section {% if current_page == 'paddle_dive' %}active{% endif %}">
+    <h3 role="heading" aria-label="Pabblesports and Diving Articles" >Paddlesports &amp; Diving <span class="toggle">{% if current_page == 'paddle_dive' %}-{% else %}+{% endif %}</span></h3>
+    <ul class="page-sidebar__navigation">
+      {% assign article_counter = 0 %}
+      {% assign tag = 'paddle dive' %}
+      {% for article in blogs.learn.articles %}
+        {% if article.tags contains tag %}
+          <li><a role="button" aria-label="{{ article.title }} href="{{ article.url }}">{{ article.title }}</a></li>
+          {% assign article_counter = article_counter | plus: 1 %}
+          {% if article_counter >= 5 %}{% break %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      <li><a role="button" aria-label="View All" class="view-all" href="/blogs/learn/tagged/{{ tag | handleize }}?view=all" >View All</a></li>
+    </ul>
+  </div>
+
+  <div class="page-sidebar__section {% if current_page == 'snow' %}active{% endif %}">
+    <h3 role="heading" aria-label="Snowsport Articles" >Snowsports <span class="toggle">{% if current_page == 'snow' %}-{% else %}+{% endif %}</span></h3>
+    <ul class="page-sidebar__navigation">
+      {% assign article_counter = 0 %}
+      {% assign tag = 'snow' %}
+      {% for article in blogs.learn.articles %}
+        {% if article.tags contains tag %}
+          <li><a role="button" aria-label="{{ article.title }} href="{{ article.url }}">{{ article.title }}</a></li>
+          {% assign article_counter = article_counter | plus: 1 %}
+          {% if article_counter >= 5 %}{% break %}{% endif %}
+        {% endif %}
+      {% endfor %}
+      <li><a role="button" aria-label="View All" class="view-all" href="/blogs/learn/tagged/{{ tag | handleize }}?view=all" >View All</a></li>
+    </ul>
+  </div>
+  </div>
+  <a role="Button" Aria-label="View All Articles" class="view-all view-all-main" href="/blogs/learn?view=all" >View All</a>
+</div>

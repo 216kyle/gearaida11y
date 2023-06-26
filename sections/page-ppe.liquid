@@ -1,0 +1,275 @@
+<section class="hero hero--ppe">
+  <figure class="hero__image lazy" data-src="{{ 'ppe-hero-bg.jpg' | asset_img_url: '3000x' }}"></figure>
+  <div class="hero__heading">
+    <div class="hero__heading-text">
+      <span>/ Learn</span>
+      <h1>Escaping<br>the fog.</h1>
+    </div>
+  </div>
+  <div class="hero__content" id="hero_content">
+    <div class="hero__content-item">
+      <h3 class="center">Navigating the new normal brings unique challenges in a post-pandemic world. Whether working in the frontlines or just waiting in line at the grocery store, we’re here to help when getting outside is necessary. Staying safe doesn’t have to be expensive or time-consuming with a little DIY attitude and GEAR AID products on hand.</h3>
+    </div>
+    <div class="hero__content-item hero__content-item--left">
+      {% include 'icon-ppe-goggles.svg' %}
+      <h3>Eye Protection</h3>
+      <p>For those of us who wear glasses, safety goggles, or face shields, fogging is more than a nuisance – it’s a safety issue. As soon as you put on a mask, your glasses fog up. There’s a simple fix for this and it works instantly. Just apply GEAR AID Anti-Fog Spray or Op Drops for clear and clean lenses.</p>
+    </div>
+    <div class="hero__content-item hero__content-item--right">
+    {% include 'icon-ppe-masks.svg' %}
+      <h3>Face Masks</h3>
+      <p>With face masks being required in many public places, the supply may not meet that demand, or it may get misplaced. We’re sharing our DIY knowledge in case a face mask is needed in a pinch. Simply use Tenacious Tape or a Sewing Kit and some old household items to build a temporary mask in minutes. </p>
+    </div>
+  </div>
+</section>
+
+<section class="full-width-ctas">
+  <div class="full-width-cta">
+    <img class="full-width-cta__image" src="{{ 'ppe-anti-fog.jpg' | asset_img_url: '600x' }}" alt="Anti-Fog Products" />
+    <div class="full-width-cta__text">
+      <h5>Anti-Fog</h5>
+      <p>Keep your eyewear and face shields fog free.</p>
+    </div>
+    <div class="full-width-cta__action">
+      <a class="btn" href="/products/anti-fog-spray">Shop Now</a>
+    </div>
+  </div>
+
+  <div class="full-width-cta">
+    <img class="full-width-cta__image" src="{{ 'ppe-kit.jpg' | asset_img_url: '600x' }}" alt="PPE Kit" />
+    <div class="full-width-cta__text">
+      <h5>DIY Mask</h5>
+      <p>Make your own mask with simple supplies.</p>
+    </div>
+    <div class="full-width-cta__action">
+      <a class="btn" href="/collections/ppe">Shop Now</a>
+    </div>
+  </div>
+</section>
+
+<section class="ppe-problem">
+  <img class="ppe-problem__image" src="{{ 'ppe-eye-protection.jpg' | asset_img_url: '3000x' }}" alt="Problem: My Glasses Fog">
+  <div class="ppe-problem__content">
+    <span>/Problem</span>
+    <h2>My Glasses Fog</h2>
+    <p>It’s a pesky problem when eyewear fogs up. Now it’s even more likely to happen when heading out the door wearing a mask. Use our Anti-Fog Spray or Op Drops™ to keep a variety of eyewear and protective lenses clean and fog-free. Both anti-fog formulas are alcohol-free and designed to prevent fogging on all types of lenses and optics including non-AR (anti-reflective) eyeglasses, sunglasses, safety glasses, and face shields.</p>
+  </div>
+</section>
+
+<section class="ppe-video">
+  <a href="#" data-embed="XSPKIYMT_xc" class="video__modal-open">
+    <figure class="ppe-video__image lazy" data-src="{{ 'ppe-anti-fog-video-bg.png' | asset_img_url: '1800x' }}"></figure>
+  </a>
+  <div class="ppe-video__text">
+    <h3>Simple Anti-fog tips:</h3>
+    <ul>
+      <li>Spray both inside and outside lenses.</li>
+      <li>Apply two coats on the first use.</li>
+      <li>Buff with a lint-free cloth.</li>
+      <li>Wear a cloth mask instead of a paper mask.</li>
+    </ul>
+    <p>Learn more about best practices to reduce fog while wearing a mask in our HELP center.</p>
+    <a href="/blogs/help/tagged/other?view=all" class="btn">Learn More</a>
+  </div>
+</section>
+
+<section class="full-width-ctas">
+  <div class="full-width-cta full-width-cta--no-bg">
+    {% assign fog_prod = all_products['anti-fog-spray'] %}
+    <div class="full-width-cta__image"><img  src="{{ fog_prod.featured_image | img_url: '600x' }}" alt="{{ fog_prod.title }}" /></div>
+    <div class="full-width-cta__text">
+      <h5>{{ fog_prod.title }}</h5>
+      <p>During any type of activity, whether indoor or outdoor, clear vision is essential. Count on GEAR AID Anti-Fog Spray to keep a variety of eyewear and protective lenses clean and fog-free.</p>
+    </div>
+    <div class="full-width-cta__action">
+      <a class="btn" href="{{ fog_prod.url }}">Shop Now</a>
+    </div>
+  </div>
+
+  <div class="full-width-cta full-width-cta--no-bg">
+    {% assign drops_prod = all_products['anti-fog-cleaner-op-drops'] %}
+    <img class="full-width-cta__image" src="{{ drops_prod.featured_image | img_url: '600x' }}" alt="{{ drops_prod.title }}" />
+    <div class="full-width-cta__text">
+      <h5>{{ drops_prod.title }}</h5>
+      <p>Clean and defog eyewear effectively with Op Drops™ Anti-Fog and Lens Cleaner. This 2-in-1 formula is gentle and alcohol-free, designed for all types of lenses and optics.</p>
+    </div>
+    <div class="full-width-cta__action">
+      <a class="btn" href="{{ drops_prod.url }}">Shop Now</a>
+    </div>
+  </div>
+  <hr />
+</section>
+
+<section class="ppe-problem">
+  <img class="ppe-problem__image" id="face-mask" src="{{ 'ppe-face-protection.jpg' | asset_img_url: '3000x' }}" alt="Problem: My Glasses Fog">
+  <div class="ppe-problem__content">
+    <span>/Problem</span>
+    <h2>I need to cover up.</h2>
+    <p>Face coverings are now an essential accessory when leaving home. If a mask is unavailable, order a GEAR AID Original BUFF® or make a DIY mask using a t-shirt, Tenacious Tape (or our Sewing Kit), and some household supplies. Either way, it’s a fun way to be courteous and cover up in public.</p>
+  </div>
+</section>
+
+<section class="full-width-ctas">
+  <div class="full-width-cta-header-image">
+    <img src="{{ 'ppe-mask-1.jpg' | asset_img_url: '1800x' }}" alt="GEAR AID Original BUFF"/>
+  </div>
+  <div class="full-width-cta full-width-cta--bottom-spacing full-width-cta--no-bg">
+    {% assign buff_prod = all_products['neck-gaiter-buff'] %}
+    <div class="full-width-cta__image"><img  src="{{ buff_prod.featured_image | img_url: '600x' }}" alt="{{ buff_prod.title }}" /></div>
+    <div class="full-width-cta__text">
+      <h5>GEAR AID Original BUFF</h5>
+      <p>The GEAR AID Original BUFF headwear protects the neck, face and head from harmful UV rays in the summer and from chilly temperatures during the winter. </p>
+    </div>
+    <div class="full-width-cta__action">
+      <a class="btn" href="{{ buff_prod.url }}">Shop Now</a>
+    </div>
+  </div>
+
+  <div class="full-width-cta-header-image">
+    <img src="{{ 'ppe-mask-2.jpg' | asset_img_url: '1800x' }}" alt="DIY Mask Kit"/>
+  </div>
+  <div class="full-width-cta full-width-cta--no-bg">
+    {% assign mask_prod = all_products['diy-face-mask-kit'] %}
+    <img class="full-width-cta__image" src="{{ mask_prod.featured_image | img_url: '600x' }}" alt="{{ mask_prod.title }}" />
+    <div class="full-width-cta__text">
+      <h5>{{ mask_prod.title }}</h5>
+      <p>Wearing a protective mask in public is now the new normal. In case it’s ever misplaced, or a family member needs a mask in a pinch, make one at home in just a few minutes.</p>
+    </div>
+    <div class="full-width-cta__action">
+      <a class="btn" href="{{ mask_prod.url }}">Shop Now</a>
+    </div>
+  </div>
+</section>
+
+<div class="ppe-content--slim">
+  {{ page.content }}
+</div>
+
+
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'collections-listing' %}
+      {% include 'section-collections-listing' %}
+    {% when 'video' %}
+      {% include 'section-video' %}
+    {% when 'text-content' %}
+      {% include 'section-text-content' %}
+  {% endcase %}
+{% endfor %}
+
+{% include 'video-modal' %}
+
+
+{% schema %}
+{
+  "name": "PPE",
+  "settings":[],
+  "blocks":[
+    {
+      "type": "collections-listing",
+      "name": "Collections Listing",
+      "settings":[
+        {
+          "type":"link_list",
+          "id":"linklist",
+          "label":"Linklist"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings":[
+        {
+          "type": "image_picker",
+          "id": "video_image",
+          "label": "Video Background Image",
+          "info": "Should be a horizontal JPG"
+        },
+        {
+          "type": "text",
+          "id": "video_heading",
+          "label": "Video Spotlight Title"
+        },
+        {
+          "type": "video_url",
+          "id": "video",
+          "label": "Video URL",
+          "accept": ["youtube"],
+          "default": "https://www.youtube.com/watch?v=LWg4nUOBFX4"
+        }
+      ]
+    },
+    {
+      "type": "text-content",
+      "name": "Text Content",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bkgd_color",
+          "label":"Background Color"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image",
+          "info":"Leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"link_text",
+          "label":"Link Text"
+        },
+        {
+          "type":"url",
+          "id":"link_url",
+          "label":"Link URL"
+        },
+        {
+          "type":"text",
+          "id":"box_1_title",
+          "label":"Box 1 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_1_text",
+          "label":"Box 1 Text"
+        },
+        {
+          "type":"text",
+          "id":"box_2_title",
+          "label":"Box 2 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_2_text",
+          "label":"Box 2 Text"
+        },
+        {
+          "type":"text",
+          "id":"box_3_title",
+          "label":"Box 3 Title",
+          "info":"leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"box_3_text",
+          "label":"Box 3 Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

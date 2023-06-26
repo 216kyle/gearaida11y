@@ -1,0 +1,81 @@
+<div class="section section--collage section--collage-{{ section.id }}">
+  <style>
+    .section--collage-{{ section.id }} {background-image: url('{{ section.settings.image | img_url: "3000x" }}');}
+    @media screen and (min-width: 1024px) and (max-width: 1555px) {
+      .section--collage-{{ section.id }} .collage__content-image {
+        background-image: url('{{ section.settings.content_image | img_url: '1200x' }}');
+        background-size: cover;
+        background-position: center;
+      }
+      .section--collage-{{ section.id }} .collage__content-image img {
+        visibility: hidden;
+      }
+    }
+  </style>
+  <div class="site-container">
+    <div class="collage-container">
+      <div class="collage__content">
+        <h4 class="section-label">{{ section.settings.title }}</h4>
+        <h2 class="collage__heading">{{ section.settings.heading }}</h2>
+        <div class="collage__text">{{ section.settings.content }}</div>
+        {% if section.settings.btn_label != blank %}
+          <a class="btn btn-alt btn-large" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
+        {% endif %}
+      </div>
+
+      <a href="{{ section.settings.btn_url }}" class="collage__content-image">
+        <img class="lazy" data-src="{{ section.settings.content_image | img_url: '800x' }}" />
+      </a>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collage",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "content_image",
+      "label": "Content Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collage",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

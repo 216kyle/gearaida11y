@@ -1,0 +1,65 @@
+<div class="modal-wrapper modal-wrapper--quickview">
+  <div class="modal modal--type-quickview">
+    <span class="modal__close">
+      <svg stroke="#ffffff" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><line stroke-width="1" x1="2" x2="30" y1="2" y2="30"/><line stroke-width="1" x1="2" x2="30" y1="30" y2="2"/></svg>
+    </span><!-- modal__close -->
+    <div class="modal__content-wrapper">
+      <div class="modal__content"></div><!-- modal__content -->
+      <a id="modal__view-details" href="#">View Product Details</a>
+    </div><!-- modal__content-wrapper -->
+  </div><!-- modal -->
+</div><!-- modal-wrapper -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  (function($){
+    $(function(){
+
+      // variables
+      var modalWrapper 		  = $('.modal-wrapper--quickview'),
+          modal		   		  = $('.modal-wrapper--quickview .modal'),
+          modalClose   		  = $('.modal-wrapper--quickview .modal__close'),
+          modalContent 		  = $('.modal-wrapper--quickview .modal__content'),
+          modalContentWrapper = $('.modal-wrapper--quickview .modal__content-wrapper');
+
+      // loads product via ajax and runs transitions
+      function loadProduct(){
+        var product = $(this),
+            productData = $(product).data("qv") + "?view=quickview";
+        $.get(productData, function(data){
+          // open modal
+          $('body').addClass('modal-shown');
+          $(modalWrapper).addClass('shown');
+          $(modal).addClass('animate');
+          $(modalContent).html(data);
+          $('#modal__view-details').attr('href', $(product).data("qv"));
+          REBASE.theme.unbindProductControls();
+          REBASE.theme.bindProductControls();
+          setTimeout(function(){
+            $(product).closest('.product').removeClass('product-loading-qv').spin(false);
+            $(modalContentWrapper).addClass('animate');
+          }, 300);
+        });
+      }
+
+      // closes modal
+      function closeModal(e){
+        e.preventDefault();
+        $('body').removeClass('modal-shown');
+        $(modal).removeClass('animate');
+        $(modalWrapper).removeClass('shown');
+        $(modalContentWrapper).removeClass('animate');
+      }
+
+      // when quickview is clicked we run loadProduct
+      $('.product__quickview').on('click', function(e){
+        e.preventDefault();
+        $(this).closest('.product').addClass('product-loading-qv').spin('custom');
+        loadProduct.call($(this));
+      });
+
+      $(modalClose).on('click', closeModal);
+
+    });
+  })(jQuery)
+});
+</script>

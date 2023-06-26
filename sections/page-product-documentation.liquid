@@ -1,0 +1,104 @@
+<div class="site-content site-content--has-sidebar site-content--sidebar-left" role="main">
+  <div class="site-container site-container--product-documentation site-flexbox">
+    
+    {% include 'blog-help-side-nav' %}
+    
+    <div class="page-main">
+      <div class="page-content">
+        <div class="site-flexbox grid">
+          <article itemscope itemtype="http://schema.org/Article">
+            <header class="page-header">
+              <h1 class="article-title" itemprop="name">{{ page.title }}</h1>
+              <p>{{ page.content }}</p>
+            </header><!-- page-header -->
+            <div class="document-section">
+              <h2>Aquaseal</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'aquaseal' %}
+                  <a href="{{ block.settings.doc_url }}" target="_blank" download title="Product Doc"><span class="doc-title">{{ block.settings.doc_title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section">
+              <h2>Seam Grip</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'seam_grip' %}
+                  <a href="{{ block.settings.doc_url }}" target="_blank" download title="Product Doc"><span class="doc-title">{{ block.settings.doc_title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section">
+              <h2>Revivex</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'revivex' %}
+                  <a href="{{ block.settings.doc_url }}" target="_blank" download title="Product Doc"><span class="doc-title">{{ block.settings.doc_title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section">
+              <h2>Tenacious Tape</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'tenacious_tape' %}
+                  <a href="{{ block.settings.doc_url }}" target="_blank" download title="Product Doc"><span class="doc-title">{{ block.settings.doc_title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section">
+              <h2>Adventure Tools</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'adventure_tools' %}
+                  <a href="{{ block.settings.doc_url }}" target="_blank" download title="Product Doc"><span class="doc-title">{{ block.settings.doc_title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="document-section">
+              <h2>Other</h2>
+              {% for block in section.blocks %}
+                {% if block.settings.doc_section == 'other' %}
+                  <a href="{{ block.settings.doc_url }}" target="_blank" download title="Product Doc"><span class="doc-title">{{ block.settings.doc_title }}</span><span class="doc-download"><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download</span></a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Product Documentation",
+  "blocks": [
+    {
+      "type": "product_doc",
+      "name": "Product Doc",
+      "settings": [
+        {
+        "type": "text",
+        "id": "doc_title",
+        "label": "Doc Title"
+        },
+        {
+          "type": "text",
+          "id": "doc_url",
+          "label": "Doc URL",
+          "info": "Copy and paste url from files section in the Shopify admin, settings -> files"
+        },
+        {
+          "type": "radio",
+          "id": "doc_section",
+          "options": [
+            {"value": "aquaseal", "label": "Aquaseal"},
+            {"value": "seam_grip", "label": "Seam Grip"},
+            {"value": "revivex", "label": "Revivex"},
+            {"value": "tenacious_tape", "label": "Tenacious Tape"},
+            {"value": "adventure_tools", "label": "Adventure Tools"},
+            {"value": "other", "label": "Other"}
+          ],
+          "label": "Doc Section"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

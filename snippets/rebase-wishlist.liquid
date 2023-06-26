@@ -1,0 +1,22 @@
+{% if customer %}
+<div id="wishlist-widget">
+  <a href="/account?view=wishlists" data-wishlist-toggle="hidden"><i class="fa fa-heart-o"></i> (<span rv-html="wishlist.products | length"></span>)</a>
+  {% comment %}
+  Not ready to use this yet.
+  <div class="wishlist-widget__list">
+    <div rv-hide="wishlist" class="loader">Loading...</div>
+    <div rv-show="wishlist.products | isEmpty">Nothing wished for yet ;)</div>
+    <ul class="wishlist-widget__list-products" rv-show="wishlist.products" style="display:none;">
+      <li rv-each-product="wishlist.products">
+        <a rv-href="'/products/' | add product.data.handle" rv-text="product.data.title"></a>
+        <a rv-on-click="wishlist.remove" rv-data-wishlist-remove="product.data.id">X</a>
+      </li>
+    </ul>
+  </div>
+  {% endcomment %}
+</div>
+{% else %}
+<div id="wishlist-widget" class="wishlist-logged-out">
+  <a href="/account/login?next=/account&view=wishlists"><i class="fa fa-heart-o"></i></a>
+</div>
+{% endif %}

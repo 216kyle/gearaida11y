@@ -1,0 +1,87 @@
+<section class="section section--text-block section--text-block--{{ section.id }} {% if section.settings.border_top %} text-block--border-top{% endif %}{% if section.settings.border_bottom %} text-block--border-bottom{% endif %}{% if section.settings.padding_top %} text-block--padding-top{% endif %}{% if section.settings.padding_bottom %} text-block--padding-bottom{% endif %}" {{ section.shopify_attributes }}>
+  <div class="site-container">
+    <div class="text-block-container">
+      {% if section.settings.block_title != blank %}
+        <h2 class="block-title">{{ section.settings.block_title}}</h2>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h3 class="block-heading {%if section.settings.small_heading%}block-heading--small{% endif %}">{{ section.settings.title}}</h3>
+      {% endif %}
+      {% if section.settings.content != blank %}
+        {{ section.settings.content}}
+      {% endif %}
+
+      {% if section.settings.btn_label != blank %}
+        <a class="btn btn-alt btn-large" href="{{ section.settings.btn_url }}">{{ section.settings.btn_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text Block",
+  "settings": [
+    {
+      "type":"text",
+      "id":"block_title",
+      "label":"Block title"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+      "type":"checkbox",
+      "id":"small_heading",
+      "label":"Use small heading style?",
+      "default":false
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"Content"
+    },
+    {
+      "type":"checkbox",
+      "id":"padding_top",
+      "label":"Padding Top?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"padding_bottom",
+      "label":"Padding Bottom?",
+      "default":true
+    },
+      {
+      "type":"checkbox",
+      "id":"border_top",
+      "label":"Border Top?",
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"border_bottom",
+      "label":"Border Bottom?",
+      "default":false
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text block"
+    }
+  ]
+}
+{% endschema %}

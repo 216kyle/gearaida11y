@@ -1,0 +1,30 @@
+{% assign has_articles = false %}
+{% for article in blogs.learn.articles %}
+{% if article.metafields.gear_aid.related_products contains product.handle %}
+{% assign has_articles = true %}
+{% endif %}
+{% endfor %}
+{% if has_articles %}
+<div role="presentation" class="product-articles">
+  <div class="product-articles__header site-container--slim center">
+    <h2 role="heading" >Helpful Articles</h2>
+  </div>
+  <div class="site-container site-container--slim site-flexbox grid grid--gutters">
+    {% for article in blogs.learn.articles %}
+    {% if article.metafields.gear_aid.related_products contains product.handle %}
+    <a class="product-article column50 {% unless article.image %}product-article--no-image{% endunless %}" title="View {{ article.title | escape }}" href="{{ article.url }}">
+      {% if article.image %}
+      <div class="product-article__image-wrapper">
+        <img itemprop="thumbnail" class="product-article__image" src="{{ article.image | img_url:'200x' }}" alt="{{ article.title }}" />
+      </div>
+      {% endif %}
+      <div class="product-article__header">
+        <h3>{{ article.title }}</h3>
+      </div>
+      <span class="fa fa-angle-right"></span>
+    </a><!--  product-article -->
+    {% endif %}
+    {% endfor %}
+  </div>
+</div><!-- product-articles -->
+{% endif %}

@@ -1,0 +1,14 @@
+{% if handle == null %}
+{% assign handle = page.handle %}
+{% endif %}
+{% if linklists[handle].links.size > 0 %}
+<nav class="widget widget--navigation">
+  <ul>
+    {% for link in linklists[handle].links %}
+    <li class="widget--navigation__item {% if link.active %}widget--navigation__item--active {% endif %}">
+      <a href="{{ link.url }}">{{ link.title }} <i class="fa fa-angle-right"></i></a>
+    </li>
+    {% endfor %}
+  </ul>
+</nav><!-- widget--navigation -->
+{% endif %}

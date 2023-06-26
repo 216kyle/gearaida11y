@@ -1,0 +1,219 @@
+<div class="site-content site-content--has-sidebar site-content--sidebar-right">
+  <div class="site-container site-container--blog site-flexbox">
+    <div class="page-main">
+      <div class="page-content">
+        <div class="site-flexbox grid">
+          {% for block in section.blocks %}
+            {% if block.type == "featured_article" %}
+              
+              {% assign article = articles[block.settings.article] %}
+              {% if article.image %}
+                <style>
+                  .article-bkgd--{{ block.id }} {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+                  .article-bkgd--{{ block.id }}.lazyloaded,
+                  .article-bkgd--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+                  @media screen and (min-width: 151px) and (max-width: 300px) {
+                    .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '600x' }}');}
+                  }
+                  @media screen and (min-width: 301px) and (max-width: 600px) {
+                    .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '800x' }}');}
+                  }
+                  @media screen and (min-width: 601px) and (max-width: 800px) {
+                    .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '900x' }}');}
+                  }
+                  @media screen and (min-width: 801px) and (max-width: 1000px) {
+                    .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '1200x' }}');}
+                  }
+                  @media screen and (min-width: 1001px) {
+                    .article-bkgd--{{ block.id }} {background-image: url('{{ article.image | img_url: '1200x' }}');}
+                  }
+                </style>
+              {% endif %}
+              <!--Featured Post-->
+              <article Aria-label= class="featured-article article-category column100">
+                <a href="{{ article.url }}">
+                  <div class="article-category__header">
+                    <h3 role="menu" aria-label="Article Title" >{{ article.title }}</h3>
+                    {% case block.settings.tag_category %}
+                      {% when 'camping' %}
+                        <a role="menuitem" aria-label="Camping Articles" class="category" href="/blogs/learn/tagged/{{ 'Camping' | handleize }}?view=all">/ Camping</a>
+                      {% when 'hike_run' %}
+                        <a role="menuitem" aria-label="Hike Run Articles" class="category" href="/blogs/learn/tagged/{{ 'Hike Run' | handleize }}?view=all">/ Hiking &amp; Running</a>
+                      {% when 'hunt_fish' %}
+                        <a role="menuitem" aria-label="Hunting and Fishing Articles" class="category" href="/blogs/learn/tagged/{{ 'hunt fish' | handleize }}?view=all">/ Hunting &amp; Fishing</a>
+                      {% when 'paddlesports_diving' %}
+                        <a role="menuitem" aria-label="Pabblesports and Diving Articles" class="category" href="/blogs/learn/tagged/{{ 'paddle dive' | handleize }}?view=all">/ Paddlesports &amp; Diving</a>
+                      {% when 'snow' %}
+                        <a role="menuitem" aria-label="Snowsport Articles" class="category" href="/blogs/learn/tagged/{{ 'snow' | handleize }}?view=all">/ Snowsports</a>
+                      {% when 'gear_care' %}
+                        <a role="menuitem" aria-label="Gear Care and Repair Articles" class="category" href="/blogs/learn/tagged/{{ 'gear care' | handleize }}?view=all">/ Gear Care &amp; Repair</a>
+                    {% endcase %}
+                  </div>
+                  <figure class="article-bkgd article-bkgd--{{ block.id }} lazy"></figure>
+                </a>
+              </article>
+
+            {% elsif block.type == "article_category" %}
+              
+              {% assign article_1 = articles[block.settings.article_1] %}
+              {% assign article_2 = articles[block.settings.article_2] %}
+              {% if article_1.image %}
+                <style>
+                .article-bkgd_1--{{ block.id }} {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+                .article-bkgd_1--{{ block.id }}.lazyloaded,
+                .article-bkgd_1--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+                  @media screen and (min-width: 151px) and (max-width: 300px) {
+                    .article-bkgd_1--{{ block.id }} {background-image: url('{{ article_1.image | img_url: '600x' }}');}
+                  }
+                  @media screen and (min-width: 301px) and (max-width: 600px) {
+                    .article-bkgd_1--{{ block.id }} {background-image: url('{{ article_1.image | img_url: '800x' }}');}
+                  }
+                  @media screen and (min-width: 601px) and (max-width: 800px) {
+                    .article-bkgd_1--{{ block.id }} {background-image: url('{{ article_1.image | img_url: '900x' }}');}
+                  }
+                  @media screen and (min-width: 801px) and (max-width: 1000px) {
+                    .article-bkgd_1--{{ block.id }} {background-image: url('{{ article_1.image | img_url: '1200x' }}');}
+                  }
+                  @media screen and (min-width: 1001px) {
+                    .article-bkgd_1--{{ block.id }} {background-image: url('{{ article_1.image | img_url: '1200x' }}');}
+                  }
+                </style>
+              {% endif %}
+              {% if article_2.image %}
+                <style>
+                  .article-bkgd_2--{{ block.id }} {opacity:0;-webkit-transition: all 0.3s ease !important;-moz-transition: all 0.3s ease !important;-ms-transition: all 0.3s ease !important;transition: all 0.3s ease !important;}
+                  .article-bkgd_2--{{ block.id }}.lazyloaded,
+                  .article-bkgd_2--{{ block.id }}[data-was-processed="true"] {opacity:1;}
+                  @media screen and (min-width: 151px) and (max-width: 300px) {
+                    .article-bkgd_2--{{ block.id }} {background-image: url('{{ article_2.image | img_url: '600x' }}');}
+                  }
+                  @media screen and (min-width: 301px) and (max-width: 600px) {
+                    .article-bkgd_2--{{ block.id }} {background-image: url('{{ article_2.image | img_url: '800x' }}');}
+                  }
+                  @media screen and (min-width: 601px) and (max-width: 800px) {
+                    .article-bkgd_2--{{ block.id }} {background-image: url('{{ article_2.image | img_url: '900x' }}');}
+                  }
+                  @media screen and (min-width: 801px) and (max-width: 1000px) {
+                    .article-bkgd_2--{{ block.id }} {background-image: url('{{ article_2.image | img_url: '1200x' }}');}
+                  }
+                  @media screen and (min-width: 1001px) {
+                    .article-bkgd_2--{{ block.id }} {background-image: url('{{ article_2.image | img_url: '1200x' }}');}
+                  }
+                </style>
+              {% endif %}
+              <!--Article Categories-->
+              <div class="article-category column100">
+                <div class="article-category__header">
+                  {% case block.settings.tag_category %}
+                    {% when 'camping' %}
+                      <a href="/blogs/learn/tagged/{{ 'Camping' | handleize }}?view=all"><h3>Camping <span class="arrow">></span></h3></a>
+                    {% when 'hike_run' %}
+                      <a href="/blogs/learn/tagged/{{ 'Hike Run' | handleize }}?view=all"><h3>Hiking &amp; Running <span class="arrow">></span></h3></a>
+                    {% when 'hunt_fish' %}
+                      <a href="/blogs/learn/tagged/{{ 'hunt fish' | handleize }}?view=all"><h3>Hunting &amp; Fishing <span class="arrow">></span></h3></a>
+                    {% when 'paddlesports_diving' %}
+                      <a href="/blogs/learn/tagged/{{ 'paddle dive' | handleize }}?view=all"><h3>Paddlesports &amp; Diving <span class="arrow">></span></h3></a>
+                    {% when 'snow' %}
+                      <a href="/blogs/learn/tagged/{{ 'snow' | handleize }}?view=all"><h3>Snowsports <span class="arrow">></span></h3></a>
+                    {% when 'gear_care' %}
+                      <a href="/blogs/learn/tagged/{{ 'gear care' | handleize }}?view=all"><h3>Gear Care &amp; Repair <span class="arrow">></span></h3></a>
+                  {% endcase %}
+                </div>
+                <div class="article-category__featured site-flexbox grid grid--gutters">
+                  <article class="column50">
+                    <a href="{{ article_1.url }}">
+                      <figure class="article-bkgd article-bkgd_1--{{ block.id }} lazy">
+                        <figcaption>
+                          <h3>{{ article_1.title }}</h3>
+                          {% comment %} {% if article_1.excerpt %}
+                            <p>{{ article_1.excerpt }}</p>
+                          {% endif %} {% endcomment %}
+                        </figcaption>
+                      </figure>
+                    </a>
+                  </article>
+                  <article class="column50">
+                    <a href="{{ article_2.url }}">
+                      <figure class="article-bkgd article-bkgd_2--{{ block.id }} lazy">
+                        <figcaption>
+                          <h3>{{ article_2.title }}</h3>
+                          {% comment %} {% if article_2.excerpt %}
+                            <p>{{ article_2.excerpt }}</p>
+                          {% endif %} {% endcomment %}
+                        </figcaption>
+                      </figure>
+                    </a>
+                  </article>
+                </div>
+              </div>
+
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div><!-- page-content -->
+    </div><!-- page-main -->
+    {% include 'blog-side-nav' %}
+  </div><!-- site-container -->
+</div><!-- site-content -->
+{% include 'email-signup' %}
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "featured_article",
+      "name": "Featured Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Article"
+        },
+        {
+          "type": "radio",
+          "id": "tag_category",
+          "options": [
+            {"value": "camping", "label": "Camping"},
+            {"value": "hike_run", "label": "Hiking & Running"},
+            {"value": "hunt_fish", "label": "Hunting & Fishing"},
+            {"value": "paddlesports_diving", "label": "Paddlesports & Diving"},
+            {"value": "snow", "label": "Snowsports"},
+            {"value": "gear_care", "label": "Gear Care & Repair"}
+          ],
+          "label": "Article Category"
+        }
+      ]
+    },
+    {
+      "type": "article_category",
+      "name": "Article Category",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article_1",
+          "label": "Article 1"
+        },
+        {
+          "type": "article",
+          "id": "article_2",
+          "label": "Article 2"
+        },
+        {
+          "type": "radio",
+          "id": "tag_category",
+          "options": [
+            {"value": "camping", "label": "Camping"},
+            {"value": "hike_run", "label": "Hiking & Running"},
+            {"value": "hunt_fish", "label": "Hunting & Fishing"},
+            {"value": "paddlesports_diving", "label": "Paddlesports & Diving"},
+            {"value": "snow", "label": "Snowsports"},
+            {"value": "gear_care", "label": "Gear Care & Repair"}
+          ],
+          "label": "Article Category"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

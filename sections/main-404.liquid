@@ -1,0 +1,28 @@
+{% include 'page-utility' %}
+<div class="site-container site-flexbox {% if settings.layout_sidebar_location == 'left' %}site-flexbox--reversed{% endif %}">
+  <section class="page-main">
+    <header class="page-header">
+      <h1>Nothing found - 404</h1>
+    </header><!-- page-header -->
+    <div class="page-content">
+      <p>Sorry, there was nothing found for that specific request. You can try searching below or <a href="{{ shop.url }}">return to our homepage</a>.</p>
+      <hr/>
+      <h4>Search {{ shop.name }}</h4>
+      <form id="search-404-form" action="/search" class="form form--compact clearfix" method="get">
+        <div class="form__fieldset">
+          <input type="text" name="q" value="{{search.terms | escape}}" size="25" />
+          <input type="submit" class="btn" value="Search" />
+        </div><!-- form__fieldset -->
+      </form><!-- form -->
+    </div><!-- page-content -->
+  </section><!-- page-main -->
+</div><!-- site-container -->
+
+<!-- DO NOT EDIT: START -->
+<!-- BULK REDIRECT CODE: START -->
+<script type="text/javascript">
+function makeDoubleDelegate(a,b){return function(){if(a)a();if(b)b()}}window.onload=makeDoubleDelegate(window.onload,function(){window.onload=function(){var a=document.createElement("img");var b="https:"==document.location.protocol?"https://":"http://";a.src=b+"www.redirectsapp.com/tracker?r="+encodeURIComponent(document.referrer)+"&c=8mss";((document.getElementsByTagName("head")||[null])[0]||document.getElementsByTagName("script")[0].parentNode).appendChild(a)}()})
+</script>
+<!-- BULK REDIRECT CODE: END -->
+<!-- DO NOT EDIT: END -->
+

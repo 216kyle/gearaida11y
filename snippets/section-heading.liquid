@@ -1,0 +1,11 @@
+<section class="heading" {{ block.shopify_attributes }}>
+  <figure class="heading__image lazy" data-src="{{ block.settings.bkgd_image | img_url: '3000x' }}">
+    <figcaption>
+      <h2>{% include 'icon-r-logo.svg' %}{{ block.settings.title }}</h2>
+    </figcaption>
+  </figure>
+  <div class="heading__content">
+    <h3>{{ block.settings.content_heading}}</h3>
+    {{ block.settings.content_body}}
+  </div>
+</section>

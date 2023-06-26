@@ -1,0 +1,88 @@
+{% if section.settings.use_utility_bar %}
+<div class="page-utility">
+  <div class="site-container--fluid clearfix">
+    {% include 'breadcrumbs' %}
+    {% if template contains 'collection' %}
+    {% if section.settings.utility_filters %}
+    <div class="utility-filters">
+    {% for block in section.blocks %}
+      
+      {% case block.settings.filter_type %}
+      {% when 'tag' %}
+      {% capture filters %}{{ block.settings.filter_list }}{% endcapture %}
+      {% when 'type' %}
+      {% capture filters %}{% for type in collection.all_types %}{{ type }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+      {% when 'vendor' %}
+      {% capture filters %}{% for vendor in collection.all_vendors %}{{ vendor }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+      {% endcase %}
+      {%- assign filters = filters | replace: ' ,', ',' | replace: ', ', ',' | replace: ' / ', '/' | split: ',' -%}
+
+      {% assign all_filter_tags = '' %}
+      {% assign show_filters = false %}
+      {% assign filters_count = 0 %}
+      {% for filter in filters limit:999 %}
+        {% if collection.all_tags contains filter %}
+          {% assign show_filters = true %}
+          {% assign filters_count = filters_count | plus:1 %}
+          {% capture all_filter_tags %}{{ all_filter_tags }},{{ filter }},{% endcapture %}
+        {% endif %}
+      {% endfor %}
+
+      {% if show_filters and filters_count > 1 %}
+      <div class="form__field--select utility-filters__filter">
+        <select class="coll-filter">
+          <option value="">All {{ block.settings.filter_title }}</option>
+          {% for f in filters %}
+          {% assign filter = f | strip %}
+          {% if current_tags contains filter %}
+            <script>console.log("current_tags match: {{ filter }}");</script>
+            <option value="{{ filter | handle }}" selected>{{ filter }}</option>
+          {% elsif collection.all_tags contains filter %}
+            <script>console.log("all_tags match: {{ filter }}");</script>
+            <option value="{{ filter | handle }}">{{ filter }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+    
+    {% comment %}
+    <span id="collection-filtering-toggle">Filter</span><!-- collection-filtering-toggle --> 
+    <div id="sort-by-option">
+      <label>Sort By</label> 
+      <div class="form__field--select">
+        <select id="sort-by-select">
+          <option value="best-selling">Popularity</option>
+          <option value="price-ascending">Price: Low to High</option>
+          <option value="price-descending">Price: High to Low</option>
+          <option value="title-ascending">A-Z</option>
+          <option value="title-descending">Z-A</option>
+          <option value="created-descending">Newest to Oldest</option>
+          <option value="created-ascending">Oldest to Newest</option>
+        </select>
+      </div><!-- form__field--select -->
+    </div><!-- sort-by-option -->
+    {% endcomment %}
+    {% if template contains 'blog' %}
+    <div class="page-utility__pagination">
+      <span id="showing-numbers">{{ paginate.current_offset | plus: 1 }}<span class="sep">-</span>{% if paginate.next %}{{ paginate.current_offset | plus: paginate.page_size }}{% else %}{{ paginate.items }}{% endif %} of {{ paginate.items }}</span>
+      {% if paginate.previous %}
+      <a id="pagination-prev" class="fa fa-angle-left" href="{{ paginate.previous.url }}"></a>
+      {% else %}
+      <span id="pagination-prev" class="fa fa-angle-left"></span>
+      {% endif %}
+      {% if paginate.next %}
+      <a id="pagination-next" class="fa fa-angle-right" href="{{ paginate.next.url }}"></a>
+      {% else %}
+      <span id="pagination-next" class="fa fa-angle-right"></span>
+      {% endif %}
+    </div><!-- page-utility__pagination -->
+    {% endif %}
+  </div><!-- site-container -->
+</div><!-- page-utility -->
+{% endif %}

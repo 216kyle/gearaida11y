@@ -1,0 +1,17 @@
+<section class="infographic infographic--green" {{ block.shopify_attributes }}>
+  <div class="infographic__column">
+    <h2>{{ block.settings.title }}</h2>
+    {{ block.settings.content_1 }}
+    {% include 'infographic-02.svg'%}
+    {% include 'infographic-04.svg'%}
+  </div>
+  <div class="infographic__column">
+    {% include 'infographic-01.svg'%}
+    {% include 'infographic-03.svg'%}
+    <h2>{{ block.settings.title_2 }}</h2>
+    {{ block.settings.content_2 }}
+    <p>
+      <a href="{{ block.settings.link_url }}" class="btn btn-alt-white" title="#">Learn More</a>
+    </p>
+  </div>
+</section>

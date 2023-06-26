@@ -1,0 +1,740 @@
+{%- liquid 
+  assign product_blocks = section.blocks | where: 'type', 'product'
+  
+  assign filter_regions_blocks = section.blocks | where: 'type', 'filter_region'
+  assign filter_group_blocks = section.blocks | where: 'type', 'filter_group'
+-%}
+
+
+<div class="section section--lp-products section--lp-products-{{ section.id }} product-inline-filters" data-product-inline-filters>
+  <div class="pf--container">
+    <div class="pf--intro center">
+      {% if section.settings.title != blank %}
+        <h1 class="pf--title primary-font">{{ section.settings.title }}</h1>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <p class="pf--title-lead secondary-font">{{ section.settings.text }}</p>
+      {% endif %}
+    </div>
+
+    {%- comment -%} Start of inline product filtering app {%- endcomment -%}
+    <section class="pf--app" data-product-filter-app>
+      <header class="center">
+        <p class="pf--filter-region-title secondary-font">Choose your country:</p>
+
+        <ul class="pf--filter-regions" data-pf-filter-triggers>
+          {%- for block in filter_regions_blocks -%}
+              <li 
+                class="pf--filter-region{% if block.settings.filter_region_value == 'us' %} pf--filter-region-active{% endif %}"
+                data-pf-filter-trigger="{{ block.settings.filter_region_value }}"
+              >
+                {{- block.settings.filter_region_name -}}
+              </li>
+          {%- endfor -%}
+        </ul>
+      </header>
+
+      <div class="pf--app-container">
+        <aside class="pf--sidebar" data-product-filters>
+          <div class="pf--sidebar-header">
+            <h2 class="pf--sidebar-title">Filter</h2>
+            <a data-pf-filter-clear class="pf--filter-clear">Clear filters</a>
+          </div>
+          <hr />
+
+          {%- for block in filter_group_blocks -%}
+            {%- assign filters_groups = block.settings.filter_group_filters | split: ',' -%}
+
+            <div class="pf--filter-triggers">
+              <h3 class="pf--filter-trigger-heading">
+                {{- block.settings.filter_group_name -}}
+              </h3>
+              <ul
+                class="pf--filters"
+                data-pf--filters="{{- block.settings.filter_group_name -}}"
+              >
+                {%- for filter in filters_groups -%}
+                  <li 
+                    class="pf--filter"
+                    data-pf--filter-trigger="{{ filter | strip }}"
+                  >
+                    {{- filter | strip -}}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+            <hr />
+
+          {%- endfor -%}
+        </aside>
+      
+        <main class="pf--main" data-filtered-products>
+
+          {%- comment -%} Render out products {%- endcomment -%}
+          <div class="pf--products" data-pf--products>
+            
+            {%- comment -%} NOTE: This entire block is copied down below and used to dynamically render filtered content. Update `renderProduct()` when any changes made here. {%- endcomment -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'product' and block.settings.product_region contains 'us' -%}
+                <article 
+                  class="pf--product"
+                  data-pf--product
+                  data-product-id="{{ block.settings.product_id }}"
+                >
+                  <figure class="pf--product-image-container">
+                    <img
+                      class="pf--product-image"
+                      src="{{ block.settings.product_image | img_url: 'x135' }}"
+                      alt="{{ block.settings.product_name }}"
+                    />
+                  </figure>
+                  <footer class="pf--product-inner">
+                    <h1 class="pf--product-title">
+                      {{ block.settings.product_name }}
+                    </h1>
+                    <p class="pf--product-details">
+                      {{ block.settings.product_size }}
+                    </p>
+                  </footer>
+                </article>
+                {%- endif -%}
+            {%- endfor -%}
+
+          </div>
+
+        </main>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Products overview",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Intro content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Lead Text"
+    },
+    {
+      "type": "header",
+      "content": "Filter settings"
+    },
+    {
+      "type": "text",
+      "id": "filter_regions",
+      "label": "Filter by Regions",
+      "info": "Comma separated list (lowercase) of regions",
+      "default": "US, EU"
+    }
+  ],
+  "blocks":[
+  {
+    "type": "filter_region",
+    "name": "Filter Region",
+    "settings": [
+      {
+        "type": "text",
+        "id": "filter_region_name",
+        "label": "Region display label",
+        "info": "Label to be rendered on landing page",
+        "default": "US / CA"
+      },
+      {
+        "type": "text",
+        "id": "filter_region_value",
+        "label": "Region value",
+        "info": "Region value, used when filtering products",
+        "default": "us"
+      }
+    ]
+  },
+    {
+      "type": "filter_group",
+      "name": "Filter Group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "filter_group_name",
+          "label": "Filter Group Name",
+          "default": "Product"
+        },
+        {
+          "type": "text",
+          "id": "filter_group_filters",
+          "label": "Filters",
+          "info": "Comma separated list (lowercase) of filters",
+          "default": "anti-fog, aquaseal, lubricants, revivex, seam_grip, tenacious_tape"
+        }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "GearPlus Product",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product details:"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product's Name",
+          "info": "The name of the product",
+          "placeholder": "Seam Grip WP"
+        },
+        {
+          "type": "text",
+          "id": "product_id",
+          "label": "Product's item number",
+          "info": "Product's SKU",
+          "placeholder": "10910"
+        },
+        {
+          "type": "text",
+          "id": "product_size",
+          "label": "Product Size",
+          "info": "The products size, include UOM",
+          "placeholder": "8oz"
+        },
+        {
+          "type": "text",
+          "id": "product_uses",
+          "label": "Product's material applications",
+          "info": "Comma separated list (lowercase) of users",
+          "placeholder": "plastic, rubber"
+        },
+        {
+          "type": "text",
+          "id": "product_region",
+          "label": "Product Region",
+          "info": "Comma separated list (lowercase) of region availability",
+          "placeholder": "US, EU"
+        },
+        {
+          "type": "text",
+          "id": "product_type",
+          "label": "Product's Type",
+          "info": "The product type property, displayed in quickshop",
+          "placeholder": "Adhesive"
+        },
+        {
+          "type": "text",
+          "id": "product_filters",
+          "label": "Product Filters",
+          "info": "Comma separated list (lowercase) of filters that match Filter Groups",
+          "placeholder": "protectants, revivex, cleaners"
+        },
+        {
+          "type": "richtext",
+          "id": "product_description",
+          "label": "Product description"          
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script type="application/json" data-pf-data>
+  {
+    "products": [
+      {%- for block in product_blocks -%}
+        {
+          "name": {{ block.settings.product_name | json }},
+          "id": {{ block.settings.product_id | json }},
+          "description": {{ block.settings.product_description | json }},
+          "type": {{ block.settings.product_type | json }},
+          "region": {{ block.settings.product_region | json }},
+          "size": {{ block.settings.product_size | json }},
+          "uses": {{ block.settings.product_uses | json }},
+          "image": {{ block.settings.product_image | img_url: 'x800' | json }},
+          "image_thumb": {{ block.settings.product_image | img_url: 'x135' | json }},
+          "filters": {{ block.settings.product_filters | json }}
+        }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+<script>
+  /**
+   * 
+   * Stateful class to track filters between functions. This allows the
+   * functions to know what active regional and product filters there are
+   * when rendering products. 
+   * 
+   *  - Tracks the currently selected region
+   *  - Tracks the currently selected filters
+   *  
+   */
+  class FilterStore {
+    constructor(filters = []) {
+      if (!FilterStore.instance) {
+        this._region = "us";
+        this._filters = filters;
+        FilterStore.instance = this;
+      }
+
+      return FilterStore.instance;
+    }
+
+    addFilter(string) {
+      if (!this._filters.includes(string)) {
+        this._filters.push(string);
+      }
+    }
+
+    getFilters() {
+      console.log('get ', this._filters)
+      return this._filters;
+    }
+
+    clearFilters() {
+      this._filters = [];
+      console.log('clear ', this._filters);
+    }
+
+    removeFilter(string = "") {
+      const idx = this._filters.indexOf(string);
+
+      if (idx !== -1) {
+        this._filters.splice(idx, 1);
+      }
+    }
+
+    setRegion(region) {
+      if (region != this._region) {
+        this._region = region;
+      } 
+    } 
+    
+    getRegion() {
+      return this._region;
+    }
+
+  }
+
+  // Create new state tracking for filters.
+  const store = new FilterStore();
+
+  // Initialize event listeners with filter store.
+  handleProductEvents(store);
+  handleFilterEvents(store);
+  handleFilterRegions(store);
+  handleClearFilter(store);
+
+  /**
+   * 
+   * Handles clicks on a product of products
+   * 
+   */ 
+  function handleFilterEvents(store) {
+    const selectors = productFilterDOMSelectors();
+    const filters = document.querySelectorAll(selectors.productFilter);
+
+    Array.from(filters).map(filter => {
+      filter.addEventListener('click', event => {
+
+        const { target } = event;
+
+        // Get JSON products
+        const products = getJSONProducts();
+
+        // Get clicked region
+        const valueToFilterBy = target.getAttribute('data-pf--filter-trigger');
+        
+        // If event.target contains active class, let's remove it from the active filter list
+        if (target.classList.contains(selectors.productFilterActiveClass)) {
+          store.removeFilter(valueToFilterBy);
+          target.classList.remove(selectors.productFilterActiveClass);
+        } else {
+          store.addFilter(valueToFilterBy);
+          target.classList.add(selectors.productFilterActiveClass);
+        }
+        
+        const activeRegion = store.getRegion();
+        const activeFilters = store.getFilters();
+
+        // Filter regional products against filters array
+        const filteredProducts = 
+          filterProducts(products, activeRegion, activeFilters);        
+
+        renderFilteredProducts(filteredProducts);
+      });
+    });
+  }
+
+  /**
+   * 
+   * Handles clicks on a product of products
+   * 
+   */ 
+  function handleClearFilter(store) {
+    const selectors = productFilterDOMSelectors();
+    const clearFilter = document.querySelector(selectors.clearFilters);
+
+    clearFilter.addEventListener('click', event => {
+
+      const { target } = event;
+
+      // Get JSON products
+      const products = getJSONProducts();
+
+      // remove active class from filters
+      const activeFilterClass = "." + selectors.productFilterActiveClass;
+      const activeFilterLinks = document.querySelectorAll(activeFilterClass);
+
+      Array.from(activeFilterLinks).map(link => {
+        link.classList.remove(selectors.productFilterActiveClass);
+      });
+
+      const activeRegion = store.getRegion();
+      store.clearFilters();
+      activeFilters = store.getFilters();
+
+      // Filter regional products against filters array
+      const filteredProducts = 
+      filterProducts(products, activeRegion, activeFilters);        
+
+      renderFilteredProducts(filteredProducts);
+    })
+  }
+
+  /**
+   * 
+   * Function that contains logic to handle filtering products based on an
+   * array of filters and a region. 
+   * 
+  */
+  function filterProducts(products, activeRegion, activeFilters) {
+    const selectors = productFilterDOMSelectors();
+    const filter = document.querySelectorAll(selectors.productFilter);
+    let availableFilters = [];
+
+    // NOTE: Gather regional items
+    const regionalProducts = products
+    .reduce((products, product) => {
+
+      const regions = product.region.split(", ");
+      const regional = 
+        regions.filter((region) => region.includes(activeRegion));
+
+      if (regional.length && regional !== undefined) products.push(product);
+
+      return products;
+    }, [])
+    .reduce((products, product) => {
+      const productFilters = product.filters.split(", ");
+
+      let matchingFilterCount = 0;
+      productFilters.map(function(filter) { 
+        activeFilters.indexOf(filter) !== -1 ? matchingFilterCount += 1 : null
+      })
+
+      if (matchingFilterCount === activeFilters.length) {
+        products.add(product);
+        availableFilters = availableFilters.concat(productFilters);
+      }
+
+      return products;
+    }, new Set());
+
+    return [...regionalProducts].map(product => renderProduct(product));
+
+  }
+
+  /**
+   * 
+   * Handles clicks on a product of products
+   * 
+   */ 
+  function handleProductEvents(store) {
+    const selectors = productFilterDOMSelectors();
+    const products = document.querySelectorAll(selectors.product);
+
+    Array.from(products).map(product => 
+      product.addEventListener('click', event => {
+
+        // Get parent element
+        const parentEl = event.target.closest(selectors.product);
+      
+        // Get product ID from parent
+        const productId = parentEl.getAttribute('data-product-id');
+
+        setActiveClass(
+          parentEl,
+          selectors.product,
+          selectors.productActiveClass
+        );
+        removeExisitingQuickshop();
+        createQuickshop(productId, parentEl);
+      })
+    )
+  }
+
+  /**
+   * 
+   * Handles clicks on region filters
+   * 
+   */
+  function handleFilterRegions(store) {
+    const selectors = productFilterDOMSelectors();
+    const filter = document.querySelectorAll(selectors.filters);
+
+    Array.from(filter).map(filter => {
+      filter.addEventListener('click', event => {
+
+        // Get clicked region
+        const region = event.target.getAttribute('data-pf-filter-trigger');
+
+        // Get JSON products
+        const products = getJSONProducts();
+
+        let activeFilters = store.getFilters();
+
+        // Filter and generate product HTML markup
+        const filteredProducts = products
+          .filter(product => product.region.includes(region))
+          .filter(product => product.filters.includes(activeFilters))
+          .map(product => renderProduct(product))
+      
+        // Ensure there are products
+        //if (filteredProducts < 1) return false;
+   
+        setActiveClass(
+          event.target,
+          selectors.filterActive,
+          selectors.filter
+        );
+
+        store.setRegion(region);
+        renderFilteredProducts(filteredProducts);
+      });
+    })
+  }
+
+  /**
+   * 
+   * Handle close button click event on quickshop modal.
+   * 
+   */
+  function handleQuickshopClose() {
+    const button = document.querySelector('[data-pf--quickshop-close]');
+    
+    button.addEventListener('click', event => removeQuickshop());
+  }
+
+  function removeQuickshop() { 
+    const selectors = productFilterDOMSelectors();
+    const products = document.querySelectorAll(selectors.product);
+
+    removeProductActiveClass(selectors.productActiveClass, products);
+    removeExisitingQuickshop();
+      
+  }
+
+  // Centralized DOM selectors to be shared between functions.
+  function productFilterDOMSelectors() {
+    return (
+      {
+        jsonData: '[data-pf-data]',
+        product: '[data-pf--product]',
+        products: '[data-pf--products]',
+        productActiveClass: 'pf--quickshop-active',
+        quickshop: '[data-pf--quickshop]',
+        quickshopActiveClass: 'pf--quickshop-loaded',
+        productFilter: '[data-pf--filter-trigger]',
+        productFilterActiveClass: 'pf--filter-active',
+        filters: '[data-pf-filter-triggers]',
+        filter: '[data-pf-filter-trigger]',
+        filterActive: 'pf--filter-region-active',
+        clearFilters: '[data-pf-filter-clear]'
+      }
+    );
+  };
+
+  // Function to dynamically render products to app.
+  function renderFilteredProducts(products) {
+    const selectors = productFilterDOMSelectors();
+
+    removeFilterProducts();
+    // Iterate and render HTML markup
+    products.map(product => {
+      const products = document.querySelector(selectors.products);
+
+      // Convert string JSX into DOM nodes and Elements
+      products.insertAdjacentHTML('beforeend', product);
+    });
+
+    handleProductEvents();
+  }
+
+  // Remove active classes from product 
+  function removeProductActiveClass(active = "", elements = []) {
+      Array.from(elements).map(el => el.classList.remove(active));
+  }
+  
+  // Handle taking clicked product into fullsize layout
+  function createQuickshop(productId, parent) {
+    const selectors = productFilterDOMSelectors();
+    const products = getJSONProducts();
+    const product = products.filter(({id}) => id === productId)[0];
+
+    const { name, size, type, description, uses, image } = product;
+
+    const quickshop = renderQuickshop({
+      name, size, type, description, uses, image
+    });
+
+    // get product card and its index within the container
+    const productCard = document.querySelector("[data-product-id='" + productId + "']");
+    const productIndex = ([...productCard.parentElement.children].indexOf(productCard)) + 1;
+
+    // get visible # of products
+    const visibleProducts = document.querySelectorAll(selectors.product).length
+
+    // find the end of the row for desktop (multiple of 4) and mobile (multiple of 2)
+    let desktopRowEnd = (Math.ceil(productIndex/4)*4);
+    let mobileRowEnd = (Math.ceil(productIndex/2)*2);
+
+    // if the end of the row is more than the current number of visible products, just set it to the last product
+    desktopRowEnd > visibleProducts ? desktopRowEnd = visibleProducts : null;
+    mobileRowEnd > visibleProducts ? mobileRowEnd = visibleProducts : null;
+    
+    let insertSelector = 
+      document.querySelector(`${selectors.product}:nth-of-type(${window.innerWidth >= 800 ? desktopRowEnd : mobileRowEnd})`);
+      
+    // Convert string JSX into DOM nodes and Elements
+    insertSelector.insertAdjacentHTML('afterend', quickshop);
+    
+    const element = document.querySelector(selectors.quickshop);
+    setTimeout(() => {
+      element.classList.add(selectors.quickshopActiveClass);
+    }, 125);    
+
+    // Add listener for close button
+    handleQuickshopClose();
+  }
+
+  function renderQuickshop(options) {
+    const {name, size, type, description, uses, image} = options;
+    return (`
+    <article class="pf--quickshop" data-pf--quickshop>
+      <figure class="pf--product-image-container pf--quickshop-half">
+        <img class="pf--product-image" src="${image}" alt="${name}" />
+      </figure>
+      <div class="pf--quickshop-half pf--quickshop-main">
+        <div class="pf--quickshop-inner">
+          <button class="pf--quickshop-close" data-pf--quickshop-close></button>
+          <header class="pf--quickshop-content pf--quickshop-content-header pf--fullsize-title">
+            <h1 class="pf--product-title" data-pf--quickshop-title>
+              ${name}
+            </h1>
+            <p class="pf--product-details" data-pf--quickshop-size>
+              ${size}
+            </p>
+            <p class="pf--product-type" data-pf--quickshop-type>
+              ${type}
+            </p>
+          </header>
+
+          <div class="pf--quickshop-content pf--quickshop-content-main">
+            <p class="pf--product-description" data-pf--quickshop-description>
+              ${description}
+            </p>
+          </div main>
+
+          <footer class="pf--quickshop-content pf--quickshop-content-footer">
+            <p class="pf-product-uses-title">Suggested use/materials:</p>
+            <p data-pf--quickshop-uses>${uses}</p>
+          </footer>
+
+        </div>
+      </div>
+    </article>
+    `);
+  }
+
+  /**
+   * NOTE: This entire block is copied down below and used to dynamically
+   * render filtered content. Update the `for block in section.blocks` section
+   * above.
+  */
+  function renderProduct(jsonProduct) {
+    const { id, image_thumb, name, size, filters, region } = jsonProduct;
+
+    return (`
+      <article
+        class="pf--product"
+        data-pf--product
+        data-product-id="${id}"
+      >
+        <figure class="pf--product-image-container">
+          <img class="pf--product-image" src="${image_thumb}" alt="${name}"/>
+        </figure>
+        <footer class="pf--product-inner">
+          <h1 class="pf--product-title">${name}</h1>
+          <p class="pf--product-details">${size}</p>
+        </footer>
+      </article>
+    `);
+  }
+  
+  /**
+   * Handle marking a child with active className. If last two arguments aren't
+   * null, the function will also remove additional elements that may already
+   * be active.
+   */
+  function setActiveClass(parent, activeClass, selector) {
+
+    if (selector) { 
+      const els = document.querySelectorAll(selector);
+      if (els && els.length) removeProductActiveClass(activeClass, els);
+    }
+
+    parent.classList.add(activeClass);
+  }
+
+
+  function removeFilterProducts() {
+    const selectors = productFilterDOMSelectors();
+    
+    document.querySelector(selectors.products).innerHTML = "";
+  }
+
+  function removeExisitingQuickshop() {
+    const selectors = productFilterDOMSelectors();
+     const quickshopEl = document.querySelector(selectors.quickshop);
+
+     // Ensure element is on the page
+     if (quickshopEl) {
+       quickshopEl.classList.remove(selectors.quickshopActiveClass);
+       quickshopEl.parentNode.removeChild(quickshopEl)
+     };
+  } 
+
+  // Return the JSON products from the page.
+  function getJSONProducts() {
+    const selectors = productFilterDOMSelectors();
+    const dataEl = document.querySelector(selectors.jsonData);
+
+    return JSON.parse(dataEl.innerHTML).products;
+  }
+</script>

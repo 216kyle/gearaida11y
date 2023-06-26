@@ -1,0 +1,74 @@
+<main class="site-content site-content--has-sidebar site-content--sidebar-left" role="main">
+  <div class="site-container site-container--faqs site-flexbox">
+    
+    {% include 'blog-help-side-nav' %}
+    
+    <div class="page-main">
+      <div class="page-content">
+        <div class="site-flexbox grid">
+          <article itemscope itemtype="http://schema.org/Article">
+            <header class="page-header">
+              <h1 role="heading" role class="article-title" itemprop="name">{{ page.title }}</h1>
+              <p role="paragraph" >{{ page.content }}</p>
+            </header><!-- page-header -->
+            {% for block in section.blocks %}
+              <div role="presentation" class="faq">
+                <h2 aria-label="{{ block.settings.faq_title }}" >{{ block.settings.faq_title }}</h2>
+                <p role="paragraph" >{{ block.settings.faq_content }}</p>
+                {% if block.settings.faq_instructions_url != blank %}
+                  <a role="button" aria-label="Download Instructions" href="{{ block.settings.faq_instructions_url }}" class="faq-doc-link" download ><svg viewBox="0 0 15.09 25.21" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001"><path d="m7.37.5h-6.87v18.32h14.09v-11.1" stroke-miterlimit="10"/><path d="m7.37 7.72h7.22l-7.22-7.22z" stroke-linejoin="round"/><g stroke-linecap="round" stroke-miterlimit="10"><path d="m9.48 22.42-2.08 2.08-2.08-2.08"/><path d="m7.4 24.15v-10.3"/></g></g></svg> Download instructions</a>
+                {% endif %}
+                {% if block.settings.faq_video_url %}
+                  <a role="button" aria-label="Watch the Video" href="{{ block.settings.faq_video_url }}" class="faq-video-link" ><svg viewBox="0 0 24.06 18.74" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ff4001" stroke-linejoin="round"><path d="m10.46 13.44 4.06-4.07-4.06-4.06z"/><path d="m.5.5h23.06v17.74h-23.06z"/></g></svg> Watch video</a>
+                {% endif %}
+                {% if block.settings.faq_blog_url %}
+                  <a button="button" aria-label="Visit FAQ Blog Post" href="{{ block.settings.faq_blog_url }}" class="faq-blog-link" >Visit blog post</a>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+        "type": "text",
+        "id": "faq_title",
+        "label": "FAQ Title"
+        },
+        {
+        "type": "textarea",
+        "id": "faq_content",
+        "label": "FAQ Content"
+        },
+        {
+          "type": "text",
+          "id": "faq_instructions_url",
+          "label": "FAQ Instructions URL",
+          "info": "Copy and paste url from files section in the Shopify admin, settings -> files"
+        },
+        {
+          "type": "url",
+          "id": "faq_video_url",
+          "label": "FAQ Video URL"
+        },
+        {
+          "type": "url",
+          "id": "faq_blog_url",
+          "label": "FAQ Blog URL"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

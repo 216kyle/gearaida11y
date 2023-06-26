@@ -1,0 +1,15 @@
+<div class="custom-recommendations__product-col">
+  <a href="{{ product.url }}">
+    <img 
+     class="custom-recommendations__product-image" 
+     src="{{ product.featured_image | img_url: '1080x' }}" 
+     alt="{{ product.featured_image.alt }}" 
+     />
+  </a>
+    <h4 class="custom-recommendations__product-title">
+        <a href="{{ product.url }}">
+            {{ product.title }}
+        </a>
+    </h4>
+    <a class="custom-recommendations__col-button btn" href="{{ product.url }}">{{ button_text }}</a>
+</div>

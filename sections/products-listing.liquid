@@ -1,0 +1,58 @@
+{% schema %}
+{
+  "name": "Products Listing",
+  "settings": [
+  {
+    "type": "collection",
+    "id": "collection",
+    "label": "Collection"
+  },
+  {
+    "type": "text",
+    "id": "heading",
+    "label": "Heading"
+  },
+  {
+    "type": "text",
+    "id": "limit",
+    "label": "Amount of products to show"
+  },
+  {
+    "type": "select",
+    "label": "Products Per Row",
+    "id": "products_per_row",
+    "options": [
+      {"label":"2", "value":"column50"},
+      {"label":"3", "value":"column33"},
+      {"label":"4", "value":"column25"}
+    ],
+    "default": "column33"
+  }],
+  "presets": [{
+    "name": "Products Listing",
+    "category": "Collection"
+  }]
+}
+{% endschema %}
+{% stylesheet %}
+.section--products-listing {padding:2em 0;}
+.section--products-listing .product {margin-bottom:1em;}
+{% endstylesheet %}
+{% assign featured_collection = section.settings.collection %}
+{% assign limit = section.settings.limit %}
+<section class="section section--index section--products-listing">
+  <div class="section-content">
+    <div class="site-container--fluid">
+      <header>
+        <h2>{{ section.settings.heading }}</h2>
+      </header>
+      <div class="site-flexbox grid grid--gutters products">
+        {% assign grid_sizing = section.settings.products_per_row  %}
+        {% for prod in collections[featured_collection].products limit:limit %}
+        {% include 'product-loop', classes:grid_sizing, quickview:true %}
+        {% endfor %}
+      </div><!-- products -->
+    </div><!-- site-container -->
+  </div><!-- section-content -->
+</section><!-- section -->
+{% include 'quickview-modal' %}

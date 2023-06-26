@@ -1,0 +1,79 @@
+{% if request.design_mode %}{% render "tapita-header-editor" %}{% endif %} {% if section.settings.message %}
+<style>
+  .site-super-header {background: {{ section.settings.message_color_bg }};color: {{ section.settings.message_color_text }};}
+  .site-super-header a {color:{{ section.settings.message_color_text }};}
+</style>
+<div class="site-super-header">
+  <div class="site-container">{% if section.settings.message_link != null %}<a href="{{ section.settings.message_link }}{% if section.settings.message_utm != null %}{{ section.settings.message_utm }}{% endif %}" title="{{ section.settings.message_text | escape }}">{% endif %}{{ section.settings.message_text }}{% if section.settings.message_link != null %}</a>{% endif %}</div><!-- site-container -->
+</div><!-- site-super-header -->
+{% endif %}
+<header class="site-header-wrapper no-landing">
+  <div class="site-header clearfix">
+    <a href="/" class="site-header__logo">
+      <img class="site-header__logo-img" src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ shop.name }}" />
+    </a><!-- site-header__logo -->
+    <div class="site-header__actions">
+      {% if customer %}
+      <a role="menuitem" href="/account">Account</a>
+      {% else %}
+      <a role="menuitem" href="/account/login">Sign In</a>
+      {% endif %}
+      <a id="cart-icon" href="/cart"><span class="cart-item-count--{{ cart.item_count }}">{{ cart.item_count }}</span><img src="{{ 'icon-cart.png' | asset_url }}" alt="Cart"/></a>
+    </div><!-- site-header__actions -->
+    <form class="form site-header__search-form clearfix" action="/search" method="get">
+      <input role="searchbox" type="text" name="q" value="" placeholder="Search GEARAID..." size="25" aria-label="Searchbox" />
+      <button role="button" type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+    </form><!-- site-header__form -->
+    <a role="navigation" href="#" id="mobile-navigation-toggle" aria-label="Site Navigation"><span></span></a>
+    {% include 'navigation' %}
+  </div><!-- site-header -->
+  {% include 'navigation-mobile' %}
+</header><!-- site-header-wrapper -->
+{% schema %}
+{
+"name": "Header",
+"settings": [
+{
+"type": "image_picker",
+"id": "logo",
+"label": "Logo"
+},
+{
+"type": "checkbox",
+"id": "message",
+"label": "Show announcement",
+"default": false
+},
+{
+"type": "text",
+"id": "message_text",
+"label": "Announcement text",
+"default": "Announce something here"
+},
+{
+"type": "url",
+"id": "message_link",
+"label": "Announcement link",
+"info": "Optional"
+},
+{
+"type": "text",
+"id": "message_utm",
+"label": "UTM Code Portion",
+"info": "Optional UTM code. Ex: ?utm_source=slider&utm_medium=banner&utm_campaign=dad"
+},
+{
+"type": "color",
+"id": "message_color_bg",
+"label": "Announcement color",
+"default": "#0066ff"
+},
+{
+"type": "color",
+"id": "message_color_text",
+"label": "Announcement text color",
+"default": "#fff"
+}
+]
+}
+{% endschema %}
