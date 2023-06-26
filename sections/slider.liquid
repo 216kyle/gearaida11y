@@ -58,7 +58,7 @@
         <p>{{ block.settings.sub_title | escape }}</p>
         {% endunless %}
         {% unless block.settings.primary_btn_text == blank %}
-        <a class="btn" href="{{ block.settings.primary_btn_link }}{% if block.settings.primary_btn_utm != blank %}{{ block.settings.primary_btn_utm }}{% endif %}">{{ block.settings.primary_btn_text }}</a>
+        <a class="btn" href="{{ block.settings.primary_btn_link }}{% if block.settings.primary_btn_utm != blank %}{{ block.settings.primary_btn_utm }}{% endif %}">{{ block.settings.primary_btn_text }} <span class="visually-hidden" style="display: none;">{{ block.settings.title | escape }}</span></a>
         {% endunless %}
         {% unless block.settings.secondary_btn_text == blank %}
         <a class="btn btn-alt" href="{{ block.settings.secondary_btn_link }}{% if block.settings.secondary_btn_utm != blank %}{{ block.settings.secondary_btn_utm }}{% endif %}">{{ block.settings.secondary_btn_text }}</a>

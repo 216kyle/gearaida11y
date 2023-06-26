@@ -54,7 +54,7 @@
       {% assign tag = 'gear care' %}
       {% for article in blogs.learn.articles %}
         {% if article.tags contains tag %}
-          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          <li><a role="button" aria-label="{{ article.title | escape }}" href="{{ article.url }}">{{ article.title | escape }}</a></li>
           {% assign article_counter = article_counter | plus: 1 %}
           {% if article_counter >= 5 %}{% break %}{% endif %}
         {% endif %}
@@ -70,7 +70,7 @@
       {% assign tag = 'Camping' %}
       {% for article in blogs.learn.articles %}
         {% if article.tags contains tag %}
-          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          <li><a role="button" aria-label="{{ article.title | escape }}" href="{{ article.url }}">{{ article.title | escape }}</a></li>
           {% assign article_counter = article_counter | plus: 1 %}
           {% if article_counter >= 5 %}{% break %}{% endif %}
         {% endif %}
@@ -86,7 +86,7 @@
       {% assign tag = 'Hike Run' %}
       {% for article in blogs.learn.articles %}
         {% if article.tags contains tag %}
-          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          <li><a role="button" aria-label="{{ article.title | escape }}" href="{{ article.url }}">{{ article.title | escape }}</a></li>
           {% assign article_counter = article_counter | plus: 1 %}
           {% if article_counter >= 5 %}{% break %}{% endif %}
         {% endif %}
@@ -102,7 +102,7 @@
       {% assign tag = 'hunt fish' %}
       {% for article in blogs.learn.articles %}
         {% if article.tags contains tag %}
-          <li><a role="button" aria-label="{{ article.title }}" href="{{ article.url }}">{{ article.title }}</a></li>
+          <li><a role="button" aria-label="{{ article.title | escape }}" href="{{ article.url }}">{{ article.title | escape }}</a></li>
           {% assign article_counter = article_counter | plus: 1 %}
           {% if article_counter >= 5 %}{% break %}{% endif %}
         {% endif %}
@@ -118,7 +118,7 @@
       {% assign tag = 'paddle dive' %}
       {% for article in blogs.learn.articles %}
         {% if article.tags contains tag %}
-          <li><a role="button" aria-label="{{ article.title }} href="{{ article.url }}">{{ article.title }}</a></li>
+          <li><a role="button" aria-label="{{ article.title | escape }}" href="{{ article.url }}">{{ article.title | escape }}</a></li>
           {% assign article_counter = article_counter | plus: 1 %}
           {% if article_counter >= 5 %}{% break %}{% endif %}
         {% endif %}
@@ -128,13 +128,13 @@
   </div>
 
   <div class="page-sidebar__section {% if current_page == 'snow' %}active{% endif %}">
-    <h3 role="heading" aria-label="Snowsport Articles" >Snowsports <span class="toggle">{% if current_page == 'snow' %}-{% else %}+{% endif %}</span></h3>
+    <h3 role="heading" aria-label="Snowsport Articles">Snowsports <span class="toggle">{% if current_page == 'snow' %}-{% else %}+{% endif %}</span></h3>
     <ul class="page-sidebar__navigation">
       {% assign article_counter = 0 %}
       {% assign tag = 'snow' %}
       {% for article in blogs.learn.articles %}
         {% if article.tags contains tag %}
-          <li><a role="button" aria-label="{{ article.title }} href="{{ article.url }}">{{ article.title }}</a></li>
+          <li><a role="button" aria-label="{{ article.title | escape }}" href="{{ article.url }}">{{ article.title | escape }}</a></li>
           {% assign article_counter = article_counter | plus: 1 %}
           {% if article_counter >= 5 %}{% break %}{% endif %}
         {% endif %}

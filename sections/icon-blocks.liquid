@@ -15,10 +15,10 @@
     </div>
     <div class="icon-blocks__actions">
       {% if section.settings.btn_1_label != blank %}
-        <a class="btn btn-large btn-alt-solid" href="{{ section.settings.btn_1_url}}">{{ section.settings.btn_1_label }}</a>
+        <a class="btn btn-large btn-alt-solid" href="{{ section.settings.btn_1_url}}">{{ section.settings.btn_1_label }} <span class="visually-hidden">{{ section.settings.heading | escape }}</span></a>
       {% endif %}
       {% if section.settings.btn_2_label != blank %}
-        <a class="btn btn-large btn-alt" href="{{ section.settings.btn_2_url }}">{{ section.settings.btn_2_label }}</a>
+        <a class="btn btn-large btn-alt" href="{{ section.settings.btn_2_url }}">{{ section.settings.btn_2_label }} <span class="visually-hidden">About {{ section.settings.heading | escape }}</span></a>
       {% endif %}
     </div>
   </div>

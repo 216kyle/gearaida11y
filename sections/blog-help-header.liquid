@@ -27,15 +27,15 @@
     }
   </style>
   <header class="blog-help__header lazy">
-    <div role="menu" class="blog-help__nav">
+    <div class="blog-help__nav">
       <ul>
-        <li><a role="menuitem" aria-label="Other Articles Clickable Menu Item" class="other" href="/blogs/help/tagged/{{ 'Other' | handleize }}?view=all" title="View All Other">Other</a></li>
-        <li><a role="menuitem" aria-label="Adventure Tool Articles Clickable Menu Item" class="adventure-tools" href="/blogs/help/tagged/{{ 'adventure tools' | handleize }}?view=all" title="View All Adventure Tools">Adventure Tools</a></li>
-        <li><a role="menuitem" aria-label="Heroclip Articles Clickable Menu Item" class="heroclip" href="/blogs/help/tagged/{{ 'Heroclip' | handleize }}?view=all" title="View All Heroclip">Heroclip</a></li>
-        <li><a role="menuitem" aria-label="Tenacious Tape Articles Clickable Menu Item" class="tenacious-tape" href="/blogs/help/tagged/{{ 'Tenacious Tape' | handleize }}?view=all" title="View All Tenacious Tape">Tenacious Tape</a></li>
-        <li><a role="menuitem" aria-label="Revivex Articles Clickable Menu Item" class="revivex" href="/blogs/help/tagged/{{ 'ReviveX' | handleize }}?view=all" title="View All Revivex">Revivex</a></li>
-        <li><a role="menuitem" aria-label="SeamGrip Articles Clickable Menu Item" class="seam-grip" href="/blogs/help/tagged/{{ 'Seam Grip' | handleize }}?view=all" title="View Seam Grip">Seam Grip</a></li>
-        <li><a role="menuitem" aria-label="Aquaseal Articles Clickable Menu Item" class="aquaseal" href="/blogs/help/tagged/{{ 'aquaseal' | handleize }}?view=all" title="View All Aquaseal">Aquaseal</a></li>
+        <li><a class="other" href="/blogs/help/tagged/{{ 'Other' | handleize }}?view=all">Other <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
+        <li><a class="adventure-tools" href="/blogs/help/tagged/{{ 'adventure tools' | handleize }}?view=all">Adventure Tools <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
+        <li><a class="heroclip" href="/blogs/help/tagged/{{ 'Heroclip' | handleize }}?view=all">Heroclip <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
+        <li><a class="tenacious-tape" href="/blogs/help/tagged/{{ 'Tenacious Tape' | handleize }}?view=all">Tenacious Tape <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
+        <li><a class="revivex" href="/blogs/help/tagged/{{ 'ReviveX' | handleize }}?view=all">Revivex <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
+        <li><a class="seam-grip" href="/blogs/help/tagged/{{ 'Seam Grip' | handleize }}?view=all">Seam Grip <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
+        <li><a class="aquaseal" href="/blogs/help/tagged/{{ 'aquaseal' | handleize }}?view=all">Aquaseal <span class="visually-hidden">Articles Clickable Menu Item</span></a></li>
       </ul>
     </div>
   </header>
@@ -43,7 +43,7 @@
     <form class="form blog__search-form clearfix" action="/search" method="get">
       <input type="hidden" name="type" value="article">
       <input role="searchbox" aria-label="Searchbox" type="text" name="q" value="" placeholder="SEARCH" />
-      <button role="button" aria-label="Submit Search" type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+      <button aria-label="Submit Search" type="submit"><i class="fa fa-search"></i></button>
     </form><!-- site-header__form -->
   </section>
 </div>

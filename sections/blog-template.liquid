@@ -30,27 +30,25 @@
                 </style>
               {% endif %}
               <!--Featured Post-->
-              <article Aria-label= class="featured-article article-category column100">
-                <a href="{{ article.url }}">
+              <article class="featured-article article-category column100">
                   <div class="article-category__header">
-                    <h3 role="menu" aria-label="Article Title" >{{ article.title }}</h3>
+                    <h3 aria-label="Article Title" >{{ article.title }}</h3>
                     {% case block.settings.tag_category %}
                       {% when 'camping' %}
-                        <a role="menuitem" aria-label="Camping Articles" class="category" href="/blogs/learn/tagged/{{ 'Camping' | handleize }}?view=all">/ Camping</a>
+                        <a aria-label="Camping Articles" class="category" href="/blogs/learn/tagged/{{ 'Camping' | handleize }}?view=all">/ Camping</a>
                       {% when 'hike_run' %}
-                        <a role="menuitem" aria-label="Hike Run Articles" class="category" href="/blogs/learn/tagged/{{ 'Hike Run' | handleize }}?view=all">/ Hiking &amp; Running</a>
+                        <a aria-label="Hike Run Articles" class="category" href="/blogs/learn/tagged/{{ 'Hike Run' | handleize }}?view=all">/ Hiking &amp; Running</a>
                       {% when 'hunt_fish' %}
-                        <a role="menuitem" aria-label="Hunting and Fishing Articles" class="category" href="/blogs/learn/tagged/{{ 'hunt fish' | handleize }}?view=all">/ Hunting &amp; Fishing</a>
+                        <a aria-label="Hunting and Fishing Articles" class="category" href="/blogs/learn/tagged/{{ 'hunt fish' | handleize }}?view=all">/ Hunting &amp; Fishing</a>
                       {% when 'paddlesports_diving' %}
-                        <a role="menuitem" aria-label="Pabblesports and Diving Articles" class="category" href="/blogs/learn/tagged/{{ 'paddle dive' | handleize }}?view=all">/ Paddlesports &amp; Diving</a>
+                        <a aria-label="Pabblesports and Diving Articles" class="category" href="/blogs/learn/tagged/{{ 'paddle dive' | handleize }}?view=all">/ Paddlesports &amp; Diving</a>
                       {% when 'snow' %}
-                        <a role="menuitem" aria-label="Snowsport Articles" class="category" href="/blogs/learn/tagged/{{ 'snow' | handleize }}?view=all">/ Snowsports</a>
+                        <a aria-label="Snowsport Articles" class="category" href="/blogs/learn/tagged/{{ 'snow' | handleize }}?view=all">/ Snowsports</a>
                       {% when 'gear_care' %}
-                        <a role="menuitem" aria-label="Gear Care and Repair Articles" class="category" href="/blogs/learn/tagged/{{ 'gear care' | handleize }}?view=all">/ Gear Care &amp; Repair</a>
+                        <a aria-label="Gear Care and Repair Articles" class="category" href="/blogs/learn/tagged/{{ 'gear care' | handleize }}?view=all">/ Gear Care &amp; Repair</a>
                     {% endcase %}
                   </div>
                   <figure class="article-bkgd article-bkgd--{{ block.id }} lazy"></figure>
-                </a>
               </article>
 
             {% elsif block.type == "article_category" %}

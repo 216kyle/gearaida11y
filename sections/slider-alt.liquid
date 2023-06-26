@@ -12,6 +12,7 @@
   });
 })(jQuery)
 </script>
+
 {% if section.blocks.size > 0 %}
 <article class="slider slider--index slider--lights slider--{{ section.id }} swiper-container swiper-container--slider" data-section-id="{{ section.id }}">
   <div class="swiper-wrapper">
@@ -53,7 +54,7 @@
         <h1>{{ block.settings.title | escape }}</h1>
         {% endunless %}
         {% unless block.settings.primary_btn_text == blank %}
-        <a class="btn" href="{{ block.settings.primary_btn_link }}">{{ block.settings.primary_btn_text }}</a>
+        <a class="btn" href="{{ block.settings.primary_btn_link }}">{{ block.settings.primary_btn_text }} <span class="visually-hidden" style="display: none;">{{ block.settings.title | escape }}</span></a>
         {% endunless %}
         {% unless block.settings.secondary_btn_text == blank %}
         <a class="btn btn-alt" href="{{ block.settings.secondary_btn_link }}">{{ block.settings.secondary_btn_text }}</a>

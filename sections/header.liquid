@@ -14,9 +14,9 @@
     </a><!-- site-header__logo -->
     <div class="site-header__actions">
       {% if customer %}
-      <a role="menuitem" href="/account">Account</a>
+      <a href="/account">Account</a>
       {% else %}
-      <a role="menuitem" href="/account/login">Sign In</a>
+      <a href="/account/login">Sign In</a>
       {% endif %}
       <a id="cart-icon" href="/cart"><span class="cart-item-count--{{ cart.item_count }}">{{ cart.item_count }}</span><img src="{{ 'icon-cart.png' | asset_url }}" alt="Cart"/></a>
     </div><!-- site-header__actions -->

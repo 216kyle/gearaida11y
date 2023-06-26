@@ -69,7 +69,7 @@
   {% if product.variants.size <= 1 %}
   <input name="id" id="product-select" type="hidden" value="{{ product.variants.first.id }}" />
   {% else %}
-  <select name="id" id="product-select" style="display: none;">
+  <select title="Select {{ product.title | escape }}" name="id" id="product-select" style="display: none;">
     {% for variant in product.variants %}
     {% if variant.available %}
     <option {% if variant == current_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>

@@ -58,13 +58,13 @@ Cards have to be approved by Twitter to be activated - https://dev.twitter.com/d
 {% endif %}
 <meta name="twitter:card" content="summary">
 {% if template contains 'product' %}
-<meta name="twitter:title" content="{{ product.title }}">
+<meta name="twitter:title" content="{{ product.title | escape }}">
 <meta name="twitter:description" content="{{ product.description | strip_html | truncatewords: 140, '' | escape }}">
 <meta name="twitter:image" content="https:{{ product.featured_image.src | img_url: 'medium' }}">
 <meta name="twitter:image:width" content="240">
 <meta name="twitter:image:height" content="240">
 {% elsif template contains 'article' %}
-<meta name="twitter:title" content="{{ article.title }}">
+<meta name="twitter:title" content="{{ article.title | escape }}">
 <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncatewords: 140, '' | escape }}">
 {% comment %}
 Check if content contains an image to add to the card - Source: http://blog.viralica.com/2013/09/twitter-product-cards-on-shopify/

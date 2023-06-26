@@ -30,10 +30,11 @@
 {% if product.tags contains 'visible_test' %}
   <div class="custom-recommendations">
     <div class="custom-recommendations__heading-box heading-align-{{ heading_align }}">
-        <h2 
-        class="custom-recommendations__heading{% unless heading_style == 'normal' %} heading-style-{{ heading_style }}{% endunless %}">
+      {% if heading_text != blank %}
+        <h2 class="custom-recommendations__heading{% unless heading_style == 'normal' %} heading-style-{{ heading_style }}{% endunless %}">
             {{ heading_text }}
         </h2>
+        {% endif %}
     </div>
 
     <div class="custom-recommendations__row">
